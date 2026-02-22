@@ -1,0 +1,49 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Card from '@components/Card';
+import { getCollection } from 'astro:content';
+import { getTranslations } from '@/i18n';
+
+const locale = 'pt' as const;
+const t = getTranslations(locale);
+const currentPath = Astro.url.pathname;
+
+const allPosts = await getCollection('blog');
+const posts = allPosts
+  .filter((post) => post.data.locale === locale)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+function slugFromId(id: string): string {
+  const parts = id.split('/');
+  return parts[parts.length - 1] ?? id;
+}
+---
+<BaseLayout title={t.blog.title} locale={locale} currentPath={currentPath}>
+  <article class="container" style="flex: 1; padding-block: var(--space-16); min-height: 100vh;">
+    <h1 style="font-size: var(--font-size-3xl); font-weight: var(--font-weight-bold); margin-bottom: var(--space-2);">
+      {t.blog.title}
+    </h1>
+    <p style="font-size: var(--font-size-base); color: var(--color-text-muted); margin-bottom: var(--space-10);">
+      {t.blog.subtitle}
+    </p>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: var(--space-6);">
+      {posts.map((post) => {
+        const slug = slugFromId(post.id);
+        const cardEntry = {
+          slug,
+          title: post.data.title,
+          description: post.data.description,
+          image: post.data.image ?? '/images/placeholder.jpg',
+          tags: post.data.tags,
+        };
+        return (
+          <Card
+            entry={cardEntry}
+            href={`/${locale}/blog/${slug}`}
+            readMoreLabel={t.common.readMore}
+          />
+        );
+      })}
+    </div>
+  </article>
+</BaseLayout>

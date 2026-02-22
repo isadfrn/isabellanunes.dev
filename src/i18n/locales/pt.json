@@ -1,0 +1,52 @@
+{
+  "nav": {
+    "home": "Início",
+    "about": "Sobre",
+    "career": "Carreira",
+    "education": "Formação",
+    "projects": "Projetos",
+    "blog": "Blog"
+  },
+  "home": {
+    "greeting": "Olá, eu sou",
+    "subtitle": "Desenvolvedora e criadora digital",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+  },
+  "about": {
+    "title": "Sobre mim",
+    "intro": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "skills_title": "Competências"
+  },
+  "career": {
+    "title": "Carreira",
+    "subtitle": "Minha trajetória profissional e experiências relevantes"
+  },
+  "education": {
+    "title": "Formação acadêmica",
+    "subtitle": "Cursos e certificações que construíram minha base de conhecimento"
+  },
+  "projects": {
+    "title": "Projetos",
+    "subtitle": "Alguns dos trabalhos que desenvolvi ao longo da minha jornada"
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Reflexões, tutoriais e pensamentos sobre tecnologia e desenvolvimento"
+  },
+  "common": {
+    "readMore": "Ler mais",
+    "backTo": "Voltar para",
+    "tags": "Tags",
+    "postedOn": "Publicado em",
+    "lightMode": "Modo claro",
+    "darkMode": "Modo escuro",
+    "language": "Idioma",
+    "openMenu": "Abrir menu",
+    "closeMenu": "Fechar menu"
+  },
+  "breadcrumb": {
+    "home": "Início",
+    "projects": "Projetos",
+    "blog": "Blog"
+  }
+}

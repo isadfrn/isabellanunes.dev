@@ -1,0 +1,63 @@
+---
+import PostLayout from '@layouts/PostLayout.astro';
+import { getTranslations } from '@/i18n';
+
+
+export async function getStaticPaths() {
+  const { default: projectList } = await import('@/data/projects/en');
+  return projectList.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const locale = 'en' as const;
+const t = getTranslations(locale);
+
+const { project } = Astro.props;
+const currentPath = Astro.url.pathname;
+
+const breadcrumbItems = [
+  { href: `/${locale}`, label: t.breadcrumb.home },
+  { href: `/${locale}/projects`, label: t.breadcrumb.projects },
+  { href: `/${locale}/projects/${project.slug}`, label: project.title },
+];
+---
+<PostLayout title={project.title} locale={locale} currentPath={currentPath} breadcrumbItems={breadcrumbItems}>
+  <article class="container" style="flex: 1; padding-block: var(--space-8) var(--space-16); min-height: 100vh;">
+    <h1 style="font-size: var(--font-size-3xl); font-weight: var(--font-weight-bold); margin-bottom: var(--space-4);">
+      {project.title}
+    </h1>
+    <p style="font-size: var(--font-size-lg); color: var(--color-text-muted); margin-bottom: var(--space-6);">
+      {project.description}
+    </p>
+    <div class="card-tags" style="margin-bottom: var(--space-6);">
+      {project.tags.map((tag) => (
+        <span class="tag" style="margin-right: var(--space-2);">{tag}</span>
+      ))}
+    </div>
+    {project.url && (
+      <p style="margin-bottom: var(--space-4);">
+        <a href={project.url} className="text-accent" target="_blank" rel="noopener noreferrer">
+          View project →
+        </a>
+      </p>
+    )}
+    {project.repo && (
+      <p style="margin-bottom: var(--space-8);">
+        <a href={project.repo} className="text-accent" target="_blank" rel="noopener noreferrer">
+          Repository →
+        </a>
+      </p>
+    )}
+    <p style="font-size: var(--font-size-base); line-height: 1.7; margin-bottom: var(--space-4);">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    </p>
+    <p style="font-size: var(--font-size-base); line-height: 1.7; margin-bottom: var(--space-4);">
+      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </p>
+    <p style="font-size: var(--font-size-base); line-height: 1.7;">
+      Nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+    </p>
+  </article>
+</PostLayout>

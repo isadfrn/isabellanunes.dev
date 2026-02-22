@@ -1,0 +1,19 @@
+---
+/**
+ * ThemeProvider - Inlines a script that runs before page render
+ * to prevent flash of wrong theme (FOUC). Reads theme from localStorage
+ * or prefers-color-scheme and sets data-theme on <html>.
+ *
+ * Use this in your Layout.astro <head> or at the top of the body.
+ */
+---
+
+<script is:inline>
+  (function () {
+    var theme = localStorage.getItem("theme");
+    if (theme !== "light" && theme !== "dark") {
+      theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    document.documentElement.dataset.theme = theme;
+  })();
+</script>

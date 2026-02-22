@@ -1,0 +1,33 @@
+---
+import ThemeProvider from '@components/ThemeProvider.astro';
+import HamburgerMenu from '@components/HamburgerMenu';
+import '@styles/global.css';
+import { getTranslations, getAlternateLocale } from '@/i18n';
+
+interface Props {
+  title: string;
+  locale: string;
+  currentPath?: string;
+}
+
+const { title, locale, currentPath = '' } = Astro.props;
+const t = getTranslations(locale);
+const altLocale = getAlternateLocale(locale);
+---
+<!DOCTYPE html>
+<html lang={locale} data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <ThemeProvider />
+    <link rel="alternate" hreflang={altLocale} href={`/${altLocale}${currentPath}`} />
+  </head>
+  <body>
+    <HamburgerMenu client:load locale={locale} currentPath={currentPath} translations={t} />
+    <main class="page-content">
+      <slot />
+    </main>
+  </body>
+</html>
