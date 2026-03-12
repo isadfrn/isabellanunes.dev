@@ -9,22 +9,38 @@ export interface BreadcrumbProps {
 
 export default function Breadcrumb({ items }: BreadcrumbProps) {
   return (
-    <ol className="breadcrumb" itemScope itemType="https://schema.org/BreadcrumbList">
+    <ol
+      className="flex flex-wrap items-center gap-1 text-sm"
+      itemScope
+      itemType="https://schema.org/BreadcrumbList"
+    >
       {items.map((item, index) => (
         <li
           key={item.href}
-          className="breadcrumb-item"
+          className="flex items-center gap-1"
           itemProp="itemListElement"
           itemScope
           itemType="https://schema.org/ListItem"
         >
-          {index > 0 && <span className="breadcrumb-separator" aria-hidden="true">/</span>}
+          {index > 0 && (
+            <span className="text-slate-300 dark:text-slate-600 select-none" aria-hidden="true">
+              /
+            </span>
+          )}
           {index === items.length - 1 ? (
-            <span aria-current="page" className="breadcrumb-link" itemProp="name">
+            <span
+              aria-current="page"
+              className="text-slate-900 dark:text-slate-100 font-medium"
+              itemProp="name"
+            >
               {item.label}
             </span>
           ) : (
-            <a href={item.href} className="breadcrumb-link" itemProp="item">
+            <a
+              href={item.href}
+              className="text-slate-500 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-150"
+              itemProp="item"
+            >
               <span itemProp="name">{item.label}</span>
             </a>
           )}

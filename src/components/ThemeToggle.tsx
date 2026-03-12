@@ -1,16 +1,15 @@
-import { useState, useEffect } from "react";
-import { Sun, Moon } from "lucide-react";
+import { useState, useEffect } from 'react';
+import { SunIcon, MoonIcon } from '@heroicons/react/24/outline';
 
-export type Theme = "light" | "dark";
+export type Theme = 'light' | 'dark';
 
-export const THEME_STORAGE_KEY = "theme";
+const THEME_KEY = 'theme';
 
-export function getInitialTheme(): Theme {
-  if (typeof window === "undefined") return "light";
-  const stored = localStorage.getItem(THEME_STORAGE_KEY) as Theme | null;
-  if (stored === "light" || stored === "dark") return stored;
-  if (window.matchMedia("(prefers-color-scheme: dark)").matches) return "dark";
-  return "light";
+function getInitialTheme(): Theme {
+  if (typeof window === 'undefined') return 'light';
+  const stored = localStorage.getItem(THEME_KEY) as Theme | null;
+  if (stored === 'light' || stored === 'dark') return stored;
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
 
 export interface ThemeToggleProps {
@@ -19,22 +18,22 @@ export interface ThemeToggleProps {
 }
 
 export default function ThemeToggle({
-  labels = { light: "Light mode", dark: "Dark mode" },
-  className = "",
+  labels = { light: 'Light mode', dark: 'Dark mode' },
+  className = '',
 }: ThemeToggleProps) {
-  const [theme, setTheme] = useState<Theme>("light");
+  const [theme, setTheme] = useState<Theme>('light');
 
   useEffect(() => {
     const stored = document.documentElement.dataset.theme as Theme | undefined;
-    setTheme(stored === "light" || stored === "dark" ? stored : getInitialTheme());
+    setTheme(stored === 'light' || stored === 'dark' ? stored : getInitialTheme());
   }, []);
 
-  const isDark = theme === "dark";
+  const isDark = theme === 'dark';
 
   const toggleTheme = () => {
-    const next: Theme = isDark ? "light" : "dark";
+    const next: Theme = isDark ? 'light' : 'dark';
     document.documentElement.dataset.theme = next;
-    localStorage.setItem(THEME_STORAGE_KEY, next);
+    localStorage.setItem(THEME_KEY, next);
     setTheme(next);
   };
 
@@ -42,14 +41,14 @@ export default function ThemeToggle({
     <button
       type="button"
       onClick={toggleTheme}
-      className={className}
+      className={`flex items-center justify-center w-10 h-10 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors duration-150 cursor-pointer ${className}`}
       aria-label={isDark ? labels.light : labels.dark}
       title={isDark ? labels.light : labels.dark}
     >
       {isDark ? (
-        <Sun size={20} aria-hidden />
+        <SunIcon className="w-5 h-5" aria-hidden />
       ) : (
-        <Moon size={20} aria-hidden />
+        <MoonIcon className="w-5 h-5" aria-hidden />
       )}
     </button>
   );

@@ -1,5 +1,5 @@
 import type { NavItem } from '@/types';
-import { getTranslations, getLocalizedPath } from './index';
+import { getTranslations, getLocalizedPath, getAlternateLocale } from './index';
 
 const NAV_KEYS = ['home', 'about', 'career', 'education', 'projects', 'blog'] as const;
 const NAV_PATHS: Record<(typeof NAV_KEYS)[number], string> = {
@@ -26,4 +26,19 @@ export function formatDate(date: Date, locale: string): string {
     month: 'long',
     day: 'numeric',
   }).format(date);
+}
+
+/** Extrai o slug final de um ID de content collection (ex: "en/first-post" → "first-post") */
+export function slugFromId(id: string): string {
+  const parts = id.split('/');
+  return parts[parts.length - 1] ?? id;
+}
+
+/** Gera o path equivalente no locale alternativo, mantendo o restante da URL. */
+export function getAlternatePath(currentPath: string, currentLocale: string): string {
+  const alternate = getAlternateLocale(currentLocale);
+  const pattern = new RegExp(`^/(${currentLocale}|${alternate})(/|$)`);
+  return pattern.test(currentPath)
+    ? currentPath.replace(pattern, `/${alternate}$2`)
+    : `/${alternate}`;
 }

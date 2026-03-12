@@ -4,6 +4,8 @@ import HamburgerMenu from '@components/HamburgerMenu';
 import Breadcrumb from '@components/Breadcrumb';
 import '@styles/global.css';
 import { getTranslations, getAlternateLocale } from '@/i18n';
+import { getNavItems } from '@/i18n/utils';
+import type { NavItem } from '@/types';
 
 interface BreadcrumbItem {
   href: string;
@@ -12,14 +14,19 @@ interface BreadcrumbItem {
 
 interface Props {
   title: string;
+  description?: string;
   locale: string;
   currentPath?: string;
   breadcrumbItems: BreadcrumbItem[];
+  navItems?: NavItem[];
 }
 
-const { title, locale, currentPath = '', breadcrumbItems } = Astro.props;
+const { title, description, locale, currentPath = '', breadcrumbItems, navItems: navItemsProp } = Astro.props;
 const t = getTranslations(locale);
 const altLocale = getAlternateLocale(locale);
+const navItems = navItemsProp ?? getNavItems(locale);
+const pageDescription = description ?? t.about.description;
+const canonicalUrl = new URL(currentPath, Astro.site).toString();
 ---
 <!DOCTYPE html>
 <html lang={locale} data-theme="light">
@@ -27,14 +34,28 @@ const altLocale = getAlternateLocale(locale);
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>{title}</title>
-    <ThemeProvider />
+    <title>{title} — Isabella Nunes</title>
+    <meta name="description" content={pageDescription} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content={`${title} — Isabella Nunes`} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:locale" content={locale === 'pt' ? 'pt_BR' : 'en_US'} />
     <link rel="alternate" hreflang={altLocale} href={`/${altLocale}${currentPath}`} />
+    <link rel="alternate" hreflang="x-default" href={`/pt${currentPath}`} />
+    <ThemeProvider />
   </head>
   <body>
-    <HamburgerMenu client:load locale={locale} currentPath={currentPath} translations={t} />
-    <main class="page-content">
-      <nav aria-label="Breadcrumb" class="container" style="padding-block: var(--space-6);">
+    <HamburgerMenu
+      client:load
+      locale={locale}
+      currentPath={currentPath}
+      navItems={navItems}
+      translations={{ common: t.common }}
+    />
+    <main class="page-content lg:ml-64">
+      <nav aria-label="Breadcrumb" class="container pt-6 pb-2">
         <Breadcrumb items={breadcrumbItems} />
       </nav>
       <slot />

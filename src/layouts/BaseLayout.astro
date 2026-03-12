@@ -3,16 +3,24 @@ import ThemeProvider from '@components/ThemeProvider.astro';
 import HamburgerMenu from '@components/HamburgerMenu';
 import '@styles/global.css';
 import { getTranslations, getAlternateLocale } from '@/i18n';
+import { getNavItems } from '@/i18n/utils';
+import type { NavItem } from '@/types';
 
 interface Props {
   title: string;
+  description?: string;
   locale: string;
   currentPath?: string;
+  navItems?: NavItem[];
 }
 
-const { title, locale, currentPath = '' } = Astro.props;
+const { title, description, locale, currentPath = '', navItems: navItemsProp } = Astro.props;
 const t = getTranslations(locale);
 const altLocale = getAlternateLocale(locale);
+// Aceita navItems como prop (evita recalcular em páginas que já buscaram) ou calcula aqui.
+const navItems = navItemsProp ?? getNavItems(locale);
+const pageDescription = description ?? t.about.description;
+const canonicalUrl = new URL(currentPath, Astro.site).toString();
 ---
 <!DOCTYPE html>
 <html lang={locale} data-theme="light">
@@ -20,13 +28,29 @@ const altLocale = getAlternateLocale(locale);
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>{title}</title>
-    <ThemeProvider />
+    <title>{title} — Isabella Nunes</title>
+    <meta name="description" content={pageDescription} />
+    <link rel="canonical" href={canonicalUrl} />
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={`${title} — Isabella Nunes`} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:locale" content={locale === 'pt' ? 'pt_BR' : 'en_US'} />
+    <!-- Alternate locale -->
     <link rel="alternate" hreflang={altLocale} href={`/${altLocale}${currentPath}`} />
+    <link rel="alternate" hreflang="x-default" href={`/pt${currentPath}`} />
+    <ThemeProvider />
   </head>
   <body>
-    <HamburgerMenu client:load locale={locale} currentPath={currentPath} translations={t} />
-    <main class="page-content">
+    <HamburgerMenu
+      client:load
+      locale={locale}
+      currentPath={currentPath}
+      navItems={navItems}
+      translations={{ common: t.common }}
+    />
+    <main class="page-content lg:ml-64">
       <slot />
     </main>
   </body>

@@ -4,9 +4,12 @@ import en from './locales/en.json';
 
 const translations: Record<string, typeof pt> = { pt, en };
 
-export function getTranslations(locale: string) {
-  return translations[locale] || translations.pt;
+export function getTranslations(locale: string): typeof pt {
+  return translations[locale] ?? translations.pt;
 }
+
+/** Tipo do objeto de traduções — use para tipar props que recebem o retorno de getTranslations(). */
+export type Translations = ReturnType<typeof getTranslations>;
 
 export function getLocalizedPath(path: string, locale: string): string {
   return `/${locale}${path}`;

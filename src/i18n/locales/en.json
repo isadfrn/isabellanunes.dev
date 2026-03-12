@@ -10,28 +10,42 @@
   "home": {
     "greeting": "Hi, I'm",
     "subtitle": "Developer and digital creator",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+    "description": "I build modern, accessible web experiences with a focus on clean code and thoughtful design. Passionate about open source and continuous learning.",
+    "extra": "Currently exploring the intersection of design systems and developer experience — always open to new challenges and collaborations."
   },
   "about": {
     "title": "About me",
-    "intro": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    "skills_title": "Skills"
+    "intro": "I'm a software developer with a passion for building things that live on the internet. I care deeply about user experience, performance, and maintainability.",
+    "bio_1": "With a background in both frontend and backend development, I enjoy working across the full stack — from crafting pixel-perfect interfaces to designing robust APIs. I believe great software is built collaboratively, with empathy for both the people who use it and the people who maintain it.",
+    "bio_2": "When I'm not coding, you'll find me reading about design, contributing to open source projects, or experimenting with new technologies to stay sharp and curious.",
+    "skills_title": "Skills",
+    "skills_desc": "My toolkit includes TypeScript, React, Node.js, Astro, and PostgreSQL — along with a deep appreciation for accessibility, testing, and clean architecture.",
+    "description": "Software developer passionate about clean code, accessibility and great user experiences."
   },
   "career": {
     "title": "Career",
-    "subtitle": "My professional journey and relevant experiences"
+    "subtitle": "My professional journey and relevant experiences",
+    "description": "Professional timeline — roles, companies and technologies that shaped my career."
   },
   "education": {
     "title": "Education",
-    "subtitle": "Courses and certifications that built my knowledge foundation"
+    "subtitle": "Courses and certifications that built my knowledge foundation",
+    "description": "Academic background and certifications in computer science and software engineering."
   },
   "projects": {
     "title": "Projects",
-    "subtitle": "Some of the work I've developed throughout my journey"
+    "subtitle": "Some of the work I've developed throughout my journey",
+    "description": "A selection of personal and professional projects built with modern web technologies.",
+    "view_project": "View project",
+    "repository": "Repository",
+    "content_placeholder_1": "This project was built to solve a real-world problem with a focus on clean architecture and developer experience. The stack was chosen to maximize performance while keeping the codebase maintainable.",
+    "content_placeholder_2": "The implementation follows best practices for accessibility, testing, and progressive enhancement. Every decision was made with the end user in mind.",
+    "content_placeholder_3": "Feel free to explore the source code and reach out if you have any questions or suggestions."
   },
   "blog": {
     "title": "Blog",
-    "subtitle": "Reflections, tutorials and thoughts on technology and development"
+    "subtitle": "Reflections, tutorials and thoughts on technology and development",
+    "description": "Articles and tutorials on web development, TypeScript, React and software architecture."
   },
   "common": {
     "readMore": "Read more",
