@@ -1,0 +1,45 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import CourseCard from '@components/CourseCard';
+import { getTranslations } from '@/i18n';
+import { getNavItems } from '@/i18n/utils';
+import { locales } from '@/types';
+import type { Locale } from '@/types';
+import courses from '@/data/courses';
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { locale } }));
+}
+
+const locale = Astro.params.locale as Locale;
+const t = getTranslations(locale);
+const navItems = getNavItems(locale);
+const currentPath = Astro.url.pathname;
+---
+<BaseLayout
+  title={t.courses.title}
+  description={t.courses.description}
+  locale={locale}
+  currentPath={currentPath}
+  navItems={navItems}
+>
+  <article class="container flex-1 py-20 lg:pl-0 pl-16 md:pl-8 min-h-screen page-enter">
+    <div class="max-w-4xl">
+      <h1 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-50 mb-2">
+        {t.courses.title}
+      </h1>
+      <p class="text-base text-slate-500 dark:text-slate-400 mb-10">
+        {t.courses.subtitle}
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {courses.map((course, index) => (
+          <CourseCard
+            entry={course}
+            labels={{ certificate: t.courses.certificate, viewCourse: t.courses.viewCourse }}
+            revealDelay={index * 80}
+          />
+        ))}
+      </div>
+    </div>
+  </article>
+</BaseLayout>

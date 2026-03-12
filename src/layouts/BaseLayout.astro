@@ -1,6 +1,7 @@
 ---
 import ThemeProvider from '@components/ThemeProvider.astro';
 import HamburgerMenu from '@components/HamburgerMenu';
+import { ViewTransitions } from 'astro:transitions';
 import '@styles/global.css';
 import { getTranslations, getAlternateLocale } from '@/i18n';
 import { getNavItems } from '@/i18n/utils';
@@ -23,7 +24,7 @@ const pageDescription = description ?? t.about.description;
 const canonicalUrl = new URL(currentPath, Astro.site).toString();
 ---
 <!DOCTYPE html>
-<html lang={locale} data-theme="light">
+<html lang={locale}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -41,8 +42,29 @@ const canonicalUrl = new URL(currentPath, Astro.site).toString();
     <link rel="alternate" hreflang={altLocale} href={`/${altLocale}${currentPath}`} />
     <link rel="alternate" hreflang="x-default" href={`/pt${currentPath}`} />
     <ThemeProvider />
+    <ViewTransitions />
   </head>
   <body>
+    <script is:inline>
+      function initReveal() {
+        var elements = document.querySelectorAll('[data-reveal]:not(.is-revealed)');
+        if (!elements.length) return;
+        var observer = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-revealed');
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+        );
+        elements.forEach(function (el) { observer.observe(el); });
+      }
+      initReveal();
+      document.addEventListener('astro:after-swap', initReveal);
+    </script>
     <HamburgerMenu
       client:load
       locale={locale}

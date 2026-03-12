@@ -50,6 +50,7 @@ const posts = allPosts
             entry={cardEntry}
             href={`/${locale}/blog/${slug}`}
             readMoreLabel={t.common.readMore}
+            revealDelay={posts.indexOf(post) * 80}
           />
         );
       })}

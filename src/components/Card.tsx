@@ -4,12 +4,15 @@ export interface CardProps {
   entry: ProjectEntry;
   href: string;
   readMoreLabel?: string;
+  revealDelay?: number;
 }
 
-export default function Card({ entry, href, readMoreLabel = 'Read more' }: CardProps) {
+export default function Card({ entry, href, readMoreLabel = 'Read more', revealDelay = 0 }: CardProps) {
   return (
     <a
       href={href}
+      data-reveal
+      style={{ '--reveal-delay': `${revealDelay}ms` } as React.CSSProperties}
       className="group block bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-200"
     >
       {/* Image */}

@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(npm run:*)",
+      "Bash(find src/pages -name \"*.astro\" | xargs sed -i 's/pl-16 md:pl-8/pl-16 md:pl-8 lg:pl-0/g')",
+      "Bash(cd \"D:/dev/isabellanunes.dev\" && npm test 2>&1)"
+    ]
+  }
+}

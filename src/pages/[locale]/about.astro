@@ -26,19 +26,19 @@ const currentPath = Astro.url.pathname;
       <h1 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-50 mb-6">
         {t.about.title}
       </h1>
-      <p class="text-lg text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
+      <p data-reveal class="text-lg text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
         {t.about.intro}
       </p>
-      <p class="text-base text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+      <p data-reveal style="--reveal-delay:80ms" class="text-base text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
         {t.about.bio_1}
       </p>
-      <p class="text-base text-slate-600 dark:text-slate-300 leading-relaxed mb-10">
+      <p data-reveal style="--reveal-delay:160ms" class="text-base text-slate-600 dark:text-slate-300 leading-relaxed mb-10">
         {t.about.bio_2}
       </p>
-      <h2 class="text-xl font-semibold text-slate-900 dark:text-slate-50 mb-4">
+      <h2 data-reveal style="--reveal-delay:240ms" class="text-xl font-semibold text-slate-900 dark:text-slate-50 mb-4">
         {t.about.skills_title}
       </h2>
-      <p class="text-base text-slate-600 dark:text-slate-300 leading-relaxed">
+      <p data-reveal style="--reveal-delay:320ms" class="text-base text-slate-600 dark:text-slate-300 leading-relaxed">
         {t.about.skills_desc}
       </p>
     </div>

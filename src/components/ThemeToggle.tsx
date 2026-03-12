@@ -22,10 +22,12 @@ export default function ThemeToggle({
   className = '',
 }: ThemeToggleProps) {
   const [theme, setTheme] = useState<Theme>('light');
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     const stored = document.documentElement.dataset.theme as Theme | undefined;
     setTheme(stored === 'light' || stored === 'dark' ? stored : getInitialTheme());
+    setMounted(true);
   }, []);
 
   const isDark = theme === 'dark';
@@ -41,7 +43,7 @@ export default function ThemeToggle({
     <button
       type="button"
       onClick={toggleTheme}
-      className={`flex items-center justify-center w-10 h-10 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors duration-150 cursor-pointer ${className}`}
+      className={`flex items-center justify-center w-10 h-10 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 cursor-pointer ${mounted ? 'transition-colors duration-150' : ''} ${className}`}
       aria-label={isDark ? labels.light : labels.dark}
       title={isDark ? labels.light : labels.dark}
     >

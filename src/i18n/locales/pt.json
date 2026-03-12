@@ -4,6 +4,7 @@
     "about": "Sobre",
     "career": "Carreira",
     "education": "Formação",
+    "courses": "Cursos",
     "projects": "Projetos",
     "blog": "Blog"
   },
@@ -41,6 +42,13 @@
     "content_placeholder_1": "Este projeto foi criado para resolver um problema real com foco em arquitetura limpa e experiência de desenvolvimento. A stack foi escolhida para maximizar a performance mantendo o código manutenível.",
     "content_placeholder_2": "A implementação segue boas práticas de acessibilidade, testes e progressive enhancement. Cada decisão foi tomada pensando no usuário final.",
     "content_placeholder_3": "Sinta-se à vontade para explorar o código-fonte e entrar em contato se tiver dúvidas ou sugestões."
+  },
+  "courses": {
+    "title": "Cursos",
+    "subtitle": "Cursos e certificações que fizeram parte da minha jornada de aprendizado",
+    "description": "Cursos e certificações concluídos em desenvolvimento web, programação e tecnologia.",
+    "certificate": "Ver certificado",
+    "viewCourse": "Ver curso"
   },
   "blog": {
     "title": "Blog",

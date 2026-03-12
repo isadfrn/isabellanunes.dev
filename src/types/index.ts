@@ -21,6 +21,15 @@ export interface ProjectEntry {
   repo?: string;
 }
 
+export interface CourseEntry {
+  title: string;
+  platform: string;
+  platformLogo: string;
+  certificateUrl?: string;
+  courseUrl?: string;
+  tags?: string[];
+}
+
 export interface NavItem {
   key: string;
   href: string;

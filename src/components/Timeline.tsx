@@ -8,7 +8,12 @@ export default function Timeline({ entries }: TimelineProps) {
   return (
     <ol className="relative pl-8 border-l-2 border-slate-200 dark:border-slate-700 space-y-8">
       {entries.map((entry, index) => (
-        <li key={index} className="relative">
+        <li
+          key={index}
+          className="relative"
+          data-reveal
+          style={{ '--reveal-delay': `${index * 80}ms` } as React.CSSProperties}
+        >
           {/* Dot */}
           <span className="absolute -left-[2.35rem] top-1.5 w-3 h-3 rounded-full bg-primary-500 dark:bg-primary-400 ring-2 ring-white dark:ring-slate-900" />
 

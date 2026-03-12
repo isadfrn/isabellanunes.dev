@@ -2,6 +2,7 @@
 import ThemeProvider from '@components/ThemeProvider.astro';
 import HamburgerMenu from '@components/HamburgerMenu';
 import Breadcrumb from '@components/Breadcrumb';
+import { ViewTransitions } from 'astro:transitions';
 import '@styles/global.css';
 import { getTranslations, getAlternateLocale } from '@/i18n';
 import { getNavItems } from '@/i18n/utils';
@@ -45,6 +46,7 @@ const canonicalUrl = new URL(currentPath, Astro.site).toString();
     <link rel="alternate" hreflang={altLocale} href={`/${altLocale}${currentPath}`} />
     <link rel="alternate" hreflang="x-default" href={`/pt${currentPath}`} />
     <ThemeProvider />
+    <ViewTransitions />
   </head>
   <body>
     <HamburgerMenu

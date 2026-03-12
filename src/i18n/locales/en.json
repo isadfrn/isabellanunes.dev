@@ -4,6 +4,7 @@
     "about": "About",
     "career": "Career",
     "education": "Education",
+    "courses": "Courses",
     "projects": "Projects",
     "blog": "Blog"
   },
@@ -41,6 +42,13 @@
     "content_placeholder_1": "This project was built to solve a real-world problem with a focus on clean architecture and developer experience. The stack was chosen to maximize performance while keeping the codebase maintainable.",
     "content_placeholder_2": "The implementation follows best practices for accessibility, testing, and progressive enhancement. Every decision was made with the end user in mind.",
     "content_placeholder_3": "Feel free to explore the source code and reach out if you have any questions or suggestions."
+  },
+  "courses": {
+    "title": "Courses",
+    "subtitle": "Courses and certifications that were part of my learning journey",
+    "description": "Completed courses and certifications in web development, programming and technology.",
+    "certificate": "View certificate",
+    "viewCourse": "View course"
   },
   "blog": {
     "title": "Blog",
