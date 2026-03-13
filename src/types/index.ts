@@ -21,6 +21,17 @@ export interface ProjectEntry {
   repo?: string;
 }
 
+export interface PublicationEntry {
+  slug: string;
+  title: string;
+  description: string;
+  authors: string[];
+  venue: string;
+  year: number;
+  url?: string;
+  tags?: string[];
+}
+
 export interface CourseEntry {
   title: string;
   platform: string;
@@ -28,6 +39,33 @@ export interface CourseEntry {
   certificateUrl?: string;
   courseUrl?: string;
   tags?: string[];
+}
+
+export interface HomeContent {
+  greeting: string;
+  subtitle: string;
+  description: string;
+  extra: string;
+}
+
+export interface AboutContent {
+  title: string;
+  intro: string;
+  bio_1: string;
+  bio_2: string;
+  skills_title: string;
+  skills_desc: string;
+  description: string;
+}
+
+export interface BlogPost {
+  slug: string;
+  title: string;
+  description: string;
+  pubDate: Date;
+  tags: string[];
+  image?: string;
+  content: string;
 }
 
 export interface NavItem {

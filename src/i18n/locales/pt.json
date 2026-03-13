@@ -6,54 +6,46 @@
     "education": "Formação",
     "courses": "Cursos",
     "projects": "Projetos",
+    "publications": "Publicações",
     "blog": "Blog"
-  },
-  "home": {
-    "greeting": "Olá, eu sou",
-    "subtitle": "Desenvolvedora e criadora digital",
-    "description": "Construo experiências web modernas e acessíveis com foco em código limpo e design cuidadoso. Apaixonada por código aberto e aprendizado contínuo.",
-    "extra": "Atualmente explorando a interseção entre design systems e developer experience — sempre aberta a novos desafios e colaborações."
-  },
-  "about": {
-    "title": "Sobre mim",
-    "intro": "Sou desenvolvedora de software com paixão por construir coisas que vivem na internet. Me importo profundamente com experiência do usuário, performance e manutenibilidade.",
-    "bio_1": "Com experiência em desenvolvimento frontend e backend, gosto de trabalhar em toda a stack — desde criar interfaces pixel-perfect até projetar APIs robustas. Acredito que um bom software é construído de forma colaborativa, com empatia tanto pelas pessoas que o usam quanto pelas que o mantêm.",
-    "bio_2": "Quando não estou programando, você me encontra lendo sobre design, contribuindo com projetos open source ou experimentando novas tecnologias para me manter atualizada e curiosa.",
-    "skills_title": "Competências",
-    "skills_desc": "Meu kit de ferramentas inclui TypeScript, React, Node.js, Astro e PostgreSQL — além de uma profunda apreciação por acessibilidade, testes e arquitetura limpa.",
-    "description": "Desenvolvedora de software apaixonada por código limpo, acessibilidade e ótimas experiências de usuário."
   },
   "career": {
     "title": "Carreira",
-    "subtitle": "Minha trajetória profissional e experiências relevantes",
-    "description": "Linha do tempo profissional — cargos, empresas e tecnologias que moldaram minha carreira."
+    "subtitle": "Minha trajetória profissional",
+    "description": "Minha trajetória profissional."
   },
   "education": {
     "title": "Formação acadêmica",
-    "subtitle": "Cursos e certificações que construíram minha base de conhecimento",
-    "description": "Formação acadêmica e certificações em ciência da computação e engenharia de software."
+    "subtitle": "Formação acadêmica",
+    "description": "Formação acadêmica."
   },
   "projects": {
     "title": "Projetos",
-    "subtitle": "Alguns dos trabalhos que desenvolvi ao longo da minha jornada",
-    "description": "Uma seleção de projetos pessoais e profissionais construídos com tecnologias web modernas.",
+    "subtitle": "Alguns dos projeto que desenvolvi ao longo da minha jornada",
+    "description": "Alguns dos projeto que desenvolvi ao longo da minha jornada.",
     "view_project": "Ver projeto",
-    "repository": "Repositório",
-    "content_placeholder_1": "Este projeto foi criado para resolver um problema real com foco em arquitetura limpa e experiência de desenvolvimento. A stack foi escolhida para maximizar a performance mantendo o código manutenível.",
-    "content_placeholder_2": "A implementação segue boas práticas de acessibilidade, testes e progressive enhancement. Cada decisão foi tomada pensando no usuário final.",
-    "content_placeholder_3": "Sinta-se à vontade para explorar o código-fonte e entrar em contato se tiver dúvidas ou sugestões."
+    "repository": "Repositório"
+  },
+  "publications": {
+    "title": "Publicações",
+    "subtitle": "Artigos acadêmicos, artigos e escritos técnicos",
+    "description": "Uma coleção de publicações acadêmicas, artigos de conferência e artigos técnicos.",
+    "view_publication": "Ver publicação",
+    "authors": "Autores",
+    "venue": "Publicado em",
+    "year": "Ano"
   },
   "courses": {
     "title": "Cursos",
-    "subtitle": "Cursos e certificações que fizeram parte da minha jornada de aprendizado",
-    "description": "Cursos e certificações concluídos em desenvolvimento web, programação e tecnologia.",
+    "subtitle": "Cursos e certificações que fizeram parte da minha jornada profissional e pessoal",
+    "description": "Cursos e certificações que fizeram parte da minha jornada profissional e pessoal.",
     "certificate": "Ver certificado",
     "viewCourse": "Ver curso"
   },
   "blog": {
     "title": "Blog",
-    "subtitle": "Reflexões, tutoriais e pensamentos sobre tecnologia e desenvolvimento",
-    "description": "Artigos e tutoriais sobre desenvolvimento web, TypeScript, React e arquitetura de software."
+    "subtitle": "Reflexões, tutoriais e pensamentos diversos",
+    "description": "Reflexões, tutoriais e pensamentos diversos."
   },
   "common": {
     "readMore": "Ler mais",
@@ -69,6 +61,7 @@
   "breadcrumb": {
     "home": "Início",
     "projects": "Projetos",
+    "publications": "Publicações",
     "blog": "Blog"
   }
 }

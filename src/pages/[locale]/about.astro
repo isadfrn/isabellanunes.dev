@@ -1,22 +1,22 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
-import { getTranslations } from '@/i18n';
 import { getNavItems } from '@/i18n/utils';
 import { locales } from '@/types';
 import type { Locale } from '@/types';
+import aboutData from '@/data/about';
 
 export function getStaticPaths() {
   return locales.map((locale) => ({ params: { locale } }));
 }
 
 const locale = Astro.params.locale as Locale;
-const t = getTranslations(locale);
 const navItems = getNavItems(locale);
 const currentPath = Astro.url.pathname;
+const about = aboutData[locale];
 ---
 <BaseLayout
-  title={t.about.title}
-  description={t.about.description}
+  title={about.title}
+  description={about.description}
   locale={locale}
   currentPath={currentPath}
   navItems={navItems}
@@ -24,22 +24,22 @@ const currentPath = Astro.url.pathname;
   <article class="container flex-1 py-20 lg:pl-0 pl-16 md:pl-8 min-h-screen page-enter">
     <div class="max-w-2xl">
       <h1 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-50 mb-6">
-        {t.about.title}
+        {about.title}
       </h1>
       <p data-reveal class="text-lg text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
-        {t.about.intro}
+        {about.intro}
       </p>
       <p data-reveal style="--reveal-delay:80ms" class="text-base text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-        {t.about.bio_1}
+        {about.bio_1}
       </p>
       <p data-reveal style="--reveal-delay:160ms" class="text-base text-slate-600 dark:text-slate-300 leading-relaxed mb-10">
-        {t.about.bio_2}
+        {about.bio_2}
       </p>
       <h2 data-reveal style="--reveal-delay:240ms" class="text-xl font-semibold text-slate-900 dark:text-slate-50 mb-4">
-        {t.about.skills_title}
+        {about.skills_title}
       </h2>
       <p data-reveal style="--reveal-delay:320ms" class="text-base text-slate-600 dark:text-slate-300 leading-relaxed">
-        {t.about.skills_desc}
+        {about.skills_desc}
       </p>
     </div>
   </article>

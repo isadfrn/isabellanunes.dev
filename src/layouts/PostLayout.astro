@@ -6,6 +6,7 @@ import { ViewTransitions } from 'astro:transitions';
 import '@styles/global.css';
 import { getTranslations, getAlternateLocale } from '@/i18n';
 import { getNavItems } from '@/i18n/utils';
+import aboutData from '@/data/about';
 import type { NavItem } from '@/types';
 
 interface BreadcrumbItem {
@@ -26,7 +27,7 @@ const { title, description, locale, currentPath = '', breadcrumbItems, navItems:
 const t = getTranslations(locale);
 const altLocale = getAlternateLocale(locale);
 const navItems = navItemsProp ?? getNavItems(locale);
-const pageDescription = description ?? t.about.description;
+const pageDescription = description ?? aboutData[locale as 'pt' | 'en'].description;
 const canonicalUrl = new URL(currentPath, Astro.site).toString();
 ---
 <!DOCTYPE html>

@@ -1,11 +1,11 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Card from '@components/Card';
-import { getCollection } from 'astro:content';
 import { getTranslations } from '@/i18n';
-import { getNavItems, slugFromId } from '@/i18n/utils';
+import { getNavItems } from '@/i18n/utils';
 import { locales } from '@/types';
 import type { Locale } from '@/types';
+import blogData from '@/data/blog';
 
 export function getStaticPaths() {
   return locales.map((locale) => ({ params: { locale } }));
@@ -16,10 +16,7 @@ const t = getTranslations(locale);
 const navItems = getNavItems(locale);
 const currentPath = Astro.url.pathname;
 
-const allPosts = await getCollection('blog');
-const posts = allPosts
-  .filter((post) => post.data.locale === locale)
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const posts = blogData[locale].sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
 ---
 <BaseLayout
   title={t.blog.title}
@@ -36,24 +33,20 @@ const posts = allPosts
       {t.blog.subtitle}
     </p>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {posts.map((post) => {
-        const slug = slugFromId(post.id);
-        const cardEntry = {
-          slug,
-          title: post.data.title,
-          description: post.data.description,
-          image: post.data.image ?? '/images/placeholder.jpg',
-          tags: post.data.tags,
-        };
-        return (
-          <Card
-            entry={cardEntry}
-            href={`/${locale}/blog/${slug}`}
-            readMoreLabel={t.common.readMore}
-            revealDelay={posts.indexOf(post) * 80}
-          />
-        );
-      })}
+      {posts.map((post, index) => (
+        <Card
+          entry={{
+            slug: post.slug,
+            title: post.title,
+            description: post.description,
+            image: post.image ?? '/images/placeholder.jpg',
+            tags: post.tags,
+          }}
+          href={`/${locale}/blog/${post.slug}`}
+          readMoreLabel={t.common.readMore}
+          revealDelay={index * 80}
+        />
+      ))}
     </div>
   </article>
 </BaseLayout>

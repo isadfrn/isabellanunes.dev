@@ -1,0 +1,80 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { getTranslations } from '@/i18n';
+import { getNavItems } from '@/i18n/utils';
+import { locales } from '@/types';
+import type { Locale } from '@/types';
+import publicationsData from '@/data/publications';
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { locale } }));
+}
+
+const locale = Astro.params.locale as Locale;
+const t = getTranslations(locale);
+const navItems = getNavItems(locale);
+const currentPath = Astro.url.pathname;
+const publications = publicationsData[locale];
+---
+<BaseLayout
+  title={t.publications.title}
+  description={t.publications.description}
+  locale={locale}
+  currentPath={currentPath}
+  navItems={navItems}
+>
+  <article class="container flex-1 py-20 lg:pl-0 pl-16 md:pl-8 min-h-screen page-enter">
+    <h1 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-50 mb-2">
+      {t.publications.title}
+    </h1>
+    <p class="text-base text-slate-500 dark:text-slate-400 mb-10">
+      {t.publications.subtitle}
+    </p>
+    <div class="flex flex-col gap-6">
+      {publications.map((publication, index) => (
+        <div
+          data-reveal
+          style={`--reveal-delay:${index * 80}ms`}
+          class="border border-slate-200 dark:border-slate-700 rounded-xl p-6 hover:border-primary-300 dark:hover:border-primary-700 transition-colors duration-150"
+        >
+          <div class="flex items-start justify-between gap-4 mb-3">
+            <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-50 leading-snug">
+              {publication.title}
+            </h2>
+            <span class="shrink-0 text-sm font-medium text-slate-500 dark:text-slate-400">
+              {publication.year}
+            </span>
+          </div>
+          <p class="text-sm text-primary-600 dark:text-primary-400 mb-3">
+            {publication.venue}
+          </p>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mb-3">
+            {publication.authors.join(', ')}
+          </p>
+          <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            {publication.description}
+          </p>
+          {publication.tags && publication.tags.length > 0 && (
+            <div class="flex flex-wrap gap-1.5 mb-4">
+              {publication.tags.map((tag) => (
+                <span class="inline-block px-2 py-0.5 text-xs font-medium bg-primary-50 dark:bg-primary-900/40 text-primary-700 dark:text-primary-300 rounded-full">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+          {publication.url && (
+            <a
+              href={publication.url}
+              class="inline-flex items-center gap-1.5 text-sm font-medium text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-150"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {t.publications.view_publication} →
+            </a>
+          )}
+        </div>
+      ))}
+    </div>
+  </article>
+</BaseLayout>

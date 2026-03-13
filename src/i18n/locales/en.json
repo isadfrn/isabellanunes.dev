@@ -6,22 +6,8 @@
     "education": "Education",
     "courses": "Courses",
     "projects": "Projects",
+    "publications": "Publications",
     "blog": "Blog"
-  },
-  "home": {
-    "greeting": "Hi, I'm",
-    "subtitle": "Developer and digital creator",
-    "description": "I build modern, accessible web experiences with a focus on clean code and thoughtful design. Passionate about open source and continuous learning.",
-    "extra": "Currently exploring the intersection of design systems and developer experience — always open to new challenges and collaborations."
-  },
-  "about": {
-    "title": "About me",
-    "intro": "I'm a software developer with a passion for building things that live on the internet. I care deeply about user experience, performance, and maintainability.",
-    "bio_1": "With a background in both frontend and backend development, I enjoy working across the full stack — from crafting pixel-perfect interfaces to designing robust APIs. I believe great software is built collaboratively, with empathy for both the people who use it and the people who maintain it.",
-    "bio_2": "When I'm not coding, you'll find me reading about design, contributing to open source projects, or experimenting with new technologies to stay sharp and curious.",
-    "skills_title": "Skills",
-    "skills_desc": "My toolkit includes TypeScript, React, Node.js, Astro, and PostgreSQL — along with a deep appreciation for accessibility, testing, and clean architecture.",
-    "description": "Software developer passionate about clean code, accessibility and great user experiences."
   },
   "career": {
     "title": "Career",
@@ -42,6 +28,15 @@
     "content_placeholder_1": "This project was built to solve a real-world problem with a focus on clean architecture and developer experience. The stack was chosen to maximize performance while keeping the codebase maintainable.",
     "content_placeholder_2": "The implementation follows best practices for accessibility, testing, and progressive enhancement. Every decision was made with the end user in mind.",
     "content_placeholder_3": "Feel free to explore the source code and reach out if you have any questions or suggestions."
+  },
+  "publications": {
+    "title": "Publications",
+    "subtitle": "Academic papers, articles and technical writings",
+    "description": "A collection of academic publications, conference papers and technical articles.",
+    "view_publication": "View publication",
+    "authors": "Authors",
+    "venue": "Published in",
+    "year": "Year"
   },
   "courses": {
     "title": "Courses",
@@ -69,6 +64,7 @@
   "breadcrumb": {
     "home": "Home",
     "projects": "Projects",
+    "publications": "Publications",
     "blog": "Blog"
   }
 }

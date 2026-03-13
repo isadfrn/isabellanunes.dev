@@ -1,0 +1,81 @@
+---
+import PostLayout from '@layouts/PostLayout.astro';
+import { getTranslations } from '@/i18n';
+import { getNavItems } from '@/i18n/utils';
+import { locales } from '@/types';
+import type { Locale } from '@/types';
+import publicationsData from '@/data/publications';
+
+export function getStaticPaths() {
+  return locales.flatMap((locale) =>
+    publicationsData[locale].map((publication) => ({
+      params: { locale, slug: publication.slug },
+      props: { publication },
+    }))
+  );
+}
+
+const locale = Astro.params.locale as Locale;
+const t = getTranslations(locale);
+const navItems = getNavItems(locale);
+const { publication } = Astro.props;
+const currentPath = Astro.url.pathname;
+
+const breadcrumbItems = [
+  { href: `/${locale}`, label: t.breadcrumb.home },
+  { href: `/${locale}/publications`, label: t.breadcrumb.publications },
+  { href: currentPath, label: publication.title },
+];
+---
+<PostLayout
+  title={publication.title}
+  description={publication.description}
+  locale={locale}
+  currentPath={currentPath}
+  breadcrumbItems={breadcrumbItems}
+  navItems={navItems}
+>
+  <article class="container flex-1 py-8 pb-20 lg:pl-0 pl-16 md:pl-8 min-h-screen page-enter">
+    <div class="max-w-2xl">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="text-sm font-medium text-slate-500 dark:text-slate-400">
+          {publication.year}
+        </span>
+      </div>
+      <h1 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-50 mb-3 leading-tight">
+        {publication.title}
+      </h1>
+      <p class="text-base text-primary-600 dark:text-primary-400 mb-2">
+        {t.publications.venue}: {publication.venue}
+      </p>
+      <p class="text-sm text-slate-500 dark:text-slate-400 mb-6">
+        {t.publications.authors}: {publication.authors.join(', ')}
+      </p>
+
+      {publication.tags && publication.tags.length > 0 && (
+        <div class="flex flex-wrap gap-1.5 mb-8">
+          {publication.tags.map((tag: string) => (
+            <span class="inline-block px-2 py-0.5 text-xs font-medium bg-primary-50 dark:bg-primary-900/40 text-primary-700 dark:text-primary-300 rounded-full">
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
+
+      <p class="text-base text-slate-600 dark:text-slate-300 leading-relaxed mb-8">
+        {publication.description}
+      </p>
+
+      {publication.url && (
+        <a
+          href={publication.url}
+          class="inline-flex items-center gap-1.5 px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg text-sm font-medium transition-colors duration-150"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {t.publications.view_publication} →
+        </a>
+      )}
+    </div>
+  </article>
+</PostLayout>
