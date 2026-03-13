@@ -6,7 +6,11 @@ export interface TimelineProps {
 
 export default function Timeline({ entries }: TimelineProps) {
   return (
-    <ol className="relative pl-8 border-l-2 border-slate-200 dark:border-slate-700 space-y-8">
+    <ol
+      data-reveal
+      style={{ transform: 'none' } as React.CSSProperties}
+      className="relative pl-8 border-l-2 border-slate-200 dark:border-slate-700 space-y-8"
+    >
       {entries.map((entry, index) => (
         <li
           key={index}

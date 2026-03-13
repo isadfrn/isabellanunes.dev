@@ -1,13 +1,14 @@
 import type { NavItem } from '@/types';
 import { getTranslations, getLocalizedPath, getAlternateLocale } from './index';
 
-const NAV_KEYS = ['home', 'about', 'career', 'education', 'courses', 'projects', 'publications', 'blog'] as const;
+const NAV_KEYS = ['home', 'about', 'career', 'education', 'courses', 'books', 'projects', 'publications', 'blog'] as const;
 const NAV_PATHS: Record<(typeof NAV_KEYS)[number], string> = {
   home: '/',
   about: '/about',
   career: '/career',
   education: '/education',
   courses: '/courses',
+  books: '/books',
   projects: '/projects',
   publications: '/publications',
   blog: '/blog',

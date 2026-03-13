@@ -5,6 +5,7 @@
     "career": "Career",
     "education": "Education",
     "courses": "Courses",
+    "books": "Books",
     "projects": "Projects",
     "publications": "Publications",
     "blog": "Blog"
@@ -37,6 +38,12 @@
     "authors": "Authors",
     "venue": "Published in",
     "year": "Year"
+  },
+  "books": {
+    "title": "Books",
+    "subtitle": "Books I recommend that have been part of my journey",
+    "description": "A selection of books I recommend on technology, programming and development.",
+    "buyBook": "Buy book"
   },
   "courses": {
     "title": "Courses",

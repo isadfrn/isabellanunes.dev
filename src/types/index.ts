@@ -41,6 +41,14 @@ export interface CourseEntry {
   tags?: string[];
 }
 
+export interface BookEntry {
+  title: string;
+  author: string;
+  cover: string;
+  affiliateUrl: string;
+  tags?: string[];
+}
+
 export interface HomeContent {
   greeting: string;
   subtitle: string;
