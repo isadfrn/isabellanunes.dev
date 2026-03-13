@@ -11,7 +11,12 @@
       "Bash(grep -r \"form\\\\|input\\\\|onChange\\\\|onSubmit\\\\|method=\" /d/dev/isabellanunes.dev/src --include=\"*.astro\" --include=\"*.tsx\" 2>/dev/null | head -20)",
       "Bash(grep -r \"script\\\\|import.*from.*http\\\\|fetch\\\\|external\" /d/dev/isabellanunes.dev/src --include=\"*.astro\" --include=\"*.tsx\" --include=\"*.ts\" 2>/dev/null | head -30)",
       "Bash(find /d/dev/isabellanunes.dev -name \"marked.config*\" -o -name \"*marked*\" 2>/dev/null | grep -v node_modules | head -10)",
-      "Bash(find /d/dev/isabellanunes.dev -maxdepth 2 -name \"tailwind*\" -type f 2>/dev/null | grep -v node_modules)"
+      "Bash(find /d/dev/isabellanunes.dev -maxdepth 2 -name \"tailwind*\" -type f 2>/dev/null | grep -v node_modules)",
+      "Bash(npm info:*)",
+      "Bash(node:*)",
+      "Bash(source:*)",
+      "Bash(nvm use:*)",
+      "Bash(npx drizzle-kit generate:*)"
     ]
   }
 }

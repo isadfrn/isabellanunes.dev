@@ -7,6 +7,8 @@ import { locales } from '@/types';
 import type { Locale } from '@/types';
 import books from '@/data/books';
 
+export const prerender = true;
+
 export function getStaticPaths() {
   return locales.map((locale) => ({ params: { locale } }));
 }

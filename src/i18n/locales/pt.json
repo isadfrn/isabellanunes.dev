@@ -25,7 +25,10 @@
     "subtitle": "Alguns dos projeto que desenvolvi ao longo da minha jornada",
     "description": "Alguns dos projeto que desenvolvi ao longo da minha jornada.",
     "view_project": "Ver projeto",
-    "repository": "Repositório"
+    "repository": "Repositório",
+    "content_placeholder_1": "Este projeto foi desenvolvido para resolver um problema real com foco em arquitetura limpa e experiência do desenvolvedor. A stack foi escolhida para maximizar a performance mantendo o código sustentável.",
+    "content_placeholder_2": "A implementação segue boas práticas de acessibilidade, testes e progressive enhancement. Cada decisão foi tomada pensando no usuário final.",
+    "content_placeholder_3": "Fique à vontade para explorar o código-fonte e entrar em contato caso tenha dúvidas ou sugestões."
   },
   "publications": {
     "title": "Publicações",

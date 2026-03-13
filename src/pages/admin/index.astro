@@ -1,0 +1,61 @@
+---
+---
+
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin — Dashboard</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        font-family: system-ui, sans-serif;
+        min-height: 100svh;
+        background: #0f172a;
+        color: #f1f5f9;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 2rem;
+        border-bottom: 1px solid #1e293b;
+        background: #0f172a;
+      }
+      header h1 { font-size: 1.125rem; font-weight: 600; }
+      a.logout {
+        font-size: 0.875rem;
+        color: #94a3b8;
+        text-decoration: none;
+      }
+      a.logout:hover { color: #f1f5f9; }
+      main {
+        padding: 2rem;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+      .welcome {
+        background: #1e293b;
+        border: 1px solid #334155;
+        border-radius: 12px;
+        padding: 1.5rem 2rem;
+      }
+      .welcome h2 { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
+      .welcome p { font-size: 0.9375rem; color: #94a3b8; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Admin</h1>
+      <a class="logout" href="/admin/logout">Sair</a>
+    </header>
+    <main>
+      <div class="welcome">
+        <h2>Dashboard</h2>
+        <p>Bem-vinda, Isabella. Em breve você poderá gerenciar os comentários do site aqui.</p>
+      </div>
+    </main>
+  </body>
+</html>
