@@ -16,7 +16,9 @@
       "Bash(node:*)",
       "Bash(source:*)",
       "Bash(nvm use:*)",
-      "Bash(npx drizzle-kit generate:*)"
+      "Bash(npx drizzle-kit generate:*)",
+      "Bash(npm uninstall:*)",
+      "Bash(nvm ls:*)"
     ]
   }
 }
