@@ -1,0 +1,22 @@
+---
+import FeatureFlagsAdmin from "@/components/FeatureFlagsAdmin";
+import ThemeProvider from "@components/ThemeProvider.astro";
+import "@styles/global.css";
+
+const adminPin = import.meta.env.PUBLIC_ADMIN_PIN ?? "1234";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Feature Flags - Admin</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <ThemeProvider />
+  </head>
+  <body>
+    <FeatureFlagsAdmin client:load adminPin={adminPin} />
+  </body>
+</html>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200" role="img" aria-label="Software architecture abstract visual">
+  <rect width="900" height="1200" fill="#f6f3ee"/>
+  <path d="M105 240h690v520H105z" fill="#17201d"/>
+  <path d="M165 310h220v28H165zm0 70h420v18H165zm0 48h520v18H165zm0 48h340v18H165zm0 92h560v18H165zm0 48h460v18H165z" fill="#dce8e2"/>
+  <circle cx="650" cy="880" r="130" fill="#546c60"/>
+  <path d="M590 880h120m-60-60v120" stroke="#fff" stroke-width="24" stroke-linecap="round"/>
+</svg>

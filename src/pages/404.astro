@@ -1,0 +1,40 @@
+---
+import ThemeProvider from "@components/ThemeProvider.astro";
+import "@styles/global.css";
+---
+
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>404 - Isabella Nunes</title>
+    <meta name="robots" content="noindex" />
+    <ThemeProvider />
+  </head>
+  <body class="min-h-screen bg-stone-50 dark:bg-slate-900">
+    <section class="flex min-h-screen flex-col items-center justify-center px-6 text-center">
+      <p
+        class="select-none text-[clamp(6rem,20vw,14rem)] font-bold leading-none text-transparent"
+        style="-webkit-text-stroke: 2px var(--color-primary-500); paint-order: stroke fill;"
+      >
+        404
+      </p>
+      <div class="mb-8 mt-2 space-y-2">
+        <p class="text-xl font-semibold text-slate-900 dark:text-slate-50 md:text-2xl">
+          Page not found
+        </p>
+        <p class="mx-auto max-w-sm text-base text-slate-500 dark:text-slate-400">
+          The path you followed does not exist here.
+        </p>
+      </div>
+      <a
+        href="/"
+        class="inline-flex items-center gap-2 rounded-lg bg-primary-500 px-5 py-2.5 text-sm font-medium text-white transition-colors duration-150 hover:bg-primary-600"
+      >
+        Home
+      </a>
+    </section>
+  </body>
+</html>

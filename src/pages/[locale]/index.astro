@@ -1,0 +1,50 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import aboutData from "@/data/about";
+import homeData from "@/data/home";
+import { getNavItems } from "@/i18n/utils";
+import { locales, type Locale } from "@/types";
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { locale } }));
+}
+
+const locale = Astro.params.locale as Locale;
+const currentPath = Astro.url.pathname;
+const navItems = getNavItems(locale);
+const home = homeData[locale];
+const about = aboutData[locale];
+---
+
+<BaseLayout
+  title="Isabella Nunes"
+  description={about.description}
+  locale={locale}
+  currentPath={currentPath}
+  navItems={navItems}
+>
+  <section class="page-enter relative min-h-screen flex-1 overflow-hidden">
+    <div class="absolute inset-0 grid grid-cols-3">
+      <img src="/images/home/hero-1.svg" alt="" class="h-full w-full object-cover" />
+      <img src="/images/home/hero-2.svg" alt="" class="h-full w-full object-cover" />
+      <img src="/images/home/hero-3.svg" alt="" class="h-full w-full object-cover" />
+      <div class="absolute inset-0 bg-stone-50/82 dark:bg-black/82"></div>
+    </div>
+
+    <article class="container page-enter relative z-10 flex min-h-screen flex-1 py-20 pl-16 md:pl-8 lg:pl-0">
+      <div class="flex min-h-[calc(100vh-10rem)] w-full items-center">
+        <div class="page-enter-slide w-full">
+          <p class="mb-3 text-sm font-medium uppercase tracking-wide text-primary-600 dark:text-primary-400">
+            {home.greeting}
+          </p>
+          <h1 class="mb-4 text-4xl font-bold leading-tight text-slate-900 dark:text-white md:text-5xl">
+            Isabella Nunes
+          </h1>
+          <p class="mb-6 text-xl leading-relaxed text-slate-700 dark:text-slate-300">
+            {home.subtitle}
+          </p>
+        </div>
+      </div>
+    </article>
+  </section>
+</BaseLayout>

@@ -1,0 +1,50 @@
+---
+import { marked } from "marked";
+import PostLayout from "@layouts/PostLayout.astro";
+import blogData from "@/data/blog";
+import { getTranslations } from "@/i18n";
+import { formatDate, getNavItems } from "@/i18n/utils";
+import { locales, type Locale } from "@/types";
+
+export function getStaticPaths() {
+  return locales.flatMap((locale) =>
+    blogData[locale].map((post) => ({
+      params: { locale, slug: post.slug },
+      props: { post },
+    })),
+  );
+}
+
+const locale = Astro.params.locale as Locale;
+const { post } = Astro.props;
+const t = getTranslations(locale);
+const navItems = getNavItems(locale);
+const currentPath = Astro.url.pathname;
+const content = await marked.parse(post.content);
+const breadcrumbItems = [
+  { href: `/${locale}/`, label: t.breadcrumb.home },
+  { href: `/${locale}/blog`, label: t.breadcrumb.blog },
+  { href: currentPath, label: post.title },
+];
+---
+
+<PostLayout
+  title={post.title}
+  description={post.description}
+  locale={locale}
+  currentPath={currentPath}
+  navItems={navItems}
+  breadcrumbItems={breadcrumbItems}
+>
+  <article class="container page-enter pb-20 pt-8 pl-16 md:pl-8 lg:pl-0">
+    <div class="max-w-3xl">
+      <p class="mb-3 text-sm text-slate-500 dark:text-slate-400">
+        {t.common.postedOn} {formatDate(post.pubDate, locale)}
+      </p>
+      <h1 class="mb-6 text-3xl font-bold text-slate-900 dark:text-slate-50 md:text-4xl">
+        {post.title}
+      </h1>
+      <div class="prose" set:html={content} />
+    </div>
+  </article>
+</PostLayout>

@@ -1,0 +1,22 @@
+---
+import type { Locale } from "@/types";
+
+interface Props {
+  language: Locale;
+  labelPt: string;
+  labelEn: string;
+  ariaPt: string;
+  ariaEn: string;
+}
+
+const { language, labelPt, labelEn, ariaPt, ariaEn } = Astro.props;
+const label = language === "pt" ? labelPt : labelEn;
+const ariaLabel = language === "pt" ? ariaPt : ariaEn;
+---
+
+<span
+  class="inline-flex shrink-0 items-center rounded-full border border-primary-100/80 bg-primary-50 px-2 py-0.5 text-xs font-medium text-primary-700 dark:border-primary-800/50 dark:bg-primary-900/40 dark:text-primary-300"
+  aria-label={ariaLabel}
+>
+  {label}
+</span>

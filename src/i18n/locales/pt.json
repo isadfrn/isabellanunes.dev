@@ -1,0 +1,76 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "about": "Sobre",
+    "career": "Carreira",
+    "education": "Formacao",
+    "courses": "Cursos",
+    "books": "Livros",
+    "projects": "Projetos",
+    "publications": "Publicacoes",
+    "blog": "Blog"
+  },
+  "about": {
+    "key_achievements": "Principais conquistas:"
+  },
+  "career": {
+    "title": "Carreira"
+  },
+  "education": {
+    "title": "Formacao academica",
+    "description": "Graduacoes e programas."
+  },
+  "projects": {
+    "title": "Projetos",
+    "description": "Coisas que construi ou as quais contribui.",
+    "view_project": "Ver projeto",
+    "repository": "Repositorio",
+    "content_placeholder_1": "Visao geral e objetivos do projeto.",
+    "content_placeholder_2": "Abordagem tecnica e stack.",
+    "content_placeholder_3": "Resultados e aprendizados."
+  },
+  "publications": {
+    "title": "Publicacoes",
+    "description": "Textos academicos e tecnicos.",
+    "view_publication": "Ver publicacao",
+    "authors": "Autores",
+    "venue": "Publicado em",
+    "year": "Ano",
+    "lang_badge_pt": "PT-BR",
+    "lang_badge_en": "EN",
+    "lang_badge_aria_pt": "Publicacao em portugues do Brasil",
+    "lang_badge_aria_en": "Publicacao em ingles"
+  },
+  "books": {
+    "title": "Livros",
+    "description": "Livros que recomendo.",
+    "buyBook": "Comprar livro"
+  },
+  "courses": {
+    "title": "Cursos",
+    "description": "Cursos que conclui.",
+    "certificate": "Ver certificado",
+    "viewCourse": "Ver curso"
+  },
+  "blog": {
+    "title": "Blog",
+    "description": "Artigos e atualizacoes."
+  },
+  "common": {
+    "readMore": "Ler mais",
+    "backTo": "Voltar para",
+    "tags": "Tags",
+    "postedOn": "Publicado em",
+    "lightMode": "Modo claro",
+    "darkMode": "Modo escuro",
+    "language": "Idioma",
+    "openMenu": "Abrir menu",
+    "closeMenu": "Fechar menu"
+  },
+  "breadcrumb": {
+    "home": "Inicio",
+    "projects": "Projetos",
+    "publications": "Publicacoes",
+    "blog": "Blog"
+  }
+}

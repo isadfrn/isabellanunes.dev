@@ -1,0 +1,76 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "career": "Career",
+    "education": "Education",
+    "courses": "Courses",
+    "books": "Books",
+    "projects": "Projects",
+    "publications": "Publications",
+    "blog": "Blog"
+  },
+  "about": {
+    "key_achievements": "Key achievements:"
+  },
+  "career": {
+    "title": "Career"
+  },
+  "education": {
+    "title": "Education",
+    "description": "Degrees and programs."
+  },
+  "projects": {
+    "title": "Projects",
+    "description": "Things I have built and contributed to.",
+    "view_project": "View project",
+    "repository": "Repository",
+    "content_placeholder_1": "Project overview and goals.",
+    "content_placeholder_2": "Technical approach and stack.",
+    "content_placeholder_3": "Outcomes and learnings."
+  },
+  "publications": {
+    "title": "Publications",
+    "description": "Academic and technical writing.",
+    "view_publication": "View publication",
+    "authors": "Authors",
+    "venue": "Published in",
+    "year": "Year",
+    "lang_badge_pt": "PT-BR",
+    "lang_badge_en": "EN",
+    "lang_badge_aria_pt": "Publication in Brazilian Portuguese",
+    "lang_badge_aria_en": "Publication in English"
+  },
+  "books": {
+    "title": "Books",
+    "description": "Books I recommend.",
+    "buyBook": "Buy book"
+  },
+  "courses": {
+    "title": "Courses",
+    "description": "Courses I have completed.",
+    "certificate": "View certificate",
+    "viewCourse": "View course"
+  },
+  "blog": {
+    "title": "Blog",
+    "description": "Articles and updates."
+  },
+  "common": {
+    "readMore": "Read more",
+    "backTo": "Back to",
+    "tags": "Tags",
+    "postedOn": "Posted on",
+    "lightMode": "Light mode",
+    "darkMode": "Dark mode",
+    "language": "Language",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "breadcrumb": {
+    "home": "Home",
+    "projects": "Projects",
+    "publications": "Publications",
+    "blog": "Blog"
+  }
+}

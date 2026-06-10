@@ -1,0 +1,42 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import aboutData from "@/data/about";
+import { getTranslations } from "@/i18n";
+import { getNavItems } from "@/i18n/utils";
+import { locales, type Locale } from "@/types";
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { locale } }));
+}
+
+const locale = Astro.params.locale as Locale;
+const t = getTranslations(locale);
+const navItems = getNavItems(locale);
+const currentPath = Astro.url.pathname;
+const about = aboutData[locale];
+---
+
+<BaseLayout title={about.title} locale={locale} currentPath={currentPath} navItems={navItems}>
+  <article class="container page-enter min-h-screen flex-1 py-20 pl-16 md:pl-8 lg:pl-0">
+    <div class="w-full max-w-none">
+      <h1 class="mb-6 text-3xl font-bold text-slate-900 dark:text-slate-50 md:text-4xl">
+        {about.title}
+      </h1>
+      <p data-reveal style="--reveal-delay:80ms" class="mb-6 text-justify text-base leading-relaxed text-slate-600 dark:text-slate-300">
+        {about.bio}
+      </p>
+      <p data-reveal style="--reveal-delay:120ms" class="mb-4 text-justify text-base leading-relaxed text-slate-600 dark:text-slate-300">
+        {t.about.key_achievements}
+      </p>
+      <ul data-reveal style="--reveal-delay:160ms" class="mb-10 list-disc space-y-2 pl-6 text-justify text-base leading-relaxed text-slate-600 dark:text-slate-300">
+        {about.achievements.map((achievement) => <li>{achievement}</li>)}
+      </ul>
+      <p data-reveal style="--reveal-delay:240ms" class="mb-6 text-justify text-base leading-relaxed text-slate-600 dark:text-slate-300">
+        {about.believes}
+      </p>
+      <p data-reveal style="--reveal-delay:320ms" class="mb-6 text-justify text-base leading-relaxed text-slate-600 dark:text-slate-300">
+        {about.hobbies}
+      </p>
+    </div>
+  </article>
+</BaseLayout>

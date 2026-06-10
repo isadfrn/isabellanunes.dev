@@ -1,0 +1,108 @@
+---
+import HamburgerMenu from "@components/HamburgerMenu";
+import ThemeProvider from "@components/ThemeProvider.astro";
+import { ClientRouter } from "astro:transitions";
+import aboutData from "@/data/about";
+import { getAlternateLocale, getTranslations } from "@/i18n";
+import { getAlternatePath, getNavItems } from "@/i18n/utils";
+import type { Locale, NavItem } from "@/types";
+import "@styles/global.css";
+
+interface Props {
+  title: string;
+  description?: string;
+  locale: Locale;
+  currentPath?: string;
+  navItems?: NavItem[];
+}
+
+const { title, description, locale, currentPath = "", navItems: navItemsProp } = Astro.props;
+const t = getTranslations(locale);
+const altLocale = getAlternateLocale(locale);
+const navItems = navItemsProp ?? getNavItems(locale);
+const pageDescription = description ?? aboutData[locale].description;
+const documentTitle = title === "Isabella Nunes" ? title : `${title} - Isabella Nunes`;
+const canonicalUrl = new URL(currentPath, Astro.site).toString();
+const alternatePath = getAlternatePath(currentPath, locale);
+const alternateUrl = new URL(alternatePath, Astro.site).toString();
+const defaultUrl = new URL(currentPath.replace(/^\/en(\/|$)/, "/pt$1"), Astro.site).toString();
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{documentTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={documentTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:locale" content={locale === "pt" ? "pt_BR" : "en_US"} />
+    <link rel="alternate" hreflang={altLocale} href={alternateUrl} />
+    <link rel="alternate" hreflang="x-default" href={defaultUrl} />
+    <ThemeProvider />
+    <ClientRouter />
+  </head>
+  <body>
+    <script is:inline>
+      function guardFeatureFlags() {
+        var keys = ["about", "career", "education", "courses", "books", "projects", "publications", "blog"];
+        var parts = window.location.pathname.split("/").filter(Boolean);
+        var section = parts[1];
+        if (!section || keys.indexOf(section) === -1) return;
+
+        try {
+          var stored = localStorage.getItem("feature-flags");
+          if (!stored) return;
+          var flags = JSON.parse(stored);
+          if (flags[section] === false) window.location.replace("/" + parts[0] + "/");
+        } catch {
+          return;
+        }
+      }
+
+      guardFeatureFlags();
+      document.addEventListener("astro:after-swap", guardFeatureFlags);
+    </script>
+    <script is:inline>
+      function initReveal() {
+        var elements = document.querySelectorAll("[data-reveal]:not(.is-revealed)");
+        if (!elements.length) return;
+
+        var observer = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-revealed");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.12, rootMargin: "0px 0px -40px 0px" },
+        );
+
+        elements.forEach(function (element) {
+          observer.observe(element);
+        });
+      }
+
+      initReveal();
+      document.addEventListener("astro:after-swap", initReveal);
+    </script>
+
+    <HamburgerMenu
+      client:load
+      locale={locale}
+      currentPath={currentPath}
+      navItems={navItems}
+      translations={{ common: t.common }}
+    />
+    <main class="page-content lg:ml-64">
+      <slot />
+    </main>
+  </body>
+</html>

@@ -1,0 +1,34 @@
+---
+import Timeline from "@components/Timeline";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import educationData from "@/data/education";
+import { getTranslations } from "@/i18n";
+import { getNavItems } from "@/i18n/utils";
+import { locales, type Locale } from "@/types";
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { locale } }));
+}
+
+const locale = Astro.params.locale as Locale;
+const t = getTranslations(locale);
+const navItems = getNavItems(locale);
+const currentPath = Astro.url.pathname;
+---
+
+<BaseLayout
+  title={t.education.title}
+  description={t.education.description}
+  locale={locale}
+  currentPath={currentPath}
+  navItems={navItems}
+>
+  <article class="container page-enter min-h-screen flex-1 py-20 pl-16 md:pl-8 lg:pl-0">
+    <div class="w-full max-w-none">
+      <h1 class="mb-8 text-3xl font-bold text-slate-900 dark:text-slate-50 md:text-4xl">
+        {t.education.title}
+      </h1>
+      <Timeline entries={educationData[locale]} />
+    </div>
+  </article>
+</BaseLayout>
