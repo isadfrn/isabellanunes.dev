@@ -90,7 +90,11 @@ const defaultUrl = new URL(currentPath.replace(/^\/en(\/|$)/, "/pt$1"), Astro.si
         });
       }
 
-      initReveal();
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initReveal);
+      } else {
+        initReveal();
+      }
       document.addEventListener("astro:after-swap", initReveal);
     </script>
 
