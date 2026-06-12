@@ -40,21 +40,20 @@ jobs:
         run: |
           install -m 600 -D /dev/null ~/.ssh/id_ed25519
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
-          echo "${{ secrets.SSH_HOST_KEY }}" >> ~/.ssh/known_hosts
+          ssh-keyscan -t ed25519 -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
       - name: Deploy na VPS
         run: |
           ssh -p ${{ secrets.SSH_PORT }} -i ~/.ssh/id_ed25519 \
-            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
-            docker pull ghcr.io/${{ github.repository_owner }}/isabellanunes-dev:latest
-            docker stop isabellanunes 2>/dev/null || true
-            docker rm   isabellanunes 2>/dev/null || true
-            docker run -d \
-              --name isabellanunes \
-              --restart unless-stopped \
-              -p 127.0.0.1:3001:80 \
-              ghcr.io/${{ github.repository_owner }}/isabellanunes-dev:latest
-          EOF
+            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
+            "docker pull ghcr.io/${{ github.repository_owner }}/isabellanunes-dev:latest && \
+             docker stop isabellanunes 2>/dev/null || true ; \
+             docker rm   isabellanunes 2>/dev/null || true ; \
+             docker run -d \
+               --name isabellanunes \
+               --restart unless-stopped \
+               -p 127.0.0.1:3001:80 \
+               ghcr.io/${{ github.repository_owner }}/isabellanunes-dev:latest"
 
       - name: Cleanup SSH key
         if: always()
