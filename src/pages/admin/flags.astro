@@ -2,8 +2,6 @@
 import FeatureFlagsAdmin from "@/components/FeatureFlagsAdmin";
 import ThemeProvider from "@components/ThemeProvider.astro";
 import "@styles/global.css";
-
-const adminPin = import.meta.env.PUBLIC_ADMIN_PIN ?? "1234";
 ---
 
 <!doctype html>
@@ -17,6 +15,6 @@ const adminPin = import.meta.env.PUBLIC_ADMIN_PIN ?? "1234";
     <ThemeProvider />
   </head>
   <body>
-    <FeatureFlagsAdmin client:load adminPin={adminPin} />
+    <FeatureFlagsAdmin client:load />
   </body>
 </html>

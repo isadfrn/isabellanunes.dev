@@ -34,7 +34,8 @@ jobs:
           push: true
           tags: ${{ env.IMAGE }}:latest
           build-args: |
-            PUBLIC_ADMIN_PIN=${{ secrets.PUBLIC_ADMIN_PIN }}
+            ADMIN_USER=${{ secrets.ADMIN_USER }}
+            ADMIN_PASSWORD=${{ secrets.ADMIN_PASSWORD }}
 
       - name: Setup SSH key
         run: |

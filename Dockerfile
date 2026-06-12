@@ -4,12 +4,14 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY . .
-ARG PUBLIC_ADMIN_PIN
-ENV PUBLIC_ADMIN_PIN=$PUBLIC_ADMIN_PIN
 RUN npm run build
 
 # Stage 2: serve
 FROM nginx:alpine
 COPY --from=builder /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
+ARG ADMIN_USER=admin
+ARG ADMIN_PASSWORD
+RUN printf '%s\n' "${ADMIN_USER}:$(openssl passwd -apr1 "${ADMIN_PASSWORD}")" > /etc/nginx/.htpasswd && \
+    chmod 600 /etc/nginx/.htpasswd
 EXPOSE 80

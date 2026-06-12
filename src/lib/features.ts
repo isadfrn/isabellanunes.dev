@@ -33,7 +33,6 @@ export const FEATURE_LABELS: Record<FeatureKey, string> = {
 export type FeatureFlags = Record<FeatureKey, boolean>;
 
 export const STORAGE_KEY = "feature-flags";
-export const AUTH_KEY = "admin-authenticated";
 
 export const DEFAULT_FLAGS: FeatureFlags = {
   about: true,
