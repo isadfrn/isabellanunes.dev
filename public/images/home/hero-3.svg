@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200" role="img" aria-label="Mentoring and engineering abstract visual">
-  <rect width="900" height="1200" fill="#f0f4f2"/>
-  <path d="M170 260h560v360H170z" fill="#fff" stroke="#435a4e" stroke-width="18"/>
-  <path d="M230 340h390M230 420h310M230 500h450" stroke="#546c60" stroke-width="26" stroke-linecap="round"/>
-  <path d="M220 790c90-120 230-120 320 0s230 120 320 0v250H220z" fill="#546c60"/>
-  <circle cx="300" cy="760" r="70" fill="#dce8e2"/>
-  <circle cx="620" cy="760" r="70" fill="#dce8e2"/>
-</svg>
