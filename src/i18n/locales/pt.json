@@ -1,13 +1,13 @@
 {
   "nav": {
-    "home": "Inicio",
+    "home": "Início",
     "about": "Sobre",
     "career": "Carreira",
-    "education": "Formacao",
+    "education": "Formação",
     "courses": "Cursos",
     "books": "Livros",
     "projects": "Projetos",
-    "publications": "Publicacoes",
+    "publications": "Publicações",
     "blog": "Blog"
   },
   "about": {
@@ -17,44 +17,31 @@
     "title": "Carreira"
   },
   "education": {
-    "title": "Formacao academica",
-    "description": "Graduacoes e programas."
+    "title": "Formação"
   },
   "projects": {
     "title": "Projetos",
-    "description": "Coisas que construi ou as quais contribui.",
     "view_project": "Ver projeto",
-    "repository": "Repositorio",
-    "content_placeholder_1": "Visao geral e objetivos do projeto.",
-    "content_placeholder_2": "Abordagem tecnica e stack.",
-    "content_placeholder_3": "Resultados e aprendizados."
+    "repository": "Repositório"
   },
   "publications": {
-    "title": "Publicacoes",
-    "description": "Textos academicos e tecnicos.",
-    "view_publication": "Ver publicacao",
-    "authors": "Autores",
-    "venue": "Publicado em",
-    "year": "Ano",
+    "title": "Publicações",
     "lang_badge_pt": "PT-BR",
     "lang_badge_en": "EN",
-    "lang_badge_aria_pt": "Publicacao em portugues do Brasil",
-    "lang_badge_aria_en": "Publicacao em ingles"
+    "lang_badge_aria_pt": "Publicações em Português do Brasil",
+    "lang_badge_aria_en": "Publicação em Inglês"
   },
   "books": {
     "title": "Livros",
-    "description": "Livros que recomendo.",
     "buyBook": "Comprar livro"
   },
   "courses": {
     "title": "Cursos",
-    "description": "Cursos que conclui.",
     "certificate": "Ver certificado",
     "viewCourse": "Ver curso"
   },
   "blog": {
-    "title": "Blog",
-    "description": "Artigos e atualizacoes."
+    "title": "Blog"
   },
   "common": {
     "readMore": "Ler mais",
@@ -68,9 +55,8 @@
     "closeMenu": "Fechar menu"
   },
   "breadcrumb": {
-    "home": "Inicio",
+    "home": "Início",
     "projects": "Projetos",
-    "publications": "Publicacoes",
     "blog": "Blog"
   }
 }

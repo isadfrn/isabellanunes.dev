@@ -2,21 +2,23 @@ import type { BookEntry } from "@/types";
 
 const books: BookEntry[] = [
   {
-    title: "Arquitetura Limpa",
+    title:
+      "Arquitetura Limpa: O guia do artesão para estrutura e design de software",
     author: "Robert C. Martin",
-    affiliateUrl: "https://www.amazon.com.br/s?k=arquitetura+limpa",
+    affiliateUrl: "https://a.co/d/06j5uohd",
     tags: ["Arquitetura", "Design"],
   },
   {
-    title: "Projeto Orientado pelo Dominio",
+    title:
+      "Domain-Driven Design: atacando as complexidades no coração do software",
     author: "Eric Evans",
-    affiliateUrl: "https://www.amazon.com.br/s?k=domain+driven+design",
+    affiliateUrl: "https://a.co/d/0e6H4YRw",
     tags: ["DDD", "Modelagem"],
   },
   {
-    title: "O Programador Pragmatico",
+    title: "O Programador Pragmático: sua jornada até a maestria",
     author: "David Thomas e Andrew Hunt",
-    affiliateUrl: "https://www.amazon.com.br/s?k=o+programador+pragmatico",
+    affiliateUrl: "https://a.co/d/00usKfuT",
     tags: ["Carreira", "Boas praticas"],
   },
 ];

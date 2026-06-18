@@ -3,9 +3,10 @@ import type { TimelineEntry } from "@/types";
 
 export interface TimelineProps {
   entries: TimelineEntry[];
+  orgAsBadge?: boolean;
 }
 
-export default function Timeline({ entries }: TimelineProps) {
+export default function Timeline({ entries, orgAsBadge = false }: TimelineProps) {
   return (
     <ol
       data-reveal
@@ -21,17 +22,34 @@ export default function Timeline({ entries }: TimelineProps) {
         >
           <span className="absolute -left-[2.35rem] top-1.5 h-3 w-3 rounded-full bg-primary-500 ring-2 ring-white dark:bg-primary-400 dark:ring-slate-900" />
           <div className="rounded-lg border border-slate-100 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-800">
-            <h3 className="mb-1 text-base font-semibold text-slate-900 dark:text-slate-50">
-              {entry.title}
-            </h3>
+            {orgAsBadge && (
+              <div className="mb-3">
+                <span className="inline-flex w-fit items-center rounded-full bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-600 dark:bg-slate-700 dark:text-slate-300">
+                  {entry.organization}
+                </span>
+              </div>
+            )}
+            <div className="mb-1 flex items-start justify-between gap-3">
+              <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
+                {entry.title}
+              </h3>
+              {entry.workMode && (
+                <span className="shrink-0 rounded-full bg-primary-50 px-2.5 py-0.5 text-xs font-medium text-primary-700 dark:bg-primary-500/15 dark:text-primary-300">
+                  {entry.workMode}
+                </span>
+              )}
+            </div>
             <p className="mb-3 text-sm text-slate-500 dark:text-slate-400">
-              {entry.organization} &middot; {entry.period}
+              {orgAsBadge ? entry.period : <>{entry.organization} &middot; {entry.period}</>}
+              {entry.location && <> &middot; {entry.location}</>}
             </p>
-            <ul className="list-disc space-y-1 pl-5 text-sm leading-relaxed text-slate-700 dark:text-slate-300">
-              {entry.description.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
+            {entry.description && entry.description.length > 0 && (
+              <ul className="list-disc space-y-1 pl-5 text-sm leading-relaxed text-slate-700 dark:text-slate-300">
+                {entry.description.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            )}
           </div>
         </li>
       ))}

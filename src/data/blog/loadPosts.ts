@@ -18,7 +18,6 @@ interface Frontmatter {
   title?: string;
   description?: string;
   pubDate?: string | Date;
-  image?: string;
 }
 
 function parseBlogMarkdown(path: string, raw: string): BlogPost {
@@ -38,7 +37,6 @@ function parseBlogMarkdown(path: string, raw: string): BlogPost {
     title: frontmatter.title,
     description: frontmatter.description,
     pubDate,
-    image: frontmatter.image,
     content,
   };
 }

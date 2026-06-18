@@ -15,10 +15,9 @@ export default function CourseCard({ entry, labels, revealDelay = 0 }: CourseCar
       style={{ "--reveal-delay": `${revealDelay}ms` } as CSSProperties}
       className="flex flex-col rounded-lg border border-slate-100 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-800"
     >
-      <div className="mb-4">
-        <span className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-2 py-1 shadow-sm">
-          <img src={entry.platformLogo} alt={entry.platform} className="h-4 w-auto object-contain" />
-          <span className="text-xs font-medium text-slate-600">{entry.platform}</span>
+      <div className="mb-3">
+        <span className="inline-flex w-fit items-center rounded-full bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-600 dark:bg-slate-700 dark:text-slate-300">
+          {entry.platform}
         </span>
       </div>
 

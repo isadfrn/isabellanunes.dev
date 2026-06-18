@@ -2,20 +2,28 @@ import type { TimelineEntry } from "@/types";
 
 const education: TimelineEntry[] = [
   {
-    title: "Pos-graduacao em Arquitetura de Software",
-    organization: "Programa de especializacao",
-    period: "Em andamento",
-    description: [
-      "Aprofundamento em arquitetura, integracao de sistemas, qualidade e escalabilidade.",
-    ],
+    title: "Mestrado, Computação Aplicada",
+    organization: "Universidade do Vale do Itajaí",
+    period: "2024 - atualmente",
+    workMode: "Em andamento",
   },
   {
-    title: "Graduacao em Sistemas de Informacao",
-    organization: "Formacao em tecnologia",
-    period: "Concluida",
-    description: [
-      "Base em engenharia de software, banco de dados, redes, analise de sistemas e gestao de projetos.",
-    ],
+    title: "Especialização, Tech Developer 360",
+    organization: "Faculdade de Tecnologia Rocketseat",
+    period: "2025 - 2026",
+    workMode: "Em andamento",
+  },
+  {
+    title: "MBA, Arquitetura Full Cycle",
+    organization: "Faculdade Brasília",
+    period: "2023 - 2024",
+    workMode: "Finalizada",
+  },
+  {
+    title: "Bacharelado, Ciência da Computação",
+    organization: "Universidade Federal de Goiás",
+    period: "2014 - 2018",
+    workMode: "Finalizada",
   },
 ];
 

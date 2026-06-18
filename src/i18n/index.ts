@@ -18,8 +18,3 @@ export function getLocalizedPath(path: string, locale: string): string {
 export function getAlternateLocale(locale: string): Locale {
   return locale === "pt" ? "en" : "pt";
 }
-
-export function extractLocaleFromUrl(url: URL): Locale {
-  const [, locale] = url.pathname.split("/");
-  return locale === "en" ? "en" : "pt";
-}

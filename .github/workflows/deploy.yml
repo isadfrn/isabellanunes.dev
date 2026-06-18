@@ -33,9 +33,6 @@ jobs:
           context: .
           push: true
           tags: ${{ env.IMAGE }}:latest
-          build-args: |
-            ADMIN_USER=${{ secrets.ADMIN_USER }}
-            ADMIN_PASSWORD=${{ secrets.ADMIN_PASSWORD }}
 
       - name: Setup SSH key
         run: |
@@ -54,6 +51,8 @@ jobs:
                --name isabellanunes \
                --restart unless-stopped \
                -p 127.0.0.1:3001:80 \
+               -e ADMIN_USER='${{ secrets.ADMIN_USER }}' \
+               -e ADMIN_PASSWORD='${{ secrets.ADMIN_PASSWORD }}' \
                ghcr.io/${{ github.repository_owner }}/isabellanunes-dev:latest"
 
       - name: Cleanup SSH key

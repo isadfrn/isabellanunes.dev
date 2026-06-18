@@ -2,25 +2,18 @@ import type { ProjectEntry } from "@/types";
 
 const projects: ProjectEntry[] = [
   {
-    slug: "rfid-platform",
-    title: "RFID platform for distribution centers",
+    title: "Pokémuu",
     description:
-      "System for printing, traceability, and monitoring of RFID tags in high-volume logistics environments.",
-    tags: ["RFID", "IoT", "Observability", "Full Stack"],
+      "Veterinary Anatomical Atlas of Bovines in Pokémon-style card format, developed for the Morphophysiology of the Neurolocomotor System and Integument course at Unisociesc Blumenau's Veterinary Medicine program.",
+    tags: ["Veterinary", "Next", "Atlas"],
+    repo: "https://github.com/isadfrn/pokemuu",
   },
   {
-    slug: "sre-automation",
-    title: "SRE automation for global operations",
+    title: "YouTube Channel Text Extract",
     description:
-      "Automation platform with custom drivers, dashboards, and integrations for distributed teams.",
-    tags: ["SRE", "Python", "MongoDB", "Automation"],
-  },
-  {
-    slug: "healthcare-modernization",
-    title: "Healthcare platform modernization",
-    description:
-      "Service migration, performance improvements, and frontend modernization for a globally used product.",
-    tags: ["PostgreSQL", "Java", "Angular", "Microservices"],
+      "Download all videos from a YouTube channel as audio only (no video), then transcribe them to text locally with OpenAI Whisper. The text is ready for Claude, NotebookLM, or any text-based tool.",
+    tags: ["Python", "Youtube-dl", "OpenAI Whisper"],
+    repo: "https://github.com/isadfrn/youtube-channel-text-extract",
   },
 ];
 

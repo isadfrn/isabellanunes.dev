@@ -18,7 +18,6 @@ const currentPath = Astro.url.pathname;
 
 <BaseLayout
   title={t.education.title}
-  description={t.education.description}
   locale={locale}
   currentPath={currentPath}
   navItems={navItems}
@@ -28,7 +27,7 @@ const currentPath = Astro.url.pathname;
       <h1 class="mb-8 text-3xl font-bold text-slate-900 dark:text-slate-50 md:text-4xl">
         {t.education.title}
       </h1>
-      <Timeline entries={educationData[locale]} />
+      <Timeline entries={educationData[locale]} orgAsBadge />
     </div>
   </article>
 </BaseLayout>

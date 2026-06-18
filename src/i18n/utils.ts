@@ -42,11 +42,6 @@ export function formatDate(date: Date, locale: string): string {
   }).format(date);
 }
 
-export function slugFromId(id: string): string {
-  const parts = id.split("/");
-  return parts[parts.length - 1] ?? id;
-}
-
 export function getAlternatePath(currentPath: string, currentLocale: string): string {
   const alternate = getAlternateLocale(currentLocale);
   const rest = currentPath.replace(new RegExp(`^/${currentLocale}/?`), "/");

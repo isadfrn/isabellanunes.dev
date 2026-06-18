@@ -10,10 +10,9 @@ RUN npm run build
 FROM nginx:alpine
 COPY --from=builder /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
-ARG ADMIN_USER=admin
-ARG ADMIN_PASSWORD
+# The .htpasswd is generated at runtime (see generate-htpasswd.sh) from the
+# ADMIN_USER/ADMIN_PASSWORD env vars, keeping credentials out of image layers.
+COPY generate-htpasswd.sh /docker-entrypoint.d/40-generate-htpasswd.sh
 RUN apk add --no-cache apache2-utils && \
-    printf '%s' "${ADMIN_PASSWORD}" | htpasswd -i -c /etc/nginx/.htpasswd "${ADMIN_USER}" && \
-    chown root:nginx /etc/nginx/.htpasswd && \
-    chmod 640 /etc/nginx/.htpasswd
+    chmod +x /docker-entrypoint.d/40-generate-htpasswd.sh
 EXPOSE 80
