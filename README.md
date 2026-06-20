@@ -4,7 +4,7 @@
 ![Repository size](https://img.shields.io/github/repo-size/isadfrn/isabellanunes.dev?style=flat-square)
 ![Last commit](https://img.shields.io/github/last-commit/isadfrn/isabellanunes.dev?style=flat-square)
 
-Personal website and portfolio for [Isabella Nunes](https://isabellanunes.dev) — Software Engineer with over 10 years of experience in full stack development, architecture, and automation.
+Personal website and portfolio for [Isabella Nunes](https://isabellanunes.dev).
 
 ## About the Project
 
