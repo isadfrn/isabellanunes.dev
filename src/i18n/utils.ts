@@ -13,25 +13,31 @@ const NAV_KEYS = [
   "blog",
 ] as const;
 
-const NAV_PATHS: Record<(typeof NAV_KEYS)[number], string> = {
-  home: "/",
-  about: "/about",
-  career: "/career",
-  education: "/education",
-  courses: "/courses",
-  books: "/books",
-  projects: "/projects",
-  publications: "/publications",
-  blog: "/blog",
-};
+const SCROLL_SECTION_KEYS = new Set<(typeof NAV_KEYS)[number]>([
+  "about",
+  "career",
+  "education",
+  "courses",
+  "books",
+  "projects",
+  "publications",
+  "blog",
+]);
+
+export function isScrollSectionKey(key: string): boolean {
+  return SCROLL_SECTION_KEYS.has(key as (typeof NAV_KEYS)[number]);
+}
 
 export function getNavItems(locale: string): NavItem[] {
   const t = getTranslations(locale);
-  return NAV_KEYS.map((key) => ({
-    key,
-    href: getLocalizedPath(NAV_PATHS[key], locale),
-    label: t.nav[key],
-  }));
+  return NAV_KEYS.map((key) => {
+    const anchor = key === "home" ? "" : `#${key}`;
+    return {
+      key,
+      href: `${getLocalizedPath("/", locale)}${anchor}`,
+      label: t.nav[key],
+    };
+  });
 }
 
 export function formatDate(date: Date, locale: string): string {
@@ -42,7 +48,10 @@ export function formatDate(date: Date, locale: string): string {
   }).format(date);
 }
 
-export function getAlternatePath(currentPath: string, currentLocale: string): string {
+export function getAlternatePath(
+  currentPath: string,
+  currentLocale: string,
+): string {
   const alternate = getAlternateLocale(currentLocale);
   const rest = currentPath.replace(new RegExp(`^/${currentLocale}/?`), "/");
   return `/${alternate}${rest === "/" ? "/" : rest}`;

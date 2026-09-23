@@ -41,7 +41,8 @@
     "viewCourse": "Ver curso"
   },
   "blog": {
-    "title": "Blog"
+    "title": "Blog",
+    "viewAll": "Ver todos os posts"
   },
   "common": {
     "readMore": "Ler mais",
