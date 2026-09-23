@@ -44,16 +44,16 @@ jobs:
         run: |
           ssh -p ${{ secrets.SSH_PORT }} -i ~/.ssh/id_ed25519 \
             ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
-            "docker pull ghcr.io/${{ github.repository_owner }}/isabellanunes-dev:latest && \
-             docker stop isabellanunes 2>/dev/null || true ; \
-             docker rm   isabellanunes 2>/dev/null || true ; \
+            "set -e
+             docker pull ${{ env.IMAGE }}:latest
+             docker rm -f isabellanunes || true
              docker run -d \
                --name isabellanunes \
                --restart unless-stopped \
                -p 127.0.0.1:3001:80 \
                -e ADMIN_USER='${{ secrets.ADMIN_USER }}' \
                -e ADMIN_PASSWORD='${{ secrets.ADMIN_PASSWORD }}' \
-               ghcr.io/${{ github.repository_owner }}/isabellanunes-dev:latest"
+               ${{ env.IMAGE }}:latest"
 
       - name: Cleanup SSH key
         if: always()
