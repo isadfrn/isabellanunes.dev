@@ -1,17 +1,60 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary-50: #f0f4f2;
-  --color-primary-100: #dce8e2;
-  --color-primary-200: #b9d1c6;
-  --color-primary-300: #8fb5a4;
-  --color-primary-400: #6b9482;
-  --color-primary-500: #546c60;
-  --color-primary-600: #435a4e;
-  --color-primary-700: #35473d;
-  --color-primary-800: #27352d;
-  --color-primary-900: #192220;
-  --color-primary-950: #0c1210;
+  /* Primary — violet, from the atmospheric neon haze in the reference image */
+  --color-primary-50: #f6f4fb;
+  --color-primary-100: #ede8f7;
+  --color-primary-200: #dad0ef;
+  --color-primary-300: #bfaee2;
+  --color-primary-400: #9f86d0;
+  --color-primary-500: #8264bd;
+  --color-primary-600: #6a4da0;
+  --color-primary-700: #553e80;
+  --color-primary-800: #423163;
+  --color-primary-900: #2b2043;
+  --color-primary-950: #17122a;
+
+  /* Accent — neon magenta signage, for secondary highlights */
+  --color-accent-50: #fdf2f8;
+  --color-accent-100: #fce7f3;
+  --color-accent-200: #fbcfe8;
+  --color-accent-300: #f9a8d4;
+  --color-accent-400: #ec5f9e;
+  --color-accent-500: #d43e82;
+  --color-accent-600: #c42270;
+  --color-accent-700: #9c1a58;
+  --color-accent-800: #741541;
+  --color-accent-900: #4d0f2c;
+  --color-accent-950: #2b0819;
+
+  /* Teal — aquarium glow / distant city lights, for links and info accents */
+  --color-teal-50: #ecfdf9;
+  --color-teal-100: #d1faf0;
+  --color-teal-200: #a4f4e2;
+  --color-teal-300: #6ee7cf;
+  --color-teal-400: #34cdb3;
+  --color-teal-500: #1aa896;
+  --color-teal-600: #14867a;
+  --color-teal-700: #126a62;
+  --color-teal-800: #11544d;
+  --color-teal-900: #0f4541;
+  --color-teal-950: #072b29;
+
+  /* Slate — repurposed as a navy-violet ink scale (was Tailwind's default gray) */
+  --color-slate-50: #f6f5fa;
+  --color-slate-100: #ecebf3;
+  --color-slate-200: #d6d3e5;
+  --color-slate-300: #b6b0c9;
+  --color-slate-400: #8f89a3;
+  --color-slate-500: #6f6a83;
+  --color-slate-600: #564f6b;
+  --color-slate-700: #3d3650;
+  --color-slate-800: #251f34;
+  --color-slate-900: #17131f;
+  --color-slate-950: #0e0c14;
+
+  /* Stone — warm paper tone for the light theme page background, from the desk wood */
+  --color-stone-50: #faf7f1;
 }
 
 @variant dark (&:where([data-theme=dark] *));
