@@ -12,9 +12,11 @@ A bilingual static application (Portuguese and English) that brings together car
 
 ### Sections
 
+The home page (`/pt/`, `/en/`) is a single scrolling page with a full-bleed hero image and the sections below, reached via smooth scroll instead of separate routes. Blog remains its own set of pages.
+
 | Section | Description |
 | ------- | ----------- |
-| Home | Introduction and professional subtitle |
+| Home | Full-screen hero image, introduction, and professional subtitle |
 | About | Bio, achievements, and interests |
 | Career | Professional experience timeline |
 | Education | Academic background |
@@ -22,16 +24,17 @@ A bilingual static application (Portuguese and English) that brings together car
 | Books | Recommendations with affiliate links |
 | Projects | Portfolio with GitHub repositories |
 | Publications | Articles and academic work |
-| Blog | Markdown posts (PT/EN) |
+| Blog | Markdown posts (PT/EN), separate listing and post pages |
 
 ### Features
 
 - Internationalization (PT-BR default, EN) with prefixed routes (`/pt/`, `/en/`)
 - Light and dark mode
 - Responsive layout (mobile and desktop)
-- Navigation with hamburger menu and breadcrumbs
+- Always-collapsed hamburger menu (desktop and mobile) with smooth scroll-to-section navigation and scroll-spy active state
 - Feature flags to show or hide sections in real time
 - Automatic sitemap
+- Conventional commit messages enforced with commitlint + Husky, changelog generated with commit-and-tag-version
 
 ## Technologies
 
