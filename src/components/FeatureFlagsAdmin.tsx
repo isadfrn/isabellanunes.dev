@@ -28,9 +28,12 @@ export default function FeatureFlagsAdmin() {
     <div className="min-h-screen bg-slate-50 px-4 py-12 dark:bg-slate-900">
       <div className="mx-auto max-w-md">
         <div className="mb-8">
-          <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-50">Feature Flags</h1>
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-50">
+            Section Visibility
+          </h1>
           <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-            Toggle site sections on or off in real time.
+            Show or hide sections in this browser only — saved to this
+            device&apos;s local storage, not shared with other visitors.
           </p>
         </div>
 
@@ -40,7 +43,9 @@ export default function FeatureFlagsAdmin() {
               <div
                 key={key}
                 className={`flex items-center justify-between px-5 py-4 ${
-                  index < FEATURE_KEYS.length - 1 ? "border-b border-slate-100 dark:border-slate-700" : ""
+                  index < FEATURE_KEYS.length - 1
+                    ? "border-b border-slate-100 dark:border-slate-700"
+                    : ""
                 }`}
               >
                 <div>
@@ -49,10 +54,18 @@ export default function FeatureFlagsAdmin() {
                   </p>
                   <p
                     className={`mt-0.5 text-xs transition-colors ${
-                      savedKey === key ? "text-primary-500" : flags[key] ? "text-slate-400" : "text-red-400"
+                      savedKey === key
+                        ? "text-primary-500"
+                        : flags[key]
+                          ? "text-slate-400"
+                          : "text-red-400"
                     }`}
                   >
-                    {savedKey === key ? "Saved" : flags[key] ? "Visible" : "Hidden"}
+                    {savedKey === key
+                      ? "Saved"
+                      : flags[key]
+                        ? "Visible"
+                        : "Hidden"}
                   </p>
                 </div>
                 <button
@@ -61,7 +74,9 @@ export default function FeatureFlagsAdmin() {
                   aria-label={`Toggle ${FEATURE_LABELS[key]}`}
                   onClick={() => toggle(key)}
                   className={`relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-slate-800 ${
-                    flags[key] ? "bg-primary-500" : "bg-slate-200 dark:bg-slate-600"
+                    flags[key]
+                      ? "bg-primary-500"
+                      : "bg-slate-200 dark:bg-slate-600"
                   }`}
                   type="button"
                 >

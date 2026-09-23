@@ -1,0 +1,29 @@
+---
+interface Props {
+  href: string;
+  revealDelay?: number;
+  external?: boolean;
+  class?: string;
+}
+
+const {
+  href,
+  revealDelay = 0,
+  external = false,
+  class: className = "",
+} = Astro.props;
+---
+
+<a
+  href={href}
+  target={external ? "_blank" : undefined}
+  rel={external ? "noopener noreferrer" : undefined}
+  data-reveal
+  style={`--reveal-delay:${revealDelay}ms`}
+  class:list={[
+    "rounded-lg border border-slate-200 bg-white shadow-sm transition-colors hover:border-primary-200 hover:bg-primary-50/40 dark:border-slate-700 dark:bg-slate-800 dark:hover:border-primary-800 dark:hover:bg-primary-900/10",
+    className,
+  ]}
+>
+  <slot />
+</a>

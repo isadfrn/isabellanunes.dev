@@ -4,25 +4,28 @@ const education: TimelineEntry[] = [
   {
     title: "Mestrado, Computação Aplicada",
     organization: "Universidade do Vale do Itajaí",
-    period: "2024 - atualmente",
+    startDate: "2024-01-01",
     workMode: "Em andamento",
   },
   {
     title: "Especialização, Tech Developer 360",
     organization: "Faculdade de Tecnologia Rocketseat",
-    period: "2025 - 2026",
+    startDate: "2025-01-01",
+    endDate: "2026-01-01",
     workMode: "Em andamento",
   },
   {
     title: "MBA, Arquitetura Full Cycle",
     organization: "Faculdade Brasília",
-    period: "2023 - 2024",
+    startDate: "2023-01-01",
+    endDate: "2024-01-01",
     workMode: "Finalizada",
   },
   {
     title: "Bacharelado, Ciência da Computação",
     organization: "Universidade Federal de Goiás",
-    period: "2014 - 2018",
+    startDate: "2014-01-01",
+    endDate: "2018-01-01",
     workMode: "Finalizada",
   },
 ];

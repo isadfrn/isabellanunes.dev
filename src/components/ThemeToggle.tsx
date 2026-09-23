@@ -5,15 +5,6 @@ export type Theme = "light" | "dark";
 
 const THEME_KEY = "theme";
 
-function getInitialTheme(): Theme {
-  if (typeof window === "undefined") return "light";
-
-  const stored = localStorage.getItem(THEME_KEY);
-  if (stored === "light" || stored === "dark") return stored;
-
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-}
-
 export interface ThemeToggleProps {
   labels?: { light: string; dark: string };
   className?: string;
@@ -27,8 +18,10 @@ export default function ThemeToggle({
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    // ThemeProvider's inline script sets this synchronously before hydration,
+    // so it's always the source of truth for the detected theme.
     const current = document.documentElement.dataset.theme;
-    setTheme(current === "light" || current === "dark" ? current : getInitialTheme());
+    setTheme(current === "dark" ? "dark" : "light");
     setMounted(true);
   }, []);
 

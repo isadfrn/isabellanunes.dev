@@ -4,7 +4,8 @@ const careerTimeline: TimelineEntry[] = [
   {
     title: "Software Engineer",
     organization: "Grupo Boticário",
-    period: "Jan 2023 - Jul 2025",
+    startDate: "2023-01-01",
+    endDate: "2025-07-01",
     location: "Curitiba, Paraná, Brazil",
     workMode: "Remote",
     description: [
@@ -20,7 +21,8 @@ const careerTimeline: TimelineEntry[] = [
   {
     title: "Programming Teacher",
     organization: "Cubos Academy",
-    period: "Nov 2022 - Jan 2025",
+    startDate: "2022-11-01",
+    endDate: "2025-01-01",
     location: "Salvador, Bahia, Brazil",
     workMode: "Remote",
     description: [
@@ -33,7 +35,8 @@ const careerTimeline: TimelineEntry[] = [
   {
     title: "Software Engineer",
     organization: "iFood",
-    period: "Jan 2022 - Jan 2023",
+    startDate: "2022-01-01",
+    endDate: "2023-01-01",
     location: "Osasco, São Paulo, Brazil",
     workMode: "Remote",
     description: [
@@ -46,7 +49,8 @@ const careerTimeline: TimelineEntry[] = [
   {
     title: "Programming Teacher",
     organization: "Digital House Brasil",
-    period: "Jun 2022 - Dec 2022",
+    startDate: "2022-06-01",
+    endDate: "2022-12-01",
     location: "São Paulo, São Paulo, Brazil",
     workMode: "Remote",
     description: [
@@ -58,7 +62,8 @@ const careerTimeline: TimelineEntry[] = [
   {
     title: "Programming Teacher",
     organization: "Blue EdTech",
-    period: "May 2021 - Jul 2022",
+    startDate: "2021-05-01",
+    endDate: "2022-07-01",
     location: "São Paulo, São Paulo, Brazil",
     workMode: "Remote",
     description: [
@@ -71,7 +76,8 @@ const careerTimeline: TimelineEntry[] = [
   {
     title: "Software Engineer",
     organization: "Dell Technologies",
-    period: "Feb 2019 - Jan 2022",
+    startDate: "2019-02-01",
+    endDate: "2022-01-01",
     location: "Round Rock, Texas, United States",
     workMode: "Remote",
     description: [
@@ -86,7 +92,8 @@ const careerTimeline: TimelineEntry[] = [
   {
     title: "Software Engineer",
     organization: "Philips",
-    period: "Mar 2017 - Feb 2019",
+    startDate: "2017-03-01",
+    endDate: "2019-02-01",
     location: "Blumenau, Santa Catarina, Brazil",
     workMode: "Hybrid",
     description: [
@@ -98,7 +105,8 @@ const careerTimeline: TimelineEntry[] = [
   {
     title: "Software Engineer",
     organization: "Senac",
-    period: "May 2011 - Mar 2017",
+    startDate: "2011-05-01",
+    endDate: "2017-03-01",
     location: "Jataí, Goiás, Brazil",
     workMode: "On-site",
     description: [

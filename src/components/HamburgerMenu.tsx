@@ -6,12 +6,12 @@ import {
 import * as Dialog from "@radix-ui/react-dialog";
 import * as Separator from "@radix-ui/react-separator";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useScrollSpy } from "@/hooks/useScrollSpy";
+import { useVisibleNavItems } from "@/hooks/useVisibleNavItems";
 import { getAlternateLocale } from "@/i18n";
 import type { Translations } from "@/i18n";
-import { getAlternatePath, isScrollSectionKey } from "@/i18n/utils";
-import { getFlags } from "@/lib/features";
-import type { FeatureKey } from "@/lib/features";
+import { getAlternatePath } from "@/i18n/utils";
 import type { NavItem } from "@/types";
 import ThemeToggle from "./ThemeToggle";
 
@@ -29,43 +29,12 @@ export default function HamburgerMenu({
   translations,
 }: HamburgerMenuProps) {
   const [open, setOpen] = useState(false);
-  const [visibleItems, setVisibleItems] = useState<NavItem[]>(navItems);
-  const [activeSection, setActiveSection] = useState<string | null>(null);
 
   const isHomePage =
     currentPath === `/${locale}` || currentPath === `/${locale}/`;
 
-  useEffect(() => {
-    const flags = getFlags();
-    setVisibleItems(
-      navItems.filter(
-        (item) =>
-          item.key === "home" || flags[item.key as FeatureKey] !== false,
-      ),
-    );
-  }, [navItems]);
-
-  useEffect(() => {
-    if (!isHomePage) return;
-
-    const sections = navItems
-      .filter((item) => item.key === "home" || isScrollSectionKey(item.key))
-      .map((item) => document.getElementById(item.key))
-      .filter((el): el is HTMLElement => el !== null);
-
-    if (sections.length === 0) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries.find((entry) => entry.isIntersecting);
-        if (visible) setActiveSection(visible.target.id);
-      },
-      { rootMargin: "-45% 0px -45% 0px", threshold: 0 },
-    );
-
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
-  }, [isHomePage, navItems]);
+  const visibleItems = useVisibleNavItems(navItems);
+  const activeSection = useScrollSpy(navItems, isHomePage);
 
   const common = translations.common;
   const alternateLocale = getAlternateLocale(locale);

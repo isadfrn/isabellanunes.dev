@@ -29,7 +29,7 @@ export default [
       "@typescript-eslint": tsPlugin,
     },
     rules: {
-      ...tsPlugin.configs.recommended.rules,
+      ...tsPlugin.configs.strict.rules,
     },
   },
   {

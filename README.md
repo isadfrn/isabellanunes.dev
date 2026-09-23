@@ -3,6 +3,7 @@
 ![Languages](https://img.shields.io/github/languages/count/isadfrn/isabellanunes.dev?style=flat-square)
 ![Repository size](https://img.shields.io/github/repo-size/isadfrn/isabellanunes.dev?style=flat-square)
 ![Last commit](https://img.shields.io/github/last-commit/isadfrn/isabellanunes.dev?style=flat-square)
+![Coverage](https://img.shields.io/badge/coverage-0%25-red?style=flat-square)
 
 Personal website and portfolio for [Isabella Nunes](https://isabellanunes.dev).
 
@@ -82,6 +83,16 @@ npm run lint:fix
 npm run format
 ```
 
+**Testing:**
+
+```bash
+npm run test           # run once
+npm run test:watch     # watch mode
+npm run test:coverage  # run with coverage report
+```
+
+Vitest is configured (via `vitest.config.ts`, sharing Astro's aliases and Vite plugins) but no test files exist yet — `npm run test` passes with zero tests so the command stays usable as suites are added. The coverage badge above is updated by hand from the `% Lines` total in `npm run test:coverage`'s summary; it isn't wired to CI yet.
+
 ## Project Structure
 
 ```
@@ -92,6 +103,7 @@ src/
 │   ├── HamburgerMenu.tsx
 │   ├── ThemeToggle.tsx
 │   └── ...
+├── config/              # Canonical config, e.g. the section/nav key registry
 ├── data/                # Content per section (pt/en)
 │   ├── about/
 │   ├── blog/
@@ -102,9 +114,10 @@ src/
 │   ├── home/
 │   ├── projects/
 │   └── publications/
+├── hooks/               # Shared React hooks (useScrollSpy, useVisibleNavItems)
 ├── i18n/                # UI translations
 ├── layouts/             # BaseLayout, PostLayout
-├── lib/                 # Feature flags
+├── lib/                 # Section visibility preferences (local storage)
 ├── pages/
 │   ├── [locale]/        # Localized routes
 │   └── index.astro      # Root redirect
@@ -112,9 +125,9 @@ src/
     └── global.css
 ```
 
-## Feature Flags
+## Section Visibility
 
-Menu sections can be toggled on or off from the admin panel. Preferences are saved in the browser's `localStorage`. Useful for hiding pages under construction without changing code.
+Menu sections can be toggled on or off from the `/admin/flags` panel. Preferences are saved to that browser's `localStorage` only — they are a per-device preference, not a shared flag, so they don't affect what other visitors see. Useful for hiding pages under construction on your own machine without changing code.
 
 ## License
 

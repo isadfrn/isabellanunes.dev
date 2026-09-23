@@ -1,12 +1,32 @@
 import type { CSSProperties } from "react";
+import { formatMonthYear, formatYear } from "@/i18n/utils";
 import type { TimelineEntry } from "@/types";
 
 export interface TimelineProps {
   entries: TimelineEntry[];
+  locale: string;
+  granularity: "month" | "year";
+  presentLabel: string;
   orgAsBadge?: boolean;
 }
 
-export default function Timeline({ entries, orgAsBadge = false }: TimelineProps) {
+export default function Timeline({
+  entries,
+  locale,
+  granularity,
+  presentLabel,
+  orgAsBadge = false,
+}: TimelineProps) {
+  const format = granularity === "year" ? formatYear : formatMonthYear;
+
+  function formatPeriod(entry: TimelineEntry): string {
+    const start = format(new Date(entry.startDate), locale);
+    const end = entry.endDate
+      ? format(new Date(entry.endDate), locale)
+      : presentLabel;
+    return `${start} - ${end}`;
+  }
+
   return (
     <ol
       data-reveal
@@ -15,7 +35,7 @@ export default function Timeline({ entries, orgAsBadge = false }: TimelineProps)
     >
       {entries.map((entry, index) => (
         <li
-          key={`${entry.organization}-${entry.period}`}
+          key={`${entry.organization}-${entry.startDate}`}
           className="relative"
           data-reveal
           style={{ "--reveal-delay": `${index * 80}ms` } as CSSProperties}
@@ -40,7 +60,13 @@ export default function Timeline({ entries, orgAsBadge = false }: TimelineProps)
               )}
             </div>
             <p className="mb-3 text-sm text-slate-500 dark:text-slate-400">
-              {orgAsBadge ? entry.period : <>{entry.organization} &middot; {entry.period}</>}
+              {orgAsBadge ? (
+                formatPeriod(entry)
+              ) : (
+                <>
+                  {entry.organization} &middot; {formatPeriod(entry)}
+                </>
+              )}
               {entry.location && <> &middot; {entry.location}</>}
             </p>
             {entry.description && entry.description.length > 0 && (

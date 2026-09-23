@@ -1,3 +1,5 @@
+import type { NavKey } from "@/config/sections";
+
 export type Locale = "pt" | "en";
 
 export const locales: Locale[] = ["pt", "en"];
@@ -5,7 +7,10 @@ export const locales: Locale[] = ["pt", "en"];
 export interface TimelineEntry {
   title: string;
   organization: string;
-  period: string;
+  /** ISO date (YYYY-MM-DD) */
+  startDate: string;
+  /** ISO date (YYYY-MM-DD); omitted means ongoing ("Present") */
+  endDate?: string;
   location?: string;
   workMode?: string;
   description?: string[];
@@ -66,7 +71,7 @@ export interface BlogPost {
 }
 
 export interface NavItem {
-  key: string;
+  key: NavKey;
   href: string;
   label: string;
 }

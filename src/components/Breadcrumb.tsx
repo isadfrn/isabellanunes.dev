@@ -23,7 +23,10 @@ export default function Breadcrumb({ items }: BreadcrumbProps) {
           itemType="https://schema.org/ListItem"
         >
           {index > 0 && (
-            <span className="select-none text-slate-300 dark:text-slate-600" aria-hidden="true">
+            <span
+              className="select-none text-slate-300 dark:text-slate-600"
+              aria-hidden="true"
+            >
               /
             </span>
           )}

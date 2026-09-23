@@ -53,7 +53,8 @@
     "darkMode": "Modo escuro",
     "language": "Idioma",
     "openMenu": "Abrir menu",
-    "closeMenu": "Fechar menu"
+    "closeMenu": "Fechar menu",
+    "present": "Atual"
   },
   "breadcrumb": {
     "home": "Início",

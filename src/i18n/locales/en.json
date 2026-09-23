@@ -53,7 +53,8 @@
     "darkMode": "Dark mode",
     "language": "Language",
     "openMenu": "Open menu",
-    "closeMenu": "Close menu"
+    "closeMenu": "Close menu",
+    "present": "Present"
   },
   "breadcrumb": {
     "home": "Home",

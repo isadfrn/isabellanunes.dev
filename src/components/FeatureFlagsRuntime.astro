@@ -1,0 +1,36 @@
+---
+import { FEATURE_KEYS, STORAGE_KEY } from "@/lib/features";
+---
+
+<script
+  is:inline
+  define:vars={{ sectionKeys: FEATURE_KEYS, storageKey: STORAGE_KEY }}
+>
+  function applyFeatureFlags() {
+    var flags = {};
+    try {
+      var stored = localStorage.getItem(storageKey);
+      if (stored) flags = JSON.parse(stored);
+    } catch {
+      flags = {};
+    }
+
+    sectionKeys.forEach(function (key) {
+      var section = document.getElementById(key);
+      if (!section) return;
+      section.style.display = flags[key] === false ? "none" : "";
+    });
+
+    var parts = window.location.pathname.split("/").filter(Boolean);
+    if (parts[1] === "blog" && flags.blog === false) {
+      window.location.replace("/" + parts[0] + "/");
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", applyFeatureFlags);
+  } else {
+    applyFeatureFlags();
+  }
+  document.addEventListener("astro:after-swap", applyFeatureFlags);
+</script>

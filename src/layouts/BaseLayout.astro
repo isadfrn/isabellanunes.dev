@@ -1,5 +1,7 @@
 ---
+import FeatureFlagsRuntime from "@components/FeatureFlagsRuntime.astro";
 import HamburgerMenu from "@components/HamburgerMenu";
+import RevealAnimations from "@components/RevealAnimations.astro";
 import ThemeProvider from "@components/ThemeProvider.astro";
 import { ClientRouter } from "astro:transitions";
 import aboutData from "@/data/about";
@@ -58,77 +60,8 @@ const defaultUrl = new URL(
     <ClientRouter />
   </head>
   <body>
-    <script is:inline>
-      function applyFeatureFlags() {
-        var sectionKeys = [
-          "about",
-          "career",
-          "education",
-          "courses",
-          "books",
-          "projects",
-          "publications",
-          "blog",
-        ];
-
-        var flags = {};
-        try {
-          var stored = localStorage.getItem("feature-flags");
-          if (stored) flags = JSON.parse(stored);
-        } catch {
-          flags = {};
-        }
-
-        sectionKeys.forEach(function (key) {
-          var section = document.getElementById(key);
-          if (!section) return;
-          section.style.display = flags[key] === false ? "none" : "";
-        });
-
-        var parts = window.location.pathname.split("/").filter(Boolean);
-        if (parts[1] === "blog" && flags.blog === false) {
-          window.location.replace("/" + parts[0] + "/");
-        }
-      }
-
-      if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", applyFeatureFlags);
-      } else {
-        applyFeatureFlags();
-      }
-      document.addEventListener("astro:after-swap", applyFeatureFlags);
-    </script>
-    <script is:inline>
-      function initReveal() {
-        var elements = document.querySelectorAll(
-          "[data-reveal]:not(.is-revealed)",
-        );
-        if (!elements.length) return;
-
-        var observer = new IntersectionObserver(
-          function (entries) {
-            entries.forEach(function (entry) {
-              if (entry.isIntersecting) {
-                entry.target.classList.add("is-revealed");
-                observer.unobserve(entry.target);
-              }
-            });
-          },
-          { threshold: 0.12, rootMargin: "0px 0px -40px 0px" },
-        );
-
-        elements.forEach(function (element) {
-          observer.observe(element);
-        });
-      }
-
-      if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", initReveal);
-      } else {
-        initReveal();
-      }
-      document.addEventListener("astro:after-swap", initReveal);
-    </script>
+    <FeatureFlagsRuntime />
+    <RevealAnimations />
 
     <HamburgerMenu
       client:load
