@@ -1,8 +1,20 @@
 ---
+import BookCard from "@components/BookCard";
+import CourseCard from "@components/CourseCard";
+import PublicationLanguageBadge from "@components/PublicationLanguageBadge.astro";
+import Timeline from "@components/Timeline";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import aboutData from "@/data/about";
+import blogData from "@/data/blog";
+import booksData from "@/data/books";
+import careerData from "@/data/career";
+import coursesData from "@/data/courses";
+import educationData from "@/data/education";
 import homeData from "@/data/home";
-import { getNavItems } from "@/i18n/utils";
+import projectsData from "@/data/projects";
+import publicationsData from "@/data/publications";
+import { getTranslations } from "@/i18n";
+import { formatDate, getNavItems } from "@/i18n/utils";
 import { locales, type Locale } from "@/types";
 
 export function getStaticPaths() {
@@ -11,9 +23,17 @@ export function getStaticPaths() {
 
 const locale = Astro.params.locale as Locale;
 const currentPath = Astro.url.pathname;
+const t = getTranslations(locale);
 const navItems = getNavItems(locale);
 const home = homeData[locale];
 const about = aboutData[locale];
+const career = careerData[locale];
+const education = educationData[locale];
+const courses = coursesData[locale];
+const books = booksData[locale];
+const projects = projectsData[locale];
+const publications = publicationsData[locale];
+const recentPosts = blogData[locale].slice(0, 3);
 ---
 
 <BaseLayout
@@ -23,26 +43,346 @@ const about = aboutData[locale];
   currentPath={currentPath}
   navItems={navItems}
 >
-  <section class="page-enter relative min-h-screen flex-1 overflow-hidden">
+  <section
+    id="home"
+    class="page-enter relative h-screen w-full overflow-hidden"
+  >
     <div class="absolute inset-0">
-      <img src="/images/home/bkg.webp" alt="" class="h-full w-full object-cover grayscale" />
-      <div class="absolute inset-0 bg-stone-50/82 dark:bg-black/82"></div>
+      <img
+        src="/images/home-bkg.webp"
+        alt=""
+        class="h-full w-full object-cover"
+      />
+      <div
+        class="absolute inset-0 bg-linear-to-r from-black/65 via-black/15 to-transparent"
+      >
+      </div>
+      <div
+        class="absolute inset-x-0 bottom-0 h-2/3 bg-linear-to-b from-transparent to-stone-50 dark:to-slate-900"
+      >
+      </div>
     </div>
 
-    <article class="container page-enter relative z-10 flex min-h-screen flex-1 py-20 pl-16 md:pl-8 lg:pl-0">
-      <div class="flex min-h-[calc(100vh-10rem)] w-full items-center">
-        <div class="page-enter-slide w-full">
-          <p class="mb-3 text-sm font-medium uppercase tracking-wide text-primary-600 dark:text-primary-400">
-            {home.greeting}
-          </p>
-          <h1 class="mb-4 text-4xl font-bold leading-tight text-slate-900 dark:text-white md:text-5xl">
-            Isabella Nunes
-          </h1>
-          <p class="mb-6 text-xl leading-relaxed text-slate-700 dark:text-slate-300">
-            {home.subtitle}
-          </p>
+    <article class="container relative z-10 flex h-full items-center">
+      <div class="page-enter-slide max-w-xl">
+        <p
+          class="mb-3 text-sm font-medium uppercase tracking-wide text-primary-300"
+        >
+          {home.greeting}
+        </p>
+        <h1
+          class="mb-4 text-4xl font-bold leading-tight text-white md:text-5xl"
+        >
+          Isabella Nunes
+        </h1>
+        <p class="mb-6 text-xl leading-relaxed text-slate-200">
+          {home.subtitle}
+        </p>
+      </div>
+    </article>
+  </section>
+
+  <section id="about" class="min-h-screen w-full py-20">
+    <article class="container">
+      <div class="w-full max-w-none">
+        <h1
+          data-reveal
+          class="mb-6 text-3xl font-bold text-slate-900 dark:text-slate-50 md:text-4xl"
+        >
+          {about.title}
+        </h1>
+        <p
+          data-reveal
+          style="--reveal-delay:80ms"
+          class="mb-6 text-justify text-base leading-relaxed text-slate-600 dark:text-slate-300"
+        >
+          {about.bio}
+        </p>
+        <p
+          data-reveal
+          style="--reveal-delay:120ms"
+          class="mb-4 text-justify text-base leading-relaxed text-slate-600 dark:text-slate-300"
+        >
+          {t.about.key_achievements}
+        </p>
+        <ul
+          data-reveal
+          style="--reveal-delay:160ms"
+          class="mb-10 list-disc space-y-2 pl-6 text-justify text-base leading-relaxed text-slate-600 dark:text-slate-300"
+        >
+          {about.achievements.map((achievement) => <li>{achievement}</li>)}
+        </ul>
+        <p
+          data-reveal
+          style="--reveal-delay:240ms"
+          class="mb-6 text-justify text-base leading-relaxed text-slate-600 dark:text-slate-300"
+        >
+          {about.believes}
+        </p>
+        <p
+          data-reveal
+          style="--reveal-delay:320ms"
+          class="mb-6 text-justify text-base leading-relaxed text-slate-600 dark:text-slate-300"
+        >
+          {about.hobbies}
+        </p>
+        <div
+          data-reveal
+          style="--reveal-delay:400ms"
+          class="mt-10 flex items-center gap-3 border-t border-slate-200 pt-6 dark:border-slate-700"
+        >
+          <a
+            href="https://www.linkedin.com/in/isadfrn/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            class="inline-flex h-10 w-10 items-center justify-center rounded-full text-slate-500 transition-colors hover:bg-primary-50 hover:text-primary-600 dark:text-slate-400 dark:hover:bg-primary-900/30 dark:hover:text-primary-400"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              class="h-6 w-6"
+              aria-hidden="true"
+            >
+              <path
+                d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"
+              ></path>
+            </svg>
+          </a>
         </div>
       </div>
+    </article>
+  </section>
+
+  <section id="career" class="min-h-screen w-full py-20">
+    <article class="container">
+      <div class="w-full max-w-none">
+        <h1
+          data-reveal
+          class="mb-8 text-3xl font-bold text-slate-900 dark:text-slate-50 md:text-4xl"
+        >
+          {t.career.title}
+        </h1>
+        <Timeline entries={career} />
+      </div>
+    </article>
+  </section>
+
+  <section id="education" class="min-h-screen w-full py-20">
+    <article class="container">
+      <div class="w-full max-w-none">
+        <h1
+          data-reveal
+          class="mb-8 text-3xl font-bold text-slate-900 dark:text-slate-50 md:text-4xl"
+        >
+          {t.education.title}
+        </h1>
+        <Timeline entries={education} orgAsBadge />
+      </div>
+    </article>
+  </section>
+
+  <section id="courses" class="min-h-screen w-full py-20">
+    <article class="container">
+      <div class="max-w-4xl">
+        <h1
+          data-reveal
+          class="mb-10 text-3xl font-bold text-slate-900 dark:text-slate-50 md:text-4xl"
+        >
+          {t.courses.title}
+        </h1>
+        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+          {
+            courses.map((course, index) => (
+              <CourseCard
+                entry={course}
+                labels={{
+                  certificate: t.courses.certificate,
+                  viewCourse: t.courses.viewCourse,
+                }}
+                revealDelay={index * 80}
+              />
+            ))
+          }
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section id="books" class="min-h-screen w-full py-20">
+    <article class="container">
+      <div class="max-w-4xl">
+        <h1
+          data-reveal
+          class="mb-10 text-3xl font-bold text-slate-900 dark:text-slate-50 md:text-4xl"
+        >
+          {t.books.title}
+        </h1>
+        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+          {
+            books.map((book, index) => (
+              <BookCard
+                entry={book}
+                labels={{ buyBook: t.books.buyBook }}
+                revealDelay={index * 80}
+              />
+            ))
+          }
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section id="projects" class="min-h-screen w-full py-20">
+    <article class="container">
+      <h1
+        data-reveal
+        class="mb-10 text-3xl font-bold text-slate-900 dark:text-slate-50 md:text-4xl"
+      >
+        {t.projects.title}
+      </h1>
+      <div class="flex flex-col gap-6">
+        {
+          projects.map((project, index) => (
+            <a
+              href={project.repo}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-reveal
+              style={`--reveal-delay:${index * 80}ms`}
+              class="rounded-lg border border-slate-200 bg-white p-6 shadow-sm transition-colors hover:border-primary-200 hover:bg-primary-50/40 dark:border-slate-700 dark:bg-slate-800 dark:hover:border-primary-800 dark:hover:bg-primary-900/10"
+            >
+              <div class="mb-4 flex flex-wrap items-start justify-between gap-4">
+                <div>
+                  <h2 class="text-xl font-semibold text-slate-900 dark:text-slate-50">
+                    {project.title}
+                  </h2>
+                  <p class="mt-2 max-w-3xl text-justify text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                    {project.description}
+                  </p>
+                </div>
+                <span class="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 px-3 py-1.5 text-xs font-medium text-slate-600 dark:border-slate-600 dark:text-slate-300">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    class="h-4 w-4"
+                    aria-hidden="true"
+                  >
+                    <path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.27-.01-1-.02-1.96-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.21-1.49 3.18-1.18 3.18-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.14 0 1.55-.01 2.8-.01 3.18 0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5z" />
+                  </svg>
+                  {t.projects.repository}
+                </span>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                {project.tags.map((tag) => (
+                  <span class="rounded-full bg-primary-50 px-2 py-1 text-xs font-medium text-primary-700 dark:bg-primary-900/40 dark:text-primary-300">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </article>
+  </section>
+
+  <section id="publications" class="min-h-screen w-full py-20">
+    <article class="container">
+      <h1
+        data-reveal
+        class="mb-10 text-3xl font-bold text-slate-900 dark:text-slate-50 md:text-4xl"
+      >
+        {t.publications.title}
+      </h1>
+      <div class="flex flex-col gap-5">
+        {
+          publications.map((publication, index) => (
+            <a
+              href={publication.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-reveal
+              style={`--reveal-delay:${index * 80}ms`}
+              class="rounded-lg border border-slate-200 bg-white p-5 shadow-sm transition-colors hover:border-primary-200 hover:bg-primary-50/40 dark:border-slate-700 dark:bg-slate-800 dark:hover:border-primary-800 dark:hover:bg-primary-900/10"
+            >
+              <div class="mb-2 flex items-start justify-between gap-4">
+                <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-50">
+                  {publication.title}
+                </h2>
+                <PublicationLanguageBadge
+                  language={publication.language}
+                  labelPt={t.publications.lang_badge_pt}
+                  labelEn={t.publications.lang_badge_en}
+                  ariaPt={t.publications.lang_badge_aria_pt}
+                  ariaEn={t.publications.lang_badge_aria_en}
+                />
+              </div>
+              <p class="mb-1 text-sm text-slate-600 dark:text-slate-300">
+                {publication.authors.join(", ")}
+              </p>
+              <p class="text-sm text-slate-500 dark:text-slate-400">
+                {publication.venue} &middot; {publication.year}
+              </p>
+            </a>
+          ))
+        }
+      </div>
+    </article>
+  </section>
+
+  <section id="blog" class="min-h-screen w-full py-20">
+    <article class="container">
+      <h1
+        data-reveal
+        class="mb-10 text-3xl font-bold text-slate-900 dark:text-slate-50 md:text-4xl"
+      >
+        {t.blog.title}
+      </h1>
+      <div class="flex flex-col gap-5">
+        {
+          recentPosts.map((post, index) => (
+            <a
+              href={`/${locale}/blog/${post.slug}`}
+              data-reveal
+              style={`--reveal-delay:${index * 80}ms`}
+              class="rounded-lg border border-slate-200 bg-white p-5 shadow-sm transition-colors hover:border-primary-200 hover:bg-primary-50/40 dark:border-slate-700 dark:bg-slate-800 dark:hover:border-primary-800 dark:hover:bg-primary-900/10"
+            >
+              <p class="mb-2 text-xs text-slate-500 dark:text-slate-400">
+                {formatDate(post.pubDate, locale)}
+              </p>
+              <h2 class="mb-2 text-lg font-semibold text-slate-900 dark:text-slate-50">
+                {post.title}
+              </h2>
+              <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                {post.description}
+              </p>
+            </a>
+          ))
+        }
+      </div>
+      <a
+        href={`/${locale}/blog`}
+        data-reveal
+        style={`--reveal-delay:${recentPosts.length * 80}ms`}
+        class="mt-8 inline-flex items-center gap-1.5 text-sm font-medium text-primary-600 hover:underline dark:text-primary-400"
+      >
+        {t.blog.viewAll}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          class="h-4 w-4"
+          aria-hidden="true"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M3 10a.75.75 0 0 1 .75-.75h10.638L10.23 5.29a.75.75 0 1 1 1.04-1.08l5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 1 1-1.04-1.08l4.158-3.96H3.75A.75.75 0 0 1 3 10Z"
+            clip-rule="evenodd"></path>
+        </svg>
+      </a>
     </article>
   </section>
 </BaseLayout>
