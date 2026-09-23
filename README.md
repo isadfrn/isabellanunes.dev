@@ -3,7 +3,7 @@
 ![Languages](https://img.shields.io/github/languages/count/isadfrn/isabellanunes.dev?style=flat-square)
 ![Repository size](https://img.shields.io/github/repo-size/isadfrn/isabellanunes.dev?style=flat-square)
 ![Last commit](https://img.shields.io/github/last-commit/isadfrn/isabellanunes.dev?style=flat-square)
-![Coverage](https://img.shields.io/badge/coverage-0%25-red?style=flat-square)
+![Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen?style=flat-square)
 
 Personal website and portfolio for [Isabella Nunes](https://isabellanunes.dev).
 
@@ -91,7 +91,7 @@ npm run test:watch     # watch mode
 npm run test:coverage  # run with coverage report
 ```
 
-Vitest is configured (via `vitest.config.ts`, sharing Astro's aliases and Vite plugins) but no test files exist yet — `npm run test` passes with zero tests so the command stays usable as suites are added. The coverage badge above is updated by hand from the `% Lines` total in `npm run test:coverage`'s summary; it isn't wired to CI yet.
+Vitest is configured via `vitest.config.ts` (sharing Astro's aliases and Vite plugins), with [Testing Library](https://testing-library.com/) and `jsdom` for component and hook tests. `@vitest/coverage-v8` enforces a 95% minimum across statements, branches, functions, and lines — `npm run test:coverage` fails the moment any of them drops below that. The coverage badge above is updated by hand from the `% Lines` total in that command's summary; it isn't wired to CI yet.
 
 ## Project Structure
 
