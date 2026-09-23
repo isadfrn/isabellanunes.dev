@@ -38,7 +38,10 @@ const pageDescription = description ?? aboutData[locale].description;
 const canonicalUrl = new URL(currentPath, Astro.site).toString();
 const alternatePath = getAlternatePath(currentPath, locale);
 const alternateUrl = new URL(alternatePath, Astro.site).toString();
-const defaultUrl = new URL(currentPath.replace(/^\/en(\/|$)/, "/pt$1"), Astro.site).toString();
+const defaultUrl = new URL(
+  currentPath.replace(/^\/en(\/|$)/, "/pt$1"),
+  Astro.site,
+).toString();
 ---
 
 <!doctype html>
@@ -68,7 +71,7 @@ const defaultUrl = new URL(currentPath.replace(/^\/en(\/|$)/, "/pt$1"), Astro.si
       navItems={navItems}
       translations={{ common: t.common }}
     />
-    <main class="page-content lg:ml-64">
+    <main class="page-content">
       <nav aria-label="Breadcrumb" class="container pb-2 pt-6">
         <Breadcrumb items={breadcrumbItems} />
       </nav>
