@@ -1,0 +1,29 @@
+---
+import LinkCard from "@components/LinkCard.astro";
+import { formatDate } from "@/i18n/utils";
+import type { BlogPost, Locale } from "@/types";
+
+interface Props {
+  post: BlogPost;
+  locale: Locale;
+  revealDelay?: number;
+}
+
+const { post, locale, revealDelay = 0 } = Astro.props;
+---
+
+<LinkCard
+  href={`/${locale}/blog/${post.slug}`}
+  revealDelay={revealDelay}
+  class="p-5"
+>
+  <p class="mb-2 text-xs text-slate-500 dark:text-slate-400">
+    {formatDate(post.pubDate, locale)}
+  </p>
+  <h2 class="mb-2 text-lg font-semibold text-slate-900 dark:text-slate-50">
+    {post.title}
+  </h2>
+  <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+    {post.description}
+  </p>
+</LinkCard>

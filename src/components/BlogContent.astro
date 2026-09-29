@@ -1,0 +1,94 @@
+---
+import BlogPostCard from "@components/BlogPostCard.astro";
+import type { BlogPost, Locale } from "@/types";
+
+interface Props {
+  posts: BlogPost[];
+  locale: Locale;
+  viewAllLabel: string;
+  /** The rest of the posts, revealed by "view all" instead of navigating —
+   * used inside the desktop's Blog program window. */
+  morePosts?: BlogPost[];
+  /** When true, "view all" expands `morePosts` in place instead of linking
+   * to the standalone /blog page. Handled by the scene's scripts
+   * (`expand-blog`), so it only works inside the scene. */
+  expandInPlace?: boolean;
+}
+
+const {
+  posts,
+  locale,
+  viewAllLabel,
+  morePosts = [],
+  expandInPlace = false,
+} = Astro.props;
+---
+
+<div class="flex flex-col gap-5">
+  {
+    posts.map((post, index) => (
+      <BlogPostCard post={post} locale={locale} revealDelay={index * 80} />
+    ))
+  }
+</div>
+
+{
+  expandInPlace && morePosts.length > 0 && (
+    <div class="mt-5 flex flex-col gap-5" data-blog-more hidden>
+      {morePosts.map((post, index) => (
+        <BlogPostCard post={post} locale={locale} revealDelay={index * 80} />
+      ))}
+    </div>
+  )
+}
+
+{
+  expandInPlace ? (
+    morePosts.length > 0 && (
+      <button
+        type="button"
+        data-action="expand-blog"
+        data-reveal
+        style={`--reveal-delay:${posts.length * 80}ms`}
+        class="mt-8 inline-flex items-center gap-1.5 text-sm font-medium text-primary-600 hover:underline dark:text-primary-400"
+      >
+        {viewAllLabel}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          class="h-4 w-4"
+          aria-hidden="true"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M3 10a.75.75 0 0 1 .75-.75h10.638L10.23 5.29a.75.75 0 1 1 1.04-1.08l5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 1 1-1.04-1.08l4.158-3.96H3.75A.75.75 0 0 1 3 10Z"
+            clip-rule="evenodd"
+          />
+        </svg>
+      </button>
+    )
+  ) : (
+    <a
+      href={`/${locale}/blog`}
+      data-reveal
+      style={`--reveal-delay:${posts.length * 80}ms`}
+      class="mt-8 inline-flex items-center gap-1.5 text-sm font-medium text-primary-600 hover:underline dark:text-primary-400"
+    >
+      {viewAllLabel}
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+        class="h-4 w-4"
+        aria-hidden="true"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M3 10a.75.75 0 0 1 .75-.75h10.638L10.23 5.29a.75.75 0 1 1 1.04-1.08l5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 1 1-1.04-1.08l4.158-3.96H3.75A.75.75 0 0 1 3 10Z"
+          clip-rule="evenodd"
+        />
+      </svg>
+    </a>
+  )
+}
