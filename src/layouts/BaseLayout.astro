@@ -1,5 +1,4 @@
 ---
-import FeatureFlagsRuntime from "@components/FeatureFlagsRuntime.astro";
 import HamburgerMenu from "@components/HamburgerMenu";
 import RevealAnimations from "@components/RevealAnimations.astro";
 import ThemeProvider from "@components/ThemeProvider.astro";
@@ -16,6 +15,13 @@ interface Props {
   locale: Locale;
   currentPath?: string;
   navItems?: NavItem[];
+  showHamburgerMenu?: boolean;
+  showWindowViewOption?: boolean;
+  menuEnterDelayMs?: number;
+  mainClass?: string;
+  /** For error pages: keeps the page out of search results and leaves out its
+   * canonical and language-alternate links, which would point at nothing. */
+  noindex?: boolean;
 }
 
 const {
@@ -24,6 +30,11 @@ const {
   locale,
   currentPath = "",
   navItems: navItemsProp,
+  showHamburgerMenu = true,
+  showWindowViewOption = false,
+  menuEnterDelayMs,
+  mainClass = "page-content",
+  noindex = false,
 } = Astro.props;
 const t = getTranslations(locale);
 const altLocale = getAlternateLocale(locale);
@@ -48,29 +59,42 @@ const defaultUrl = new URL(
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{documentTitle}</title>
     <meta name="description" content={pageDescription} />
-    <link rel="canonical" href={canonicalUrl} />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={documentTitle} />
     <meta property="og:description" content={pageDescription} />
-    <meta property="og:url" content={canonicalUrl} />
     <meta property="og:locale" content={locale === "pt" ? "pt_BR" : "en_US"} />
-    <link rel="alternate" hreflang={altLocale} href={alternateUrl} />
-    <link rel="alternate" hreflang="x-default" href={defaultUrl} />
+    {
+      noindex ? (
+        <meta name="robots" content="noindex" />
+      ) : (
+        <>
+          <link rel="canonical" href={canonicalUrl} />
+          <meta property="og:url" content={canonicalUrl} />
+          <link rel="alternate" hreflang={altLocale} href={alternateUrl} />
+          <link rel="alternate" hreflang="x-default" href={defaultUrl} />
+        </>
+      )
+    }
     <ThemeProvider />
     <ClientRouter />
   </head>
   <body>
-    <FeatureFlagsRuntime />
     <RevealAnimations />
 
-    <HamburgerMenu
-      client:load
-      locale={locale}
-      currentPath={currentPath}
-      navItems={navItems}
-      translations={{ common: t.common }}
-    />
-    <main class="page-content">
+    {
+      showHamburgerMenu && (
+        <HamburgerMenu
+          client:load
+          locale={locale}
+          currentPath={currentPath}
+          navItems={navItems}
+          translations={{ common: t.common }}
+          showWindowView={showWindowViewOption}
+          enterDelayMs={menuEnterDelayMs}
+        />
+      )
+    }
+    <main class={mainClass}>
       <slot />
     </main>
   </body>

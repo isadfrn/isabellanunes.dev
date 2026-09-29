@@ -186,4 +186,101 @@ describe("HamburgerMenu", () => {
       "bg-primary-50",
     );
   });
+
+  it("keeps the section nav mobile-only, since desktop/tablet-landscape uses the interactive scene instead", () => {
+    render(
+      <HamburgerMenu
+        locale="en"
+        currentPath="/en"
+        navItems={navItems}
+        translations={translations}
+      />,
+    );
+    fireEvent.click(screen.getByRole("button", { name: "Open menu" }));
+    expect(screen.getByRole("navigation")).toHaveClass("sm:hidden");
+  });
+
+  it("keeps the window view picker desktop/tablet-landscape only, since mobile has no scene to preview", () => {
+    render(
+      <HamburgerMenu
+        locale="en"
+        currentPath="/en"
+        navItems={[]}
+        translations={translations}
+        showWindowView
+      />,
+    );
+    fireEvent.click(screen.getByRole("button", { name: "Open menu" }));
+    const radiogroup = screen.getByRole("radiogroup", {
+      name: "Window view",
+    });
+    // radiogroup -> WindowViewPicker's own wrapper -> the visibility wrapper
+    expect(radiogroup.parentElement?.parentElement).toHaveClass(
+      "hidden",
+      "sm:block",
+    );
+  });
+
+  it("shows only the theme and language controls when there are no nav items", () => {
+    render(
+      <HamburgerMenu
+        locale="en"
+        currentPath="/en"
+        navItems={[]}
+        translations={translations}
+      />,
+    );
+    fireEvent.click(screen.getByRole("button", { name: "Open menu" }));
+
+    expect(screen.queryByRole("navigation")).not.toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "Dark mode" }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: "Switch to Portuguese" }),
+    ).toBeInTheDocument();
+  });
+
+  it("offers the window view picker only when asked to", () => {
+    const { unmount } = render(
+      <HamburgerMenu
+        locale="en"
+        currentPath="/en"
+        navItems={[]}
+        translations={translations}
+      />,
+    );
+    fireEvent.click(screen.getByRole("button", { name: "Open menu" }));
+    expect(screen.queryByRole("radiogroup")).not.toBeInTheDocument();
+    unmount();
+
+    render(
+      <HamburgerMenu
+        locale="en"
+        currentPath="/en"
+        navItems={[]}
+        translations={translations}
+        showWindowView
+      />,
+    );
+    fireEvent.click(screen.getByRole("button", { name: "Open menu" }));
+    expect(
+      screen.getByRole("radiogroup", { name: "Window view" }),
+    ).toBeInTheDocument();
+  });
+
+  it("delays the button's entrance when asked to", () => {
+    render(
+      <HamburgerMenu
+        locale="en"
+        currentPath="/en"
+        navItems={navItems}
+        translations={translations}
+        enterDelayMs={4200}
+      />,
+    );
+    const trigger = screen.getByRole("button", { name: "Open menu" });
+    expect(trigger).toHaveClass("menu-trigger-enter");
+    expect(trigger.style.getPropertyValue("--enter-delay")).toBe("4200ms");
+  });
 });

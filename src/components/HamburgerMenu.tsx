@@ -6,20 +6,24 @@ import {
 import * as Dialog from "@radix-ui/react-dialog";
 import * as Separator from "@radix-ui/react-separator";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
-import { useState } from "react";
+import { useState, type CSSProperties } from "react";
 import { useScrollSpy } from "@/hooks/useScrollSpy";
-import { useVisibleNavItems } from "@/hooks/useVisibleNavItems";
 import { getAlternateLocale } from "@/i18n";
 import type { Translations } from "@/i18n";
 import { getAlternatePath } from "@/i18n/utils";
 import type { NavItem } from "@/types";
 import ThemeToggle from "./ThemeToggle";
+import WindowViewPicker from "./WindowViewPicker";
 
 export interface HamburgerMenuProps {
   locale: string;
   currentPath: string;
   navItems: NavItem[];
   translations: Pick<Translations, "common">;
+  /** Adds the picker for the view seen through the home scene's window. */
+  showWindowView?: boolean;
+  /** Delay before the button fades in; omit to show it right away. */
+  enterDelayMs?: number;
 }
 
 export default function HamburgerMenu({
@@ -27,13 +31,14 @@ export default function HamburgerMenu({
   currentPath,
   navItems,
   translations,
+  showWindowView = false,
+  enterDelayMs,
 }: HamburgerMenuProps) {
   const [open, setOpen] = useState(false);
 
   const isHomePage =
     currentPath === `/${locale}` || currentPath === `/${locale}/`;
 
-  const visibleItems = useVisibleNavItems(navItems);
   const activeSection = useScrollSpy(navItems, isHomePage);
 
   const common = translations.common;
@@ -57,7 +62,12 @@ export default function HamburgerMenu({
       <Dialog.Trigger asChild>
         <button
           type="button"
-          className="fixed left-4 top-4 z-[1000] flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700 shadow-sm transition-colors duration-150 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700"
+          className={`${enterDelayMs === undefined ? "" : "menu-trigger-enter "}fixed left-4 top-4 z-[1000] flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700 shadow-sm transition-colors duration-150 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700`}
+          style={
+            enterDelayMs === undefined
+              ? undefined
+              : ({ "--enter-delay": `${enterDelayMs}ms` } as CSSProperties)
+          }
           aria-label={common.openMenu}
         >
           <Bars3Icon className="h-5 w-5" aria-hidden />
@@ -86,24 +96,48 @@ export default function HamburgerMenu({
             </Dialog.Close>
           </header>
 
-          <nav className="flex flex-1 flex-col gap-1 px-3 py-4">
-            {visibleItems.map((item) => (
-              <a
-                key={item.key}
-                href={item.href}
-                onClick={handleNavClick}
-                className={`rounded-lg px-3 py-2.5 text-sm font-medium transition-colors duration-150 ${
-                  isActive(item)
-                    ? "bg-primary-50 text-primary-700 dark:bg-primary-900/40 dark:text-primary-300"
-                    : "text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-700"
-                }`}
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
+          {/* Section nav is only meaningful on the mobile scrolling layout —
+             desktop/tablet-landscape is the hero-only interactive scene. */}
+          {navItems.length > 0 && (
+            <>
+              <nav className="flex flex-1 flex-col gap-1 px-3 py-4 sm:hidden">
+                {navItems.map((item) => (
+                  <a
+                    key={item.key}
+                    href={item.href}
+                    onClick={handleNavClick}
+                    className={`rounded-lg px-3 py-2.5 text-sm font-medium transition-colors duration-150 ${
+                      isActive(item)
+                        ? "bg-primary-50 text-primary-700 dark:bg-primary-900/40 dark:text-primary-300"
+                        : "text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-700"
+                    }`}
+                  >
+                    {item.label}
+                  </a>
+                ))}
+              </nav>
 
-          <Separator.Root className="mx-4 h-px bg-slate-100 dark:bg-slate-700" />
+              <Separator.Root className="mx-4 h-px bg-slate-100 sm:hidden dark:bg-slate-700" />
+            </>
+          )}
+
+          {/* The window view only affects the scene, so it's desktop/tablet-
+             landscape only — there's nothing to preview on mobile. */}
+          {showWindowView && (
+            <div className="hidden sm:block">
+              <WindowViewPicker
+                labels={{
+                  title: common.windowView,
+                  sunny: common.windowViewSunny,
+                  night: common.windowViewNight,
+                  winter: common.windowViewWinter,
+                  spring: common.windowViewSpring,
+                  autumn: common.windowViewAutumn,
+                  rain: common.windowViewRain,
+                }}
+              />
+            </div>
+          )}
 
           <footer className="flex items-center justify-between px-4 py-4">
             <ThemeToggle

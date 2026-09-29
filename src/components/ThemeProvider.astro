@@ -1,16 +1,43 @@
-<script is:inline>
-  function getTheme() {
-    var theme = localStorage.getItem("theme");
-    if (theme !== "light" && theme !== "dark") {
-      theme = window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light";
-    }
-    return theme;
-  }
+---
+import {
+  DEFAULT_WINDOW_VIEW,
+  WINDOW_VIEW_STORAGE_KEY,
+  WINDOW_VIEWS,
+} from "@/config/scene.types";
+---
 
-  document.documentElement.dataset.theme = getTheme();
-  document.addEventListener("astro:before-swap", function (event) {
-    event.newDocument.documentElement.dataset.theme = getTheme();
-  });
+{
+  /* Inline on purpose: it has to run before the first paint so the saved theme
+   and window view are already applied, or the page would flash the defaults. */
+}
+<script
+  is:inline
+  define:vars={{
+    windowViews: WINDOW_VIEWS,
+    defaultWindowView: DEFAULT_WINDOW_VIEW,
+    windowViewStorageKey: WINDOW_VIEW_STORAGE_KEY,
+  }}
+>
+  const getTheme = () => {
+    const theme = localStorage.getItem("theme");
+    if (theme === "light" || theme === "dark") return theme;
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  };
+
+  const getWindowView = () => {
+    const view = localStorage.getItem(windowViewStorageKey);
+    return windowViews.includes(view) ? view : defaultWindowView;
+  };
+
+  const apply = (root) => {
+    root.dataset.theme = getTheme();
+    root.dataset.windowView = getWindowView();
+  };
+
+  apply(document.documentElement);
+  document.addEventListener("astro:before-swap", (event) =>
+    apply(event.newDocument.documentElement),
+  );
 </script>
