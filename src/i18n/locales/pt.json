@@ -1,4 +1,12 @@
 {
+  "home": {
+    "focusHotspotLabel": "Abrir Focus (temporizador pomodoro)",
+    "lampToggleLabel": "Ligar ou desligar a luminária",
+    "aquariumToggleLabel": "Ligar ou desligar a luz do aquário",
+    "booksWindowLabel": "Abrir livros",
+    "computerToggleLabel": "Ligar ou desligar a tela do computador",
+    "printerWindowLabel": "Abrir a impressora 3D"
+  },
   "nav": {
     "home": "Início",
     "about": "Sobre",
@@ -35,6 +43,20 @@
     "title": "Livros",
     "buyBook": "Comprar livro"
   },
+  "printer": {
+    "title": "Impressora 3D",
+    "printButton": "Imprimir",
+    "emptyState": "Nenhum modelo disponível para imprimir ainda."
+  },
+  "computerDesktop": {
+    "osWindowTitle": "Área de Trabalho",
+    "menuAbout": "Sobre mim",
+    "menuCareer": "Carreira",
+    "menuProjects": "Projetos",
+    "menuEducation": "Educação",
+    "menuCourses": "Cursos",
+    "menuBlog": "Blog"
+  },
   "courses": {
     "title": "Cursos",
     "certificate": "Ver certificado",
@@ -54,7 +76,20 @@
     "language": "Idioma",
     "openMenu": "Abrir menu",
     "closeMenu": "Fechar menu",
+    "closeWindow": "Fechar janela",
+    "windowView": "Fundo da janela",
+    "windowViewSunny": "Dia de sol",
+    "windowViewNight": "Noite",
+    "windowViewWinter": "Inverno",
+    "windowViewSpring": "Primavera",
+    "windowViewAutumn": "Outono",
+    "windowViewRain": "Chuva",
     "present": "Atual"
+  },
+  "notFound": {
+    "title": "Página não encontrada",
+    "message": "O endereço que você seguiu não existe aqui.",
+    "home": "Início"
   },
   "breadcrumb": {
     "home": "Início",

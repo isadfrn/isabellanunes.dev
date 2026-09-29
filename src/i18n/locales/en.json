@@ -1,4 +1,12 @@
 {
+  "home": {
+    "focusHotspotLabel": "Open Focus (pomodoro timer)",
+    "lampToggleLabel": "Turn the lamp on or off",
+    "aquariumToggleLabel": "Turn the aquarium light on or off",
+    "booksWindowLabel": "Open books",
+    "computerToggleLabel": "Turn the computer screen on or off",
+    "printerWindowLabel": "Open the 3D printer"
+  },
   "nav": {
     "home": "Home",
     "about": "About",
@@ -35,6 +43,20 @@
     "title": "Books",
     "buyBook": "Buy book"
   },
+  "printer": {
+    "title": "3D Printer",
+    "printButton": "Print",
+    "emptyState": "No models available to print yet."
+  },
+  "computerDesktop": {
+    "osWindowTitle": "Desktop",
+    "menuAbout": "About me",
+    "menuCareer": "Career",
+    "menuProjects": "Projects",
+    "menuEducation": "Education",
+    "menuCourses": "Courses",
+    "menuBlog": "Blog"
+  },
   "courses": {
     "title": "Courses",
     "certificate": "View certificate",
@@ -54,7 +76,20 @@
     "language": "Language",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
+    "closeWindow": "Close window",
+    "windowView": "Window view",
+    "windowViewSunny": "Sunny day",
+    "windowViewNight": "Night",
+    "windowViewWinter": "Winter",
+    "windowViewSpring": "Spring",
+    "windowViewAutumn": "Autumn",
+    "windowViewRain": "Rain",
     "present": "Present"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "message": "The path you followed does not exist here.",
+    "home": "Home"
   },
   "breadcrumb": {
     "home": "Home",
