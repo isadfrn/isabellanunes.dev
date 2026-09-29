@@ -357,6 +357,23 @@
   }
 }
 
+/* Only the layer the chosen view shows is animated. The other four are
+   invisible, but rain, snow, petals and leaves move by `top`/`left`, which
+   costs a layout pass per frame for each of their elements — dozens, for
+   nothing. So a layer waits paused and runs while its own view is chosen
+   (it holds still for the half second its crossfade takes to fade it out). */
+.scene-weather__layer > * {
+  animation-play-state: paused;
+}
+
+:root[data-window-view="rain"] .scene-weather__layer--rain > *,
+:root[data-window-view="night"] .scene-weather__layer--night > *,
+:root[data-window-view="winter"] .scene-weather__layer--winter > *,
+:root[data-window-view="spring"] .scene-weather__layer--spring > *,
+:root[data-window-view="autumn"] .scene-weather__layer--autumn > * {
+  animation-play-state: running;
+}
+
 /* Steam rising from the coffee cup. Anchored at the coffee's surface (see
    the coffee item's `steam` visual in config/scene.ts); each wisp seats at its own small
    --steam-left offset and drifts further sideways by --steam-drift as it
