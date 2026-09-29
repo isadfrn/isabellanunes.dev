@@ -97,6 +97,7 @@ Vitest is configured via `vitest.config.ts` (sharing Astro's aliases and Vite pl
 
 ```
 src/
+├── assets/              # Artwork Astro optimizes at build time: scene/ and printer-models/
 ├── components/          # Astro and React components
 │   ├── scene/           # The interactive desktop scene: stage, hotspots, desk windows, computer OS
 │   ├── mobile/          # The scrolling feed phones get instead of the scene
@@ -126,6 +127,8 @@ src/
     └── animations.css   # Everything that moves: reveal, weather, steam, fish, printer
 ```
 
+At the repo root, `design/reference/` holds reference artwork that is not part of the site, and `public/` only has files that must keep their exact name and address (favicon, the mobile hero).
+
 ## Section Visibility
 
 Sections are enabled or disabled at build time, not per visitor. `ENABLED_SECTIONS` in `src/config/sections.ts` is the single source of truth: add a section's key to that array to render it again, remove it to switch it off. A disabled section disappears everywhere at once — the mobile feed, the mobile menu, the desktop computer's program menu and program window, and (for books) the shelf hotspot. The section's markup, data, and translations stay in the codebase either way — nothing is deleted when a section is disabled.
@@ -153,6 +156,12 @@ On `sm` screens and up, the home page is an interactive 2.5D scene (a 2752×1536
 Actions are `toggle` (lights/screens sharing a `target`), `open-window`, `open-link` and `run-printer`. Visuals are `image`, `weather`, `custom`, `beam`, `screen`, `steam` and `rig` (the printer; its print time is `durationMs`). The intro timing is `SCENE_REVEAL`.
 
 Behavior lives in `src/scripts/`: one listener on the scene root routes clicks by `data-action` (`sceneController.ts`), with the desk windows, the printer, the computer's desktop and the clock in their own modules. `lifecycle.ts` sets everything up on each page and tears it down (listeners, timers, observers) before the Astro router swaps the page. `src/scripts/markup.test.ts` fails if the markup and the scripts drift apart.
+
+### Images
+
+The scene's artwork lives in `src/assets/scene` (and the printable models in `src/assets/printer-models`), not in `public/`. Astro converts each file to WebP at build time, resizes it to the box its item is drawn in (`toImageWidth`: two device pixels per stage pixel, never above the artwork's own width) and fingerprints the name, so a 4.5 MB PNG ships as roughly 150 KB. In `scene.ts`, `src` is just a file name in that folder: drop the artwork in at any size and it is sized from the item's `width`.
+
+Only `priority: true` images (the background and the default window view) are fetched up front; the rest wait until the browser knows they are on screen, which on a phone, where the scene is hidden, is never. The other window views are fetched one at a time when the browser is idle after load (`prefetchWindowViews`), so switching is instant. Adding a model to `src/assets/printer-models` makes it printable with no code change.
 
 Missing pages get a localized 404: `pages/[locale]/404.astro` is served by nginx for anything missing under `/en/` (see `nginx.conf`), and `/404.html` (Portuguese) is the fallback for everything else.
 
