@@ -1,0 +1,142 @@
+---
+import AboutContent from "@components/AboutContent.astro";
+import BlogContent from "@components/BlogContent.astro";
+import CareerContent from "@components/CareerContent.astro";
+import CoursesContent from "@components/CoursesContent.astro";
+import EducationContent from "@components/EducationContent.astro";
+import ProjectsContent from "@components/ProjectsContent.astro";
+import DesktopProgramWindow from "@components/scene/DesktopProgramWindow.astro";
+import DesktopUI from "@components/scene/DesktopUI.astro";
+import { SCENE_ITEMS } from "@/config/scene";
+import { toAspectRatio } from "@/config/scene.geometry";
+import { getOsPrograms } from "@/config/sections";
+import type { Portfolio } from "@/data/portfolio";
+import { getTranslations } from "@/i18n";
+import { getDesktopMenuItems } from "@/i18n/utils";
+import type { Locale } from "@/types";
+
+interface Props {
+  locale: Locale;
+  portfolio: Portfolio;
+}
+
+const { locale, portfolio } = Astro.props;
+const t = getTranslations(locale);
+const { about, career, education, courses, projects, recentPosts, morePosts } =
+  portfolio;
+
+// Only the programs whose section is switched on (ENABLED_SECTIONS) are in
+// the menu, and only those have a window.
+const programs = new Set(getOsPrograms());
+
+// Shaped like the monitor's own screen, so the window reads as "the same
+// screen, zoomed in".
+const screen = SCENE_ITEMS.flatMap((item) => item.visuals ?? []).find(
+  (visual) => visual.type === "screen",
+);
+---
+
+<div
+  class="computer-desktop"
+  style={screen ? `--desktop-aspect:${toAspectRatio(screen.box)}` : undefined}
+>
+  <DesktopUI items={getDesktopMenuItems(locale)} interactive />
+
+  {
+    programs.has("about") && (
+      <DesktopProgramWindow
+        id="about"
+        title={about.title}
+        closeLabel={t.common.closeWindow}
+      >
+        <AboutContent
+          about={about}
+          keyAchievementsLabel={t.about.key_achievements}
+        />
+      </DesktopProgramWindow>
+    )
+  }
+
+  {
+    programs.has("career") && (
+      <DesktopProgramWindow
+        id="career"
+        title={t.career.title}
+        closeLabel={t.common.closeWindow}
+      >
+        <CareerContent
+          entries={career}
+          locale={locale}
+          presentLabel={t.common.present}
+        />
+      </DesktopProgramWindow>
+    )
+  }
+
+  {
+    programs.has("education") && (
+      <DesktopProgramWindow
+        id="education"
+        title={t.education.title}
+        closeLabel={t.common.closeWindow}
+      >
+        <EducationContent
+          entries={education}
+          locale={locale}
+          presentLabel={t.common.present}
+        />
+      </DesktopProgramWindow>
+    )
+  }
+
+  {
+    programs.has("courses") && (
+      <DesktopProgramWindow
+        id="courses"
+        title={t.courses.title}
+        closeLabel={t.common.closeWindow}
+      >
+        <CoursesContent
+          courses={courses}
+          labels={{
+            certificate: t.courses.certificate,
+            viewCourse: t.courses.viewCourse,
+          }}
+        />
+      </DesktopProgramWindow>
+    )
+  }
+
+  {
+    programs.has("projects") && (
+      <DesktopProgramWindow
+        id="projects"
+        title={t.projects.title}
+        closeLabel={t.common.closeWindow}
+      >
+        <ProjectsContent
+          projects={projects}
+          repositoryLabel={t.projects.repository}
+        />
+      </DesktopProgramWindow>
+    )
+  }
+
+  {
+    programs.has("blog") && (
+      <DesktopProgramWindow
+        id="blog"
+        title={t.blog.title}
+        closeLabel={t.common.closeWindow}
+      >
+        <BlogContent
+          posts={recentPosts}
+          morePosts={morePosts}
+          expandInPlace
+          locale={locale}
+          viewAllLabel={t.blog.viewAll}
+        />
+      </DesktopProgramWindow>
+    )
+  }
+</div>

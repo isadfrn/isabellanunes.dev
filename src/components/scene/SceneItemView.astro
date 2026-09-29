@@ -1,0 +1,79 @@
+---
+import SceneComputerScreen from "@components/scene/SceneComputerScreen.astro";
+import SceneFish from "@components/scene/SceneFish.astro";
+import SceneHotspot from "@components/scene/SceneHotspot.astro";
+import SceneLeaves from "@components/scene/SceneLeaves.astro";
+import ScenePrinterRig from "@components/scene/ScenePrinterRig.astro";
+import SceneSteam from "@components/scene/SceneSteam.astro";
+import SceneWeather from "@components/scene/SceneWeather.astro";
+import { toBeamStyle, toStageStyle } from "@/config/scene.geometry";
+import { DEFAULT_WINDOW_VIEW, type SceneItem } from "@/config/scene.types";
+import type { Translations } from "@/i18n";
+import type { DesktopMenuItem } from "@/i18n/utils";
+
+interface Props {
+  item: SceneItem;
+  labels: Translations["home"];
+  menuItems: readonly DesktopMenuItem[];
+}
+
+const { item, labels, menuItems } = Astro.props;
+const { interaction } = item;
+---
+
+{
+  (item.visuals ?? []).map((visual) => (
+    <>
+      {visual.type === "image" && (
+        <img
+          src={
+            visual.view && visual.view !== DEFAULT_WINDOW_VIEW
+              ? undefined
+              : visual.src
+          }
+          data-view={visual.view}
+          data-view-src={visual.view ? visual.src : undefined}
+          alt=""
+          class:list={[
+            "scene-item",
+            { "scene-item--cover": visual.cover },
+            visual.view && ["scene-view", `scene-view--${visual.view}`],
+          ]}
+          style={toStageStyle(item)}
+        />
+      )}
+      {visual.type === "weather" && <SceneWeather box={item} />}
+      {visual.type === "custom" && visual.component === "leaves" && (
+        <SceneLeaves box={item} />
+      )}
+      {visual.type === "custom" && visual.component === "fish" && (
+        <SceneFish box={item} />
+      )}
+      {visual.type === "beam" && (
+        <span
+          class:list={[
+            "scene-beam",
+            { "scene-beam--bar": visual.beam.kind === "bar" },
+          ]}
+          data-toggle-target={visual.target}
+          style={toBeamStyle(visual.beam)}
+          aria-hidden="true"
+        />
+      )}
+      {visual.type === "screen" && (
+        <SceneComputerScreen screen={visual} menuItems={menuItems} />
+      )}
+      {visual.type === "steam" && <SceneSteam point={visual.point} />}
+      {visual.type === "rig" && <ScenePrinterRig rig={visual} />}
+    </>
+  ))
+}
+{
+  interaction && (
+    <SceneHotspot
+      box={item}
+      interaction={interaction}
+      label={labels[interaction.labelKey]}
+    />
+  )
+}

@@ -1,0 +1,39 @@
+---
+interface Props {
+  id: string;
+  title: string;
+  closeLabel: string;
+}
+
+const { id, title, closeLabel } = Astro.props;
+---
+
+<section
+  class="desktop-program"
+  role="dialog"
+  aria-label={title}
+  data-desktop-program={id}
+  data-program-title={title}
+>
+  <header class="desktop-program__bar">
+    <span class="desktop-program__title">{title}</span>
+    <button
+      type="button"
+      class="desktop-program__close"
+      data-action="close-programs"
+      aria-label={closeLabel}
+    >
+      <svg viewBox="0 0 16 16" aria-hidden="true">
+        <path
+          d="M4 4l8 8M12 4l-8 8"
+          stroke="currentColor"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          fill="none"></path>
+      </svg>
+    </button>
+  </header>
+  <div class="desktop-program__body">
+    <slot />
+  </div>
+</section>

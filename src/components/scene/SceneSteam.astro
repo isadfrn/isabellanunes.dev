@@ -1,0 +1,29 @@
+---
+import { toPointStyle } from "@/config/scene.geometry";
+import type { StagePoint } from "@/config/scene.types";
+
+interface Props {
+  point: StagePoint;
+}
+
+const { point } = Astro.props;
+
+// Where each wisp seats and how far it drifts sideways as it rises; the
+// delays stagger them so they don't rise in lockstep.
+const wisps = [
+  { left: -10, drift: 13, delay: 0 },
+  { left: 2, drift: -9, delay: 1 },
+  { left: 11, drift: 7, delay: 2 },
+];
+---
+
+<span class="coffee-steam" style={toPointStyle(point)} aria-hidden="true">
+  {
+    wisps.map((wisp) => (
+      <span
+        class="coffee-steam__wisp"
+        style={`--steam-left:${wisp.left}px;--steam-drift:${wisp.drift}px;--steam-delay:${wisp.delay}s`}
+      />
+    ))
+  }
+</span>

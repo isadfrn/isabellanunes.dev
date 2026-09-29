@@ -1,0 +1,18 @@
+---
+interface Props {
+  greeting: string;
+  subtitle: string;
+}
+
+const { greeting, subtitle } = Astro.props;
+---
+
+<p class="mb-3 text-sm font-medium uppercase tracking-wide text-primary-300">
+  {greeting}
+</p>
+<h1 class="mb-4 text-4xl font-bold leading-tight text-white md:text-5xl">
+  Isabella Nunes
+</h1>
+<p class="mb-6 text-xl leading-relaxed text-slate-200">
+  {subtitle}
+</p>

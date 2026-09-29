@@ -1,0 +1,119 @@
+---
+import { toStageStyle } from "@/config/scene.geometry";
+import { WINDOW_SKY_DEPTH } from "@/config/scene";
+import type { StageBox } from "@/config/scene.types";
+
+interface Props {
+  box: StageBox;
+}
+
+const { box } = Astro.props;
+
+function rand(min: number, max: number) {
+  return min + Math.random() * (max - min);
+}
+
+// Density is per patch width, in stage px, so a wider patch gets more
+// particles without needing to size each one by hand.
+const rainDrops = Array.from(
+  { length: Math.max(4, Math.round(box.width * 0.05)) },
+  () => {
+    const duration = rand(0.5, 1);
+    return {
+      left: rand(0, 100),
+      duration,
+      delay: -rand(0, duration),
+      opacity: rand(0.3, 0.65),
+    };
+  },
+);
+
+const snowFlakes = Array.from(
+  { length: Math.max(3, Math.round(box.width * 0.035)) },
+  () => {
+    const duration = rand(4, 8);
+    return {
+      left: rand(0, 100),
+      size: rand(0.22, 0.5),
+      sway: rand(8, 20),
+      duration,
+      delay: -rand(0, duration),
+      opacity: rand(0.55, 0.95),
+    };
+  },
+);
+
+// Kept to the strip of clear sky at the top of the patch (see
+// WINDOW_SKY_DEPTH), so stars never land in front of the skyline.
+const skyPct = (WINDOW_SKY_DEPTH / box.height) * 100;
+const stars = Array.from(
+  { length: Math.max(3, Math.round(box.width * 0.03)) },
+  () => ({
+    left: rand(0, 100),
+    top: rand(0, skyPct),
+    size: rand(0.12, 0.3),
+    duration: rand(1.6, 4),
+    delay: -rand(0, 4),
+  }),
+);
+
+// Sparse on purpose — one petal per patch, so only two or three are ever
+// falling across the whole window at once, not a snow-like flurry.
+const petals = Array.from({ length: 1 }, () => {
+  const duration = rand(7, 12);
+  return {
+    left: rand(0, 100),
+    size: rand(0.7, 1.1),
+    sway: rand(10, 24),
+    spin: (Math.random() < 0.5 ? -1 : 1) * rand(200, 420),
+    duration,
+    delay: -rand(0, duration),
+    opacity: rand(0.6, 0.95),
+  };
+});
+---
+
+<div class="scene-weather" style={toStageStyle(box)} aria-hidden="true">
+  <div class="scene-weather__layer scene-weather__layer--rain">
+    {
+      rainDrops.map((drop) => (
+        <span
+          class="weather-drop"
+          style={`left:${drop.left}%;animation-duration:${drop.duration}s;animation-delay:${drop.delay}s;opacity:${drop.opacity};`}
+        />
+      ))
+    }
+  </div>
+  <div class="scene-weather__layer scene-weather__layer--winter">
+    {
+      snowFlakes.map((flake) => (
+        <span
+          class="weather-flake"
+          style={`left:${flake.left}%;--flake-size:${flake.size}rem;--flake-sway:${flake.sway}px;animation-duration:${flake.duration}s;animation-delay:${flake.delay}s;opacity:${flake.opacity};`}
+        />
+      ))
+    }
+  </div>
+  <div class="scene-weather__layer scene-weather__layer--night">
+    {
+      stars.map((star) => (
+        <span
+          class="weather-star"
+          style={`left:${star.left}%;top:${star.top}%;--star-size:${star.size}rem;animation-duration:${star.duration}s;animation-delay:${star.delay}s;`}
+        />
+      ))
+    }
+  </div>
+  <div class="scene-weather__layer scene-weather__layer--spring">
+    {
+      petals.map((petal) => (
+        <img
+          src="/images/petal.png"
+          alt=""
+          class="weather-petal"
+          style={`left:${petal.left}%;width:${petal.size}rem;--petal-sway:${petal.sway}px;--petal-spin:${petal.spin}deg;animation-duration:${petal.duration}s;animation-delay:${petal.delay}s;opacity:${petal.opacity};`}
+        />
+      ))
+    }
+  </div>
+</div>

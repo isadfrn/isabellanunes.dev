@@ -1,0 +1,50 @@
+---
+import type { DesktopMenuItem } from "@/i18n/utils";
+
+interface Props {
+  /** The programs the menu lists — already filtered by ENABLED_SECTIONS. */
+  items: readonly DesktopMenuItem[];
+  /** When true, menu items open the matching program window, and right-click
+   * toggles the menu — like a real Openbox desktop. */
+  interactive?: boolean;
+}
+
+const { items, interactive = false } = Astro.props;
+---
+
+<div class="desktop-ui__conky">
+  <span class="desktop-ui__time" data-computer-clock-time>00:00</span>
+  <span class="desktop-ui__date" data-computer-clock-date></span>
+  <div class="desktop-ui__sysinfo">
+    <p><strong>USER:</strong> isa | <strong>MACHINE:</strong> desktop</p>
+    <p><strong>DISTRIBUTION:</strong> ArchLabs</p>
+    <p><strong>KERNEL:</strong> 4.11.3-1-ARCH</p>
+    <p><strong>CPU:</strong> 14% <strong>RAM:</strong> 3.2G/16G</p>
+    <p><strong>TEMP:</strong> 47°C</p>
+  </div>
+</div>
+
+<ul class="desktop-ui__menu">
+  {
+    items.map((item) => (
+      <li>
+        {interactive ? (
+          <button
+            type="button"
+            data-action="open-program"
+            data-program={item.id}
+          >
+            {item.label}
+          </button>
+        ) : (
+          item.label
+        )}
+      </li>
+    ))
+  }
+</ul>
+
+<div class="desktop-ui__taskbar">
+  <span class="desktop-ui__workspace">2</span>
+  <span class="desktop-ui__window-title" data-desktop-window-title></span>
+</div>

@@ -1,0 +1,22 @@
+---
+import DesktopUI from "@components/scene/DesktopUI.astro";
+import { toStageStyle } from "@/config/scene.geometry";
+import type { ScreenVisual } from "@/config/scene.types";
+import type { DesktopMenuItem } from "@/i18n/utils";
+
+interface Props {
+  screen: ScreenVisual;
+  menuItems: readonly DesktopMenuItem[];
+}
+
+const { screen, menuItems } = Astro.props;
+---
+
+<div
+  class="computer-screen"
+  data-toggle-target={screen.target}
+  style={toStageStyle(screen.box)}
+  aria-hidden="true"
+>
+  <DesktopUI items={menuItems} />
+</div>

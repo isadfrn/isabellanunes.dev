@@ -1,0 +1,27 @@
+---
+import { SCENE_REVEAL } from "@/config/scene";
+import { toHotspotElement } from "@/config/scene.actions";
+import { toHotspotBox, toStageStyle } from "@/config/scene.geometry";
+import type { SceneInteraction, StageBox } from "@/config/scene.types";
+
+interface Props {
+  /** The item the hotspot sits on. */
+  box: StageBox;
+  interaction: SceneInteraction;
+  label: string;
+}
+
+const { box, interaction, label } = Astro.props;
+const { tag: Tag, attrs } = toHotspotElement(interaction.action);
+---
+
+<Tag
+  class="scene-hotspot scene-link"
+  style={`${toStageStyle(toHotspotBox(box, interaction.hotspot))};--reveal-delay:${SCENE_REVEAL.hotspotsDelayMs}ms;`}
+  data-reveal
+  aria-label={label}
+  type={Tag === "button" ? "button" : undefined}
+  {...attrs}
+>
+  <span class="scene-hotspot__ring"></span>
+</Tag>

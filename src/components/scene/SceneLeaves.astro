@@ -1,0 +1,46 @@
+---
+import { toStageStyle } from "@/config/scene.geometry";
+import type { StageBox } from "@/config/scene.types";
+
+interface Props {
+  box: StageBox;
+}
+
+const { box } = Astro.props;
+
+function rand(min: number, max: number) {
+  return min + Math.random() * (max - min);
+}
+
+// Occasional, not continuous — the keyframes spend most of a cycle
+// off-screen between crossings, and each leaf's own (randomized)
+// animation-duration sets how long that pause is.
+const leaves = Array.from({ length: 2 }, () => {
+  const duration = rand(9, 16);
+  return {
+    top: rand(10, 80),
+    size: rand(2.2, 3.2),
+    spin: Math.random() < 0.5 ? 1 : -1,
+    duration,
+    delay: -rand(0, duration),
+  };
+});
+---
+
+<div class="scene-weather scene-weather--leaves" style={toStageStyle(box)}>
+  <div
+    class="scene-weather__layer scene-weather__layer--autumn"
+    aria-hidden="true"
+  >
+    {
+      leaves.map((leaf) => (
+        <img
+          src="/images/leaf.png"
+          alt=""
+          class="weather-leaf"
+          style={`top:${leaf.top}%;width:${leaf.size}rem;animation-duration:${leaf.duration}s;animation-delay:${leaf.delay}s;--leaf-spin:${leaf.spin * 360}deg;`}
+        />
+      ))
+    }
+  </div>
+</div>

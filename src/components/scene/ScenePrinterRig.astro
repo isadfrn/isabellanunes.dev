@@ -1,0 +1,26 @@
+---
+import { toRisePercent, toStageStyle } from "@/config/scene.geometry";
+import type { PrinterRigVisual } from "@/config/scene.types";
+
+interface Props {
+  rig: PrinterRigVisual;
+}
+
+const { rig } = Astro.props;
+---
+
+<div
+  class="printer-rig"
+  data-printing="off"
+  style={`--printer-duration:${rig.durationMs}ms`}
+>
+  <img
+    src={rig.hotendSrc}
+    alt=""
+    class="printer-hotend"
+    style={`${toStageStyle(rig.hotendHome)};--hotend-rise:-${toRisePercent(rig.hotendHome, rig.hotendRisen)}%;`}
+  />
+  <div class="printer-object" style={toStageStyle(rig.objectBox)}>
+    <img data-printer-object alt="" />
+  </div>
+</div>

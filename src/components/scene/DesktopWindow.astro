@@ -1,0 +1,58 @@
+---
+interface Props {
+  id: string;
+  title: string;
+  closeLabel: string;
+  /** Drops the body's default padding, for content that fills it edge to edge. */
+  flushBody?: boolean;
+  /** A notably bigger window, for content that needs the extra room. */
+  size?: "default" | "large";
+}
+
+const {
+  id,
+  title,
+  closeLabel,
+  flushBody = false,
+  size = "default",
+} = Astro.props;
+---
+
+<div class="desk-window-layer">
+  <section
+    class:list={["desk-window", { "desk-window--large": size === "large" }]}
+    role="dialog"
+    aria-labelledby={`desk-window-${id}-title`}
+    data-desk-window={id}
+  >
+    <header class="desk-window__bar">
+      <span class="desk-window__spacer" aria-hidden="true"></span>
+      <h2 id={`desk-window-${id}-title`} class="desk-window__title">
+        {title}
+      </h2>
+      <button
+        type="button"
+        class="desk-window__close"
+        data-action="close-window"
+        aria-label={closeLabel}
+      >
+        <svg viewBox="0 0 16 16" aria-hidden="true">
+          <path
+            d="M4 4l8 8M12 4l-8 8"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            fill="none"></path>
+        </svg>
+      </button>
+    </header>
+    <div
+      class:list={[
+        "desk-window__body",
+        { "desk-window__body--flush": flushBody },
+      ]}
+    >
+      <slot />
+    </div>
+  </section>
+</div>

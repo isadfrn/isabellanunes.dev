@@ -1,0 +1,14 @@
+---
+import { toStageStyle } from "@/config/scene.geometry";
+import type { StageBox } from "@/config/scene.types";
+
+interface Props {
+  box: StageBox;
+}
+
+const { box } = Astro.props;
+---
+
+<div class="fish-lane" style={toStageStyle(box)} aria-hidden="true">
+  <img src="/images/fish.png" alt="" class="fish-swimmer" />
+</div>

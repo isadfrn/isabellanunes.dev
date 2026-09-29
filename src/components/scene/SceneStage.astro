@@ -1,0 +1,72 @@
+---
+import HeroCopy from "@components/HeroCopy.astro";
+import SceneItemView from "@components/scene/SceneItemView.astro";
+import SceneWindows from "@components/scene/SceneWindows.astro";
+import { SCENE_ITEMS, SCENE_REVEAL } from "@/config/scene";
+import { isActionEnabled } from "@/config/scene.actions";
+import { SCENE_SIZE } from "@/config/scene.geometry";
+import type { Portfolio } from "@/data/portfolio";
+import { getTranslations } from "@/i18n";
+import { getDesktopMenuItems } from "@/i18n/utils";
+import type { Locale } from "@/types";
+
+interface Props {
+  locale: Locale;
+  portfolio: Portfolio;
+}
+
+const { locale, portfolio } = Astro.props;
+const t = getTranslations(locale);
+const menuItems = getDesktopMenuItems(locale);
+
+// A hotspot whose action leads to a switched-off section is left out.
+const items = SCENE_ITEMS.filter(
+  ({ interaction }) => !interaction || isActionEnabled(interaction.action),
+);
+---
+
+{
+  /* The interactive scene for desktop / tablet-landscape: hero-only, no page
+   scroll. `data-scene` is the root the scripts listen on (see
+   src/scripts/sceneController.ts): it holds both the stage and the desk
+   windows that open over it, since those sit beside the stage, not in it. */
+}
+<section id="home" data-scene class="relative h-screen w-full overflow-hidden">
+  <div
+    class="absolute inset-0 scene-fade-only"
+    data-reveal
+    style={`--reveal-delay:0ms; --reveal-duration:${SCENE_REVEAL.sceneFadeMs}ms;`}
+  >
+    <div
+      class="scene-stage"
+      style={`--stage-w:${SCENE_SIZE.width};--stage-h:${SCENE_SIZE.height}`}
+    >
+      {
+        items.map((item) => (
+          <SceneItemView item={item} labels={t.home} menuItems={menuItems} />
+        ))
+      }
+    </div>
+  </div>
+
+  <article
+    class="container relative z-10 flex h-full items-center pointer-events-none"
+  >
+    <div
+      data-reveal
+      style={`--reveal-delay:${SCENE_REVEAL.heroDelayMs}ms; --reveal-duration:${SCENE_REVEAL.heroFadeMs}ms;`}
+      class="max-w-xl"
+    >
+      <HeroCopy
+        greeting={portfolio.home.greeting}
+        subtitle={portfolio.home.subtitle}
+      />
+    </div>
+  </article>
+
+  <SceneWindows locale={locale} portfolio={portfolio} />
+</section>
+
+<script>
+  import "@/scripts/scene";
+</script>
