@@ -1,0 +1,557 @@
+/* Everything that moves: the page's entrance and reveal, the scene's pulsing
+   hotspots and lamp flicker, the printer, and the ambient loops — weather,
+   steam and the fish. Each block that plays an animation is wrapped in
+   prefers-reduced-motion, so it settles to a still frame for people who ask
+   for that. The layout these animate lives in scene.css. */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-enter {
+  animation: fadeIn 300ms ease-out;
+}
+
+.page-enter-slide {
+  animation: slideUp 300ms ease-out;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(1.25rem);
+    transition:
+      opacity var(--reveal-duration, 500ms) ease-out,
+      transform var(--reveal-duration, 500ms) ease-out;
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  [data-reveal].is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Fades opacity only, without the translateY slide-up — used for the
+     hero background image, which shouldn't shift position as it appears. */
+  .scene-fade-only[data-reveal] {
+    transform: none;
+  }
+
+  .scene-fade-only[data-reveal].is-revealed {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .scene-hotspot__ring {
+    animation: hotspot-pulse 2.6s ease-in-out infinite;
+  }
+}
+
+@keyframes hotspot-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .scene-beam {
+    transition: opacity 300ms ease-out;
+  }
+
+  .scene-beam[data-on] {
+    animation: lamp-on 700ms ease-out;
+  }
+}
+
+@keyframes lamp-on {
+  0% {
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.9;
+  }
+  22% {
+    opacity: 0.15;
+  }
+  34% {
+    opacity: 1;
+  }
+  46% {
+    opacity: 0.4;
+  }
+  60%,
+  100% {
+    opacity: 1;
+  }
+}
+
+/* The 3D printer's hotend: parked low over the bed until a print starts,
+   then rises toward the top of the frame while the chosen model grows into
+   view underneath it (see .printer-object below). */
+.printer-hotend {
+  position: absolute;
+  max-width: none;
+  pointer-events: none;
+  transform: translateY(0);
+}
+
+.printer-object {
+  position: absolute;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.printer-object img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  clip-path: inset(100% 0 0 0);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .printer-rig[data-printing="on"] .printer-hotend {
+    animation: printer-hotend-rise var(--printer-duration, 20s) ease-in-out
+      forwards;
+  }
+
+  .printer-rig[data-printing="on"] .printer-object img {
+    animation: printer-object-grow var(--printer-duration, 20s) ease-in-out
+      forwards;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .printer-rig[data-printing="on"] .printer-hotend {
+    transform: translateY(var(--hotend-rise));
+  }
+
+  .printer-rig[data-printing="on"] .printer-object img {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes printer-hotend-rise {
+  to {
+    transform: translateY(var(--hotend-rise));
+  }
+}
+
+@keyframes printer-object-grow {
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* Menu button that fades in together with the scene's clickable circles. */
+@media (prefers-reduced-motion: no-preference) {
+  .menu-trigger-enter {
+    animation: fadeIn 800ms ease-out var(--enter-delay, 0ms) backwards;
+  }
+}
+
+/* On mobile there's no scene reveal choreography to sync with, so the menu
+   button shouldn't wait for it. */
+@media (max-width: 639px) {
+  .menu-trigger-enter {
+    animation-delay: 0ms;
+  }
+}
+
+/* Rain */
+.weather-drop {
+  position: absolute;
+  top: -10%;
+  width: 1.5px;
+  height: clamp(0.5rem, 1.6vw, 1.1rem);
+  border-radius: 999px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(214, 230, 255, 0.85),
+    rgba(214, 230, 255, 0.85),
+    transparent
+  );
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .weather-drop {
+    animation: weather-fall linear infinite;
+  }
+}
+
+@keyframes weather-fall {
+  from {
+    top: -10%;
+  }
+  to {
+    top: 110%;
+  }
+}
+
+/* Winter: snow falls slower than rain and sways side to side. */
+.weather-flake {
+  position: absolute;
+  top: -8%;
+  width: var(--flake-size);
+  height: var(--flake-size);
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 3px rgba(255, 255, 255, 0.7);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .weather-flake {
+    animation: weather-fall-sway linear infinite;
+  }
+}
+
+@keyframes weather-fall-sway {
+  0% {
+    top: -8%;
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(var(--flake-sway));
+  }
+  50% {
+    transform: translateX(0);
+  }
+  75% {
+    transform: translateX(calc(var(--flake-sway) * -1));
+  }
+  100% {
+    top: 110%;
+    transform: translateX(0);
+  }
+}
+
+/* Night: fixed points that twinkle instead of moving. Under reduced motion
+   they stay at the base opacity below — static, not hidden. */
+.weather-star {
+  position: absolute;
+  width: var(--star-size);
+  height: var(--star-size);
+  border-radius: 9999px;
+  background: #fff;
+  box-shadow: 0 0 4px 1px rgba(255, 255, 255, 0.8);
+  opacity: 0.75;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .weather-star {
+    opacity: 0;
+    animation: weather-twinkle ease-in-out infinite alternate;
+  }
+}
+
+@keyframes weather-twinkle {
+  from {
+    opacity: 0.2;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+/* Spring: petals fall like snow (sway side to side) but slower and
+   tumbling — each one spins continuously by its own --petal-spin as it
+   falls, instead of holding a fixed orientation. */
+.weather-petal {
+  position: absolute;
+  top: -8%;
+  max-width: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .weather-petal {
+    animation: weather-petal-fall linear infinite;
+  }
+}
+
+@keyframes weather-petal-fall {
+  0% {
+    top: -8%;
+    transform: translateX(0) rotate(0deg);
+  }
+  25% {
+    transform: translateX(var(--petal-sway))
+      rotate(calc(var(--petal-spin) * 0.25));
+  }
+  50% {
+    transform: translateX(0) rotate(calc(var(--petal-spin) * 0.5));
+  }
+  75% {
+    transform: translateX(calc(var(--petal-sway) * -1))
+      rotate(calc(var(--petal-spin) * 0.75));
+  }
+  100% {
+    top: 110%;
+    transform: translateX(0) rotate(var(--petal-spin));
+  }
+}
+
+/* Autumn: a leaf blown across the glass every so often, not continuously —
+   the keyframes below cross in the first ~46% of the cycle and spend the
+   rest off-screen, so the pause between crossings comes from each leaf's
+   own (randomized) animation-duration. */
+.weather-leaf {
+  position: absolute;
+  left: -15%;
+  opacity: 0;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.25));
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .weather-leaf {
+    animation: weather-leaf-drift linear infinite;
+  }
+}
+
+@keyframes weather-leaf-drift {
+  0% {
+    left: -15%;
+    opacity: 0;
+    transform: rotate(0deg);
+  }
+  6% {
+    opacity: 0.9;
+  }
+  38% {
+    opacity: 0.9;
+  }
+  46% {
+    left: 115%;
+    opacity: 0;
+    transform: rotate(var(--leaf-spin));
+  }
+  100% {
+    left: 115%;
+    opacity: 0;
+    transform: rotate(var(--leaf-spin));
+  }
+}
+
+/* Steam rising from the coffee cup. Anchored at the coffee's surface (see
+   the coffee item's `steam` visual in config/scene.ts); each wisp seats at its own small
+   --steam-left offset and drifts further sideways by --steam-drift as it
+   rises and fades. */
+.coffee-steam {
+  position: absolute;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.coffee-steam__wisp {
+  position: absolute;
+  left: var(--steam-left, 0);
+  bottom: 0;
+  width: 0.6rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.65);
+  filter: blur(2.5px);
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .coffee-steam__wisp {
+    animation: coffee-steam-rise 3s ease-in infinite;
+    animation-delay: var(--steam-delay, 0s);
+  }
+}
+
+@keyframes coffee-steam-rise {
+  0% {
+    transform: translate(0, 0) scale(0.6);
+    opacity: 0;
+  }
+  18% {
+    opacity: 0.55;
+  }
+  55% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translate(var(--steam-drift, 8px), -3.6rem) scale(2);
+    opacity: 0;
+  }
+}
+
+/* Fish swimming in the aquarium (the fish item's box in config/scene.ts): swims left to
+   right, rests, swims back right to left, rests, crosses to the middle,
+   rests there, then returns to the start to loop without a visible jump.
+   fish.png faces left, so scaleX(-1) mirrors it to face right while it
+   swims that way. The small top/left wobbles along each leg are just for
+   a less mechanical, more fish-like path. */
+.fish-lane {
+  position: absolute;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.fish-swimmer {
+  position: absolute;
+  left: 50%;
+  top: 47%;
+  width: clamp(0.75rem, 1.7vw, 1.25rem);
+  max-width: none;
+  transform: translate(-50%, -50%) scaleX(1);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fish-swimmer {
+    animation: fish-swim 42s ease-in-out infinite;
+  }
+}
+
+@keyframes fish-swim {
+  /* Facing right (swimming left to right) */
+  0% {
+    left: 8%;
+    top: 48%;
+    transform: translate(-50%, -50%) scaleX(-1);
+  }
+  4% {
+    left: 20%;
+    top: 40%;
+    transform: translate(-50%, -50%) scaleX(-1);
+  }
+  8% {
+    left: 45%;
+    top: 56%;
+    transform: translate(-50%, -50%) scaleX(-1);
+  }
+  12% {
+    left: 70%;
+    top: 42%;
+    transform: translate(-50%, -50%) scaleX(-1);
+  }
+  16% {
+    left: 90%;
+    top: 50%;
+    transform: translate(-50%, -50%) scaleX(-1);
+  }
+  20% {
+    left: 92%;
+    top: 48%;
+    transform: translate(-50%, -50%) scaleX(-1);
+  }
+  /* Resting on the right */
+  29% {
+    left: 92%;
+    top: 46%;
+    transform: translate(-50%, -50%) scaleX(-1);
+  }
+  /* Turn, then facing left (swimming right to left) */
+  30% {
+    left: 92%;
+    top: 47%;
+    transform: translate(-50%, -50%) scaleX(1);
+  }
+  34% {
+    left: 75%;
+    top: 38%;
+    transform: translate(-50%, -50%) scaleX(1);
+  }
+  38% {
+    left: 50%;
+    top: 54%;
+    transform: translate(-50%, -50%) scaleX(1);
+  }
+  42% {
+    left: 25%;
+    top: 40%;
+    transform: translate(-50%, -50%) scaleX(1);
+  }
+  46% {
+    left: 5%;
+    top: 48%;
+    transform: translate(-50%, -50%) scaleX(1);
+  }
+  /* Resting on the left */
+  50% {
+    left: 8%;
+    top: 49%;
+    transform: translate(-50%, -50%) scaleX(1);
+  }
+  59% {
+    left: 8%;
+    top: 51%;
+    transform: translate(-50%, -50%) scaleX(1);
+  }
+  /* Turn, then facing right (swimming to the middle) */
+  60% {
+    left: 8%;
+    top: 50%;
+    transform: translate(-50%, -50%) scaleX(-1);
+  }
+  66% {
+    left: 20%;
+    top: 44%;
+    transform: translate(-50%, -50%) scaleX(-1);
+  }
+  70% {
+    left: 38%;
+    top: 52%;
+    transform: translate(-50%, -50%) scaleX(-1);
+  }
+  /* Resting in the middle */
+  75% {
+    left: 50%;
+    top: 47%;
+    transform: translate(-50%, -50%) scaleX(-1);
+  }
+  90% {
+    left: 50%;
+    top: 45%;
+    transform: translate(-50%, -50%) scaleX(-1);
+  }
+  /* Turn, then facing left (back to the start, to loop cleanly) */
+  92% {
+    left: 50%;
+    top: 47%;
+    transform: translate(-50%, -50%) scaleX(1);
+  }
+  95% {
+    left: 30%;
+    top: 52%;
+    transform: translate(-50%, -50%) scaleX(1);
+  }
+  98% {
+    left: 10%;
+    top: 48%;
+    transform: translate(-50%, -50%) scaleX(1);
+  }
+  100% {
+    left: 8%;
+    top: 48%;
+    transform: translate(-50%, -50%) scaleX(1);
+  }
+}
