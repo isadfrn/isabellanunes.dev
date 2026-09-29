@@ -13,7 +13,7 @@ A bilingual static application (Portuguese and English) that brings together car
 
 ### Sections
 
-The home page (`/pt/`, `/en/`) is a single scrolling page with a full-bleed hero image and the sections below, reached via smooth scroll instead of separate routes. Blog remains its own set of pages.
+The home page (`/pt/`, `/en/`) currently renders only the full-screen hero (image, greeting, and subtitle) with no scrolling. The remaining sections below are implemented — markup, data, and translations all still exist — but are switched off in `src/config/sections.ts`. Blog remains its own set of pages, still reachable directly even while its home-page preview is off.
 
 | Section | Description |
 | ------- | ----------- |
@@ -32,8 +32,8 @@ The home page (`/pt/`, `/en/`) is a single scrolling page with a full-bleed hero
 - Internationalization (PT-BR default, EN) with prefixed routes (`/pt/`, `/en/`)
 - Light and dark mode
 - Responsive layout (mobile and desktop)
-- Always-collapsed hamburger menu (desktop and mobile) with smooth scroll-to-section navigation and scroll-spy active state
-- Feature flags to show or hide sections in real time
+- Hamburger menu on blog pages with language switch and theme toggle (not shown on the home page)
+- Sections are toggled on/off at build time via `ENABLED_SECTIONS` in `src/config/sections.ts` — no runtime flags or admin UI
 - Automatic sitemap
 - Conventional commit messages enforced with commitlint + Husky, changelog generated with commit-and-tag-version
 
@@ -98,36 +98,63 @@ Vitest is configured via `vitest.config.ts` (sharing Astro's aliases and Vite pl
 ```
 src/
 ├── components/          # Astro and React components
+│   ├── scene/           # The interactive desktop scene: stage, hotspots, desk windows, computer OS
+│   ├── mobile/          # The scrolling feed phones get instead of the scene
 │   ├── Breadcrumb.tsx
-│   ├── FeatureFlagsAdmin.tsx
 │   ├── HamburgerMenu.tsx
-│   ├── ThemeToggle.tsx
 │   └── ...
-├── config/              # Canonical config, e.g. the section/nav key registry
-├── data/                # Content per section (pt/en)
-│   ├── about/
-│   ├── blog/
-│   ├── books/
-│   ├── career/
-│   ├── courses/
-│   ├── education/
-│   ├── home/
-│   ├── projects/
-│   └── publications/
-├── hooks/               # Shared React hooks (useScrollSpy, useVisibleNavItems)
+├── config/              # Canonical config
+│   ├── scene.ts         # The scene as data: positions, sizes, visuals, hotspots, actions
+│   ├── scene.types.ts   # The shapes that data may take
+│   ├── scene.geometry.ts# Stage pixels -> CSS
+│   ├── scene.actions.ts # Action -> hotspot element
+│   └── sections.ts      # Section/nav key registry and ENABLED_SECTIONS
+├── data/                # Content per section (pt/en); portfolio.ts gathers it for the home page
+├── hooks/               # Shared React hooks (useScrollSpy)
 ├── i18n/                # UI translations
 ├── layouts/             # BaseLayout, PostLayout
-├── lib/                 # Section visibility preferences (local storage)
 ├── pages/
-│   ├── [locale]/        # Localized routes
+│   ├── [locale]/        # Localized routes (home, blog, 404)
+│   ├── 404.astro        # Fallback 404 (default locale)
 │   └── index.astro      # Root redirect
+├── scripts/             # Client-side TypeScript: the scene, reveal-on-scroll (bundled by Astro, no inline scripts)
 └── styles/
-    └── global.css
+    ├── global.css       # Entry point: imports the files below
+    ├── theme.css        # Color tokens, dark variant, base/reset
+    ├── prose.css        # Markdown typography
+    ├── scene.css        # Stage, layers, hotspots, beams, desk windows, computer desktop
+    └── animations.css   # Everything that moves: reveal, weather, steam, fish, printer
 ```
 
 ## Section Visibility
 
-Menu sections can be toggled on or off from the `/admin/flags` panel. Preferences are saved to that browser's `localStorage` only — they are a per-device preference, not a shared flag, so they don't affect what other visitors see. Useful for hiding pages under construction on your own machine without changing code.
+Sections are enabled or disabled at build time, not per visitor. `ENABLED_SECTIONS` in `src/config/sections.ts` is the single source of truth: add a section's key to that array to render it again, remove it to switch it off. A disabled section disappears everywhere at once — the mobile feed, the mobile menu, the desktop computer's program menu and program window, and (for books) the shelf hotspot. The section's markup, data, and translations stay in the codebase either way — nothing is deleted when a section is disabled.
+
+## The Home Scene
+
+On `sm` screens and up, the home page is an interactive 2.5D scene (a 2752×1536 stage scaled to cover the viewport); below that it is the classic scrolling feed. The scene is described entirely by data in `src/config/scene.ts` — to move, scale or re-wire an object, edit its entry in `SCENE_ITEMS`; no component or script changes:
+
+```ts
+{
+  id: "lamp",
+  x: 963, y: 929, width: 162, height: 271,                 // position and size (stage px)
+  visuals: [                                                // what is drawn, back to front
+    { type: "image", src: "/images/light.png" },
+    { type: "beam", target: "lamp", beam: { /* ... */ } },
+  ],
+  interaction: {                                            // what a click does
+    labelKey: "lampToggleLabel",                            // accessible name (src/i18n)
+    hotspot: { x: 0.72, y: 0.23, size: 0.5 },               // glow, as fractions of the item
+    action: { type: "toggle", target: "lamp" },
+  },
+}
+```
+
+Actions are `toggle` (lights/screens sharing a `target`), `open-window`, `open-link` and `run-printer`. Visuals are `image`, `weather`, `custom`, `beam`, `screen`, `steam` and `rig` (the printer; its print time is `durationMs`). The intro timing is `SCENE_REVEAL`.
+
+Behavior lives in `src/scripts/`: one listener on the scene root routes clicks by `data-action` (`sceneController.ts`), with the desk windows, the printer, the computer's desktop and the clock in their own modules. `lifecycle.ts` sets everything up on each page and tears it down (listeners, timers, observers) before the Astro router swaps the page. `src/scripts/markup.test.ts` fails if the markup and the scripts drift apart.
+
+Missing pages get a localized 404: `pages/[locale]/404.astro` is served by nginx for anything missing under `/en/` (see `nginx.conf`), and `/404.html` (Portuguese) is the fallback for everything else.
 
 ## License
 
