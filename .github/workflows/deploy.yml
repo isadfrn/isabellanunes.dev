@@ -41,10 +41,16 @@ jobs:
           ssh-keyscan -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts 2>/dev/null || true
 
       - name: Deploy on VPS
+        env:
+          GHCR_USER: ${{ github.actor }}
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          ssh -p ${{ secrets.SSH_PORT }} -i ~/.ssh/id_ed25519 \
+          printf '%s' "$GHCR_TOKEN" | ssh -p ${{ secrets.SSH_PORT }} -i ~/.ssh/id_ed25519 \
             ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
             "set -e
+             export DOCKER_CONFIG=\$(mktemp -d)
+             trap 'rm -rf \"\$DOCKER_CONFIG\"' EXIT
+             docker login ghcr.io -u $GHCR_USER --password-stdin
              docker pull ${{ env.IMAGE }}:latest
              docker rm -f isabellanunes || true
              docker run -d \
