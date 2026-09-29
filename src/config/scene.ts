@@ -11,10 +11,11 @@
 import type {
   PrinterRigVisual,
   SceneItem,
+  SceneVisual,
   StageBox,
   WindowView,
 } from "./scene.types";
-import { WINDOW_VIEWS } from "./scene.types";
+import { DEFAULT_WINDOW_VIEW, WINDOW_VIEWS } from "./scene.types";
 
 const WINDOW_VIEW_BOX: StageBox = {
   x: 895,
@@ -78,13 +79,23 @@ function windowViewItem(view: WindowView): SceneItem {
   return {
     id: `window-view-${view}`,
     ...WINDOW_VIEW_BOX,
-    visuals: [{ type: "image", src: `/images/${view}.png`, cover: true, view }],
+    visuals: [
+      {
+        type: "image",
+        src: `${view}.png`,
+        cover: true,
+        view,
+        // Only the default view is in the page's HTML; the others are fetched
+        // by scripts/windowViews.ts once the page is idle.
+        priority: view === DEFAULT_WINDOW_VIEW,
+      },
+    ],
   };
 }
 
 interface PrinterRigOptions {
   hotendSrc: string;
-  /** The hotend's resting x, measured off 3dprinter-complete.png. */
+  /** The hotend's resting x, measured off design/reference/3dprinter-complete.png. */
   hotendX: number;
   hotendWidth: number;
   hotendHeight: number;
@@ -119,10 +130,19 @@ function createPrinterRig(options: PrinterRigOptions): PrinterRigVisual {
   };
 }
 
-// The scenery images for every window view, for preloading.
-export const WINDOW_VIEW_IMAGES: readonly string[] = WINDOW_VIEWS.map(
-  (view) => `/images/${view}.png`,
-);
+/** The first visual of the given type anywhere in the scene, if there is one. */
+export function findVisual<T extends SceneVisual["type"]>(
+  type: T,
+): Extract<SceneVisual, { type: T }> | undefined {
+  for (const item of SCENE_ITEMS) {
+    for (const visual of item.visuals ?? []) {
+      if (visual.type === type) {
+        return visual as Extract<SceneVisual, { type: T }>;
+      }
+    }
+  }
+  return undefined;
+}
 
 // Ordered back to front: later items are drawn on top of earlier ones.
 export const SCENE_ITEMS: readonly SceneItem[] = [
@@ -132,7 +152,7 @@ export const SCENE_ITEMS: readonly SceneItem[] = [
     y: 0,
     width: 2752,
     height: 1536,
-    visuals: [{ type: "image", src: "/images/background.png" }],
+    visuals: [{ type: "image", src: "background.png", priority: true }],
   },
   {
     id: "books",
@@ -167,7 +187,7 @@ export const SCENE_ITEMS: readonly SceneItem[] = [
     y: 63,
     width: 1058,
     height: 1105,
-    visuals: [{ type: "image", src: "/images/window.png" }],
+    visuals: [{ type: "image", src: "window.png" }],
   },
   {
     id: "blind",
@@ -175,7 +195,7 @@ export const SCENE_ITEMS: readonly SceneItem[] = [
     y: 87,
     width: 1014,
     height: 410,
-    visuals: [{ type: "image", src: "/images/blind.png" }],
+    visuals: [{ type: "image", src: "blind.png" }],
   },
   {
     id: "lamp",
@@ -184,7 +204,7 @@ export const SCENE_ITEMS: readonly SceneItem[] = [
     width: 162,
     height: 271,
     visuals: [
-      { type: "image", src: "/images/light.png" },
+      { type: "image", src: "light.png" },
       {
         type: "beam",
         target: "lamp",
@@ -212,7 +232,7 @@ export const SCENE_ITEMS: readonly SceneItem[] = [
     y: 1098,
     width: 112,
     height: 107,
-    visuals: [{ type: "image", src: "/images/pomodor.png" }],
+    visuals: [{ type: "image", src: "pomodor.png" }],
     interaction: {
       labelKey: "focusHotspotLabel",
       // Centered on the round dial of the timer, which sits right of the
@@ -232,7 +252,7 @@ export const SCENE_ITEMS: readonly SceneItem[] = [
     y: 900,
     width: 150,
     height: 320,
-    visuals: [{ type: "image", src: "/images/plant.png" }],
+    visuals: [{ type: "image", src: "plant.png" }],
   },
   {
     // A little clock/gadget next to the plant, further back from the desk's
@@ -243,7 +263,7 @@ export const SCENE_ITEMS: readonly SceneItem[] = [
     y: 1200,
     width: 85,
     height: 59,
-    visuals: [{ type: "image", src: "/images/nerdminer.png" }],
+    visuals: [{ type: "image", src: "nerdminer.png" }],
   },
   {
     id: "computer",
@@ -255,7 +275,7 @@ export const SCENE_ITEMS: readonly SceneItem[] = [
     width: 567,
     height: 415,
     visuals: [
-      { type: "image", src: "/images/pc.png" },
+      { type: "image", src: "pc.png" },
       {
         type: "screen",
         target: "computer",
@@ -281,7 +301,7 @@ export const SCENE_ITEMS: readonly SceneItem[] = [
     width: 290,
     height: 235,
     visuals: [
-      { type: "image", src: "/images/aquarium.png" },
+      { type: "image", src: "aquarium.png" },
       {
         type: "beam",
         target: "aquarium",
@@ -311,7 +331,7 @@ export const SCENE_ITEMS: readonly SceneItem[] = [
     width: 107,
     height: 102,
     visuals: [
-      { type: "image", src: "/images/coffee.png" },
+      { type: "image", src: "coffee.png" },
       // The coffee's surface, where the steam wisps rise from.
       { type: "steam", point: { x: 1819, y: 1165 } },
     ],
@@ -323,9 +343,9 @@ export const SCENE_ITEMS: readonly SceneItem[] = [
     width: 465,
     height: 567,
     visuals: [
-      { type: "image", src: "/images/3dprinter.png" },
+      { type: "image", src: "3dprinter.png" },
       createPrinterRig({
-        hotendSrc: "/images/3dprinter-hotend.png",
+        hotendSrc: "3dprinter-hotend.png",
         hotendX: 2073,
         hotendWidth: 375,
         hotendHeight: 87,
@@ -347,6 +367,6 @@ export const SCENE_ITEMS: readonly SceneItem[] = [
     y: 976,
     width: 243,
     height: 373,
-    visuals: [{ type: "image", src: "/images/cat.png" }],
+    visuals: [{ type: "image", src: "cat.png" }],
   },
 ];

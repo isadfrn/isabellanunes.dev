@@ -1,6 +1,9 @@
 ---
+import { Image } from "astro:assets";
+import petalImage from "@/assets/scene/petal.png";
 import { toStageStyle } from "@/config/scene.geometry";
 import { WINDOW_SKY_DEPTH } from "@/config/scene";
+import { IMAGE_FORMAT, IMAGE_QUALITY } from "@/config/sceneImages";
 import type { StageBox } from "@/config/scene.types";
 
 interface Props {
@@ -107,8 +110,10 @@ const petals = Array.from({ length: 1 }, () => {
   <div class="scene-weather__layer scene-weather__layer--spring">
     {
       petals.map((petal) => (
-        <img
-          src="/images/petal.png"
+        <Image
+          src={petalImage}
+          format={IMAGE_FORMAT}
+          quality={IMAGE_QUALITY}
           alt=""
           class="weather-petal"
           style={`left:${petal.left}%;width:${petal.size}rem;--petal-sway:${petal.sway}px;--petal-spin:${petal.spin}deg;animation-duration:${petal.duration}s;animation-delay:${petal.delay}s;opacity:${petal.opacity};`}

@@ -62,6 +62,20 @@ export function toBeamStyle(beam: SceneBeam): string {
   ].join(";");
 }
 
+// Device pixels an image gets per stage pixel. The stage is scaled to cover
+// the viewport, so the density an image really needs sits between a 4K screen
+// at 1x (about 1.4) and a retina laptop (about 1.9): twice the stage size is
+// sharp on both, without shipping the artwork at its full resolution.
+export const DEVICE_PIXELS_PER_STAGE_PIXEL = 2;
+
+/** The width to ship an image at, for the stage width it is drawn at. */
+export function toImageWidth(stageWidth: number, nativeWidth: number): number {
+  return Math.min(
+    nativeWidth,
+    Math.ceil(stageWidth * DEVICE_PIXELS_PER_STAGE_PIXEL),
+  );
+}
+
 /** A CSS `aspect-ratio` value with the box's proportions, e.g. "353 / 227". */
 export function toAspectRatio(box: StageBox): string {
   return `${box.width} / ${box.height}`;

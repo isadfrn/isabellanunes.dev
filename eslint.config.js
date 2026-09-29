@@ -36,7 +36,7 @@ export default [
     },
   },
   {
-    files: ["*.config.ts", "*.config.js", "src/config/printerModels.ts"],
+    files: ["*.config.ts", "*.config.js"],
     languageOptions: {
       globals: {
         ...globals.node,

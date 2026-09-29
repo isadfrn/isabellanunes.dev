@@ -1,9 +1,13 @@
 ---
 import BookCard from "@components/BookCard";
+import { getImage } from "astro:assets";
 import ComputerDesktop from "@components/scene/ComputerDesktop.astro";
 import DesktopWindow from "@components/scene/DesktopWindow.astro";
 import { getPrinterModels } from "@/config/printerModels";
+import { findVisual } from "@/config/scene";
 import { isWindowEnabled } from "@/config/scene.actions";
+import { toImageWidth } from "@/config/scene.geometry";
+import { IMAGE_FORMAT, IMAGE_QUALITY, nativeWidth } from "@/config/sceneImages";
 import type { Portfolio } from "@/data/portfolio";
 import { getTranslations } from "@/i18n";
 import type { Locale } from "@/types";
@@ -15,7 +19,24 @@ interface Props {
 
 const { locale, portfolio } = Astro.props;
 const t = getTranslations(locale);
-const printerModels = getPrinterModels();
+
+// Each model is shipped at the size it is printed at on the bed (which is
+// plenty for its thumbnail in the picker too).
+const printWidth = findVisual("rig")?.objectBox.width;
+const printerModels = await Promise.all(
+  getPrinterModels().map(async ({ id, name, image }) => ({
+    id,
+    name,
+    image: await getImage({
+      src: image,
+      width: printWidth
+        ? toImageWidth(printWidth, nativeWidth(image))
+        : nativeWidth(image),
+      format: IMAGE_FORMAT,
+      quality: IMAGE_QUALITY,
+    }),
+  })),
+);
 ---
 
 {
@@ -56,12 +77,16 @@ const printerModels = getPrinterModels();
               <input
                 type="radio"
                 name="printer-model"
-                value={model.src}
+                value={model.image.src}
                 class="peer sr-only"
               />
               <span class="flex flex-col items-center gap-2 rounded-lg border border-slate-100 bg-white p-3 text-center shadow-sm transition-colors peer-checked:border-primary-500 peer-checked:ring-2 peer-checked:ring-primary-500 peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-primary-500 dark:border-slate-700 dark:bg-slate-800">
                 <img
-                  src={model.src}
+                  src={model.image.src}
+                  width={model.image.attributes.width}
+                  height={model.image.attributes.height}
+                  loading="lazy"
+                  decoding="async"
                   alt=""
                   class="h-20 w-full object-contain"
                 />

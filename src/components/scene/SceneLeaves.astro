@@ -1,12 +1,19 @@
 ---
+import { Image } from "astro:assets";
+import leafImage from "@/assets/scene/leaf.png";
 import { toStageStyle } from "@/config/scene.geometry";
 import type { StageBox } from "@/config/scene.types";
+import { IMAGE_FORMAT, IMAGE_QUALITY } from "@/config/sceneImages";
 
 interface Props {
   box: StageBox;
 }
 
 const { box } = Astro.props;
+
+// A leaf is drawn 2.2-3.2rem wide (about 50px); this keeps it sharp on
+// high-density screens without shipping the 2419px artwork.
+const LEAF_WIDTH = 128;
 
 function rand(min: number, max: number) {
   return min + Math.random() * (max - min);
@@ -34,8 +41,11 @@ const leaves = Array.from({ length: 2 }, () => {
   >
     {
       leaves.map((leaf) => (
-        <img
-          src="/images/leaf.png"
+        <Image
+          src={leafImage}
+          width={LEAF_WIDTH}
+          format={IMAGE_FORMAT}
+          quality={IMAGE_QUALITY}
           alt=""
           class="weather-leaf"
           style={`top:${leaf.top}%;width:${leaf.size}rem;animation-duration:${leaf.duration}s;animation-delay:${leaf.delay}s;--leaf-spin:${leaf.spin * 360}deg;`}

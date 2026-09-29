@@ -7,7 +7,7 @@ import EducationContent from "@components/EducationContent.astro";
 import ProjectsContent from "@components/ProjectsContent.astro";
 import DesktopProgramWindow from "@components/scene/DesktopProgramWindow.astro";
 import DesktopUI from "@components/scene/DesktopUI.astro";
-import { SCENE_ITEMS } from "@/config/scene";
+import { findVisual } from "@/config/scene";
 import { toAspectRatio } from "@/config/scene.geometry";
 import { getOsPrograms } from "@/config/sections";
 import type { Portfolio } from "@/data/portfolio";
@@ -31,9 +31,7 @@ const programs = new Set(getOsPrograms());
 
 // Shaped like the monitor's own screen, so the window reads as "the same
 // screen, zoomed in".
-const screen = SCENE_ITEMS.flatMap((item) => item.visuals ?? []).find(
-  (visual) => visual.type === "screen",
-);
+const screen = findVisual("screen");
 ---
 
 <div

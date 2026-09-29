@@ -1,14 +1,14 @@
 import { describe, expect, it } from "vitest";
 import { getTranslations } from "@/i18n";
 import { locales } from "@/types";
-import {
-  SCENE_ITEMS,
-  SCENE_REVEAL,
-  WINDOW_GLASS_PATCHES,
-  WINDOW_VIEW_IMAGES,
-} from "./scene";
+import { SCENE_ITEMS, SCENE_REVEAL, WINDOW_GLASS_PATCHES } from "./scene";
 import { SCENE_SIZE, toHotspotBox } from "./scene.geometry";
-import { WINDOW_VIEWS, type SceneItem, type SceneVisual } from "./scene.types";
+import {
+  DEFAULT_WINDOW_VIEW,
+  WINDOW_VIEWS,
+  type SceneItem,
+  type SceneVisual,
+} from "./scene.types";
 
 const visualsOf = (item: SceneItem) => item.visuals ?? [];
 const allVisuals = SCENE_ITEMS.flatMap(visualsOf);
@@ -40,8 +40,14 @@ describe("SCENE_ITEMS", () => {
       image.view ? [image.view] : [],
     );
     expect(views).toEqual([...WINDOW_VIEWS]);
-    expect(WINDOW_VIEW_IMAGES).toEqual(
-      ofType("image").flatMap((image) => (image.view ? [image.src] : [])),
+  });
+
+  it("fetches only what is above the fold up front: the background and the default window view", () => {
+    const upFront = ofType("image")
+      .filter((image) => image.priority)
+      .map((image) => image.src);
+    expect(upFront.sort()).toEqual(
+      ["background.png", `${DEFAULT_WINDOW_VIEW}.png`].sort(),
     );
   });
 

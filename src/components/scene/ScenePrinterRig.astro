@@ -1,12 +1,31 @@
 ---
-import { toRisePercent, toStageStyle } from "@/config/scene.geometry";
+import { getImage } from "astro:assets";
+import {
+  toImageWidth,
+  toRisePercent,
+  toStageStyle,
+} from "@/config/scene.geometry";
 import type { PrinterRigVisual } from "@/config/scene.types";
+import {
+  IMAGE_FORMAT,
+  IMAGE_QUALITY,
+  nativeWidth,
+  resolveSceneImage,
+} from "@/config/sceneImages";
 
 interface Props {
   rig: PrinterRigVisual;
 }
 
 const { rig } = Astro.props;
+
+const source = resolveSceneImage(rig.hotendSrc);
+const hotend = await getImage({
+  src: source,
+  width: toImageWidth(rig.hotendHome.width, nativeWidth(source)),
+  format: IMAGE_FORMAT,
+  quality: IMAGE_QUALITY,
+});
 ---
 
 <div
@@ -15,8 +34,12 @@ const { rig } = Astro.props;
   style={`--printer-duration:${rig.durationMs}ms`}
 >
   <img
-    src={rig.hotendSrc}
+    src={hotend.src}
+    width={hotend.attributes.width}
+    height={hotend.attributes.height}
     alt=""
+    loading="lazy"
+    decoding="async"
     class="printer-hotend"
     style={`${toStageStyle(rig.hotendHome)};--hotend-rise:-${toRisePercent(rig.hotendHome, rig.hotendRisen)}%;`}
   />

@@ -1,6 +1,9 @@
 ---
+import { Image } from "astro:assets";
+import fish from "@/assets/scene/fish.png";
 import { toStageStyle } from "@/config/scene.geometry";
 import type { StageBox } from "@/config/scene.types";
+import { IMAGE_FORMAT, IMAGE_QUALITY } from "@/config/sceneImages";
 
 interface Props {
   box: StageBox;
@@ -10,5 +13,13 @@ const { box } = Astro.props;
 ---
 
 <div class="fish-lane" style={toStageStyle(box)} aria-hidden="true">
-  <img src="/images/fish.png" alt="" class="fish-swimmer" />
+  <!-- Drawn at most 20px wide (see .fish-swimmer); 80px keeps it sharp. -->
+  <Image
+    src={fish}
+    width={80}
+    format={IMAGE_FORMAT}
+    quality={IMAGE_QUALITY}
+    alt=""
+    class="fish-swimmer"
+  />
 </div>

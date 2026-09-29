@@ -1,31 +1,34 @@
-import { existsSync, readdirSync } from "node:fs";
-import path from "node:path";
+import type { ImageMetadata } from "astro";
 
-const MODELS_DIR = path.join(process.cwd(), "public/images/models-printer");
-const IMAGE_EXTENSION = /\.(png|jpe?g|webp|svg)$/i;
+const IMAGE_EXTENSION = /\.(png|jpe?g|webp|avif)$/i;
+
+// Whatever image files sit in src/assets/printer-models are the models on
+// offer to print — dropping a new one in makes it printable without
+// touching any code.
+const FILES = import.meta.glob<ImageMetadata>(
+  "/src/assets/printer-models/*.{png,jpg,jpeg,webp,avif}",
+  { eager: true, import: "default" },
+);
 
 export interface PrinterModel {
   id: string;
   name: string;
-  src: string;
+  image: ImageMetadata;
 }
 
-// Whatever image files sit in public/images/models-printer are the models on
-// offer to print — dropping a new one in makes it printable without
-// touching any code.
-export function getPrinterModels(): PrinterModel[] {
-  if (!existsSync(MODELS_DIR)) return [];
-  return readdirSync(MODELS_DIR)
-    .filter((file) => IMAGE_EXTENSION.test(file))
+export function toPrinterModels(
+  files: Record<string, ImageMetadata>,
+): PrinterModel[] {
+  return Object.keys(files)
     .sort()
-    .map((file) => {
-      const id = file.replace(IMAGE_EXTENSION, "");
-      return {
-        id,
-        name: prettifyModelName(id),
-        src: `/images/models-printer/${file}`,
-      };
+    .map((path) => {
+      const id = (path.split("/").pop() ?? path).replace(IMAGE_EXTENSION, "");
+      return { id, name: prettifyModelName(id), image: files[path] };
     });
+}
+
+export function getPrinterModels(): PrinterModel[] {
+  return toPrinterModels(FILES);
 }
 
 function prettifyModelName(id: string): string {

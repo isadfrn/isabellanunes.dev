@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { WINDOW_VIEW_IMAGES } from "@/config/scene";
 import {
   DEFAULT_WINDOW_VIEW,
   WINDOW_VIEW_STORAGE_KEY,
@@ -20,8 +19,6 @@ export default function WindowViewPicker({ labels }: WindowViewPickerProps) {
     setView(
       WINDOW_VIEWS.find((option) => option === current) ?? DEFAULT_WINDOW_VIEW,
     );
-    // Start fetching the other views so switching to one is instant.
-    for (const src of WINDOW_VIEW_IMAGES) new Image().src = src;
   }, []);
 
   function choose(next: WindowView) {

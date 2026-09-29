@@ -93,10 +93,16 @@ export type SceneBeam =
 
 export interface ImageVisual {
   type: "image";
+  /** File name in src/assets/scene. Astro resizes it to the item's box and
+   * converts it at build time, so drop the artwork there at any size. */
   src: string;
   cover?: boolean;
   /** Marks the image as one of the alternative views seen through the window. */
   view?: WindowView;
+  /** Above the fold: fetched right away and ahead of the rest. Everything
+   * else waits until the browser knows it is on screen — which, on a phone
+   * where the scene is hidden, is never. */
+  priority?: boolean;
 }
 
 /** A patch of window glass that gets rain/snow/stars/petals, per window view. */
@@ -135,6 +141,7 @@ export interface SteamVisual {
 export interface PrinterRigVisual {
   type: "rig";
   rig: "printer";
+  /** File name in src/assets/scene. */
   hotendSrc: string;
   hotendHome: StageBox;
   hotendRisen: StageBox;

@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   SCENE_SIZE,
   toAspectRatio,
+  toImageWidth,
   toBeamStyle,
   toHotspotBox,
   toPointStyle,
@@ -91,5 +92,17 @@ describe("toRisePercent", () => {
     const risen = { ...home, y: 120 };
     expect(toRisePercent(home, risen)).toBe("100.00");
     expect(toRisePercent(home, { ...home, y: 160 })).toBe("50.00");
+  });
+});
+
+describe("toImageWidth", () => {
+  it("ships an image at two device pixels per stage pixel", () => {
+    expect(toImageWidth(130, 736)).toBe(260);
+    expect(toImageWidth(85.4, 2265)).toBe(171);
+  });
+
+  it("never upscales past the artwork's own width", () => {
+    expect(toImageWidth(1025, 1792)).toBe(1792);
+    expect(toImageWidth(100, 150)).toBe(150);
   });
 });

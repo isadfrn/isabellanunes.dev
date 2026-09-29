@@ -1,38 +1,39 @@
-import { describe, expect, it, vi } from "vitest";
+import type { ImageMetadata } from "astro";
+import { describe, expect, it } from "vitest";
+import { getPrinterModels, toPrinterModels } from "./printerModels";
 
-vi.mock("node:fs", () => {
-  const mocked = { existsSync: vi.fn(), readdirSync: vi.fn() };
-  return { ...mocked, default: mocked };
-});
+const image = (width: number) =>
+  ({ src: `/${width}.png`, width, height: width }) as ImageMetadata;
 
-const { existsSync, readdirSync } = await import("node:fs");
-const { getPrinterModels } = await import("./printerModels");
+describe("toPrinterModels", () => {
+  it("lists the images sorted by path, with prettified names", () => {
+    const fox = image(1);
+    const zelda = image(2);
 
-describe("getPrinterModels", () => {
-  it("returns an empty list when the folder doesn't exist", () => {
-    vi.mocked(existsSync).mockReturnValue(false);
-    expect(getPrinterModels()).toEqual([]);
+    expect(
+      toPrinterModels({
+        "/src/assets/printer-models/zelda-funko.png": zelda,
+        "/src/assets/printer-models/low_poly_fox.webp": fox,
+      }),
+    ).toEqual([
+      { id: "low_poly_fox", name: "Low Poly Fox", image: fox },
+      { id: "zelda-funko", name: "Zelda Funko", image: zelda },
+    ]);
   });
 
-  it("lists only image files, sorted, with prettified names", () => {
-    vi.mocked(existsSync).mockReturnValue(true);
-    vi.mocked(readdirSync).mockReturnValue([
-      "zelda-funko.png",
-      "notes.txt",
-      "low_poly_fox.webp",
-    ] as unknown as ReturnType<typeof readdirSync>);
+  it("returns nothing for an empty folder", () => {
+    expect(toPrinterModels({})).toEqual([]);
+  });
+});
 
-    expect(getPrinterModels()).toEqual([
-      {
-        id: "low_poly_fox",
-        name: "Low Poly Fox",
-        src: "/images/models-printer/low_poly_fox.webp",
-      },
-      {
-        id: "zelda-funko",
-        name: "Zelda Funko",
-        src: "/images/models-printer/zelda-funko.png",
-      },
-    ]);
+describe("getPrinterModels", () => {
+  it("offers whatever is in src/assets/printer-models", () => {
+    const models = getPrinterModels();
+    expect(models.length).toBeGreaterThan(0);
+    for (const model of models) {
+      expect(model.id).toBeTruthy();
+      expect(model.name).toBeTruthy();
+      expect(model.image).toBeDefined();
+    }
   });
 });

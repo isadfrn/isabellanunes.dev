@@ -1,0 +1,54 @@
+---
+import { getImage } from "astro:assets";
+import { toImageWidth, toStageStyle } from "@/config/scene.geometry";
+import {
+  DEFAULT_WINDOW_VIEW,
+  type ImageVisual,
+  type StageBox,
+} from "@/config/scene.types";
+import {
+  IMAGE_FORMAT,
+  IMAGE_QUALITY,
+  nativeWidth,
+  resolveSceneImage,
+} from "@/config/sceneImages";
+
+interface Props {
+  visual: ImageVisual;
+  /** The item the image is drawn in: it decides the size the file ships at. */
+  box: StageBox;
+}
+
+const { visual, box } = Astro.props;
+
+const source = resolveSceneImage(visual.src);
+const image = await getImage({
+  src: source,
+  width: toImageWidth(box.width, nativeWidth(source)),
+  format: IMAGE_FORMAT,
+  quality: IMAGE_QUALITY,
+});
+
+// Only the default window view is in the HTML. The others are big, so their
+// address waits in `data-view-src` until scripts/windowViews.ts loads them.
+const deferred =
+  visual.view !== undefined && visual.view !== DEFAULT_WINDOW_VIEW;
+---
+
+<img
+  src={deferred ? undefined : image.src}
+  data-view={visual.view}
+  data-view-src={visual.view ? image.src : undefined}
+  width={image.attributes.width}
+  height={image.attributes.height}
+  alt=""
+  loading={visual.priority || deferred ? "eager" : "lazy"}
+  fetchpriority={visual.priority ? "high" : undefined}
+  decoding="async"
+  class:list={[
+    "scene-item",
+    { "scene-item--cover": visual.cover },
+    visual.view && ["scene-view", `scene-view--${visual.view}`],
+  ]}
+  style={toStageStyle(box)}
+/>
