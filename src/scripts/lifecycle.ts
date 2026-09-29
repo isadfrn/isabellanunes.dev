@@ -42,3 +42,19 @@ export function every(
   const id = setInterval(callback, ms);
   signal.addEventListener("abort", () => clearInterval(id), { once: true });
 }
+
+// Safari has no requestIdleCallback, so wait a beat instead.
+const IDLE_FALLBACK_MS = 200;
+
+/** Runs `callback` once the browser has nothing better to do, unless `signal` aborts first. */
+export function onIdle(callback: () => void, signal: AbortSignal): void {
+  if (typeof requestIdleCallback === "function") {
+    const id = requestIdleCallback(callback);
+    signal.addEventListener("abort", () => cancelIdleCallback(id), {
+      once: true,
+    });
+    return;
+  }
+  const id = setTimeout(callback, IDLE_FALLBACK_MS);
+  signal.addEventListener("abort", () => clearTimeout(id), { once: true });
+}

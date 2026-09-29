@@ -1,5 +1,9 @@
-import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import { loadCurrentWindowView, watchWindowViews } from "./windowViews";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import {
+  loadCurrentWindowView,
+  prefetchWindowViews,
+  watchWindowViews,
+} from "./windowViews";
 
 function render() {
   document.body.innerHTML = `
@@ -74,7 +78,7 @@ describe("watchWindowViews", () => {
     const { src } = render();
     setView("rain");
     const controller = new AbortController();
-    watchWindowViews(document, controller.signal);
+    watchWindowViews(document.body, controller.signal);
     expect(src("rain")).toBe("/rain.png");
 
     setView("night");
@@ -86,11 +90,121 @@ describe("watchWindowViews", () => {
   it("stops watching once the signal aborts", async () => {
     const { src } = render();
     const controller = new AbortController();
-    watchWindowViews(document, controller.signal);
+    watchWindowViews(document.body, controller.signal);
     controller.abort();
 
     setView("night");
     await settle();
     expect(src("night")).toBeNull();
+  });
+});
+
+describe("prefetchWindowViews", () => {
+  // jsdom has no layout: say the scene is on screen unless a test says otherwise
+  const rendered = (yes: boolean) =>
+    vi
+      .spyOn(Element.prototype, "getClientRects")
+      .mockReturnValue((yes ? [{}] : []) as unknown as DOMRectList);
+  const idle = () => vi.advanceTimersByTime(200);
+  const finish = (id: string, event: "load" | "error" = "load") =>
+    document.getElementById(id)?.dispatchEvent(new Event(event));
+  const src = (id: string) => document.getElementById(id)?.getAttribute("src");
+
+  beforeEach(() => {
+    vi.useFakeTimers();
+    vi.stubGlobal("requestIdleCallback", undefined);
+    document.body.innerHTML = `
+      <img id="sunny" data-view="sunny" data-view-src="/sunny.webp" src="/sunny.webp" />
+      <img id="night" data-view="night" data-view-src="/night.webp" />
+      <img id="rain" data-view="rain" data-view-src="/rain.webp" />
+      <img id="winter" data-view="winter" data-view-src="/winter.webp" />
+      <img id="empty" data-view="spring" data-view-src="" />`;
+  });
+  afterEach(() => {
+    vi.useRealTimers();
+    vi.unstubAllGlobals();
+    vi.restoreAllMocks();
+  });
+
+  it("loads the other views one at a time, each after the last has arrived", () => {
+    rendered(true);
+    prefetchWindowViews(document.body, new AbortController().signal);
+    expect(src("night")).toBeNull();
+
+    idle();
+    expect(src("night")).toBe("/night.webp");
+    expect(src("rain")).toBeNull();
+
+    idle();
+    expect(src("rain")).toBeNull(); // night still on its way
+
+    finish("night");
+    idle();
+    expect(src("rain")).toBe("/rain.webp");
+    expect(src("winter")).toBeNull();
+  });
+
+  it("carries on past a view that fails to load, and past one with nothing to load", () => {
+    rendered(true);
+    prefetchWindowViews(document.body, new AbortController().signal);
+    idle();
+    finish("night", "error");
+    idle();
+    finish("rain");
+    idle();
+    expect(src("winter")).toBe("/winter.webp");
+    finish("winter");
+    idle();
+    expect(src("empty")).toBeNull();
+    expect(vi.getTimerCount()).toBe(0);
+  });
+
+  it("skips a view the visitor asked for before its turn came", () => {
+    rendered(true);
+    prefetchWindowViews(document.body, new AbortController().signal);
+    document.getElementById("rain")?.setAttribute("src", "/rain.webp");
+    idle();
+    finish("night");
+    idle();
+    expect(src("winter")).toBe("/winter.webp");
+  });
+
+  it("waits for the page to finish loading first", () => {
+    rendered(true);
+    Object.defineProperty(document, "readyState", {
+      value: "loading",
+      configurable: true,
+    });
+    try {
+      prefetchWindowViews(document.body, new AbortController().signal);
+      idle();
+      expect(src("night")).toBeNull();
+
+      window.dispatchEvent(new Event("load"));
+      idle();
+      expect(src("night")).toBe("/night.webp");
+    } finally {
+      Reflect.deleteProperty(document, "readyState");
+    }
+  });
+
+  it("leaves everything alone where the scene is hidden, as on a phone", () => {
+    rendered(false);
+    prefetchWindowViews(document.body, new AbortController().signal);
+    idle();
+    expect(src("night")).toBeNull();
+    expect(vi.getTimerCount()).toBe(0);
+  });
+
+  it("stops once the page is gone", () => {
+    rendered(true);
+    const controller = new AbortController();
+    prefetchWindowViews(document.body, controller.signal);
+    idle();
+    controller.abort();
+    finish("night");
+    idle();
+    expect(src("rain")).toBeNull();
+    expect(vi.getTimerCount()).toBe(0);
   });
 });

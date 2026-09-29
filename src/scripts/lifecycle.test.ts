@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { every, onEachPage } from "./lifecycle";
+import { every, onEachPage, onIdle } from "./lifecycle";
 
 const fire = (name: string) => document.dispatchEvent(new Event(name));
 
@@ -88,6 +88,51 @@ describe("every", () => {
     controller.abort();
     vi.advanceTimersByTime(5000);
     expect(callback).toHaveBeenCalledTimes(2);
+    expect(vi.getTimerCount()).toBe(0);
+  });
+});
+
+describe("onIdle", () => {
+  beforeEach(() => vi.useFakeTimers());
+  afterEach(() => {
+    vi.useRealTimers();
+    vi.unstubAllGlobals();
+  });
+
+  it("uses the browser's idle callback where there is one", () => {
+    const request = vi.fn(() => 7);
+    const cancel = vi.fn();
+    vi.stubGlobal("requestIdleCallback", request);
+    vi.stubGlobal("cancelIdleCallback", cancel);
+    const callback = vi.fn();
+    const controller = new AbortController();
+
+    onIdle(callback, controller.signal);
+    expect(request).toHaveBeenCalledWith(callback);
+
+    controller.abort();
+    expect(cancel).toHaveBeenCalledWith(7);
+  });
+
+  it("waits a beat instead where there is not (Safari)", () => {
+    vi.stubGlobal("requestIdleCallback", undefined);
+    const callback = vi.fn();
+
+    onIdle(callback, new AbortController().signal);
+    expect(callback).not.toHaveBeenCalled();
+    vi.advanceTimersByTime(200);
+    expect(callback).toHaveBeenCalledTimes(1);
+  });
+
+  it("does not run once the page is gone", () => {
+    vi.stubGlobal("requestIdleCallback", undefined);
+    const callback = vi.fn();
+    const controller = new AbortController();
+
+    onIdle(callback, controller.signal);
+    controller.abort();
+    vi.advanceTimersByTime(1000);
+    expect(callback).not.toHaveBeenCalled();
     expect(vi.getTimerCount()).toBe(0);
   });
 });
