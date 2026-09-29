@@ -30,10 +30,13 @@ export default [
     },
     rules: {
       ...tsPlugin.configs.strict.rules,
+      // TypeScript already reports undefined names (astro check), and no-undef
+      // doesn't know DOM type names like ParentNode.
+      "no-undef": "off",
     },
   },
   {
-    files: ["*.config.ts", "*.config.js"],
+    files: ["*.config.ts", "*.config.js", "src/config/printerModels.ts"],
     languageOptions: {
       globals: {
         ...globals.node,
