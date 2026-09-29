@@ -4,6 +4,7 @@ import {
   formatMonthYear,
   formatYear,
   getAlternatePath,
+  getDesktopMenuItems,
   getNavItems,
   isScrollSectionKey,
 } from "./utils";
@@ -42,6 +43,32 @@ describe("getNavItems", () => {
   it("localizes hrefs for the given locale", () => {
     const items = getNavItems("pt");
     expect(items.every((item) => item.href.startsWith("/pt"))).toBe(true);
+  });
+
+  it("leaves out sections that are switched off", () => {
+    const keys = getNavItems("en", ["about", "blog"]).map((item) => item.key);
+    expect(keys).toEqual(["home", "about", "blog"]);
+  });
+});
+
+describe("getDesktopMenuItems", () => {
+  it("lists the computer's programs in menu order, labelled in the locale", () => {
+    expect(getDesktopMenuItems("en")).toEqual([
+      { id: "about", label: "About me" },
+      { id: "career", label: "Career" },
+      { id: "projects", label: "Projects" },
+      { id: "education", label: "Education" },
+      { id: "courses", label: "Courses" },
+      { id: "blog", label: "Blog" },
+    ]);
+    expect(getDesktopMenuItems("pt")[0].label).not.toBe("About me");
+  });
+
+  it("drops the programs of sections that are switched off", () => {
+    const ids = getDesktopMenuItems("en", ["about", "blog", "books"]).map(
+      (item) => item.id,
+    );
+    expect(ids).toEqual(["about", "blog"]);
   });
 });
 

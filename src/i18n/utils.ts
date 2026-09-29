@@ -1,6 +1,19 @@
-import { HOME_KEY, NAV_KEYS, SECTION_KEYS } from "@/config/sections";
+import {
+  ENABLED_SECTIONS,
+  HOME_KEY,
+  getNavKeys,
+  getOsPrograms,
+  SECTION_KEYS,
+  type OsProgramKey,
+  type SectionKey,
+} from "@/config/sections";
 import type { NavItem } from "@/types";
-import { getAlternateLocale, getLocalizedPath, getTranslations } from "./index";
+import {
+  getAlternateLocale,
+  getLocalizedPath,
+  getTranslations,
+  type Translations,
+} from "./index";
 
 const SCROLL_SECTION_KEYS = new Set<string>(SECTION_KEYS);
 
@@ -8,9 +21,14 @@ export function isScrollSectionKey(key: string): boolean {
   return SCROLL_SECTION_KEYS.has(key);
 }
 
-export function getNavItems(locale: string): NavItem[] {
+// Only the sections that are switched on (ENABLED_SECTIONS) get a nav item,
+// so the menu never links to a section that isn't on the page.
+export function getNavItems(
+  locale: string,
+  enabled: readonly SectionKey[] = ENABLED_SECTIONS,
+): NavItem[] {
   const t = getTranslations(locale);
-  return NAV_KEYS.map((key) => {
+  return getNavKeys(enabled).map((key) => {
     const anchor = key === HOME_KEY ? "" : `#${key}`;
     return {
       key,
@@ -18,6 +36,36 @@ export function getNavItems(locale: string): NavItem[] {
       label: t.nav[key],
     };
   });
+}
+
+export interface DesktopMenuItem {
+  id: OsProgramKey;
+  label: string;
+}
+
+const DESKTOP_MENU_LABELS = {
+  about: "menuAbout",
+  career: "menuCareer",
+  projects: "menuProjects",
+  education: "menuEducation",
+  courses: "menuCourses",
+  blog: "menuBlog",
+} as const satisfies Record<
+  OsProgramKey,
+  keyof Translations["computerDesktop"]
+>;
+
+// The entries of the simulated computer's Openbox menu: the same sections as
+// the rest of the site, minus the ones ENABLED_SECTIONS switches off.
+export function getDesktopMenuItems(
+  locale: string,
+  enabled: readonly SectionKey[] = ENABLED_SECTIONS,
+): DesktopMenuItem[] {
+  const labels = getTranslations(locale).computerDesktop;
+  return getOsPrograms(enabled).map((id) => ({
+    id,
+    label: labels[DESKTOP_MENU_LABELS[id]],
+  }));
 }
 
 // `timeZone: "UTC"` matters here: date-only strings ("2023-01-01") parse as
