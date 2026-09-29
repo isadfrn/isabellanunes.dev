@@ -1,0 +1,46 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { getLocalizedPath, getTranslations } from "@/i18n";
+import type { Locale } from "@/types";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getTranslations(locale);
+---
+
+<BaseLayout
+  title={t.notFound.title}
+  locale={locale}
+  showHamburgerMenu={false}
+  noindex
+>
+  <section
+    class="flex min-h-screen flex-col items-center justify-center px-6 text-center"
+  >
+    <p
+      class="select-none text-[clamp(6rem,20vw,14rem)] font-bold leading-none text-transparent"
+      style="-webkit-text-stroke: 2px var(--color-primary-500); paint-order: stroke fill;"
+    >
+      404
+    </p>
+    <div class="mb-8 mt-2 space-y-2">
+      <p
+        class="text-xl font-semibold text-slate-900 dark:text-slate-50 md:text-2xl"
+      >
+        {t.notFound.title}
+      </p>
+      <p class="mx-auto max-w-sm text-base text-slate-500 dark:text-slate-400">
+        {t.notFound.message}
+      </p>
+    </div>
+    <a
+      href={getLocalizedPath("/", locale)}
+      class="inline-flex items-center gap-2 rounded-lg bg-primary-500 px-5 py-2.5 text-sm font-medium text-white transition-colors duration-150 hover:bg-primary-600"
+    >
+      {t.notFound.home}
+    </a>
+  </section>
+</BaseLayout>

@@ -4,6 +4,9 @@ export type Locale = "pt" | "en";
 
 export const locales: Locale[] = ["pt", "en"];
 
+/** The locale for pages that live outside /[locale]/, like the fallback 404. */
+export const DEFAULT_LOCALE: Locale = "pt";
+
 export interface TimelineEntry {
   title: string;
   organization: string;

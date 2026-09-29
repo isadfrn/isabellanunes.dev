@@ -1,0 +1,16 @@
+---
+import NotFoundPage from "@components/NotFoundPage.astro";
+import { locales, type Locale } from "@/types";
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { locale } }));
+}
+
+const locale = Astro.params.locale as Locale;
+---
+
+{
+  /* Served by the web server for addresses missing under /<locale>/ (see the
+   error_page rules in nginx.conf), so the message matches the visitor's language. */
+}
+<NotFoundPage locale={locale} />
