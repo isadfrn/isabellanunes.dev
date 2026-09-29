@@ -1,0 +1,216 @@
+---
+import AboutContent from "@components/AboutContent.astro";
+import BlogContent from "@components/BlogContent.astro";
+import BookCard from "@components/BookCard";
+import CareerContent from "@components/CareerContent.astro";
+import CoursesContent from "@components/CoursesContent.astro";
+import EducationContent from "@components/EducationContent.astro";
+import HeroCopy from "@components/HeroCopy.astro";
+import LinkCard from "@components/LinkCard.astro";
+import MobileSection from "@components/mobile/MobileSection.astro";
+import ProjectsContent from "@components/ProjectsContent.astro";
+import PublicationLanguageBadge from "@components/PublicationLanguageBadge.astro";
+import { isSectionEnabled } from "@/config/sections";
+import type { Portfolio } from "@/data/portfolio";
+import { getTranslations } from "@/i18n";
+import type { Locale } from "@/types";
+
+interface Props {
+  locale: Locale;
+  portfolio: Portfolio;
+}
+
+const { locale, portfolio } = Astro.props;
+const t = getTranslations(locale);
+const {
+  home,
+  about,
+  career,
+  education,
+  courses,
+  books,
+  projects,
+  publications,
+  recentPosts,
+} = portfolio;
+
+const publicationLanguageLabels = {
+  pt: {
+    label: t.publications.lang_badge_pt,
+    aria: t.publications.lang_badge_aria_pt,
+  },
+  en: {
+    label: t.publications.lang_badge_en,
+    aria: t.publications.lang_badge_aria_en,
+  },
+};
+---
+
+{
+  /* The classic scrolling layout (hero + full sections): what phones get,
+   in place of the interactive scene. Each section can be switched off in
+   config/sections.ts. */
+}
+<section class="page-enter relative h-screen w-full overflow-hidden">
+  <div class="absolute inset-0">
+    <img
+      src="/images/home-bkg.webp"
+      alt=""
+      class="h-full w-full object-cover"
+    />
+    <div
+      class="absolute inset-0 bg-linear-to-r from-black/65 via-black/15 to-transparent"
+    >
+    </div>
+    <div
+      class="absolute inset-x-0 bottom-0 h-2/3 bg-linear-to-b from-transparent to-stone-50 dark:to-slate-900"
+    >
+    </div>
+  </div>
+
+  <article class="container relative z-10 flex h-full items-center">
+    <div class="page-enter-slide max-w-xl">
+      <HeroCopy greeting={home.greeting} subtitle={home.subtitle} />
+    </div>
+  </article>
+</section>
+
+{
+  isSectionEnabled("about") && (
+    <MobileSection
+      id="about"
+      title={about.title}
+      titleClass="mb-6"
+      contentClass="w-full max-w-none"
+    >
+      <AboutContent
+        about={about}
+        keyAchievementsLabel={t.about.key_achievements}
+      />
+    </MobileSection>
+  )
+}
+
+{
+  isSectionEnabled("career") && (
+    <MobileSection
+      id="career"
+      title={t.career.title}
+      titleClass="mb-8"
+      contentClass="w-full max-w-none"
+    >
+      <CareerContent
+        entries={career}
+        locale={locale}
+        presentLabel={t.common.present}
+      />
+    </MobileSection>
+  )
+}
+
+{
+  isSectionEnabled("education") && (
+    <MobileSection
+      id="education"
+      title={t.education.title}
+      titleClass="mb-8"
+      contentClass="w-full max-w-none"
+    >
+      <EducationContent
+        entries={education}
+        locale={locale}
+        presentLabel={t.common.present}
+      />
+    </MobileSection>
+  )
+}
+
+{
+  isSectionEnabled("courses") && (
+    <MobileSection
+      id="courses"
+      title={t.courses.title}
+      contentClass="max-w-4xl"
+    >
+      <CoursesContent
+        courses={courses}
+        labels={{
+          certificate: t.courses.certificate,
+          viewCourse: t.courses.viewCourse,
+        }}
+      />
+    </MobileSection>
+  )
+}
+
+{
+  isSectionEnabled("books") && (
+    <MobileSection id="books" title={t.books.title} contentClass="max-w-4xl">
+      <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+        {books.map((book, index) => (
+          <BookCard
+            entry={book}
+            labels={{ buyBook: t.books.buyBook }}
+            revealDelay={index * 80}
+          />
+        ))}
+      </div>
+    </MobileSection>
+  )
+}
+
+{
+  isSectionEnabled("projects") && (
+    <MobileSection id="projects" title={t.projects.title}>
+      <ProjectsContent
+        projects={projects}
+        repositoryLabel={t.projects.repository}
+      />
+    </MobileSection>
+  )
+}
+
+{
+  isSectionEnabled("publications") && (
+    <MobileSection id="publications" title={t.publications.title}>
+      <div class="flex flex-col gap-5">
+        {publications.map((publication, index) => (
+          <LinkCard
+            href={publication.url}
+            revealDelay={index * 80}
+            external
+            class="p-5"
+          >
+            <div class="mb-2 flex items-start justify-between gap-4">
+              <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-50">
+                {publication.title}
+              </h2>
+              <PublicationLanguageBadge
+                language={publication.language}
+                labels={publicationLanguageLabels}
+              />
+            </div>
+            <p class="mb-1 text-sm text-slate-600 dark:text-slate-300">
+              {publication.authors.join(", ")}
+            </p>
+            <p class="text-sm text-slate-500 dark:text-slate-400">
+              {publication.venue} &middot; {publication.year}
+            </p>
+          </LinkCard>
+        ))}
+      </div>
+    </MobileSection>
+  )
+}
+
+{
+  isSectionEnabled("blog") && (
+    <MobileSection id="blog" title={t.blog.title}>
+      <BlogContent
+        posts={recentPosts}
+        locale={locale}
+        viewAllLabel={t.blog.viewAll}
+      />
+    </MobileSection>
+  )
+}

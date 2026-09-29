@@ -1,0 +1,30 @@
+---
+interface Props {
+  /** The anchor the mobile menu links to. */
+  id: string;
+  title: string;
+  /** Space between the title and the content. */
+  titleClass?: string;
+  /** Sizing of the content column. */
+  contentClass?: string;
+}
+
+const { id, title, titleClass = "mb-10", contentClass } = Astro.props;
+---
+
+<section id={id} class="min-h-screen w-full py-20">
+  <article class="container">
+    <div class={contentClass}>
+      <h1
+        data-reveal
+        class:list={[
+          "text-3xl font-bold text-slate-900 dark:text-slate-50 md:text-4xl",
+          titleClass,
+        ]}
+      >
+        {title}
+      </h1>
+      <slot />
+    </div>
+  </article>
+</section>
