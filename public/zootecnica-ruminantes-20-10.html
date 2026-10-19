@@ -1,0 +1,2031 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Zootecnia de Ruminantes</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&family=Zilla+Slab:wght@500;700&display=swap">
+<style>
+/* Layout: caderno de campo. Sumário fixo à esquerda no desktop, coluna de leitura de ~70 caracteres, figuras e tabelas um pouco mais largas. */
+:root{
+  --bg:#F3F6F0;
+  --surface:#FFFFFF;
+  --tint:#E6EEE2;
+  --fg:#17211A;
+  --fg-soft:#4F5D52;
+  --line:#CFD9CB;
+  --accent:#2C6A3A;
+  --accent-soft:#D3E6D3;
+  --straw:#A87818;
+  --straw-soft:#F3E4C2;
+  --ok:#2C7A3F;
+  --bad:#B23A2E;
+  --bad-soft:#F6DCD8;
+  --f-display:"Zilla Slab", "Rockwell", Georgia, serif;
+  --f-body:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#111712; --surface:#18201A; --tint:#1E2A21; --fg:#E4EBE2; --fg-soft:#A6B4A8; --line:#2F3D32;
+    --accent:#86C895; --accent-soft:#24402C; --straw:#E2B65C; --straw-soft:#3A3020;
+    --ok:#7FD192; --bad:#F08A7E; --bad-soft:#47241F; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#111712; --surface:#18201A; --tint:#1E2A21; --fg:#E4EBE2; --fg-soft:#A6B4A8; --line:#2F3D32;
+  --accent:#86C895; --accent-soft:#24402C; --straw:#E2B65C; --straw-soft:#3A3020;
+  --ok:#7FD192; --bad:#F08A7E; --bad-soft:#47241F; color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:17px;line-height:1.62}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:32px 80px}
+h1,h2,h3,h4{font-family:var(--f-display);line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.2rem,5vw,3.4rem);font-weight:700;letter-spacing:-.01em}
+h2{font-size:clamp(1.6rem,3.2vw,2.15rem);font-weight:700}
+h3{font-size:1.32rem;font-weight:700;margin-top:6px}
+h4{font-size:1.08rem;font-weight:700}
+p{margin:0}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--straw);outline-offset:2px;border-radius:4px}
+strong{font-weight:700}
+.mono,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.num{font-size:.92em;background:var(--tint);padding:1px 5px;border-radius:4px;white-space:nowrap}
+.eyebrow{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-soft)}
+
+header.top{display:grid;gap:14px;padding-bottom:28px;border-bottom:2px solid var(--fg);margin-bottom:28px}
+header.top .lede{max-width:68ch;color:var(--fg-soft);font-size:1.06rem}
+.chips{display:flex;flex-wrap:wrap;gap:8px;list-style:none;padding:0;margin:4px 0 0}
+.chips li{font-family:var(--f-mono);font-size:.78rem;border:1px solid var(--line);background:var(--surface);padding:4px 9px;border-radius:999px}
+.chips li b{color:var(--accent);font-weight:500}
+
+.layout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:48px;align-items:start}
+nav.toc{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 16px);max-height:calc(100vh - 32px);overflow:auto;font-size:.92rem}
+nav.toc ol{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:2px}
+nav.toc a{display:block;text-decoration:none;color:var(--fg-soft);padding:4px 8px;border-radius:6px}
+nav.toc a:hover{background:var(--tint);color:var(--fg)}
+nav.toc .n{font-family:var(--f-mono);font-size:.78rem;color:var(--straw);margin-right:6px}
+details.toc-m{display:none}
+
+main{min-width:0;display:grid;gap:64px}
+section.sec{display:grid;gap:18px;scroll-margin-top:16px}
+section.sec > p, section.sec > ul, section.sec > ol, .sub > p, .sub > ul, .sub > ol{max-width:70ch}
+.sec-head{display:grid;gap:6px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.sec-head .eyebrow b{color:var(--straw);font-weight:500}
+.sub{display:grid;gap:12px;margin-top:10px}
+ul,ol{margin:0;padding-left:1.25em;display:grid;gap:6px}
+
+.note{background:var(--tint);border-radius:10px;padding:14px 16px;display:grid;gap:6px;max-width:74ch}
+.note .lab{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:500}
+.note.warn{background:var(--straw-soft)}
+.note.warn .lab{color:var(--straw)}
+.calc{border:1px dashed var(--fg-soft);border-radius:10px;padding:14px 16px;display:grid;gap:6px;max-width:74ch;background:var(--surface)}
+.calc .lab{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-soft)}
+.calc ol{font-family:var(--f-body)}
+
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.93rem;line-height:1.45}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-soft);font-weight:500;background:var(--tint)}
+tr:last-child td{border-bottom:none}
+td.nowrap{white-space:nowrap}
+td .num{background:transparent;padding:0}
+
+figure{margin:0;display:grid;gap:8px}
+figure .fig{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px}
+figure svg{display:block;width:100%;height:auto;min-width:560px}
+figure svg.small{min-width:0;max-width:520px;margin:0 auto}
+figcaption{font-size:.88rem;color:var(--fg-soft);max-width:74ch}
+.d-box{fill:var(--surface);stroke:var(--fg-soft);stroke-width:1.4}
+.d-box-acc{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.6}
+.d-box-straw{fill:var(--straw-soft);stroke:var(--straw);stroke-width:1.6}
+.d-box-tint{fill:var(--tint);stroke:var(--line);stroke-width:1}
+.d-t{fill:var(--fg);font-family:var(--f-body);font-size:14px}
+.d-tb{fill:var(--fg);font-family:var(--f-display);font-size:16px;font-weight:700}
+.d-ts{fill:var(--fg-soft);font-family:var(--f-body);font-size:12px}
+.d-tm{fill:var(--fg-soft);font-family:var(--f-mono);font-size:11px}
+.d-ta{fill:var(--accent);font-family:var(--f-body);font-size:13px;font-weight:700}
+.d-tstraw{fill:var(--straw);font-family:var(--f-body);font-size:13px;font-weight:700}
+.d-line{stroke:var(--fg-soft);stroke-width:1.5;fill:none}
+.d-line-acc{stroke:var(--accent);stroke-width:3;fill:none}
+.d-line-straw{stroke:var(--straw);stroke-width:3;fill:none}
+.d-line-dash{stroke:var(--fg-soft);stroke-width:2.2;fill:none;stroke-dasharray:6 5}
+.d-ah{fill:var(--fg-soft)}
+.d-fill-acc{fill:var(--accent)}
+.d-fill-straw{fill:var(--straw)}
+.d-fill-bad{fill:var(--bad)}
+.d-zone-straw{fill:var(--straw-soft)}
+.d-zone-tint{fill:var(--tint)}
+.d-zone-acc{fill:var(--accent-soft)}
+.d-zone-bad{fill:var(--bad-soft)}
+
+.steps{list-style:none;padding:0;counter-reset:st;display:grid;gap:10px;max-width:74ch}
+.steps li{counter-increment:st;display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px;align-items:start}
+.steps li::before{content:counter(st);font-family:var(--f-mono);font-weight:500;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:var(--bg);font-size:.85rem}
+
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:grid;gap:6px;align-content:start}
+.card h4{color:var(--accent)}
+.card ul{font-size:.95rem}
+
+/* quiz */
+.qz-bar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 16px;position:sticky;top:calc(env(safe-area-inset-top, 0px) + 8px);z-index:5}
+.qz-score{font-family:var(--f-mono);font-size:.95rem}
+.qz-score b{color:var(--accent)}
+.btn{font:inherit;font-size:.92rem;border:1px solid var(--fg-soft);background:transparent;color:var(--fg);padding:7px 14px;border-radius:8px;cursor:pointer}
+.btn:hover{background:var(--tint)}
+.qz-list{display:grid;gap:14px;list-style:none;padding:0;margin:0}
+.qz{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;display:grid;gap:10px}
+.qz .meta{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-soft)}
+.qz .q{font-weight:700}
+.qz .opts{display:grid;gap:8px}
+.qz .opt{font:inherit;text-align:left;border:1px solid var(--line);background:var(--bg);color:var(--fg);padding:9px 12px;border-radius:8px;cursor:pointer;display:grid;grid-template-columns:26px minmax(0,1fr);gap:8px;align-items:start}
+.qz .opt:hover:not(:disabled){border-color:var(--accent)}
+.qz .opt .k{font-family:var(--f-mono);color:var(--fg-soft)}
+.qz .opt:disabled{cursor:default}
+.qz .opt.right{border-color:var(--ok);background:var(--accent-soft)}
+.qz .opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.qz .exp{font-size:.95rem;border-top:1px solid var(--line);padding-top:10px}
+.qz .exp b.ok{color:var(--ok)}
+.qz .exp b.no{color:var(--bad)}
+
+details.disc{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:0}
+details.disc summary{cursor:pointer;padding:14px 16px;font-weight:700;list-style:none;display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px}
+details.disc summary::-webkit-details-marker{display:none}
+details.disc summary .n{font-family:var(--f-mono);color:var(--straw);font-weight:500}
+details.disc .ans{padding:0 16px 16px;display:grid;gap:8px;border-top:1px solid var(--line);padding-top:12px;margin:0 0 0 0}
+details.disc .ans .lab{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.disc-list{display:grid;gap:10px}
+
+footer{margin-top:56px;padding-top:18px;border-top:1px solid var(--line);font-size:.9rem;color:var(--fg-soft);display:grid;gap:8px}
+footer ul{font-size:.88rem}
+
+@media (max-width: 920px){
+  .layout{grid-template-columns:minmax(0,1fr);gap:24px}
+  nav.toc{display:none}
+  details.toc-m{display:block;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 14px}
+  details.toc-m summary{cursor:pointer;font-family:var(--f-mono);font-size:.85rem}
+  details.toc-m ol{padding-left:1.2em;margin-top:8px}
+  details.toc-m a{color:var(--fg)}
+}
+@media (max-width: 620px){
+  body{font-size:16px}
+  .grid2{grid-template-columns:minmax(0,1fr)}
+  main{gap:52px}
+}
+</style>
+
+<div class="wrap">
+<header class="top">
+  <span class="eyebrow">Medicina Veterinária · Unisociesc Blumenau · guia para a prova</span>
+  <h1>Zootecnia de Ruminantes</h1>
+  <p class="lede">Todo o conteúdo das aulas de terça, em ordem, do zero até o fim. Texto montado a partir das suas notas no Anytype (transcrições e slides) e completado com pesquisa em Embrapa, SciELO e anais de congressos. No fim tem um quiz de múltipla escolha e perguntas discursivas com resposta.</p>
+  <ul class="chips" aria-label="Aulas incluídas">
+    <li><b>Aula 1</b> 11/08 raças</li>
+    <li><b>Aula 3</b> 18/08 índices e melhoramento</li>
+    <li><b>Aula 5</b> 25/08 reprodução</li>
+    <li><b>Aula 7</b> 01/09 bioclimatologia</li>
+    <li><b>Aula 8</b> 08/09 digestão</li>
+    <li><b>Aula 11</b> 22/09 nutrição</li>
+    <li><b>Aula 13</b> 29/09 pastagens</li>
+    <li><b>Aula 15</b> 06/10 sistemas de leite</li>
+  </ul>
+  <p class="eyebrow" style="text-transform:none;letter-spacing:0">Ficaram de fora as aulas de segunda (2, 4, 6, 9, 10, 12 e 14), que não caem na prova.</p>
+</header>
+
+<div class="layout">
+<nav class="toc" aria-label="Sumário">
+  <span class="eyebrow">Sumário</span>
+  <ol>
+    <li><a href="#base"><span class="n">01</span>Ponto de partida</a></li>
+    <li><a href="#racas"><span class="n">02</span>Raças e aptidão</a></li>
+    <li><a href="#genetica"><span class="n">03</span>Genética e melhoramento</a></li>
+    <li><a href="#indices"><span class="n">04</span>Índices zootécnicos</a></li>
+    <li><a href="#reproducao"><span class="n">05</span>Reprodução</a></li>
+    <li><a href="#biotec"><span class="n">06</span>Biotecnologias</a></li>
+    <li><a href="#clima"><span class="n">07</span>Bioclimatologia</a></li>
+    <li><a href="#digestao"><span class="n">08</span>Digestão</a></li>
+    <li><a href="#nutricao"><span class="n">09</span>Nutrição por fase</a></li>
+    <li><a href="#pastagens"><span class="n">10</span>Pastagens</a></li>
+    <li><a href="#sistemas"><span class="n">11</span>Sistemas de leite</a></li>
+    <li><a href="#numeros"><span class="n">12</span>Números para decorar</a></li>
+    <li><a href="#quiz"><span class="n">13</span>Quiz</a></li>
+    <li><a href="#discursivas"><span class="n">14</span>Discursivas</a></li>
+  </ol>
+</nav>
+
+<main>
+<details class="toc-m">
+  <summary>Sumário (toque para abrir)</summary>
+  <ol>
+    <li><a href="#base">Ponto de partida</a></li>
+    <li><a href="#racas">Raças e aptidão</a></li>
+    <li><a href="#genetica">Genética e melhoramento</a></li>
+    <li><a href="#indices">Índices zootécnicos</a></li>
+    <li><a href="#reproducao">Reprodução</a></li>
+    <li><a href="#biotec">Biotecnologias</a></li>
+    <li><a href="#clima">Bioclimatologia</a></li>
+    <li><a href="#digestao">Digestão</a></li>
+    <li><a href="#nutricao">Nutrição por fase</a></li>
+    <li><a href="#pastagens">Pastagens</a></li>
+    <li><a href="#sistemas">Sistemas de leite</a></li>
+    <li><a href="#numeros">Números para decorar</a></li>
+    <li><a href="#quiz">Quiz</a></li>
+    <li><a href="#discursivas">Discursivas</a></li>
+  </ol>
+</details>
+
+<!-- 01 -->
+<section class="sec" id="base">
+  <div class="sec-head">
+    <span class="eyebrow"><b>01</b> · Aulas 1, 3 e 5</span>
+    <h2>Ponto de partida: o que é um ruminante e o que move a produção</h2>
+  </div>
+  <p>Ruminantes são mamíferos herbívoros com o estômago dividido em quatro compartimentos: <strong>rúmen, retículo, omaso e abomaso</strong>. Bovinos, ovinos, caprinos e búfalos são os principais. O grande diferencial deles é a parceria com microrganismos. Nenhum animal produz a enzima que quebra a celulose (a celulase). Os micróbios do rúmen fazem isso por eles, por fermentação. Por isso o ruminante transforma capim, uma coisa que nós não conseguimos digerir, em leite e carne.</p>
+  <p>Antes de começar uma criação, o produtor precisa olhar quatro coisas: o <strong>planejamento financeiro</strong> (local e mercado), a <strong>pastagem</strong>, o <strong>rigor sanitário</strong> e o <strong>clima</strong>. O clima pesa mais, porque afeta todos os outros fatores.</p>
+  <div class="note">
+    <span class="lab">A fórmula que aparece em toda a matéria</span>
+    <p><strong>Fenótipo = genótipo + ambiente.</strong> Fenótipo é o que você vê e mede no animal (quanto leite dá, quanto pesa). Genótipo é o conjunto de genes. Ambiente é tudo o resto: nutrição, manejo, sanidade, clima. A mesma genética pode render muito ou pouco conforme o manejo. Por isso o professor repete: "o que é melhor? Depende dos teus objetivos". Não existe animal melhor em absoluto.</p>
+  </div>
+  <div class="sub">
+    <h3>O ciclo de vida da fêmea</h3>
+    <p>Três nomes que precisam estar na ponta da língua:</p>
+    <ul>
+      <li><strong>Terneira ou bezerra:</strong> do nascimento até a puberdade.</li>
+      <li><strong>Novilha:</strong> já entrou na puberdade (idade reprodutiva), mas <strong>ainda não pariu</strong>.</li>
+      <li><strong>Vaca:</strong> depois da <strong>primeira cria</strong>.</li>
+    </ul>
+    <p>Regra prática: em idade reprodutiva e sem cria é novilha. Depois que pare, é vaca.</p>
+  </div>
+  <div class="note">
+    <span class="lab">Para a prova</span>
+    <p>"Sem bezerro não tem leite." A vaca só produz leite depois de parir. Sem nova cria, ela só desce na curva de lactação. Por isso a <strong>reprodução é a base da produção de leite</strong>, e a meta é <strong>um parto por ano</strong>.</p>
+  </div>
+</section>
+
+<!-- 02 -->
+<section class="sec" id="racas">
+  <div class="sec-head">
+    <span class="eyebrow"><b>02</b> · Aula 1 (11/08), slides da Aula 3 e tabela da Aula 15</span>
+    <h2>Raças e aptidão</h2>
+  </div>
+  <p>Identificar a raça serve para três coisas: <strong>selecionar</strong> animais para carne, leite ou lã; <strong>ajustar o manejo</strong> sanitário, nutricional e reprodutivo ao ambiente; e servir de <strong>base para o melhoramento genético</strong> do rebanho. A escolha da raça considera adaptação ao clima, sanidade, característica produtiva e viabilidade comercial.</p>
+  <p>Para separar uma raça da outra na prática, olhamos a <strong>morfologia</strong> (conformação do corpo, tamanho, formato da cabeça, orelhas e focinho), a <strong>pelagem</strong> (cor, padrão e tipo de pelo: curto, longo, liso, encaracolado) e a <strong>adaptação ao clima de origem</strong>. Cada raça carrega características moldadas por seleção ao longo do tempo numa região. Exemplo da aula: a raça escocesa Highland tem pelo longo, é muito rústica no frio e na chuva, mas sofre no calor seco, porque esse não é o ambiente dela.</p>
+  <p>Algumas palavras que o material usa: <strong>puro</strong> é o animal com ascendência conhecida desde a formação da raça. <strong>Mestiço ou cruzado</strong> é filho de duas raças. <strong>Acasalamento</strong> é entre animais da mesma raça. <strong>Cruzamento</strong> é entre raças diferentes. Até o século 19 as raças eram de duplo propósito. A seleção específica para leite começou nessa época.</p>
+
+  <div class="sub">
+    <h3>Os dois grandes grupos de bovinos</h3>
+    <div class="tbl"><table>
+      <thead><tr><th></th><th>Europeias (taurinas, <i>Bos taurus</i>)</th><th>Zebuínas (indianas, <i>Bos indicus</i>)</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Produção</strong></td><td>Alta (10 a 15 mil L por lactação nas melhores), alta persistência</td><td>Menor produção e menor persistência</td></tr>
+        <tr><td><strong>Calor</strong></td><td>Sensíveis</td><td>Toleram bem</td></tr>
+        <tr><td><strong>Carrapato e tristeza parasitária</strong></td><td>Sensíveis</td><td>Mais resistentes</td></tr>
+        <tr><td><strong>Cascos</strong></td><td>Macios, mais problemas</td><td>Mais resistentes</td></tr>
+        <tr><td><strong>Reprodução</strong></td><td>Mais doenças da produção e problemas reprodutivos</td><td>Menos problemas reprodutivos</td></tr>
+        <tr><td><strong>Histórico</strong></td><td>Pioneiras na inseminação artificial (1950)</td><td>Seleção para leite recente no Brasil (anos 1990)</td></tr>
+      </tbody>
+    </table></div>
+    <p>Persistência da lactação quer dizer quanto tempo a vaca segura a produção depois do pico. Alta persistência significa que a produção cai devagar.</p>
+  </div>
+
+  <div class="sub">
+    <h3>Raças leiteiras bovinas</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Raça</th><th>Origem e porte</th><th>O que lembrar</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Holandesa</strong> (HPB preta e branca, HVB vermelha e branca)</td><td>Holanda, cerca de 2.000 anos. Vacas de 600 a 700 kg (slides falam em 500 a 750 kg); touros acima de 1.000 kg. Bezerro de 40 a 45 kg</td><td>"A campeã". A mais produtiva do mundo: 6 a 10 mil L por lactação no Brasil. Leite de alto volume e <strong>pouca gordura</strong>. Alta exigência nutricional e de ambiência, cascos frágeis, problemas reprodutivos e <strong>parto difícil</strong>. Dócil. Cerca de 20% do rebanho leiteiro nacional</td></tr>
+        <tr><td><strong>Jersey</strong></td><td>Ilha de Jersey (Canal da Mancha). A menor: 350 a 500 kg. Bezerro de 25 a 30 kg</td><td>"A pequena notável". <strong>Maior teor de gordura e sólidos</strong> entre todas, ótima para queijo. 6 a 8 mil L. Precoce (cobertura aos 14 a 16 meses com 230 a 250 kg). Longeva, boa no pasto, boa fertilidade, alta eficiência alimentar. Sensível a carrapato, mosca e tristeza parasitária. Mais suscetível à hipocalcemia</td></tr>
+        <tr><td><strong>Guernsey</strong></td><td>Ilha de Guernsey. Cerca de 500 kg</td><td>Vermelha ou amarela e branca. Leite rico em caroteno (cor amarelada), gordura alta, ótimo para manteiga. Beta-caseína A2. Dócil</td></tr>
+        <tr><td><strong>Pardo-Suíço</strong></td><td>Suíça, das mais antigas. 500 a 700 kg</td><td>Cascos pretos. Leite com <strong>proteína alta</strong>, ótimo para queijo. 8 a 10 mil L. Origem de duplo propósito. Em decadência no Brasil</td></tr>
+        <tr><td><strong>Ayrshire</strong></td><td>Escócia, a mais jovem (cerca de 1750). 550 kg</td><td>Gordura média (4%). Rústica, boa de pastejo, temperamento nervoso</td></tr>
+        <tr><td><strong>Gir Leiteiro</strong></td><td>Índia (zebu)</td><td>A mais produtiva entre os zebus. Pelagem vermelha ou amarela, perfil da cabeça ultraconvexo, dócil. Parto fácil. Alta consanguinidade. Beta-caseína A2. Base do Girolando</td></tr>
+        <tr><td><strong>Guzerá</strong> (Kankrej)</td><td>Gujarat, Índia. Vaca 600 kg, touro 900 a 1.000 kg</td><td>Pelagem cinza prateada a quase preta. Dupla aptidão, alta rusticidade, boa conversão alimentar</td></tr>
+        <tr><td><strong>Sindi</strong></td><td>Paquistão. Pequeno porte</td><td>Muito rústica, alta consanguinidade</td></tr>
+        <tr><td><strong>Girolando</strong></td><td>Brasil: Holandês × Gir</td><td>Une a produção do Holandês com a rusticidade e a tolerância ao calor do Gir. Padrão da raça: <strong>5/8 Holandês + 3/8 Gir</strong>. O mais usado no Brasil</td></tr>
+        <tr><td><strong>Jersolando</strong></td><td>Jersey × Holandês</td><td>Menor porte, alta fertilidade, leite rico em sólidos</td></tr>
+      </tbody>
+    </table></div>
+    <p>Também foram citadas: Sueca Vermelha e Branca (selecionada para fertilidade e resistência à mastite), Normanda, Milking Shorthorn, Illawarra (australiana, parto fácil), Sahiwal e Indubrasil.</p>
+  </div>
+
+  <div class="sub">
+    <h3>Holandesa × Jersey na curva de lactação</h3>
+    <p>Na aula, o professor comparou as duas. A <strong>Holandesa</strong> tem um <strong>pico de produção alto e precoce</strong> e depois cai mais rápido. A <strong>Jersey</strong> não tem um pico tão alto, mas a produção fica mais estável ao longo da lactação.</p>
+    <div class="note warn">
+      <span class="lab">Atenção: divergência entre materiais</span>
+      <p>Os slides dizem que as raças europeias (o grupo da Holandesa) têm <strong>alta persistência</strong> quando comparadas às zebuínas. Na Aula 11 o professor também disse que a Holandesa tem curva persistente. Então: comparando europeia com zebu, a europeia é mais persistente. Comparando Holandesa com Jersey em sala, a Jersey foi descrita como mais estável. Se cair, leia bem com quem a questão compara.</p>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>Dupla aptidão (leite e carne)</h3>
+    <ul>
+      <li><strong>Simental:</strong> grande porte, ganho de peso precoce, boa habilidade materna. Pouco expressiva no leite.</li>
+      <li><strong>Pardo-Suíço:</strong> leite bom para queijo, rústico, bom em cruzamentos para carne.</li>
+      <li><strong>Guzerá:</strong> corte e leite, alta rusticidade.</li>
+      <li><strong>Shorthorn:</strong> citada na Aula 15 como dupla aptidão.</li>
+    </ul>
+  </div>
+
+  <div class="sub">
+    <h3>Ovinos e caprinos</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Raça</th><th>Espécie</th><th>Aptidão</th><th>Destaques</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Lacaune</strong></td><td>Ovino</td><td>Leite</td><td>Leite rico em gordura, bom para queijos finos (o Roquefort é feito com leite de ovelha Lacaune). Cordeiros bons para corte</td></tr>
+        <tr><td><strong>Bergamácia</strong></td><td>Ovino</td><td>Leite</td><td>Grande porte, boa carne e aptidão leiteira</td></tr>
+        <tr><td><strong>Corriedale</strong></td><td>Ovino</td><td>Dupla</td><td>Lã e carne, em equilíbrio (50% cada)</td></tr>
+        <tr><td><strong>Romney Marsh</strong></td><td>Ovino</td><td>Dupla</td><td>Resistente a ambientes <strong>úmidos</strong>. Carne e lã, fértil</td></tr>
+        <tr><td><strong>Morada Nova e Somalis Brasileira</strong></td><td>Ovino</td><td>Corte</td><td><strong>Deslanados</strong> (sem lã), adaptados ao semiárido do Nordeste</td></tr>
+        <tr><td><strong>Santa Inês</strong></td><td>Ovino</td><td>Corte</td><td>Raça tropical que cicla o ano todo (não é estacional)</td></tr>
+        <tr><td><strong>Saanen</strong></td><td>Caprino</td><td>Leite</td><td>A cabra leiteira mais produtiva do mundo. Dócil e fértil</td></tr>
+        <tr><td><strong>Parda Alpina</strong></td><td>Caprino</td><td>Leite</td><td>Boa produção, rusticidade e adaptação climática</td></tr>
+        <tr><td><strong>Toggenburg</strong></td><td>Caprino</td><td>Leite</td><td>Boa produção, rústica, adapta a climas variados</td></tr>
+        <tr><td><strong>Anglo-Nubiana</strong></td><td>Caprino</td><td>Dupla</td><td>Carne e leite, prolífica (muitas crias) e rústica</td></tr>
+      </tbody>
+    </table></div>
+    <p><strong>Ovinos e casco.</strong> Um dos maiores problemas na criação de ovelhas é a podridão do casco, ligada à umidade do solo. A solução é manejo: instalações <strong>elevadas do chão</strong>, área seca, sem água parada nem pedras. Terrenos altos e secos são melhores que baixadas encharcadas.</p>
+    <p><strong>Caprinos.</strong> A carne de cabra tem aceitação cultural variável no Brasil (cheiro e sabor marcantes). Um problema comum no parto é a falta de habilidade materna: a cabra não cuida da cria. Antes de descartar a fêmea, é preciso separar o que é <strong>genético</strong> do que é <strong>comportamental ou ambiental</strong>.</p>
+  </div>
+
+  <div class="sub">
+    <h3>Úbere: quatro quartos independentes</h3>
+    <p>O úbere da vaca tem <strong>4 quartos independentes</strong>. Cada quarto produz seu leite e tem seus problemas de forma isolada. Uma vaca pode ter mastite em um quarto e os outros três estarem sadios. Isso explica por que o tratamento de mastite é feito <strong>teto por teto</strong>.</p>
+  </div>
+
+  <div class="sub">
+    <h3>Freemartinismo: gêmeos de sexos diferentes</h3>
+    <p>Caso discutido em aula: uma vaca pariu gêmeos, um macho e uma fêmea. A fêmea foi cruzada várias vezes e não emprenhou. Isso é o <strong>freemartinismo</strong>.</p>
+    <p>Como acontece, passo a passo:</p>
+    <ol>
+      <li>A vaca gera dois embriões de sexos diferentes (gêmeos de dois óvulos diferentes).</li>
+      <li>No início da gestação, as placentas dos dois se fundem e os vasos sanguíneos se ligam. Esse ligamento de vasos se chama <strong>anastomose</strong>.</li>
+      <li>Por esses vasos, hormônios e células do feto macho chegam à fêmea.</li>
+      <li>Essas moléculas "masculinizam" o trato reprodutivo da fêmea, que fica malformado. Por fora, muitas vezes ela parece normal.</li>
+    </ol>
+    <p>Na literatura, cerca de <strong>90 a 92%</strong> das fêmeas nascidas gêmeas de macho são freemartins, ou seja, inférteis. O macho quase não é afetado. A regra prática: <strong>não usar fêmea gêmea de macho para reprodução</strong>. No padrão racial da Jersey, o freemartinismo é condição <strong>desclassificante</strong>.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Para a prova (orientação do professor)</span>
+    <p>Vai ter questão aplicada: "um produtor de tal lugar, com tal alimentação e tal clima, qual raça é mais indicada?". Um guia rápido para raciocinar:</p>
+    <ul>
+      <li><strong>Região quente, com carrapato, manejo mais simples:</strong> Gir, Girolando, Guzerá, Sindi (zebuínos ou mestiços).</li>
+      <li><strong>Região fria ou de altitude, alta tecnologia e boa comida:</strong> Holandesa.</li>
+      <li><strong>Pasto, foco em sólidos, queijo, propriedade pequena:</strong> Jersey (ou Jersolando).</li>
+      <li><strong>Leite para queijo com mais proteína:</strong> Pardo-Suíço.</li>
+      <li><strong>Ovinos em local úmido:</strong> Romney Marsh. <strong>Semiárido:</strong> Morada Nova, Somalis, Santa Inês.</li>
+      <li><strong>Cabra leiteira de alta produção:</strong> Saanen.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 03 -->
+<section class="sec" id="genetica">
+  <div class="sec-head">
+    <span class="eyebrow"><b>03</b> · Aula 3 (18/08) e herdabilidade da Aula 5</span>
+    <h2>Genética e melhoramento animal</h2>
+  </div>
+  <p><strong>Seleção</strong> é escolher alguns indivíduos para produzir a próxima geração. A história do melhoramento começou com o cão e depois com o cavalo. O primeiro <i>herd book</i> (livro de registro genealógico) foi de 1791, para o cavalo Puro-Sangue Inglês. O segundo, de 1822, foi do gado Shorthorn. A primeira associação de controle leiteiro surgiu em 1892, na Dinamarca.</p>
+
+  <div class="sub">
+    <h3>Características qualitativas e quantitativas</h3>
+    <p><strong>Qualitativas</strong> são controladas por poucos genes. O comportamento é simples: "colocou o gene, tem; tirou, não tem". Exemplos: cor de pelagem em bovinos, presença de chifre. O resultado do cruzamento é previsível.</p>
+    <p><strong>Quantitativas</strong> são controladas por muitos genes e sofrem muito efeito do ambiente. Exemplos: produção de leite, ganho de peso. O resultado é uma média, não um "sim ou não".</p>
+    <p>Exemplo de contraste da aula: pelagem de cavalo é difícil de prever, porque envolve muitos genes. A exceção citada foi o Appaloosa: Appaloosa com Appaloosa mantém o padrão. Moral: <strong>prever a raça é bem mais fácil que prever a pelagem</strong>.</p>
+  </div>
+
+  <div class="sub">
+    <h3>Como os genes agem</h3>
+    <ul>
+      <li><strong>Ação aditiva:</strong> cada gene "soma" um pouco no fenótipo. A mudança no animal corresponde ao gene que entrou ou saiu. É a parte que o pai passa de forma previsível ao filho.</li>
+      <li><strong>Ação não aditiva:</strong> efeitos de combinação. Inclui <strong>dominância</strong> (um alelo esconde o outro), <strong>sobredominância</strong> (o heterozigoto, com dois alelos diferentes, supera os dois homozigotos) e <strong>epistasia</strong> (um gene interfere em outro gene diferente).</li>
+      <li><strong>Valor genético aditivo:</strong> a parte do valor do animal que passa dos pais para os filhos. É o que a seleção aproveita.</li>
+      <li><strong>Valor genotípico:</strong> valor aditivo + desvios de dominância + epistasia.</li>
+      <li><strong>Valor de combinação:</strong> a parte que vem das interações (dominância e epistasia). É o que o cruzamento aproveita.</li>
+    </ul>
+  </div>
+
+  <div class="sub">
+    <h3>Exercício do slide: pelagem pampa</h3>
+    <p>Em bovinos, a pelagem <strong>sólida (S)</strong> é dominante e a <strong>pampa ou malhada (s)</strong> é recessiva. Pai pampa homozigoto (<span class="num">ss</span>) com mãe sólida homozigota (<span class="num">SS</span>).</p>
+    <div class="calc">
+      <span class="lab">Resolvendo passo a passo</span>
+      <ol>
+        <li>O pai <span class="num">ss</span> só pode passar o alelo <span class="num">s</span>.</li>
+        <li>A mãe <span class="num">SS</span> só pode passar o alelo <span class="num">S</span>.</li>
+        <li>Todo filho recebe um de cada: <span class="num">s + S = Ss</span>.</li>
+        <li>Como S é dominante, <strong>100% dos filhos são sólidos</strong>, mas todos carregam o alelo pampa escondido.</li>
+        <li>Se um filho <span class="num">Ss</span> cruzar com um pampa <span class="num">ss</span>: o filho passa S ou s (metade cada), o pampa só passa s. Resultado: metade <span class="num">Ss</span> (sólido) e metade <span class="num">ss</span> (pampa).</li>
+      </ol>
+    </div>
+    <div class="tbl" style="max-width:420px"><table>
+      <thead><tr><th>Ss × ss</th><th>s (do pampa)</th><th>s (do pampa)</th></tr></thead>
+      <tbody>
+        <tr><th>S</th><td>Ss · sólido</td><td>Ss · sólido</td></tr>
+        <tr><th>s</th><td>ss · pampa</td><td>ss · pampa</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="sub">
+    <h3>Herdabilidade</h3>
+    <p>Herdabilidade é a capacidade do animal de <strong>repassar uma característica aos filhos</strong>. Vai de 0 a 100%. Regra geral: características <strong>físicas</strong> têm herdabilidade <strong>alta</strong>. Características <strong>produtivas e reprodutivas</strong> têm herdabilidade <strong>baixa</strong>, porque envolvem muitos genes e muito ambiente.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Característica reprodutiva</th><th>Herdabilidade</th></tr></thead>
+      <tbody>
+        <tr><td>Idade à puberdade</td><td class="mono">20 a 30%</td></tr>
+        <tr><td>Idade ao primeiro parto</td><td class="mono">20 a 30%</td></tr>
+        <tr><td>Período de serviço</td><td class="mono">5 a 10%</td></tr>
+        <tr><td>Intervalo entre partos</td><td class="mono">5 a 10%</td></tr>
+        <tr><td>Número de serviços por concepção</td><td class="mono">5%</td></tr>
+        <tr><td>Regularidade de estros</td><td class="mono">5%</td></tr>
+        <tr><td>Nascimentos múltiplos</td><td class="mono">3 a 5%</td></tr>
+        <tr><td>Natimortos</td><td class="mono">3 a 5%</td></tr>
+        <tr><td>Taxa de concepção ao 1º serviço</td><td class="mono">3%</td></tr>
+      </tbody>
+    </table></div>
+    <p>O que isso quer dizer na prática: como os valores são baixos, trocar o touro ou usar inseminação ajuda <strong>pouco e devagar</strong> (algo como 5% por geração, precisa de várias gerações). Na reprodução, quem mais pesa é o <strong>manejo</strong>: nutricional, reprodutivo e sanitário. Não adianta investir em um ponto e esquecer os outros.</p>
+  </div>
+
+  <div class="sub">
+    <h3>Pedigree e endogamia</h3>
+    <p><strong>Pedigree</strong> é a árvore genealógica: pai, mãe, avós, linhagens. Serve para calcular o <strong>coeficiente de endogamia</strong> e escolher linhagens diferentes.</p>
+    <p><strong>Endogamia</strong> (ou consanguinidade) é o acasalamento entre parentes, animais com genes em comum. A consequência é trazer de volta doenças da família e problemas reprodutivos: aborto, reabsorção embrionária (o embrião morre e é reabsorvido), morte fetal e infertilidade.</p>
+    <p><strong>O caso da Holandesa:</strong> o maior problema atual da raça é a <strong>fertilidade</strong>. Quase todas as linhagens comerciais descendem de uma base genética muito próxima. Nos catálogos aparecem sempre as mesmas famílias. A solução apontada: introduzir genética distante, por exemplo entrar com Jersey. "Quando tu pega uma genética distinta, normalmente resolve o problema: esse aqui não tem o gene que aquele tem."</p>
+  </div>
+
+  <div class="sub">
+    <h3>Heterose e cruzamentos</h3>
+    <p><strong>Heterose</strong>, ou vigor híbrido, é quando o filho de duas raças diferentes desempenha melhor que a média dos pais. Ela é maior quando as raças são bem distantes, como europeu com zebu. A F1 (primeira geração, meio sangue) tem <strong>100% da heterose</strong>. Nas gerações seguintes ela vai caindo se o cruzamento não for planejado.</p>
+    <figure>
+      <div class="fig">
+      <svg viewBox="0 0 720 230" role="img" aria-label="Esquema de formação do Girolando 5/8">
+        <defs><marker id="ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="d-ah"/></marker></defs>
+        <rect x="16" y="22" width="140" height="52" rx="8" class="d-box"/>
+        <text x="86" y="44" text-anchor="middle" class="d-tb">Holandês</text>
+        <text x="86" y="63" text-anchor="middle" class="d-ts">100% H</text>
+        <rect x="16" y="110" width="140" height="52" rx="8" class="d-box"/>
+        <text x="86" y="132" text-anchor="middle" class="d-tb">Gir</text>
+        <text x="86" y="151" text-anchor="middle" class="d-ts">0% H</text>
+        <rect x="206" y="66" width="140" height="52" rx="8" class="d-box-straw"/>
+        <text x="276" y="88" text-anchor="middle" class="d-tb">F1 · 1/2 H</text>
+        <text x="276" y="107" text-anchor="middle" class="d-ts">100% heterose</text>
+        <path d="M156 48 L204 82" class="d-line" marker-end="url(#ah1)"/>
+        <path d="M156 136 L204 102" class="d-line" marker-end="url(#ah1)"/>
+        <rect x="396" y="22" width="140" height="52" rx="8" class="d-box"/>
+        <text x="466" y="44" text-anchor="middle" class="d-tb">3/4 H</text>
+        <text x="466" y="63" text-anchor="middle" class="d-ts">F1 × touro Holandês</text>
+        <path d="M346 82 L394 56" class="d-line" marker-end="url(#ah1)"/>
+        <rect x="574" y="66" width="130" height="52" rx="8" class="d-box-acc"/>
+        <text x="639" y="88" text-anchor="middle" class="d-tb">5/8 H + 3/8 G</text>
+        <text x="639" y="107" text-anchor="middle" class="d-ts">Girolando</text>
+        <path d="M536 56 L572 80" class="d-line" marker-end="url(#ah1)"/>
+        <path d="M346 100 C 430 140, 500 130, 572 104" class="d-line" marker-end="url(#ah1)"/>
+        <text x="466" y="152" text-anchor="middle" class="d-tm">(3/4 + 1/2) ÷ 2 = (6/8 + 4/8) ÷ 2 = 5/8</text>
+        <text x="360" y="196" text-anchor="middle" class="d-t">Touro 5/8 × vaca 5/8 = filhos 5/8: a composição se mantém (Girolando "puro sintético")</text>
+        <text x="360" y="218" text-anchor="middle" class="d-ts">O grau de sangue do filho é a média do grau de sangue do pai e da mãe</text>
+      </svg>
+      </div>
+      <figcaption>Um caminho para chegar ao Girolando 5/8. O filho sempre fica com a média dos pais. A F1 cruzada com touro 3/4 dá 5/8 de uma vez.</figcaption>
+    </figure>
+    <ul>
+      <li><strong>Mestiços:</strong> Girolando 1/2, 3/4 e 7/8; Guzolando; Jersolando; Guzonel.</li>
+      <li><strong>Raça sintética:</strong> formada por cruzamento e depois "fechada". O Girolando 5/8 foi reconhecido como raça pelo Ministério da Agricultura (MAPA) em 1996. Ele mantém parte da heterose, tem baixa consanguinidade e junta produção e rusticidade. Para manter o rebanho 5/8, usa-se <strong>touro 5/8</strong>.</li>
+      <li><strong>Tri-cross</strong> (cruzamento de três raças): mantém heterose alta, dá mais sangue europeu e tem boa aceitação no mercado.</li>
+      <li><strong>Cuidado:</strong> o cruzamento aleatório (ora volta para Holandês, ora para Gir, sem plano) gera animais com genética imprevisível. Cruzamento precisa de programa estruturado.</li>
+    </ul>
+  </div>
+
+  <div class="sub">
+    <h3>Como ler um catálogo de touros</h3>
+    <p>O mérito genético dos touros é medido pela <strong>DEP</strong> (Diferença Esperada na Progênie). Progênie são os filhos. A DEP diz quanto as filhas daquele touro devem produzir <strong>a mais ou a menos</strong> que a média. Em bovinos de leite também se usa a sigla PTA (capacidade prevista de transmissão), que tem a mesma ideia.</p>
+    <p>Não existe "melhor touro". Existe o touro certo para o objetivo do produtor. Os catálogos de várias empresas (a Semex foi citada) trazem as mesmas informações com valores diferentes.</p>
+    <ul>
+      <li><strong>Produção de leite +440 L:</strong> na média, as filhas devem produzir 440 L a mais por lactação. "Pode ser, pode não ser": depende da confiabilidade.</li>
+      <li><strong>Facilidade de parto:</strong> valor negativo ou percentual alto de partos difíceis significa parto mais difícil. A Holandesa é classicamente uma raça de parto difícil.</li>
+      <li><strong>Gordura do leite:</strong> a Holandesa tem gordura baixa (em torno de 2,5% a 3%).</li>
+      <li><strong>Força</strong> (em inglês <i>strength</i>): tamanho e capacidade da caixa torácica. Mais tórax, melhor respiração, mais oxigênio, mais energia para produzir.</li>
+    </ul>
+    <div class="note">
+      <span class="lab">O ponto mais enfatizado da aula: confiabilidade</span>
+      <p>A primeira coisa a olhar em qualquer catálogo é o <strong>tamanho da amostra</strong>, ou seja, quantas filhas foram avaliadas.</p>
+      <ul>
+        <li><strong>0 filhas:</strong> é promessa (avaliação genômica, feita pelo DNA). "Interessante, mas vamos ver." Baixa confiabilidade.</li>
+        <li><strong>Cerca de 1.090 filhas:</strong> números bem mais confiáveis, mesmo que pareçam menos impressionantes.</li>
+      </ul>
+      <p><strong>Confiabilidade de 70% é considerada boa.</strong> O valor do catálogo é uma média. Algumas filhas vão produzir muito mais e outras muito menos, distribuídas numa <strong>curva normal (de Gauss)</strong>, em forma de sino, com a maioria perto da média. Regra prática: entre um touro espetacular com amostra pequena e um touro modesto com amostra grande, <strong>o segundo é mais confiável</strong>. Cuidado com DEPs muito extremas.</p>
+    </div>
+    <p>Catálogos trazem touros <strong>provados</strong> (com filhas avaliadas), <strong>não provados</strong> (jovens, só genômica) e mestiços.</p>
+  </div>
+
+  <div class="sub">
+    <h3>Ferramentas de apoio</h3>
+    <ul>
+      <li><strong>Embrapa</strong> é a primeira fonte de dados de produção de leite e corte.</li>
+      <li><strong>GENECOC</strong> (Embrapa Caprinos e Ovinos): sistema online para caprinos e ovinos de corte e leite. Atende bem pequenos produtores.</li>
+      <li><strong>Geneplus</strong> (Embrapa): melhoramento de gado de corte, seleção e planos de acasalamento.</li>
+      <li><strong>Gisleite</strong> (Embrapa): indicadores produtivos, reprodutivos e econômicos do leite.</li>
+      <li><strong>Apps gratuitos:</strong> SGR Mobile (caprinos e ovinos) e BovPilot (bovinos).</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 04 -->
+<section class="sec" id="indices">
+  <div class="sec-head">
+    <span class="eyebrow"><b>04</b> · Aula 3 (18/08) e apostila da Aula 5</span>
+    <h2>Índices zootécnicos</h2>
+  </div>
+  <p>Índices zootécnicos são números que medem como o rebanho está indo. O professor insistiu numa ideia: o índice "não é uma referência para seguir, é um número para a gente ver se está ok". Ele é uma <strong>ferramenta de diagnóstico</strong>. Quando um número sai do esperado, o veterinário vira "detetive" e investiga a causa: alimentação, estresse, inseminação precoce, sanidade. E todos esses dados precisam ir para uma <strong>planilha</strong>.</p>
+
+  <div class="tbl"><table>
+    <thead><tr><th>Índice</th><th>O que mede</th><th>Referência</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Intervalo entre partos (IEP)</strong></td><td>Tempo entre dois partos seguidos</td><td>Meta de 12 a 13 meses. Ovinos: 3 partos em 2 anos</td></tr>
+      <tr><td><strong>Taxa de prenhez</strong></td><td>% de fêmeas prenhes sobre as expostas à reprodução</td><td></td></tr>
+      <tr><td><strong>Idade ao primeiro parto (IPP)</strong></td><td>Precocidade das novilhas</td><td>Bovinos de leite: 24 meses. Ovinos: 1 ano (intensivo), 1,5 ano (extensivo)</td></tr>
+      <tr><td><strong>Taxa de natalidade</strong></td><td>Nascidos vivos ÷ total de matrizes</td><td>Depende do perfil da propriedade</td></tr>
+      <tr><td><strong>Eficiência reprodutiva</strong></td><td>Nascidos ÷ fêmeas aptas (idade e peso)</td><td>95% é bom; 50% é baixo</td></tr>
+      <tr><td><strong>Ganho médio diário (GMD)</strong></td><td>Peso ganho por dia, depois do desmame</td><td>Essencial no corte</td></tr>
+      <tr><td><strong>Peso à desmama</strong></td><td>Habilidade materna e leite da mãe</td><td>Ovinos: média de 15 kg</td></tr>
+      <tr><td><strong>Controle leiteiro</strong></td><td>Leite por lactação</td><td>Holandês: 6 a 10 mil L. Ovinos: 300 L</td></tr>
+      <tr><td><strong>Conversão alimentar</strong></td><td>Alimento consumido ÷ peso ganho</td><td>Quanto menor, melhor</td></tr>
+      <tr><td><strong>Taxa de desfrute</strong></td><td>% do rebanho vendido por ano</td><td>Índice típico do corte</td></tr>
+      <tr><td><strong>Taxa de descarte</strong></td><td>Saída de animais do rebanho</td><td>Voluntário × involuntário</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="sub">
+    <h3>Cada índice com o raciocínio</h3>
+    <p><strong>Idade ao primeiro parto.</strong> Caso real da aula: uma novilha foi inseminada no primeiro cio, com uns 6 meses, ainda muito pequena. Pariu com 1 ano e 3 meses pesando uns 240 kg. Sem peso nem desenvolvimento, como ela vai produzir leite? O bom produtor espera o <strong>peso-alvo</strong>, não só o primeiro cio. Isolado, esse índice não é muito confiável, mas indica precocidade.</p>
+    <div class="calc">
+      <span class="lab">Exemplo: taxa de natalidade</span>
+      <ol>
+        <li>Uma fazenda tem 100 matrizes (fêmeas reprodutoras).</li>
+        <li>90 emprenharam. Nasceram 81 bezerros vivos.</li>
+        <li>Taxa de natalidade = nascidos vivos ÷ matrizes = 81 ÷ 100 = 0,81.</li>
+        <li>Vezes 100: <strong>81%</strong>. A taxa de prenhez foi 90 ÷ 100 = 90%. A diferença (9 gestações perdidas) é a pista para investigar: aborto? doença? nutrição?</li>
+      </ol>
+    </div>
+    <p><strong>Ganho médio diário.</strong> Um lote ganha 1 kg por dia e outro ganha 900 g por dia. Qual é melhor? Depende do <strong>custo</strong>. Se o 1 kg veio de ração caríssima e os 900 g vieram de pasto, que é barato, os 900 g podem dar mais lucro. O GMD isolado não diz nada sem o custo do quilo ganho e o objetivo (abate, reposição, venda). Confinar e dar ração deposita gordura e "fica bonito", mas é preciso fazer a conta por arroba.</p>
+    <p><strong>Peso ao desmame.</strong> Mostra a habilidade da mãe e quanto leite ela produz. Peso abaixo do esperado pode vir de: falta de alimento, animal que nasceu fraco, problema com a mãe, dificuldade de acesso à teta. Em gêmeos, os dois disputam o leite e o peso de cada um cai. Com três, pior ainda.</p>
+    <p><strong>Descarte.</strong> O <strong>voluntário</strong> é escolha econômica: "já teve três gestações, está dando pouco leite, vou descartar". O <strong>involuntário</strong> não é escolha: doença, suspeita de doença, falha reprodutiva ou morte.</p>
+    <div class="calc">
+      <span class="lab">Exemplo: eficiência reprodutiva</span>
+      <ol>
+        <li>Há 100 vacas aptas (com idade e peso para reproduzir).</li>
+        <li>Nasceram 80 crias no ano.</li>
+        <li>80 ÷ 100 × 100 = <strong>80%</strong> do rebanho produzindo cria. Meta boa é 95%.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>Índices reprodutivos da apostila</h3>
+    <p><strong>Dias em aberto</strong> são os dias entre o último parto e a nova concepção. O ideal é <span class="num">85 a 110 dias</span>, o que dá um intervalo entre partos de 12 a 13 meses.</p>
+    <div class="calc">
+      <span class="lab">Por que 85 a 110 dias dá 12 a 13 meses</span>
+      <ol>
+        <li>A gestação da vaca dura cerca de 280 dias.</li>
+        <li>IEP = dias em aberto + gestação.</li>
+        <li>85 + 280 = 365 dias, cerca de 12 meses.</li>
+        <li>110 + 280 = 390 dias, cerca de 13 meses.</li>
+      </ol>
+    </div>
+    <div class="calc">
+      <span class="lab">Custo do cio perdido</span>
+      <ol>
+        <li>Cada cio perdido atrasa a próxima lactação em 21 dias (um ciclo).</li>
+        <li>Vaca de 10 kg de leite por dia que fica 150 dias a mais sem emprenhar.</li>
+        <li>10 × 150 = <strong>1.500 kg de leite</strong> que deixam de ser produzidos.</li>
+        <li>Dez vacas assim: 10 × 1.500 = 15.000 kg.</li>
+      </ol>
+    </div>
+    <div class="calc">
+      <span class="lab">Taxa de detecção de estro (TDE)</span>
+      <p>TDE = (21 ÷ IME) × 100. O IME é o intervalo médio entre cios ou serviços observados.</p>
+      <ol>
+        <li>Se o IME é 30 dias: 21 ÷ 30 = 0,7.</li>
+        <li>0,7 × 100 = <strong>70%</strong> (adequado). Quer dizer que o produtor percebe 7 de cada 10 cios.</li>
+        <li>Se o IME é 23 dias: 21 ÷ 23 = 0,91, cerca de <strong>90%</strong> (excelente). O intervalo ficou perto de 21, então quase nenhum cio passou batido.</li>
+      </ol>
+    </div>
+    <div class="calc">
+      <span class="lab">Serviços por concepção (S/C)</span>
+      <p>S/C = total de serviços (inseminações ou coberturas) das vacas prenhes ÷ número de vacas prenhes.</p>
+      <ol>
+        <li>10 vacas emprenharam. Somando, elas precisaram de 20 inseminações.</li>
+        <li>20 ÷ 10 = <strong>2,0</strong>.</li>
+        <li>Tabela: abaixo de 1,8 excelente; 1,8 a 2,0 adequado; 2,0 a 2,3 moderado; acima de 2,3 severo. Então 2,0 está no limite do adequado.</li>
+      </ol>
+    </div>
+    <p>A fertilidade máxima aparece quando a vaca é coberta a partir de <strong>60 dias pós-parto</strong> (57% de concepção, contra 6% entre 1 e 20 dias).</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Metas reprodutivas (Wattiaux, 2012)</th><th>Meta</th><th>Problema</th></tr></thead>
+      <tbody>
+        <tr><td>Intervalo de partos</td><td class="mono">12,5 a 13 meses</td><td class="mono">&gt; 14 meses</td></tr>
+        <tr><td>Primeiro cio observado</td><td class="mono">&lt; 40 dias pós-parto</td><td class="mono">&gt; 60 dias</td></tr>
+        <tr><td>Parto ao primeiro serviço</td><td class="mono">45 a 60 dias</td><td class="mono">&gt; 60 dias</td></tr>
+        <tr><td>Serviços por concepção</td><td class="mono">&lt; 1,7</td><td class="mono">&gt; 2,5</td></tr>
+        <tr><td>Concepção ao 1º serviço (novilhas)</td><td class="mono">65 a 70%</td><td class="mono">&lt; 60%</td></tr>
+        <tr><td>Concepção ao 1º serviço (vacas)</td><td class="mono">50 a 60%</td><td class="mono">&lt; 40%</td></tr>
+        <tr><td>Dias em aberto</td><td class="mono">85 a 110</td><td class="mono">&gt; 140</td></tr>
+        <tr><td>Período seco</td><td class="mono">50 a 60 dias</td><td class="mono">&lt; 45 ou &gt; 70</td></tr>
+        <tr><td>Idade ao primeiro cio</td><td class="mono">&lt; 12 meses</td><td class="mono">&gt; 18 meses</td></tr>
+        <tr><td>Idade ao primeiro parto</td><td class="mono">24 meses</td><td class="mono">&lt; 24 ou &gt; 30</td></tr>
+        <tr><td>Natimortos, retenção de placenta, metrite, cistos</td><td class="mono">&lt; 5 a 10%</td><td class="mono">&gt; 10%</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- 05 -->
+<section class="sec" id="reproducao">
+  <div class="sec-head">
+    <span class="eyebrow"><b>05</b> · Aula 5 (25/08)</span>
+    <h2>Reprodução: o motor da produção</h2>
+  </div>
+  <p>Os objetivos numa propriedade leiteira são dois. Primeiro, as novilhas devem entrar em reprodução o quanto antes (com o peso certo). Segundo, as vacas que pariram devem <strong>voltar a ciclar cerca de 2 meses após o parto</strong>, buscando um <strong>intervalo entre partos de 12 a 13 meses</strong>.</p>
+  <figure>
+    <div class="fig">
+    <svg class="small" viewBox="0 0 520 390" role="img" aria-label="Ano produtivo da vaca leiteira em anel de 365 dias">
+      <circle cx="260" cy="190" r="130" class="d-zone-tint" style="fill:none;stroke:var(--line);stroke-width:22"/>
+      <path d="M260 60 A130 130 0 1 1 148.4 123.4" style="fill:none;stroke:var(--accent);stroke-width:22"/>
+      <path d="M148.4 123.4 A130 130 0 0 1 260 60" style="fill:none;stroke:var(--straw);stroke-width:22"/>
+      <circle cx="260" cy="60" r="7" class="d-fill-bad"/>
+      <circle cx="371.6" cy="123.4" r="6" style="fill:var(--bg);stroke:var(--fg);stroke-width:2"/>
+      <circle cx="388.5" cy="209.5" r="6" style="fill:var(--bg);stroke:var(--fg);stroke-width:2"/>
+      <circle cx="148.4" cy="123.4" r="6" style="fill:var(--bg);stroke:var(--fg);stroke-width:2"/>
+      <text x="260" y="32" text-anchor="middle" class="d-tb">Parto (dia 0)</text>
+      <text x="392" y="112" class="d-t">≈ 60 dias:</text>
+      <text x="392" y="129" class="d-ts">1º serviço (IA)</text>
+      <text x="404" y="206" class="d-t">85 a 110 dias:</text>
+      <text x="404" y="223" class="d-ts">nova prenhez</text>
+      <text x="126" y="112" text-anchor="end" class="d-t">305 dias:</text>
+      <text x="126" y="129" text-anchor="end" class="d-ts">secagem</text>
+      <text x="205" y="52" text-anchor="end" class="d-tstraw">seca, 60 dias</text>
+      <text x="260" y="186" text-anchor="middle" class="d-tb">IEP 12 a 13 meses</text>
+      <text x="260" y="207" text-anchor="middle" class="d-ts">um parto por ano</text>
+      <text x="260" y="350" text-anchor="middle" class="d-ta">lactação: 305 dias</text>
+      <text x="260" y="372" text-anchor="middle" class="d-ts">a vaca está prenhe enquanto ainda dá leite</text>
+    </svg>
+    </div>
+    <figcaption>O ano da vaca leiteira desenhado em escala de 365 dias. Verde é lactação, palha é período seco. A nova gestação começa por volta do terceiro mês de lactação.</figcaption>
+  </figure>
+  <p><strong>Vida útil.</strong> Hoje se trabalha com <strong>5 a 6 lactações</strong> (às vezes 7). Antigamente eram 8 a 9, com vacas de 11 a 12 anos. Vaca velha dá mais problemas (reprodutivos, de úbere, físicos) e é reservatório de doenças como a tuberculose. Às vezes compensa repor por uma vaca mais nova. Diferença cultural citada: o pessoal do corte trabalha "no número" e descarta quem falha. O do leite cria vínculo e segura mais a vaca boa produtora.</p>
+
+  <div class="sub">
+    <h3>Anatomia do trato reprodutivo da vaca</h3>
+    <figure>
+      <div class="fig">
+      <svg viewBox="0 0 720 210" role="img" aria-label="Trato reprodutivo da vaca do exterior ao ovário com locais de deposição de sêmen">
+        <defs><marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="d-ah"/></marker></defs>
+        <text x="552" y="34" text-anchor="middle" class="d-ta">★ fecundação aqui</text>
+        <path d="M552 40 L552 56" class="d-line" marker-end="url(#ah2)"/>
+        <g>
+          <rect x="31" y="60" width="82" height="58" rx="8" class="d-box"/><text x="72" y="85" text-anchor="middle" class="d-tb">Vulva</text><text x="72" y="104" text-anchor="middle" class="d-ts">entrada</text>
+          <rect x="127" y="60" width="82" height="58" rx="8" class="d-box"/><text x="168" y="85" text-anchor="middle" class="d-tb">Vagina</text><text x="168" y="104" text-anchor="middle" class="d-ts">≈ 30 cm, muco</text>
+          <rect x="223" y="60" width="82" height="58" rx="8" class="d-box-straw"/><text x="264" y="85" text-anchor="middle" class="d-tb">Cérvix</text><text x="264" y="104" text-anchor="middle" class="d-ts">3 a 4 anéis</text>
+          <rect x="319" y="60" width="82" height="58" rx="8" class="d-box"/><text x="360" y="85" text-anchor="middle" class="d-tb">Útero</text><text x="360" y="104" text-anchor="middle" class="d-ts">corpo</text>
+          <rect x="415" y="60" width="82" height="58" rx="8" class="d-box"/><text x="456" y="85" text-anchor="middle" class="d-tb">Cornos</text><text x="456" y="104" text-anchor="middle" class="d-ts">carúnculas</text>
+          <rect x="511" y="60" width="82" height="58" rx="8" class="d-box-acc"/><text x="552" y="85" text-anchor="middle" class="d-tb">Oviduto</text><text x="552" y="104" text-anchor="middle" class="d-ts">25 a 30 cm</text>
+          <rect x="607" y="60" width="82" height="58" rx="8" class="d-box"/><text x="648" y="85" text-anchor="middle" class="d-tb">Ovário</text><text x="648" y="104" text-anchor="middle" class="d-ts">2 a 5 cm</text>
+        </g>
+        <path d="M113 89 L125 89" class="d-line" marker-end="url(#ah2)"/>
+        <path d="M209 89 L221 89" class="d-line" marker-end="url(#ah2)"/>
+        <path d="M305 89 L317 89" class="d-line" marker-end="url(#ah2)"/>
+        <path d="M401 89 L413 89" class="d-line" marker-end="url(#ah2)"/>
+        <path d="M497 89 L509 89" class="d-line" marker-end="url(#ah2)"/>
+        <path d="M605 89 L595 89" class="d-line" marker-end="url(#ah2)"/>
+        <text x="600" y="138" text-anchor="middle" class="d-tm">infundíbulo capta o óvulo</text>
+        <path d="M168 160 L168 122" class="d-line" marker-end="url(#ah2)"/>
+        <text x="168" y="176" text-anchor="middle" class="d-t">Monta natural: sêmen antes do cérvix</text>
+        <path d="M360 182 L360 122" class="d-line" marker-end="url(#ah2)"/>
+        <text x="360" y="200" text-anchor="middle" class="d-t">Inseminação artificial: depois do cérvix, no útero</text>
+      </svg>
+      </div>
+      <figcaption>Do exterior para o interior. O sêmen do touro fica antes do cérvix. Na IA, o técnico atravessa o cérvix com a pipeta. A fecundação acontece no oviduto.</figcaption>
+    </figure>
+    <ul>
+      <li><strong>Vulva:</strong> entrada.</li>
+      <li><strong>Vagina:</strong> cerca de 30 cm, mucosa cheia de glândulas que produzem muco.</li>
+      <li><strong>Cérvix</strong> (colo do útero): órgão fibromuscular, em tubo, com <strong>3 a 4 pregas em anel</strong>. Na gestação, suas glândulas produzem um <strong>tampão mucoso</strong> espesso que fecha o útero e o deixa hermético, sem contaminação de fora.</li>
+      <li><strong>Útero:</strong> corpo e dois cornos. Os cornos têm <strong>80 a 120 carúnculas</strong>, pontos onde a placenta se prende. A união carúncula + cório (membrana fetal) forma o <strong>placentomo</strong>.</li>
+      <li><strong>Oviduto</strong> (tuba uterina): 2 a 4 mm de diâmetro, 25 a 30 cm. A fertilização acontece na metade superior.</li>
+      <li><strong>Infundíbulo:</strong> o "funil" do oviduto que capta o óvulo liberado pelo ovário.</li>
+      <li><strong>Ovários:</strong> 2 a 5 cm, produzem o óvulo e hormônios.</li>
+    </ul>
+    <p>A reprodução também depende do <strong>eixo hipotálamo-hipófise-ovário</strong>. Hipotálamo e hipófise são glândulas na cabeça que mandam sinais hormonais ao ovário. Tudo isso é muito influenciado pela nutrição. Reposição hormonal é possível, mas cara, e nem sempre compensa.</p>
+    <p>Curiosidade: a gestação <strong>ectópica</strong> (fora do lugar normal, com o embrião fora do útero) é rara em vacas.</p>
+  </div>
+
+  <div class="sub">
+    <h3>O ciclo estral</h3>
+    <p>O ciclo estral é o intervalo entre um cio e o próximo. Na vaca dura <strong>21 dias</strong> (faixa de 14 a 29). Todos os hormônios trabalham para um objetivo: fazer o ovário ovular. Depois da ovulação, o folículo que se rompeu vira o <strong>corpo lúteo (CL)</strong>, que produz <strong>progesterona</strong>, o "hormônio da gestação". Se não houver fecundação, o útero libera <strong>prostaglandina F2α (PGF2α)</strong>, que destrói o corpo lúteo. Esse processo se chama <strong>luteólise</strong>. A progesterona cai e o ciclo recomeça.</p>
+    <figure>
+      <div class="fig">
+      <svg viewBox="0 0 720 250" role="img" aria-label="Ciclo estral de 21 dias com fases e curvas de progesterona e estrógeno">
+        <line x1="60" y1="138" x2="690" y2="138" class="d-line" style="stroke:var(--line)"/>
+        <path d="M60 135 L150 130 C 200 60, 230 50, 300 50 L 540 50 C 570 55, 585 120, 600 135 L690 135" class="d-line-acc"/>
+        <path d="M60 60 C 75 70, 85 128, 112 134 L 560 134 C 610 130, 650 92, 690 58" class="d-line-straw"/>
+        <text x="420" y="40" text-anchor="middle" class="d-ta">progesterona (corpo lúteo)</text>
+        <text x="84" y="62" class="d-tstraw">estrógeno (folículo)</text>
+        <line x1="570" y1="44" x2="570" y2="148" class="d-line-dash"/>
+        <text x="570" y="22" text-anchor="middle" class="d-t">PGF2α do útero: luteólise</text>
+        <rect x="60" y="150" width="18" height="28" class="d-fill-bad"/>
+        <rect x="78" y="150" width="72" height="28" class="d-zone-straw"/>
+        <rect x="150" y="150" width="450" height="28" class="d-zone-acc"/>
+        <rect x="600" y="150" width="90" height="28" class="d-zone-straw"/>
+        <text x="114" y="169" text-anchor="middle" class="d-ts">metaestro</text>
+        <text x="375" y="169" text-anchor="middle" class="d-t">diestro (domínio do corpo lúteo)</text>
+        <text x="645" y="169" text-anchor="middle" class="d-ts">proestro</text>
+        <g class="d-tm">
+          <text x="60" y="194" text-anchor="middle">0</text>
+          <text x="150" y="194" text-anchor="middle">3</text>
+          <text x="270" y="194" text-anchor="middle">7</text>
+          <text x="480" y="194" text-anchor="middle">14</text>
+          <text x="600" y="194" text-anchor="middle">18</text>
+          <text x="690" y="194" text-anchor="middle">21 dias</text>
+        </g>
+        <text x="60" y="216" class="d-t">■ Estro (cio): 12 a 18 h, a fase mais curta</text>
+        <text x="60" y="236" class="d-ts">ovulação: cerca de 28 h após o início do cio (10 a 14 h após o fim)</text>
+      </svg>
+      </div>
+      <figcaption>Ciclo de 21 dias desenhado em escala (30 px por dia). As curvas mostram a tendência dos hormônios, sem valores absolutos.</figcaption>
+    </figure>
+    <ul>
+      <li><strong>Proestro (3 a 4 dias):</strong> o corpo lúteo antigo morre, cresce um novo folículo e o <strong>estrógeno sobe</strong>. A vaca fica agitada e tenta montar nas outras.</li>
+      <li><strong>Estro, ou cio (12 a 18 h):</strong> a fase mais curta. A vaca <strong>aceita ser montada e fica parada</strong>. Sai <strong>muco claro e transparente</strong> pela vulva. A ovulação acontece perto do fim. É o <strong>melhor momento para IA ou monta</strong>.</li>
+      <li><strong>Metaestro (2 a 3 dias):</strong> transição. O óvulo desce pelo oviduto, o folículo rompido vira corpo lúteo e a progesterona começa a subir. Pode aparecer uma pequena marca de sangue.</li>
+      <li><strong>Diestro:</strong> a fase mais longa, dominada pelo corpo lúteo e pela progesterona.</li>
+    </ul>
+    <div class="tbl"><table>
+      <thead><tr><th></th><th>Vaca</th><th>Ovelha</th><th>Cabra</th></tr></thead>
+      <tbody>
+        <tr><td>Tipo de ciclo</td><td>Poliéstrica <strong>anual</strong> (vários cios o ano todo)</td><td>Poliéstrica <strong>estacional</strong> (outono e inverno, dias curtos)</td><td>Poliéstrica; raças tropicais reproduzem o ano todo</td></tr>
+        <tr><td>Puberdade</td><td class="mono">15 meses (10 a 24)</td><td class="mono">5 a 8 meses</td><td class="mono">5 a 8 meses</td></tr>
+        <tr><td>Ciclo</td><td class="mono">21 dias</td><td class="mono">17 dias</td><td class="mono">17 dias (na aula)</td></tr>
+        <tr><td>Duração do cio</td><td class="mono">12 h (1 a 30)</td><td class="mono">24 a 36 h</td><td class="mono">24 a 36 h</td></tr>
+        <tr><td>Ovulação</td><td>28 a 29 h após o início do cio</td><td>no final do cio</td><td>no final do cio</td></tr>
+        <tr><td>Gestação</td><td class="mono">275 a 282 dias (≈ 9 meses)</td><td class="mono">145 a 150 dias (≈ 5 meses)</td><td class="mono">≈ 5 meses</td></tr>
+        <tr><td>Óvulos por ciclo</td><td>normalmente 1</td><td></td><td></td></tr>
+      </tbody>
+    </table></div>
+    <div class="note">
+      <span class="lab">Por que a ovelha cicla no inverno</span>
+      <ol>
+        <li>A ovelha é um animal de frio (tem lã).</li>
+        <li>No inverno os dias são curtos. Menos luz faz a glândula pineal liberar mais melatonina, e o eixo hipotálamo-hipófise ativa a ovulação. Isso é o controle pelo <strong>fotoperíodo</strong> (duração do dia).</li>
+        <li>A gestação dura 5 meses. Cobrindo no inverno (junho), o cordeiro nasce no verão (novembro), quando há muito alimento.</li>
+        <li>Por isso a <strong>estação de monta</strong> de ovinos é no outono e inverno. Raças tropicais como a Santa Inês, e as cabras do Nordeste, não seguem a estação.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>Detecção de cio</h3>
+    <ul>
+      <li>Observar nos <strong>horários mais frescos</strong> do dia.</li>
+      <li><strong>No mínimo 2 observações por dia, de no mínimo 30 minutos cada.</strong> Não é "bater o ponto".</li>
+      <li><strong>Hierarquia social</strong> interfere: vacas velhas dominam. No cio, as novas sobem nas velhas.</li>
+      <li><strong>Nutrição</strong> afeta mais a <strong>ciclicidade</strong> (quantos cios a vaca tem) do que a manifestação do cio.</li>
+      <li><strong>Estresse térmico</strong> reduz a intensidade do cio e a manutenção da gestação.</li>
+      <li><strong>Piso irregular</strong> (barro, chão batido) dá medo de escorregar, e a vaca não mostra o cio.</li>
+      <li>Mão de obra sem treino ou sobrecarregada perde cios.</li>
+      <li><strong>Buçal marcador:</strong> dispositivo com tinta preso ao peito de um rufião (macho que não fecunda) ou touro. Quando ele monta, marca o dorso da fêmea. Muito usado em ovinos.</li>
+    </ul>
+    <div class="calc">
+      <span class="lab">Regra AM/PM: quando inseminar</span>
+      <ol>
+        <li>A ovulação acontece 10 a 14 h depois do fim do cio.</li>
+        <li>O espermatozoide precisa de 4 a 6 h no trato da vaca para ficar apto a fecundar (capacitação).</li>
+        <li>Então o sêmen deve chegar umas horas antes da ovulação, nem cedo nem tarde demais.</li>
+        <li>Na prática: <strong>cio visto de manhã, inseminar à tarde. Cio visto à tarde, inseminar na manhã seguinte.</strong></li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>O que derruba a eficiência reprodutiva</h3>
+    <ul>
+      <li><strong>Nutrição ruim no pré e no pós-parto.</strong> É o maior problema. A vaca gestante forma um bezerro de 40 a 60 kg (cálcio para os ossos, proteína para os músculos, gordura para o sistema nervoso). Depois, a lactação "rouba" ainda mais cálcio, proteína e gordura.</li>
+      <li>Baixa eficiência na detecção de cio.</li>
+      <li>Doenças metabólicas.</li>
+      <li>Água, clima (pasto sem sombra) e ambiência.</li>
+      <li>Infecções uterinas.</li>
+      <li>Problemas de sêmen: na monta natural, o touro pode levar bactérias de uma vaca infectada para as sadias.</li>
+      <li>Patologias que causam subfertilidade ou infertilidade.</li>
+      <li>Problemas de parto: sêmen mal escolhido gera bezerro grande demais.</li>
+      <li>Rebanho grande sem sistema de controle.</li>
+      <li>Temperatura acima da zona de conforto.</li>
+      <li>Decisões gerenciais erradas ("um sistema novo que vi no YouTube").</li>
+    </ul>
+    <p>Em novilhas no periparto (em volta do parto), o <strong>escore de condição corporal (ECC)</strong> conta: abaixo de 2 ela desvia reservas para o leite e atrasa o retorno ao cio. Acima de 4 aumenta o risco de cetose e fígado gorduroso.</p>
+  </div>
+
+  <div class="sub">
+    <h3>Desordens reprodutivas</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Desordem</th><th>Definição</th><th>O que lembrar</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Cisto ovariano</strong></td><td>Folículo que <strong>não ovula</strong>, maior que <strong>25 mm</strong>, que persiste por <strong>mais de 10 dias</strong>, <strong>sem corpo lúteo</strong></td><td>O cisto produz hormônio e desregula o sistema. Causa infertilidade. Sinal: ausência de cio (anestro) ou cio irregular (a cada 3 meses, ou "uma semana em cio"). Não adianta inseminar</td></tr>
+        <tr><td><strong>Distocia</strong></td><td>Dificuldade ou incapacidade de parir sozinha</td><td>Causas: feto mal posicionado, feto grande para a bacia, falta de força. Holandesa é "má parideira" (alta, precisa de muita força); Gir pare fácil. O 1º parto é mais difícil. Esperar no máximo uns <strong>6 h</strong> de trabalho de parto sem evolução. Ter piquete-maternidade perto da sede</td></tr>
+        <tr><td><strong>Metrite</strong></td><td>Inflamação de <strong>todas as camadas</strong> do útero, pós-parto, por bactérias</td><td>Mais grave. Vem de mão suja, ambiente sujo, falta de assepsia</td></tr>
+        <tr><td><strong>Endometrite</strong></td><td>Inflamação <strong>só da camada interna</strong> (endométrio)</td><td>Prejudica a fertilidade <strong>sem febre alta</strong></td></tr>
+        <tr><td><strong>Piometra</strong></td><td>Pus acumulado dentro do útero, com <strong>cérvix fechado</strong> e <strong>corpo lúteo persistente</strong></td><td>Ex.: pedaço de feto retido apodrece e o útero fecha. Difícil de tratar: primeiro derrubar o CL, depois abrir o tampão, só então o antibiótico age. Mais comum em cadelas</td></tr>
+        <tr><td><strong>Retenção de placenta</strong></td><td>Placenta não sai em até <strong>12 h</strong> após o parto</td><td>O produtor diz "a vaca não se limpou". Muito comum sem <strong>sal mineral</strong>: problema nutricional, fácil de prevenir. Outras causas: parto difícil, gêmeos, imunidade baixa, vaca velha. Manejo: tração leve, ocitocina e/ou antibiótico</td></tr>
+      </tbody>
+    </table></div>
+    <p><strong>Prevenção de infecção uterina:</strong> luva, água com desinfetante, lavar o animal. O trabalho do veterinário inclui a assepsia, não é só "puxar o terneiro". Antibiótico não deve ser de rotina (afeta o leite), mas é o mais seguro quando o parto foi complicado ou sujo.</p>
+  </div>
+</section>
+
+<!-- 06 -->
+<section class="sec" id="biotec">
+  <div class="sec-head">
+    <span class="eyebrow"><b>06</b> · Aula 5 (25/08)</span>
+    <h2>Biotecnologias reprodutivas</h2>
+  </div>
+  <p>Em ordem de complexidade e custo: <strong>IA → sexagem → IATF → TE → FIV</strong>.</p>
+
+  <div class="sub">
+    <h3>Inseminação artificial (IA)</h3>
+    <p>O técnico deposita sêmen selecionado no útero. Como: toque pelo reto, segura o cérvix com a mão e passa a pipeta através das pregas, depositando o sêmen no corpo do útero.</p>
+    <p><strong>Vantagens:</strong> acelera muito o melhoramento genético (dá acesso a touros muito melhores que os da região); aumenta a produtividade reprodutiva; dispensa manter touro (animal grande, que briga, precisa de área separada, é caro e "só cobre"); controle sanitário rigoroso nas centrais de sêmen; padroniza a idade dos bezerros. Muitas prefeituras oferecem o serviço e o produtor escolhe de um "cardápio de touros".</p>
+    <div class="calc">
+      <span class="lab">Quantas doses sai de um ejaculado</span>
+      <ol>
+        <li>Ejaculado do touro: 3 a 15 mL, com 800 a 2.000 milhões de espermatozoides por mL. No total, 3 a 10 bilhões.</li>
+        <li>Uma palheta (dose) de 0,25 ou 0,5 mL leva 10 a 20 milhões de espermatozoides. No sêmen sexado, 2 a 4 milhões.</li>
+        <li>Pegue um ejaculado de 5 bilhões = 5.000 milhões.</li>
+        <li>5.000 ÷ 20 = <strong>250 doses</strong> de um único ejaculado.</li>
+        <li>Por isso o sêmen é diluído em laboratório. Um touro pode gerar milhares de filhas.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>IA em ovinos e caprinos</h3>
+    <ul>
+      <li><strong>Vaginal ou cervical superficial:</strong> deposita na entrada do cérvix, como o macho faria. Simples, só precisa de um vaginoscópio. <strong>Principal método em caprinos</strong> (mais agitados).</li>
+      <li><strong>Transcervical:</strong> atravessa o cérvix sem toque retal. Difícil pelas voltas do colo da ovelha. Exige pessoa muito especializada.</li>
+      <li><strong>Laparoscópica:</strong> cirúrgica, guiada por vídeo, cara. É a mais usada em ovinos com sêmen congelado e dá alta taxa de prenhez.</li>
+    </ul>
+  </div>
+
+  <div class="sub">
+    <h3>Sexagem de sêmen</h3>
+    <p>Feita por <strong>citometria de fluxo</strong> (uma máquina que separa células uma a uma). O espermatozoide com cromossomo X (gera fêmea) tem um pouco mais de DNA que o Y (gera macho), e a máquina separa por essa diferença. Acerto de <strong>85 a 95%</strong>. No <strong>leite</strong>, prefere-se <strong>fêmeas</strong> (reposição e aumento do rebanho). No <strong>corte</strong>, prefere-se <strong>machos</strong> (a testosterona dá mais músculo, mais carne).</p>
+  </div>
+
+  <div class="sub">
+    <h3>FIV e transferência de embriões (TE)</h3>
+    <p><strong>FIV</strong> (fertilização in vitro, "no vidro", ou seja, em laboratório): hormônios fazem a doadora liberar muitos óvulos (<strong>superovulação</strong>). Coletam-se os óvulos por aspiração, fecunda-se no laboratório e geram-se embriões. Saem uns <strong>15 a 20 óvulos por coleta</strong>. Os embriões vão para vacas <strong>receptoras</strong> ("barriga de aluguel"). Dá para obter crias de uma vaca que não consegue gestar (ex.: perna quebrada). Desvantagem: custo alto (laboratório, equipe especializada, insumos).</p>
+    <p><strong>TE:</strong> colhem-se embriões de uma doadora geneticamente superior e colocam-se em receptoras. Há duas modalidades:</p>
+    <ul>
+      <li><strong>In vivo:</strong> superovulação + IA na própria doadora. Depois se coletam os embriões prontos por <strong>lavagem uterina</strong>. Não precisa de laboratório para fecundar.</li>
+      <li><strong>In vitro:</strong> aspiração folicular + fecundação em laboratório.</li>
+    </ul>
+    <p>Doadora e receptoras são <strong>sincronizadas</strong> com hormônios. O embrião com cerca de <strong>7 dias</strong> é colocado direto no corno uterino, quando a receptora já tem corpo lúteo. Costuma-se usar vacas leiteiras como receptoras (o Girolando é muito usado pela docilidade e habilidade materna).</p>
+    <p><strong>Diagnóstico de gestação:</strong> por <strong>ultrassom com uns 30 dias</strong>. Com 30 dias o toque retal não sente nada, é só uma bolsinha. O toque pega bem só por volta de 3 meses.</p>
+    <p>As vacas "de milhões" do Canal do Boi: em geral o valor é de uma <strong>cota</strong> (condomínio), não da vaca inteira.</p>
+  </div>
+
+  <div class="sub">
+    <h3>IATF</h3>
+    <p><strong>Inseminação Artificial em Tempo Fixo.</strong> Hormônios colocam todas as vacas em cio ao mesmo tempo. Insemina-se o lote todo num dia marcado, <strong>sem precisar observar cio</strong>. Os nascimentos ficam concentrados no início da estação de monta. Custa um pouco mais que a IA comum.</p>
+    <div class="note">
+      <span class="lab">Recomendação por tamanho de propriedade</span>
+      <p><strong>Pequenas:</strong> IA funciona muito bem, sexagem também, FIV é possível gastando mais. <strong>Maiores:</strong> a IATF costuma compensar.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 07 -->
+<section class="sec" id="clima">
+  <div class="sec-head">
+    <span class="eyebrow"><b>07</b> · Aula 7 (01/09)</span>
+    <h2>Bioclimatologia e bem-estar</h2>
+  </div>
+  <p><strong>Bioclimatologia animal</strong> estuda o conforto térmico das espécies de produção. O objetivo é evitar estresse por calor e melhorar reprodução, saúde e produção. <strong>Adaptabilidade</strong> (Hafez, 1973) é a capacidade do animal de se ajustar a climas adversos com mínima perda de desempenho, mantendo alta taxa reprodutiva, resistência a doenças e baixa mortalidade.</p>
+
+  <div class="sub">
+    <h3>Contexto: clima e leite</h3>
+    <ul>
+      <li><strong>Índia:</strong> maior produtor mundial, rebanho zebuíno e de búfalos, mas média baixa (1.500 a 2.000 L por vaca por ano).</li>
+      <li><strong>EUA:</strong> 2º maior. Cerca de 30 a 35 L por dia por vaca, Holandesa com ventiladores e aspersores no verão.</li>
+      <li><strong>Brasil:</strong> MG lidera, depois PR, RS e SC.</li>
+      <li><strong>Santa Catarina:</strong> 4º produtor, mas <strong>1º em produtividade por vaca (cerca de 15,9 L por dia)</strong>, com forte agricultura familiar. Clima subtropical úmido. Planalto e serra com médias de 13 a 18 °C, geada e neve. Litoral e vales (como Blumenau) perto de 20 °C, verão quente.</li>
+    </ul>
+  </div>
+
+  <div class="sub">
+    <h3>Estresse térmico</h3>
+    <p>A <strong>zona termoneutra</strong> é a faixa de temperatura em que o animal não gasta energia extra para se aquecer nem para se resfriar. Para vacas de alta produção, o slide dá <strong>-5 °C a 25 °C</strong>. A vaca tolera muito melhor o frio que o calor.</p>
+    <p>A temperatura sozinha não basta. Com <strong>umidade</strong> alta o suor evapora mal e a sensação de calor aumenta. Por isso se usa o <strong>ITU</strong> (Índice de Temperatura e Umidade), que junta os dois num número só.</p>
+    <figure>
+      <div class="fig">
+      <svg viewBox="0 0 720 120" role="img" aria-label="Escala do ITU com faixas de conforto, alerta e perigo">
+        <rect x="40" y="30" width="256" height="34" class="d-zone-acc"/>
+        <rect x="296" y="30" width="128" height="34" class="d-zone-straw"/>
+        <rect x="424" y="30" width="256" height="34" class="d-zone-bad"/>
+        <text x="168" y="52" text-anchor="middle" class="d-t">conforto</text>
+        <text x="360" y="52" text-anchor="middle" class="d-t">alerta</text>
+        <text x="552" y="52" text-anchor="middle" class="d-t">perigo, estresse forte</text>
+        <g class="d-tm">
+          <text x="40" y="84" text-anchor="middle">60</text>
+          <text x="296" y="84" text-anchor="middle">72</text>
+          <text x="424" y="84" text-anchor="middle">78</text>
+          <text x="680" y="84" text-anchor="middle">90</text>
+        </g>
+        <line x1="296" y1="22" x2="296" y2="72" style="stroke:var(--fg);stroke-width:2"/>
+        <text x="296" y="16" text-anchor="middle" class="d-ta">ITU 72: começa o estresse por calor</text>
+        <text x="360" y="108" text-anchor="middle" class="d-ts">ITU (sem unidade): combina temperatura do ar e umidade relativa</text>
+      </svg>
+      </div>
+      <figcaption>Faixas usadas em estudos brasileiros: abaixo de 72 conforto, de 72 a 78 alerta, a partir de 78 perigo. O valor que o slide pede para decorar é 72.</figcaption>
+    </figure>
+    <p><strong>De onde vem o calor da vaca:</strong> do metabolismo (produzir leite gera muito calor), da digestão e fermentação no rúmen (incremento calórico) e do ambiente (sol e ar quente). Uma vaca de 30 L por dia bombeia cerca de <strong>12.000 a 15.000 L de sangue</strong> pelo úbere a cada 24 h.</p>
+    <p><strong>Efeitos:</strong> a produção pode cair <strong>até 30%</strong>. A vaca come menos matéria seca (para gerar menos calor), fica mais tempo em pé e respira ofegante. Também aumenta o risco de doenças metabólicas, de mastite (sobe a contagem de células somáticas) e cai a fertilidade. Suínos sofrem ainda mais rápido porque não têm glândulas sudoríparas funcionais.</p>
+  </div>
+
+  <div class="sub">
+    <h3>Estratégias contra o calor</h3>
+    <ul>
+      <li><strong>Sombra:</strong> reduz a carga de calor radiante em <strong>até 50%</strong>. Natural (árvores, sistema silvipastoril) ou artificial (<strong>sombrite com pelo menos 80%</strong> de retenção de luz). Reservar <strong>3,5 a 4,5 m² de sombra por vaca</strong>. Árvores ainda resfriam o ar pela evapotranspiração das folhas.</li>
+      <li><strong>Orientação norte-sul</strong> das estruturas: o sol seca o chão em horários diferentes e evita lama. Barro perto de sombra e bebedouro favorece doença de casco e mastite.</li>
+      <li><strong>Ventiladores:</strong> priorizar área de alimentação, sala de espera da ordenha e linhas de camas (compost barn ou free stall).</li>
+      <li><strong>Aspersão + ventilação</strong> é a estratégia mais eficiente. A aspersão usa gotas grossas que molham o pelo até a pele; o ventilador evapora essa água e leva o calor. A <strong>nebulização</strong> usa microgotas que resfriam o ar, e só funciona em clima seco (umidade abaixo de 50%).</li>
+      <li><strong>Ciclo recomendado:</strong> 5 minutos, sendo <strong>1 minuto com aspersores ligados e 4 desligados</strong>, ventiladores sempre ligados. Cerca de 1,8 a 2,5 L de água por vaca a cada acionamento.</li>
+      <li><strong>Nutrição e aditivos:</strong> gordura protegida (gera menos calor na digestão), leveduras vivas (<i>Saccharomyces cerevisiae</i>), niacina (vitamina B3, dilata os vasos), antioxidantes (vitamina E e selênio).</li>
+      <li><strong>Genética:</strong> animais tolerantes ao calor e cruzamentos europeu × zebu (ex.: Holandês × Gir).</li>
+      <li><strong>Sustentabilidade:</strong> ILPF (Integração Lavoura-Pecuária-Floresta) baixa a temperatura no pasto.</li>
+    </ul>
+  </div>
+
+  <div class="sub">
+    <h3>Água</h3>
+    <p>Quanto mais a vaca bebe, mais matéria seca ela come, e mais leite produz. Água ruim reduz o consumo de água e, em cadeia, o de comida. Perder <strong>10 a 12%</strong> da água do corpo já pode matar o animal. Acima de 32 °C o consumo de água pode subir <strong>até 100%</strong>.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Qualidade da água</th><th>Referência</th></tr></thead>
+      <tbody>
+        <tr><td>pH</td><td class="mono">6,0 a 8,5</td></tr>
+        <tr><td>Sólidos totais dissolvidos (TDS)</td><td class="mono">máximo 3.000 mg/L para adultos</td></tr>
+        <tr><td>Temperatura</td><td class="mono">20 a 30 °C (outro slide: preferem 15 a 25 °C)</td></tr>
+        <tr><td>Patógenos</td><td>sem coliformes fecais (<i>E. coli</i>), bactérias ou parasitas</td></tr>
+        <tr><td>Consumo</td><td class="mono">4 a 5 L de água por litro de leite; 50 a 200 L por vaca por dia</td></tr>
+      </tbody>
+    </table></div>
+    <ul>
+      <li>Água limpa no bebedouro pode aumentar o ganho de peso em <strong>até 20%</strong> comparado a açude sujo.</li>
+      <li>Limpar bebedouros <strong>a cada 2 dias</strong>. Fundo claro ou azulejado ajuda a ver a sujeira. Evitar bebedouro metálico ao sol.</li>
+      <li>Proteger nascentes do pisoteio. Separar dejetos em fração sólida e líquida; a líquida pode ir para fertirrigação.</li>
+    </ul>
+    <div class="note warn">
+      <span class="lab">Atenção: dois números para a água</span>
+      <p>O slide da Aula 7 (bioclimatologia) fala em <strong>4 a 5 L de água por litro de leite</strong>. O slide da Aula 15 (sistemas) fala em <strong>8,5 L por litro de leite</strong>. Se cair, veja de que contexto a questão fala. Se for sobre consumo da vaca, use 4 a 5 L.</p>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>Regiões frias</h3>
+    <p>Zona de conforto de raças europeias leiteiras: <strong>4 a 18 °C</strong>. Estresse por frio começa abaixo de 0 °C a -12 °C, conforme raça e adaptação. O frio tem vantagens: menos esforço para perder calor, melhor apetite e ruminação, menos moscas e carrapatos. Manejo: abrigo seco sem corrente de ar, dieta mais energética e água sem congelar, em temperatura adequada.</p>
+  </div>
+</section>
+
+<!-- 08 -->
+<section class="sec" id="digestao">
+  <div class="sec-head">
+    <span class="eyebrow"><b>08</b> · Aula 8 (08/09)</span>
+    <h2>Digestão do ruminante</h2>
+  </div>
+  <p>Nos animais com estômago simples (monogástricos), a digestão é feita por enzimas do próprio animal. Carboidratos viram glicose pela amilase. Proteínas viram aminoácidos pela pepsina (ativada pelo ácido clorídrico, HCl), tripsina e quimiotripsina. Gorduras são emulsificadas pela bile e quebradas pela lipase. Mas <strong>celulose nenhum animal digere sozinho</strong>. Só a fermentação microbiana faz isso. No ruminante essa fermentação acontece <strong>no início do trato</strong>, antes do estômago verdadeiro. No cavalo e no coelho, acontece no fim (ceco e cólon).</p>
+  <figure>
+    <div class="fig">
+    <svg viewBox="0 0 720 300" role="img" aria-label="Caminho do alimento no ruminante: boca, rúmen, retículo, omaso, abomaso e intestino">
+      <defs><marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="d-ah"/></marker></defs>
+      <rect x="16" y="120" width="90" height="50" rx="8" class="d-box"/>
+      <text x="61" y="150" text-anchor="middle" class="d-tb">Boca</text>
+      <path d="M106 145 L148 145" class="d-line" marker-end="url(#ah3)"/>
+      <text x="127" y="137" text-anchor="middle" class="d-tm">esôfago</text>
+      <rect x="150" y="40" width="200" height="95" rx="10" class="d-box-acc"/>
+      <text x="250" y="72" text-anchor="middle" class="d-tb">Rúmen</text>
+      <text x="250" y="93" text-anchor="middle" class="d-ts">fermentação por micróbios</text>
+      <text x="250" y="111" text-anchor="middle" class="d-ts">gera AGV e gases</text>
+      <rect x="150" y="150" width="200" height="60" rx="10" class="d-box-acc"/>
+      <text x="250" y="175" text-anchor="middle" class="d-tb">Retículo</text>
+      <text x="250" y="195" text-anchor="middle" class="d-ts">filtra: só passa &lt; 2 mm</text>
+      <path d="M330 137 L330 148" class="d-line" marker-end="url(#ah3)" marker-start="url(#ah3)"/>
+      <path d="M350 180 L388 180" class="d-line" marker-end="url(#ah3)"/>
+      <rect x="390" y="150" width="140" height="60" rx="10" class="d-box"/>
+      <text x="460" y="175" text-anchor="middle" class="d-tb">Omaso</text>
+      <text x="460" y="195" text-anchor="middle" class="d-ts">absorve água</text>
+      <path d="M530 180 L558 180" class="d-line" marker-end="url(#ah3)"/>
+      <rect x="560" y="150" width="145" height="60" rx="10" class="d-box-straw"/>
+      <text x="632" y="175" text-anchor="middle" class="d-tb">Abomaso</text>
+      <text x="632" y="195" text-anchor="middle" class="d-ts">HCl e enzimas</text>
+      <path d="M632 210 L632 238" class="d-line" marker-end="url(#ah3)"/>
+      <rect x="560" y="240" width="145" height="44" rx="10" class="d-box"/>
+      <text x="632" y="267" text-anchor="middle" class="d-t">Intestino delgado</text>
+      <path d="M200 40 C 170 5, 70 20, 61 116" class="d-line-dash" marker-end="url(#ah3)"/>
+      <text x="112" y="24" text-anchor="middle" class="d-ta">ruminação</text>
+      <path d="M320 40 L320 14" class="d-line" marker-end="url(#ah3)"/>
+      <text x="330" y="18" class="d-ts">eructação (CO₂ e metano)</text>
+      <path d="M150 228 L530 228" class="d-line"/>
+      <path d="M150 222 L150 228 M530 222 L530 228" class="d-line"/>
+      <text x="340" y="250" text-anchor="middle" class="d-ts">não glandulares: mucosa que só absorve</text>
+      <text x="632" y="138" text-anchor="middle" class="d-ts">"estômago verdadeiro"</text>
+    </svg>
+    </div>
+    <figcaption>O alimento desce pelo esôfago, fermenta no rúmen e volta à boca para ser remastigado (ruminação). Só partículas pequenas e densas passam do retículo para o omaso.</figcaption>
+  </figure>
+
+  <div class="sub">
+    <h3>Adaptações</h3>
+    <ul>
+      <li><strong>Boca:</strong> bovinos <strong>não têm incisivos superiores</strong>. A língua funciona como um êmbolo que enrola e puxa o capim.</li>
+      <li><strong>Saliva:</strong> não tem amilase, é <strong>alcalina</strong> (funciona como tampão do rúmen, segura o pH) e recicla nitrogênio (ureia volta ao rúmen pela saliva).</li>
+      <li><strong>Esôfago:</strong> participa da eructação (arroto) e da ruminação. Na ruminação o bolo sobe por movimentos <strong>antiperistálticos</strong> (contrações no sentido contrário ao normal).</li>
+      <li>Segundo Van Soest (1994), essas adaptações dão melhor aproveitamento da fibra e menor necessidade de vitaminas do complexo B e de aminoácidos essenciais na dieta, porque os micróbios produzem.</li>
+    </ul>
+  </div>
+
+  <div class="sub">
+    <h3>Os quatro compartimentos</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Compartimento</th><th>Função</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Rúmen</strong></td><td>O maior no adulto. Câmara de fermentação. Papilas cônicas aumentam a área de absorção (aspecto de "toalha felpuda")</td></tr>
+        <tr><td><strong>Retículo</strong></td><td>O menor. Seletor de partículas: só passam pelo orifício retículo-omasal partículas de <strong>cerca de 2 mm</strong> e densidade <strong>acima de 1,2 g/mL</strong>. As maiores voltam para ruminar</td></tr>
+        <tr><td><strong>Omaso</strong></td><td>"Estômago hídrico", cheio de folhas. Absorve <strong>água e minerais</strong> (sódio e fósforo), que voltam ao rúmen pela saliva</td></tr>
+        <tr><td><strong>Abomaso</strong></td><td>O único <strong>glandular e secretor</strong>, o "estômago verdadeiro" ou "químico". Secreta HCl e enzimas, mucosa em dobras em espiral</td></tr>
+      </tbody>
+    </table></div>
+    <p>Rúmen, retículo e omaso têm epitélio <strong>não glandular</strong>: absorvem, mas não secretam.</p>
+  </div>
+
+  <div class="sub">
+    <h3>Desenvolvimento do rúmen</h3>
+    <ul>
+      <li><strong>Forragem</strong> desenvolve o <strong>tamanho, volume e musculatura</strong> do rúmen, retículo e omaso, e mantém o pH entre 5,5 e 6,8.</li>
+      <li><strong>Concentrado</strong> (alta digestibilidade) desenvolve as <strong>papilas e a mucosa</strong>, principalmente pelo butirato.</li>
+      <li><strong>Excesso de grãos:</strong> o pH despenca, a mucosa inflama, surgem úlceras, as papilas são destruídas e cicatrizam (fibrose).</li>
+      <li><strong>Excesso de fibra grosseira:</strong> impactação ruminal (rúmen "entupido"), hiperqueratose (espessamento da queratina) e, no crônico, atrofia das papilas.</li>
+    </ul>
+  </div>
+
+  <div class="sub">
+    <h3>Motilidade, eructação e ruminação</h3>
+    <p>O rúmen tem inervação rica e faz movimentos coordenados. Eles servem para misturar a comida com os micróbios, eliminar os gases, regurgitar o bolo para a ruminação e manter o alimento em contato com as bactérias.</p>
+    <ul>
+      <li>As contrações levam o conteúdo do saco dorsal para o ventral, depois para o saco cego caudodorsal e de volta. Cada ciclo leva <strong>30 a 50 segundos</strong>.</li>
+      <li>Na ausculta (escutar com estetoscópio) se ouvem cerca de <strong>3 sons a cada 2 minutos</strong> numa vaca saudável. Na aula: 1 a 3 contrações a cada 2 minutos. Poucas ou nenhuma indica problema.</li>
+      <li>A fermentação produz <strong>cerca de 2 L de gás por minuto</strong>, principalmente CO₂ e metano.</li>
+      <li>Uma contração de regurgitação a cada 2 a 3 minutos durante a ruminação.</li>
+      <li>Num rebanho em repouso, <strong>pelo menos 60% das vacas</strong> devem estar ruminando.</li>
+    </ul>
+  </div>
+
+  <div class="sub">
+    <h3>Ácidos graxos voláteis (AGV)</h3>
+    <p>Os micróbios fermentam o alimento e liberam AGV, que a vaca absorve pela parede do rúmen. Eles fornecem <strong>até 80% da energia</strong> do ruminante. São três os principais.</p>
+    <figure>
+      <div class="fig">
+      <svg viewBox="0 0 720 240" role="img" aria-label="Da dieta aos ácidos graxos voláteis e seus destinos">
+        <defs><marker id="ah4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="d-ah"/></marker></defs>
+        <rect x="16" y="30" width="180" height="54" rx="8" class="d-box"/>
+        <text x="106" y="53" text-anchor="middle" class="d-tb">Forragem</text>
+        <text x="106" y="72" text-anchor="middle" class="d-ts">fibra, celulose</text>
+        <rect x="16" y="150" width="180" height="54" rx="8" class="d-box"/>
+        <text x="106" y="173" text-anchor="middle" class="d-tb">Grãos</text>
+        <text x="106" y="192" text-anchor="middle" class="d-ts">amido</text>
+        <rect x="240" y="30" width="180" height="54" rx="8" class="d-box-tint"/>
+        <text x="330" y="53" text-anchor="middle" class="d-t">Bactérias</text>
+        <text x="330" y="72" text-anchor="middle" class="d-ts">celulolíticas</text>
+        <rect x="240" y="150" width="180" height="54" rx="8" class="d-box-tint"/>
+        <text x="330" y="173" text-anchor="middle" class="d-t">Bactérias</text>
+        <text x="330" y="192" text-anchor="middle" class="d-ts">amilolíticas</text>
+        <path d="M196 57 L238 57" class="d-line" marker-end="url(#ah4)"/>
+        <path d="M196 177 L238 177" class="d-line" marker-end="url(#ah4)"/>
+        <rect x="470" y="10" width="236" height="62" rx="8" class="d-box-acc"/>
+        <text x="482" y="34" class="d-tb">Acetato</text>
+        <text x="482" y="54" class="d-ts">gordura do leite e do corpo</text>
+        <rect x="470" y="88" width="236" height="62" rx="8" class="d-box-straw"/>
+        <text x="482" y="112" class="d-tb">Propionato</text>
+        <text x="482" y="132" class="d-ts">glicose no fígado (gliconeogênese)</text>
+        <rect x="470" y="166" width="236" height="62" rx="8" class="d-box"/>
+        <text x="482" y="190" class="d-tb">Butirato</text>
+        <text x="482" y="210" class="d-ts">energia das papilas, corpos cetônicos</text>
+        <path d="M420 50 L468 42" class="d-line" marker-end="url(#ah4)"/>
+        <path d="M420 170 L468 122" class="d-line" marker-end="url(#ah4)"/>
+        <path d="M420 186 L468 196" class="d-line" marker-end="url(#ah4)"/>
+      </svg>
+      </div>
+      <figcaption>Dieta com mais fibra puxa para acetato. Dieta com mais grão puxa para propionato. Na literatura, a proporção acetato : propionato : butirato vai de cerca de 75:15:10 até 40:40:20, conforme a dieta.</figcaption>
+    </figure>
+    <ul>
+      <li><strong>Acetato:</strong> o mais produzido, sobretudo em dieta fibrosa. Principal precursor da <strong>gordura do leite</strong>. Se a dieta tem pouca fibra, cai o acetato e cai a gordura do leite.</li>
+      <li><strong>Propionato:</strong> aumenta com grãos. No fígado vira glicose (<strong>gliconeogênese</strong>, fabricação de glicose nova). A glicose vira lactose, o açúcar do leite.</li>
+      <li><strong>Butirato:</strong> usado no próprio epitélio do rúmen, onde vira <strong>corpos cetônicos</strong>. É o que mais estimula o crescimento das papilas, seguido do propionato e do acetato.</li>
+    </ul>
+  </div>
+
+  <div class="sub">
+    <h3>A microbiota do rúmen</h3>
+    <p>Condições que o rúmen precisa manter (Berchielli e colaboradores, 2006): <strong>pH de 5,5 a 6,8</strong>, substrato (comida) constante, <strong>temperatura de 38 a 42 °C</strong>, <strong>anaerobiose</strong> (sem oxigênio), potencial redutor e taxa de passagem constante.</p>
+    <div class="grid2">
+      <div class="card">
+        <h4>Bactérias</h4>
+        <ul>
+          <li>As mais numerosas e ativas.</li>
+          <li><strong>Celulolíticas</strong> (gram-positivas): digerem fibra, formam acetato, liberam CO₂ e H₂.</li>
+          <li><strong>Metanogênicas:</strong> usam esse CO₂ e H₂ para fazer metano.</li>
+          <li><strong>Amilolíticas</strong> (gram-negativas): digerem amido, formam propionato.</li>
+          <li>pH abaixo de 6,0 reduz as celulolíticas. Muito amido favorece as amilolíticas e prejudica a digestão da fibra.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>Protozoários</h4>
+        <ul>
+          <li>Unicelulares, anaeróbios, não causam doença.</li>
+          <li>20 a 200 µm, de 10 a 100 vezes maiores que bactérias.</li>
+          <li>Comem bactérias. Ao morrer, liberam nitrogênio de volta para as bactérias.</li>
+          <li>A população varia ao longo do dia.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>Fungos</h4>
+        <ul>
+          <li>Filo Neocallimastigomycota.</li>
+          <li>Cerca de <strong>8%</strong> da microbiota.</li>
+          <li>Amolecem a parede vegetal mais lignificada e abrem área para as bactérias grudarem.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>Relações ecológicas</h4>
+        <ul>
+          <li><strong>Predação:</strong> protozoário come bactéria.</li>
+          <li><strong>Competição:</strong> por espaço e nutrientes.</li>
+          <li><strong>Antibiose:</strong> um micróbio produz substância que inibe outro.</li>
+          <li><strong>Mutualismo:</strong> os dois se beneficiam (ex.: celulolíticas e metanogênicas).</li>
+        </ul>
+      </div>
+    </div>
+    <p>Pastagens tropicais têm pouca proteína. A falta de nitrogênio amoniacal (N-NH₃) pode limitar o crescimento dos micróbios. Antibióticos e aditivos na dieta devem <strong>reequilibrar</strong> a microbiota, nunca tentar eliminá-la.</p>
+  </div>
+
+  <div class="sub">
+    <h3>Estratégias de formulação</h3>
+    <ul>
+      <li><strong>Ureia:</strong> fonte de nitrogênio não proteico, barata. Os micróbios usam esse nitrogênio para fazer proteína. Uso criterioso. Não substitui fibra.</li>
+      <li><strong>Leguminosas:</strong> muita proteína, mas custo maior, menos volume por área e risco de timpanismo. Estratégia: uma área separada como <strong>"banco de proteína"</strong>, complementando o volumoso principal.</li>
+      <li>O desafio é atender o animal <strong>sem desarrumar o ambiente ruminal</strong>, dentro da realidade econômica da propriedade.</li>
+    </ul>
+  </div>
+
+  <div class="sub">
+    <h3>Distúrbios digestivos por erro de manejo</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Distúrbio</th><th>Causa</th><th>O que acontece</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Acidose ruminal</strong></td><td>Excesso de carboidrato de fermentação rápida (grão) e falta de fibra efetiva</td><td>pH cai de 5,5 a 7 para até 2 a 3 nos casos graves. Bactérias benéficas morrem. Falta de apetite, diarreia, menos ruminação, queda de produção. Emergência: "garrafada" de água com <strong>bicarbonato de sódio</strong>. O prejuízo pode durar até 6 meses</td></tr>
+        <tr><td><strong>Ruminite</strong></td><td>Acidoses repetidas; dieta rica em concentrado e pobre em fibra longa</td><td>Inflamação crônica do epitélio e das papilas. Pode evoluir para <strong>abscessos no fígado</strong></td></tr>
+        <tr><td><strong>Excesso de gordura</strong></td><td>Mais de <strong>7% de gordura</strong> na matéria seca</td><td>A gordura recobre a fibra e as celulolíticas não alcançam. Cai a digestão da fibra, o consumo e a <strong>gordura do leite</strong> (menos acetato). Fígado gorduroso em animais superalimentados</td></tr>
+        <tr><td><strong>Desequilíbrio proteico</strong></td><td>Muita proteína degradável sem energia ao mesmo tempo</td><td>A amônia sobe no rúmen e no sangue</td></tr>
+        <tr><td><strong>Falta de fibra</strong></td><td>Dieta sem fibra efetiva</td><td>Menos ruminação e menos saliva (menos tampão), acidose, queda de leite, <strong>laminite</strong> (inflamação do casco)</td></tr>
+        <tr><td><strong>Timpanismo primário (espumoso)</strong></td><td>Leguminosas jovens (alfafa, trevo) ou grão muito moído</td><td>Forma espuma estável que prende o gás. Distensão do <strong>lado esquerdo</strong>, risco de morte. Tratamento: antiespumante (tensoativo) por sonda. Prevenção: introduzir leguminosas aos poucos</td></tr>
+        <tr><td><strong>Timpanismo secundário</strong></td><td>Obstrução física</td><td>Ex.: corpo estranho preso no esôfago impede o arroto</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- 09 -->
+<section class="sec" id="nutricao">
+  <div class="sec-head">
+    <span class="eyebrow"><b>09</b> · Aula 11 (22/09)</span>
+    <h2>Nutrição de bovinos leiteiros por fase</h2>
+  </div>
+  <p>A dieta muda conforme a fase da vida e da lactação. O erro mais comum é dar a mesma comida para todas as vacas. A seguir, a vida da fêmea leiteira do nascimento ao pico de produção.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Fase</th><th>Recomendação dos slides</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Bezerra: colostro</strong></td><td>Nas primeiras <strong>6 horas</strong> de vida, no mínimo <strong>10% do peso vivo</strong>. Ex.: bezerra de 35 kg × 0,10 = 3,5 L</td></tr>
+      <tr><td><strong>Aleitamento (até 60 dias)</strong></td><td>Leite ou sucedâneo (substituto do leite) <strong>4 a 6 L por dia</strong> + concentrado inicial peletizado com <strong>18 a 22% de PB</strong>, sem poeira, para estimular o rúmen</td></tr>
+      <tr><td><strong>Pós-desmame (até 6 meses)</strong></td><td>Concentrado 1,5 a 2 kg por dia + volumoso de alta qualidade (feno ou silagem de milho)</td></tr>
+      <tr><td><strong>Novilhas de 6 a 12 meses</strong></td><td><strong>15 a 16% de PB</strong>, boa digestibilidade, ganho de <strong>700 a 800 g por dia</strong></td></tr>
+      <tr><td><strong>Novilhas de 12 meses ao parto</strong></td><td>Mais volumoso; PB pode cair para <strong>13 a 14%</strong>. Excesso de energia deposita gordura no úbere</td></tr>
+      <tr><td><strong>Vaca seca inicial (30 a 40 dias)</strong></td><td>Dieta de mantença: alta fibra e baixa energia (silagem de capim, feno)</td></tr>
+      <tr><td><strong>Pré-parto (close-up, 21 dias)</strong></td><td>Introdução gradual do concentrado da lactação + <strong>dieta aniônica</strong></td></tr>
+      <tr><td><strong>Início da lactação (0 a 100 DEL)</strong></td><td>BEN; <strong>17 a 19% de PB</strong>; gordura protegida e amido; respeitar o mínimo de FDN efetiva</td></tr>
+      <tr><td><strong>Meio (100 a 200 DEL)</strong></td><td>Pico de consumo de MS; <strong>16 a 17% de PB</strong>; ajustar energia para manter a persistência</td></tr>
+      <tr><td><strong>Final (200 a 305 DEL)</strong></td><td>Mais volumoso, menos concentrado; <strong>14 a 15% de PB</strong>; recuperar ECC sem engordar (<strong>ECC ao secar: 3,25 a 3,5</strong>)</td></tr>
+    </tbody>
+  </table></div>
+  <p>Siglas: <strong>PB</strong> é proteína bruta. <strong>MS</strong> é matéria seca (o alimento sem a água). <strong>DEL</strong> é dias em lactação, contados do parto (dia 0) até uns 305 dias. <strong>ECC</strong> é escore de condição corporal. <strong>BEN</strong> é balanço energético negativo.</p>
+
+  <div class="sub">
+    <h3>Recria: a fase mais negligenciada</h3>
+    <p>Recria é a fase da novilha entre a cria e a primeira gestação. O foco é <strong>crescimento estrutural sem acumular gordura</strong>. Gordura demais dificulta o parto, se deposita no úbere (atrapalha o tecido que produz leite) e sobrecarrega as articulações, encurtando a vida útil. Muitos produtores dão as sobras para as novilhas. Elas chegam ao parto pequenas e viram vacas de baixa produção. Investir na recria dá retorno no futuro.</p>
+  </div>
+
+  <div class="sub">
+    <h3>Vaca seca e pré-parto</h3>
+    <p>A vaca para de ser ordenhada uns <strong>60 dias antes do próximo parto</strong>. Objetivos: <strong>recuperar a glândula mamária</strong>, recuperar as reservas corporais e preparar a próxima lactação. Nos primeiros 30 a 40 dias, muita fibra e pouco concentrado. Reduzir a ração sinaliza ao corpo o fim da lactação. Evitar engordar.</p>
+    <p>Os últimos <strong>21 dias</strong> são o <strong>período de transição</strong>, a fase crítica. No último terço da gestação o feto ganha uns 60% do peso. Logo depois vêm colostro e leite. A demanda de cálcio é enorme.</p>
+    <div class="note">
+      <span class="lab">Dieta aniônica e hipocalcemia, explicadas passo a passo</span>
+      <ol>
+        <li><strong>Hipocalcemia puerperal</strong> (febre do leite, paresia puerperal) é a queda de cálcio no sangue logo após o parto. A vaca cai e não consegue levantar. Aparece em geral nas primeiras 24 a 48 h, mais em vacas de alta produção e a partir da segunda lactação.</li>
+        <li>Se o produtor só dá muito cálcio pronto no pré-parto, o corpo "se acostuma" e não ativa os mecanismos de buscar cálcio no osso e no intestino.</li>
+        <li>A dieta aniônica tem mais <strong>ânions</strong> (íons negativos: cloro, enxofre) do que <strong>cátions</strong> (íons positivos: sódio, potássio). A conta usada é a <strong>DCAD</strong> (diferença cátion-ânion da dieta): DCAD = (Na + K) − (Cl + S). Na dieta aniônica ela fica <strong>negativa</strong>.</li>
+        <li>Isso deixa o sangue levemente ácido (acidose metabólica leve). Nessa condição o corpo responde melhor aos hormônios que tiram cálcio do osso e aumentam a absorção no intestino.</li>
+        <li>Resultado: a vaca chega ao parto com o sistema de mobilizar cálcio já "treinado". O controle prático é medir o pH da urina, que fica mais ácido.</li>
+      </ol>
+      <p>Tratamento da vaca caída: aplicação de cálcio. Ela costuma se recuperar rápido.</p>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>Curva de lactação, ECC e balanço energético negativo</h3>
+    <figure>
+      <div class="fig">
+      <svg viewBox="0 0 720 300" role="img" aria-label="Curvas esquemáticas de produção de leite, consumo de matéria seca e escore corporal ao longo da lactação">
+        <rect x="60" y="40" width="173" height="190" class="d-zone-straw"/>
+        <rect x="586" y="40" width="104" height="190" class="d-zone-tint"/>
+        <text x="146" y="34" text-anchor="middle" class="d-tstraw">BEN</text>
+        <text x="638" y="34" text-anchor="middle" class="d-ts">vaca seca</text>
+        <line x1="60" y1="230" x2="690" y2="230" class="d-line"/>
+        <line x1="60" y1="40" x2="60" y2="230" class="d-line"/>
+        <path d="M60 170 C 100 60, 130 55, 146 58 C 300 75, 450 130, 586 175" class="d-line-acc"/>
+        <path d="M60 205 C 150 150, 200 105, 260 100 C 380 100, 480 120, 586 140 L 690 160" class="d-line-straw"/>
+        <path d="M60 92 C 120 122, 180 136, 230 136 C 350 132, 480 106, 586 94 L 690 92" class="d-line-dash"/>
+        <g class="d-tm">
+          <text x="60" y="248" text-anchor="middle">0</text>
+          <text x="233" y="248" text-anchor="middle">100</text>
+          <text x="405" y="248" text-anchor="middle">200</text>
+          <text x="586" y="248" text-anchor="middle">305</text>
+          <text x="690" y="248" text-anchor="middle">365</text>
+        </g>
+        <text x="146" y="266" text-anchor="middle" class="d-ts">início</text>
+        <text x="319" y="266" text-anchor="middle" class="d-ts">meio</text>
+        <text x="495" y="266" text-anchor="middle" class="d-ts">final</text>
+        <text x="375" y="288" text-anchor="middle" class="d-t">dias em lactação (DEL)</text>
+        <line x1="420" y1="56" x2="446" y2="56" class="d-line-acc"/><text x="452" y="60" class="d-ts">produção de leite (pico ≈ 50 DEL)</text>
+        <line x1="420" y1="74" x2="446" y2="74" class="d-line-straw"/><text x="452" y="78" class="d-ts">consumo de matéria seca (pico depois)</text>
+        <line x1="420" y1="92" x2="446" y2="92" class="d-line-dash"/><text x="452" y="96" class="d-ts">ECC: 3,5 no parto, cai e recupera</text>
+      </svg>
+      </div>
+      <figcaption>Esquema sem valores no eixo vertical. O leite chega ao pico antes do consumo de comida. Nesse intervalo a vaca gasta mais energia do que come e tira o resto da gordura do corpo (zona do BEN).</figcaption>
+    </figure>
+    <p>O <strong>ECC</strong> avalia a gordura corporal numa escala de 1 a 5, com meios pontos. O ideal ao parto é <strong>cerca de 3,5</strong>. No início da lactação a vaca mobiliza reservas e pode cair para 2,5 ou até 2.</p>
+    <p>Nos primeiros cerca de 100 dias a vaca está em <strong>balanço energético negativo</strong>: produz mais leite do que consegue comer. Ela queima gordura do corpo para compensar.</p>
+    <div class="note">
+      <span class="lab">Do BEN para a cetose</span>
+      <ol>
+        <li>No BEN, a vaca mobiliza muita gordura corporal, que chega ao fígado como ácidos graxos livres.</li>
+        <li>Se chega mais gordura do que o fígado consegue queimar, ele produz <strong>corpos cetônicos</strong> (acetoacetato, acetona e beta-hidroxibutirato, o BHB) e acumula gordura (fígado gorduroso, lipidose hepática).</li>
+        <li>Corpos cetônicos em excesso intoxicam a vaca: é a <strong>cetose</strong>. Cai o apetite e o leite.</li>
+        <li>Diagnóstico prático: medir BHB no sangue com aparelho portátil. Na literatura, BHB a partir de cerca de 1,2 a 1,4 mmol/L já indica cetose subclínica (sem sinais visíveis).</li>
+        <li>Vacas gordas demais no parto (ECC alto) comem menos depois e correm mais risco. Por isso a meta de ECC 3,5 e a gordura protegida na dieta.</li>
+      </ol>
+    </div>
+    <ul>
+      <li><strong>Gordura protegida</strong> (<i>by-pass</i>, que "passa direto"): gordura que atravessa o rúmen sem atrapalhar a fermentação e é absorvida no intestino. Gordura livre no rúmen recobre a fibra e prejudica as celulolíticas.</li>
+      <li>Ajuste econômico: se a produção cai, reduzir a ração. Senão o produtor gasta sem retorno.</li>
+    </ul>
+  </div>
+
+  <div class="sub">
+    <h3>Sistema de Van Soest: as frações da fibra</h3>
+    <p>É um método de laboratório que separa a planta pela solubilidade em detergentes.</p>
+    <figure>
+      <div class="fig">
+      <svg viewBox="0 0 720 170" role="img" aria-label="Barra das frações da planta pelo método de Van Soest">
+        <rect x="40" y="30" width="256" height="44" class="d-zone-acc"/>
+        <rect x="296" y="30" width="160" height="44" class="d-zone-straw"/>
+        <rect x="456" y="30" width="160" height="44" class="d-zone-tint" style="stroke:var(--line)"/>
+        <rect x="616" y="30" width="64" height="44" class="d-zone-bad"/>
+        <text x="168" y="57" text-anchor="middle" class="d-t">conteúdo celular</text>
+        <text x="376" y="57" text-anchor="middle" class="d-t">hemicelulose</text>
+        <text x="536" y="57" text-anchor="middle" class="d-t">celulose</text>
+        <text x="648" y="57" text-anchor="middle" class="d-ts">lignina</text>
+        <text x="168" y="20" text-anchor="middle" class="d-ts">açúcar, amido, pectina, proteína solúvel</text>
+        <path d="M296 88 L296 96 L680 96 L680 88" class="d-line"/>
+        <text x="488" y="114" text-anchor="middle" class="d-ta">FDN = hemicelulose + celulose + lignina</text>
+        <path d="M456 126 L456 134 L680 134 L680 126" class="d-line"/>
+        <text x="568" y="154" text-anchor="middle" class="d-tstraw">FDA = celulose + lignina</text>
+        <text x="40" y="114" class="d-ts">rápida digestão</text>
+        <text x="40" y="132" class="d-ts">(solúvel em detergente neutro)</text>
+      </svg>
+      </div>
+      <figcaption>Larguras ilustrativas. A FDN é a parede celular inteira. A FDA é a parte mais difícil de digerir. A lignina não é digerida nem pelos micróbios.</figcaption>
+    </figure>
+    <ul>
+      <li><strong>FDN</strong> (fibra em detergente neutro): celulose, hemicelulose, lignina e sílica. É a parte que não se dissolve em detergente neutro. Ligada ao <strong>consumo</strong> e à ruminação: quanto mais FDN, mais o alimento enche o rúmen.</li>
+      <li><strong>FDA</strong> (fibra em detergente ácido): celulose + lignina. Ligada à <strong>digestibilidade</strong>: quanto maior, menos digestível.</li>
+      <li>Contas: <strong>FDN − FDA = hemicelulose</strong>. <strong>FDA − lignina = celulose</strong>.</li>
+    </ul>
+    <div class="calc">
+      <span class="lab">Exemplo de conta</span>
+      <ol>
+        <li>Um capim tem FDN = 65%, FDA = 38% e lignina = 6%.</li>
+        <li>Hemicelulose = 65 − 38 = <strong>27%</strong>.</li>
+        <li>Celulose = 38 − 6 = <strong>32%</strong>.</li>
+        <li>Conteúdo celular = 100 − 65 = <strong>35%</strong>.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>Volumoso</h3>
+    <p><strong>Volumoso</strong> é alimento com mais de <strong>18% de fibra bruta na matéria seca</strong>, em geral com muita água, consumido em grande volume. É a <strong>base da dieta do ruminante</strong>, cerca de <strong>60%</strong>. Funções: estimula mastigação, ruminação e saliva (o tampão), mantém o rúmen saudável e previne acidose. Além disso, <strong>é mais barato que o concentrado</strong>.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Tipo</th><th>Detalhes</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Pastagens</strong></td><td>Nativas, nativas melhoradas (sobressemeadura de gramíneas ou leguminosas no campo nativo) e cultivadas</td></tr>
+        <tr><td><strong>Aquosos in natura</strong></td><td>75 a 85% de umidade, cortados e dados no cocho. Capineiras de capim-elefante (Napier, Pioneiro, Kurumi) e BRS Capiaçu. Cana picada, em geral com 1% de mistura de ureia e sulfato de amônio. Leguminosas frescas: alfafa, feijão-guandu</td></tr>
+        <tr><td><strong>Feno</strong></td><td>Capim desidratado, 10 a 15% de umidade. Mantém proteína e energia se colhido na hora certa. Fibra efetiva</td></tr>
+        <tr><td><strong>Silagem</strong></td><td>Forragem fermentada e guardada sem ar. Milho (a mais usada e nutritiva), sorgo (regiões mais secas), capim (excedente das águas)</td></tr>
+        <tr><td><strong>Pré-secado</strong> (<i>haylage</i>)</td><td>Entre feno e silagem: murcha parcial e depois ensila</td></tr>
+        <tr><td><strong>Palhadas</strong></td><td>Restos da colheita de grãos. Baratas, muita lignina, pouca digestibilidade. Úteis para vacas secas e novilhas que não podem engordar</td></tr>
+        <tr><td><strong>Cascas e subprodutos</strong></td><td>Cascas da indústria de grãos; bagaço de cana (muita fibra, poucos nutrientes, opção mas não volumoso principal)</td></tr>
+      </tbody>
+    </table></div>
+    <p><strong>Qualidade do volumoso:</strong></p>
+    <ul>
+      <li><strong>Digestibilidade:</strong> bom volumoso tem <strong>NDT acima de 65%</strong> (NDT é nutrientes digestíveis totais, uma medida de energia). Pasto verde e novo fica acima; pasto seco e lignificado fica abaixo.</li>
+      <li><strong>Palatabilidade:</strong> o quanto o alimento desperta o interesse do animal (ex.: o cheiro de uma boa silagem). Com fome o animal come alimento ruim, mas rende pouco.</li>
+      <li><strong>Plantas tóxicas:</strong> <strong>maria-mole ou flor-das-almas</strong> (<i>Senecio</i> spp., flor amarela de beira de estrada): animais da região costumam evitar; animais de fora comem por não conhecer, e todos comem em falta de alimento. <strong>Samambaia</strong> (<i>Pteridium</i>): cresce em solo ácido sem calagem; consumo prolongado causa tumores de bexiga e sangue na urina (hematúria enzoótica). Prevenção: análise e correção do solo e boa formação de pastagem.</li>
+    </ul>
+  </div>
+
+  <div class="sub">
+    <h3>Relação volumoso:concentrado e lotes</h3>
+    <p>A relação deve ficar entre <strong>40:60 e 60:40</strong>, conforme a fase. No início da lactação, cerca de 40% volumoso e 60% concentrado. Nas fases seguintes, mais volumoso. Vaca com mais leite recebe mais concentrado. Por isso se divide o rebanho em lotes: início, meio e final da lactação, e vacas secas.</p>
+    <p><strong>Concentrado para vacas em lactação:</strong> <strong>18 a 22% de PB</strong> e <strong>NDT acima de 70%</strong>. Energéticos: milho, sorgo, milheto, polpa cítrica, farelo de trigo, melaço (melhora o sabor). Proteicos (mais de 20% de PB): farelo de soja, farelo e caroço de algodão. Alternativos: raspa e farelo de mandioca, resíduo úmido de cervejaria (rico em proteína, mas estraga rápido).</p>
+    <div class="calc">
+      <span class="lab">Regra prática da Embrapa: quanto concentrado dar</span>
+      <p>1 kg de concentrado para cada 2,5 a 3 kg de leite, dividido em 2 ou 3 refeições.</p>
+      <ol>
+        <li>Vaca de 30 L por dia. Usando 1 kg para cada 3 L.</li>
+        <li>30 ÷ 3 = <strong>10 kg de ração por dia</strong>.</li>
+        <li>Em 3 refeições: 10 ÷ 3 ≈ 3,3 kg por refeição.</li>
+        <li>Um lote de 20 vacas assim: 20 × 10 = <strong>200 kg de ração por dia</strong>.</li>
+      </ol>
+      <p>Na Aula 15 o professor completou: a regra vale <strong>a partir de 12 a 15 L por vaca</strong>. Abaixo disso, o pasto bom dá conta.</p>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>Minerais</h3>
+    <ul>
+      <li><strong>Macrominerais</strong> (exigidos em gramas): cálcio e fósforo na proporção de <strong>1,5:1 a 2:1</strong>, mais magnésio, sódio, cloro e potássio.</li>
+      <li><strong>Microminerais</strong> (em miligramas): zinco, cobre, selênio, manganês, iodo e cobalto.</li>
+      <li>Funções: repor o cálcio e fósforo do leite (prevenir hipocalcemia), atuar como cofatores dos hormônios da reprodução e fortalecer a imunidade (selênio com vitamina E e zinco reduzem mastite e problemas de casco). Falta de sal mineral está ligada à retenção de placenta.</li>
+    </ul>
+    <div class="note warn">
+      <span class="lab">Cuidados</span>
+      <ul>
+        <li>Evitar mudanças bruscas de dieta (acidose, timpanismo, laminite).</li>
+        <li><strong>Farinha de ossos e outros produtos de origem animal são proibidos por lei</strong> na alimentação de ruminantes, pelo risco da encefalopatia espongiforme bovina ("vaca louca").</li>
+        <li>Água limpa: água suja reduz consumo, digestão e ganho de peso.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 10 -->
+<section class="sec" id="pastagens">
+  <div class="sec-head">
+    <span class="eyebrow"><b>10</b> · Aula 13 (29/09)</span>
+    <h2>Pastagens: produção e manejo</h2>
+  </div>
+  <p>O pasto é a <strong>base da pecuária brasileira</strong> e o alimento mais barato. O clima do Brasil favorece muito o acúmulo de biomassa pela fotossíntese. Bons produtores de leite se veem como "produtores de pasto".</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Termo</th><th>Definição</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Pasto</strong></td><td>Comunidade de plantas que alimenta animais em pastejo</td></tr>
+      <tr><td><strong>Pastagem</strong></td><td>Área de pasto, em geral cercada</td></tr>
+      <tr><td><strong>Piquete</strong></td><td>Cada subdivisão da pastagem no pastejo rotativo</td></tr>
+      <tr><td><strong>Capineira</strong></td><td>Área de capim de alta produção usada só para corte</td></tr>
+      <tr><td><strong>Unidade animal (UA)</strong></td><td>Vaca adulta não lactante de <strong>450 kg</strong>, ou equivalente</td></tr>
+      <tr><td><strong>Taxa de lotação</strong></td><td>Animais por área num período (UA/ha)</td></tr>
+      <tr><td><strong>Pressão de pastejo</strong></td><td>Relação entre peso dos animais e massa seca de forragem</td></tr>
+      <tr><td><strong>Superpastejo</strong></td><td>Acima da capacidade de suporte: estraga a vegetação e expõe o solo</td></tr>
+      <tr><td><strong>Subpastejo</strong></td><td>Muito abaixo da capacidade: o animal seleciona demais e sobra forragem que se perde</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="sub">
+    <h3>O que limita o crescimento do pasto</h3>
+    <ul>
+      <li><strong>Solo:</strong> fertilidade e acidez (precisa de calagem e adubação, principalmente <strong>fósforo</strong>, que estimula a raiz); drenagem e textura (a maioria das plantas não tolera solo encharcado ou compactado); profundidade (pedra rasa limita a raiz).</li>
+      <li><strong>Água:</strong> seca paralisa a fotossíntese, fecha os <strong>estômatos</strong> (os "poros" da folha) e faz a planta gastar as reservas. Excesso de água sem drenagem sufoca a raiz por falta de oxigênio.</li>
+      <li><strong>Luz e temperatura:</strong> impulsionam a fotossíntese e o <strong>perfilhamento</strong> (nascimento de novos brotos, os perfilhos).</li>
+      <li><strong>Semente:</strong> baixa <strong>pureza</strong> ou baixa <strong>germinação</strong> causa falhas e abre espaço para plantas daninhas. A embalagem informa a pureza. Semente plantada funda demais gasta a energia antes de emergir.</li>
+      <li><strong>Degradação:</strong> com superpastejo a planta não tem tempo de rebrotar. Solo sem cobertura recebe sol direto e a chuva causa <strong>erosão</strong>. Trilhas dos animais concentram água e pioram a erosão.</li>
+      <li><strong>Pragas e doenças:</strong> cigarrinha-das-pastagens e fungos.</li>
+    </ul>
+  </div>
+
+  <div class="sub">
+    <h3>O sistema de produção a pasto</h3>
+    <p>Segundo Da Silva e Pedreira (1997), o sistema se baseia em manipular três componentes: <strong>ambiente, planta e animal</strong>. O objetivo é equilibrar a <strong>oferta</strong> de alimento (forragem produzida + forragem conservada, como silagem e feno) com a <strong>demanda</strong> (exigência de cada animal × número de animais).</p>
+    <p>São três etapas: <strong>crescimento</strong> da planta (fotossíntese, clima, fertilidade), <strong>utilização</strong> (consumo pelos animais, controlado pela taxa de lotação) e <strong>conversão</strong> em carne ou leite.</p>
+    <p>Vantagens frente ao confinamento: <strong>baixo custo</strong> (menos máquinas, instalações e comida no cocho), <strong>margens atrativas</strong> e <strong>bem-estar</strong> (liberdade de movimento, valorizada pelo consumidor).</p>
+  </div>
+
+  <div class="sub">
+    <h3>Métodos de pastejo</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Método</th><th>Como funciona</th><th>Observações</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Contínuo</strong></td><td>Animais na mesma área o tempo todo</td><td>Sistema antigo, comum em pasto nativo. Muita área, pouca produção. Mesmo nele se fazem subdivisões, chamadas <strong>"mangas"</strong>. Braquiárias toleram bem (aguentam pisoteio)</td></tr>
+        <tr><td><strong>Alternado</strong></td><td>Área dividida em dois piquetes</td><td>Simples, já dá descanso a uma das áreas</td></tr>
+        <tr><td><strong>Rotativo (rotacionado)</strong></td><td>Vários piquetes, com período de pastejo limitado e descanso entre usos</td><td>Mais animais por área e forragem de melhor qualidade. Convencional: um único grupo de animais</td></tr>
+        <tr><td><strong>Rotativo em faixas</strong></td><td>Com <strong>cerca elétrica</strong>, libera-se a cada dia a faixa do consumo do dia</td><td>Ocupação de <strong>1 dia</strong>. A dieta não varia de um dia para o outro e o leite fica uniforme. Muito usado em leite</td></tr>
+        <tr><td><strong>Primeiro e último</strong> (ponta e repasse)</td><td>Categorias diferentes usam o mesmo piquete em sequência</td><td>Vacas em lactação (mais exigentes) entram na frente; vacas secas depois</td></tr>
+        <tr><td><strong>Creep grazing</strong> (pastejo privativo)</td><td>Igual ao primeiro e último, mas o primeiro grupo são os <strong>bezerros</strong></td><td>Eles passam por uma abertura estreita e comem as pontas das folhas antes das mães. Acelera o desenvolvimento do rúmen</td></tr>
+        <tr><td><strong>Creep feeding</strong> (cocho privativo)</td><td>Cocho com passagem estreita só para bezerros</td><td>Ração ou concentrado proteico-energético. Acelera o crescimento das papilas</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note">
+      <span class="lab">Por que no máximo 7 dias de ocupação</span>
+      <ol>
+        <li>Os ovos de vermes saem nas fezes dos animais.</li>
+        <li>A maioria dos parasitas de bovinos leva uns <strong>5 a 7 dias</strong> para virar larva infectante no pasto.</li>
+        <li>Se o gado sai do piquete antes disso, não come as larvas que ele mesmo eliminou.</li>
+        <li>Por isso: bovinos <strong>até 7 dias</strong>. Ovinos <strong>no máximo 5, de preferência até 3</strong>, porque pastejam mais baixo, perto das fezes, e são mais seletivos.</li>
+        <li>O rotativo reduz a carga parasitária e o uso de vermífugo, que ainda é necessário.</li>
+      </ol>
+    </div>
+    <p><strong>Primeiro e último no exemplo do professor:</strong> ele dividiu em três grupos. Primeiro entram as vacas de alta produção (início da lactação, em BEN), que pegam as pontas das folhas. Depois as de final de lactação, que precisam de menos. Por último as vacas que se quer secar, que ficam com talos, o que ajuda a reduzir a produção. Isso exige avaliar o pasto de perto, "não só pela janela da cozinha".</p>
+  </div>
+
+  <div class="sub">
+    <h3>Escolha da forrageira</h3>
+    <p>Depende da <strong>fertilidade do solo</strong>, do <strong>clima</strong> (regime de chuvas, geada) e do <strong>método de pastejo</strong>. Não adianta levar planta tropical para Lages, na Serra Catarinense: ela morre na geada. Solo pobre pede planta rústica. Solo fértil comporta plantas exigentes e mais produtivas. As principais tropicais são dos gêneros <i>Brachiaria</i> (hoje também chamada <i>Urochloa</i>) e <i>Panicum</i>.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Espécie</th><th>Característica</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Braquiarão</strong> (<i>B. brizantha</i> cv. Marandu)</td><td>"Campeão dos campeões". O mais cultivado no país, produtivo e <strong>resistente à cigarrinha</strong></td></tr>
+        <tr><td><i>B. decumbens</i></td><td>Pouco exigente em fertilidade, mas <strong>sensível à cigarrinha</strong></td></tr>
+        <tr><td><i>B. humidicola</i></td><td>Solos <strong>encharcados</strong> ou alagáveis; tolera baixa fertilidade</td></tr>
+        <tr><td><strong>Mombaça</strong> (<i>Panicum</i>)</td><td>Muito produtivo, proteína alta, exige solo fértil</td></tr>
+        <tr><td><strong>Tanzânia</strong> (<i>Panicum</i>)</td><td>Destaque em sistemas intensivos de engorda e leite</td></tr>
+        <tr><td><strong>Andropogon</strong></td><td>Extremamente rústico: solo seco e pobre, cerrado, semiárido</td></tr>
+        <tr><td><strong>Capim-elefante</strong></td><td>Muito produtivo; rotativo intensivo ou capineira; exige alta fertilidade</td></tr>
+        <tr><td><strong>Aveia-preta</strong></td><td>Principal gramínea de <strong>inverno</strong> no Sul, para pastejo ou palhada</td></tr>
+        <tr><td><strong>Azevém</strong></td><td>Inverno; excelente qualidade; resiste a pisoteio e umidade</td></tr>
+        <tr><td><strong>Amendoim forrageiro</strong></td><td>Leguminosa para consórcio com gramíneas; fixa nitrogênio</td></tr>
+        <tr><td><strong>Estilosantes</strong></td><td>Leguminosa rústica, adaptada a solo ácido e pobre</td></tr>
+      </tbody>
+    </table></div>
+    <p>Leguminosas fixam nitrogênio do ar no solo (com bactérias nas raízes) e trazem mais proteína para a dieta.</p>
+  </div>
+
+  <div class="sub">
+    <h3>Solo: análise, calagem, adubação</h3>
+    <p>A sequência é: <strong>análise de solo → correção da acidez (calagem) → adubação de manutenção</strong>. A análise é barata e rápida. Colete subamostras em vários pontos da área para formar uma amostra representativa. "Análise ruim, tratamento ruim." A <strong>calagem</strong> (aplicar calcário para corrigir a acidez) leva uns <strong>6 a 8 meses</strong> para fazer efeito, e a correção completa pode levar <strong>2 a 3 anos</strong>. O investimento é parcelado. Dejetos fermentados também servem de adubo orgânico.</p>
+  </div>
+
+  <div class="sub">
+    <h3>Quantos piquetes fazer</h3>
+    <p>Não basta dizer "tenho tantas vacas, faço tantos piquetes". É preciso alinhar capim disponível, consumo e tempo de descanso. As variáveis: <strong>período de descanso</strong> (tempo para o capim rebrotar), <strong>período de ocupação</strong> (tempo dos animais em cada piquete, 1 a 7 dias), massa de forragem e UA.</p>
+    <div class="note">
+      <span class="lab">Fórmula</span>
+      <p style="font-family:var(--f-mono);font-size:1.05rem">Número de piquetes = (período de descanso ÷ período de ocupação) + 1</p>
+    </div>
+    <div class="calc">
+      <span class="lab">Exemplo do slide</span>
+      <ol>
+        <li>Descanso de 30 dias, ocupação de 3 dias.</li>
+        <li>Passo 1: 30 ÷ 3 = 10. São 10 piquetes descansando.</li>
+        <li>Passo 2: 10 + 1 = <strong>11 piquetes</strong>. O +1 é o piquete que está sendo ocupado enquanto os outros descansam.</li>
+        <li>Conferindo: o gado passa 3 dias em cada um dos outros 10 antes de voltar. 10 × 3 = 30 dias de descanso. Bate.</li>
+      </ol>
+      <p>Outro exemplo: descanso de 30 dias e ocupação de 1 dia (faixa): 30 ÷ 1 + 1 = <strong>31 piquetes</strong>.</p>
+    </div>
+    <figure>
+      <div class="fig">
+      <svg viewBox="0 0 720 170" role="img" aria-label="Onze piquetes com um ocupado e dez em descanso">
+        <defs><marker id="ah5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="d-ah"/></marker></defs>
+        <rect x="20" y="30" width="54" height="70" rx="6" class="d-box-acc" style="fill:var(--accent)"/>
+        <text x="47" y="62" text-anchor="middle" class="d-tb" style="fill:var(--bg)">1</text>
+        <text x="47" y="82" text-anchor="middle" class="d-tm" style="fill:var(--bg)">gado</text>
+        <g>
+          <rect x="82" y="30" width="54" height="70" rx="6" class="d-box-tint"/><text x="109" y="70" text-anchor="middle" class="d-t">2</text>
+          <rect x="144" y="30" width="54" height="70" rx="6" class="d-box-tint"/><text x="171" y="70" text-anchor="middle" class="d-t">3</text>
+          <rect x="206" y="30" width="54" height="70" rx="6" class="d-box-tint"/><text x="233" y="70" text-anchor="middle" class="d-t">4</text>
+          <rect x="268" y="30" width="54" height="70" rx="6" class="d-box-tint"/><text x="295" y="70" text-anchor="middle" class="d-t">5</text>
+          <rect x="330" y="30" width="54" height="70" rx="6" class="d-box-tint"/><text x="357" y="70" text-anchor="middle" class="d-t">6</text>
+          <rect x="392" y="30" width="54" height="70" rx="6" class="d-box-tint"/><text x="419" y="70" text-anchor="middle" class="d-t">7</text>
+          <rect x="454" y="30" width="54" height="70" rx="6" class="d-box-tint"/><text x="481" y="70" text-anchor="middle" class="d-t">8</text>
+          <rect x="516" y="30" width="54" height="70" rx="6" class="d-box-tint"/><text x="543" y="70" text-anchor="middle" class="d-t">9</text>
+          <rect x="578" y="30" width="54" height="70" rx="6" class="d-box-tint"/><text x="605" y="70" text-anchor="middle" class="d-t">10</text>
+          <rect x="640" y="30" width="54" height="70" rx="6" class="d-box-tint"/><text x="667" y="70" text-anchor="middle" class="d-t">11</text>
+        </g>
+        <text x="47" y="20" text-anchor="middle" class="d-ta">3 dias</text>
+        <text x="388" y="20" text-anchor="middle" class="d-ts">10 piquetes descansando, 3 dias cada = 30 dias até o gado voltar ao 1</text>
+        <path d="M60 116 L660 116" class="d-line" marker-end="url(#ah5)"/>
+        <text x="360" y="138" text-anchor="middle" class="d-t">sentido da rotação</text>
+        <text x="360" y="158" text-anchor="middle" class="d-ts">todo piquete precisa ter acesso a água, sombra e sal</text>
+      </svg>
+      </div>
+      <figcaption>O exemplo do slide desenhado: 11 piquetes, 3 dias de ocupação, 30 dias de descanso.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 11 -->
+<section class="sec" id="sistemas">
+  <div class="sec-head">
+    <span class="eyebrow"><b>11</b> · Aula 15 (06/10)</span>
+    <h2>Sistemas e cadeias produtivas do leite</h2>
+  </div>
+  <p><strong>Sistema produtivo de leite</strong> é o conjunto de recursos, práticas e tecnologias que a fazenda usa para transformar alimento (pasto e ração) em leite, com eficiência econômica e sanitária, usando vacas, ovelhas ou cabras.</p>
+  <div class="grid2">
+    <div class="card"><h4>Alimentação</h4><p>Define volume e qualidade do leite. É o maior custo diário: <strong>40 a 60% do custo de produção</strong> (menos a pasto, mais com ração). Dieta por categoria. Consumo de MS cresce com o peso e a produção.</p></div>
+    <div class="card"><h4>Sanidade e higiene</h4><p>Responsabilidade primária do <strong>médico veterinário</strong>: vacinação (aftosa e brucelose obrigatórias), vermifugação, tratamentos e boas práticas de ordenha.</p></div>
+    <div class="card"><h4>Reprodução</h4><p>Dividida entre veterinário e zootecnista. Meta: um parto por ano. Novilhas que começam cedo tendem a produzir mais. Tecnologias: IA, IATF, FIV.</p></div>
+    <div class="card"><h4>Genética</h4><p>Raças adequadas à região. Selecionar além do volume: <strong>sólidos</strong>, <strong>resistência a doenças</strong> (incluindo mastite) e <strong>facilidade de parto</strong>.</p></div>
+  </div>
+
+  <div class="sub">
+    <h3>Higiene da ordenha, na ordem</h3>
+    <ol class="steps">
+      <li><div><strong>Teste da caneca de fundo preto.</strong> Antes de toda ordenha, tirar 1 ou 2 jatos de cada teto na caneca. <strong>Grumos</strong> no leite indicam <strong>mastite clínica</strong> começando. O fundo preto faz o grumo branco aparecer.</div></li>
+      <li><div><strong>Lavar só se o teto estiver sujo</strong> (barro). Lavar sempre leva a sujeira de cima para a ponta do teto.</div></li>
+      <li><div><strong>Pré-dipping</strong> (imersão antes da ordenha): mergulhar o teto em desinfetante e deixar agir <strong>30 segundos</strong> para reduzir os micróbios.</div></li>
+      <li><div><strong>Secar com papel-toalha, uma folha por teto.</strong> Nunca usar o "paninho" coletivo: o canal do teto está aberto e o pano espalha bactérias de um teto para o outro. Papel é mais barato que tratar mastite.</div></li>
+      <li><div><strong>Ordenhar com o teto seco.</strong> Teto molhado faz a gota de água subir pela teteira e levar sujeira para dentro.</div></li>
+      <li><div><strong>Pós-dipping</strong> (imersão depois): selante mais espesso que protege o canal do teto até ele fechar, uns <strong>20 a 30 minutos</strong>. Pré e pós-dipping são produtos diferentes e não se trocam.</div></li>
+    </ol>
+    <p><strong>Número de ordenhas:</strong> 2 por dia em produção normal. <strong>3 por dia</strong> em rebanhos de alta produção, porque o úbere cheio por muito tempo pode inflamar (e a terceira ordenha aumenta um pouco a produção).</p>
+  </div>
+
+  <div class="sub">
+    <h3>Mastite</h3>
+    <p><strong>Mastite</strong> é a inflamação da glândula mamária. Pode ser só inflamatória (úbere cheio por muito tempo, trata com anti-inflamatório) ou infecciosa (com pus, trata com antibiótico). Na forma <strong>clínica</strong> se vê alteração no leite ou no úbere (grumos, inchaço). Na forma <strong>subclínica</strong> não se vê nada, mas as células de defesa no leite aumentam e a produção cai. A subclínica é a mais comum e a que dá mais prejuízo escondido.</p>
+    <ul>
+      <li><strong>CMT</strong> (<i>California Mastitis Test</i>, teste da Califórnia): feito na fazenda, numa raquete com reagente. Estima a quantidade de células somáticas: quanto mais gelatinosa a mistura, mais células, mais inflamação. Serve para achar a subclínica.</li>
+      <li><strong>CCS</strong> (contagem de células somáticas): feita em laboratório. Células somáticas são principalmente células de defesa. Segundo a Embrapa, CCS acima de <strong>200 mil células por mL</strong> já é compatível com mastite subclínica no quarto.</li>
+      <li>Vacas com mastite são <strong>ordenhadas por último</strong> e o leite é <strong>descartado</strong>.</li>
+      <li><strong>Tratamento intramamário:</strong> esgotar todo o leite do quarto e aplicar <strong>uma bisnaga por teto</strong>. Bem feito, resolve em <strong>3 a 5 dias</strong>; grave pode levar uns 20. Depois do antibiótico há <strong>período de carência</strong> (tempo em que o leite ainda tem resíduo e precisa ser descartado).</li>
+      <li><strong>Vacas crônicas</strong> (mastite que volta sempre) costumam ser descartadas. Causa: predisposição genética (catálogos de touros têm índice para mastite) ou falha no sistema. <strong>Muitas vacas doentes indicam problema no sistema, não só nos animais.</strong></li>
+      <li>Fatores de risco: pós-parto em BEN (imunidade baixa) e instalações ruins (barro, fezes, água).</li>
+    </ul>
+  </div>
+
+  <div class="sub">
+    <h3>Qualidade do leite e limpeza</h3>
+    <ul>
+      <li>Indicadores de laboratório: <strong>CCS</strong> e <strong>CBT</strong> (contagem bacteriana total), monitorados conforme o MAPA. Os limites aceitos estão cada vez mais baixos.</li>
+      <li><strong>Resfriamento rápido</strong> em tanque com agitação, abaixo de <strong>4 °C</strong>. Se demorar, as bactérias se multiplicam. Algumas fazendas usam pré-resfriador.</li>
+      <li>Com CCS e CBT baixas, o leite pasteurizado de saquinho passou de uns 2 para 5 a 7 dias de validade.</li>
+      <li><strong>Limpeza diária</strong> do tanque e das teteiras logo após o uso, alternando <strong>detergente alcalino</strong> (remove gordura e proteína, a parte orgânica) e <strong>detergente ácido</strong> (remove a parte mineral), com sanitização por cloro. Água quente demais carameliza o açúcar do leite.</li>
+    </ul>
+    <div class="note warn">
+      <span class="lab">Caso da aula</span>
+      <p>Apareceu depósito dentro da tubulação transparente. O ordenhador não lembrava qual detergente usar e <strong>misturava os dois</strong>. Ácido + base = sal + água: um anulava o outro e nada limpava. Lição: explicar o processo inteiro ao produtor e aos funcionários.</p>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>A escada dos sistemas de produção</h3>
+    <figure>
+      <div class="fig">
+      <svg viewBox="0 0 720 230" role="img" aria-label="Escada dos sistemas de produção de leite do extensivo ao intensivo">
+        <defs><marker id="ah6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="d-ah"/></marker></defs>
+        <rect x="20" y="150" width="220" height="60" class="d-box-tint"/>
+        <text x="130" y="176" text-anchor="middle" class="d-tb">Extensivo</text>
+        <text x="130" y="196" text-anchor="middle" class="d-ts">12 a 15 L/vaca/dia</text>
+        <rect x="250" y="100" width="220" height="110" class="d-box-straw"/>
+        <text x="360" y="128" text-anchor="middle" class="d-tb">Semi-intensivo</text>
+        <text x="360" y="148" text-anchor="middle" class="d-ts">pasto + cocho na ordenha</text>
+        <rect x="480" y="50" width="105" height="160" class="d-box-acc"/>
+        <rect x="595" y="50" width="105" height="160" class="d-box-acc"/>
+        <text x="532" y="78" text-anchor="middle" class="d-tb">Intensivo</text>
+        <text x="532" y="96" text-anchor="middle" class="d-ts">a pasto</text>
+        <text x="647" y="78" text-anchor="middle" class="d-tb">Intensivo</text>
+        <text x="647" y="96" text-anchor="middle" class="d-ts">confinado</text>
+        <path d="M40 130 L690 30" class="d-line" marker-end="url(#ah6)"/>
+        <text x="300" y="70" text-anchor="middle" class="d-t" transform="rotate(-8.7 300 70)">mais investimento, controle e produção por área</text>
+      </svg>
+      </div>
+      <figcaption>Os sistemas funcionam como uma escada. O produtor costuma subir aos poucos.</figcaption>
+    </figure>
+    <div class="tbl"><table>
+      <thead><tr><th>Sistema</th><th>Como é</th><th>Vantagens</th><th>Desvantagens</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Extensivo</strong></td><td>Pasto nativo ou antigo, grandes áreas, pouco planejamento ("o que dá para uma, dá para todas"). Curral simples, ordenha lateral. Animais rústicos, SRD (sem raça definida) ou Girolando. Mão de obra familiar, <strong>monta natural</strong> (às vezes touro do vizinho). Leite como renda complementar</td><td>Baixo custo inicial, menor risco, despesas baixas, menor impacto de crises, animais soltos</td><td>Mais mastite (barro, esterco), <strong>baixa produtividade</strong> (12 a 15 L, no máximo 20; há quem tire 7 L), <strong>sazonalidade</strong> (cai na seca e no calor), muita área. Hoje quase não existe no Brasil</td></tr>
+        <tr><td><strong>Semi-intensivo</strong></td><td>Dia no pasto (piquetes, muitas vezes rotativos) e <strong>suplementação no cocho</strong>, em geral na ordenha. Sai o touro, entra a <strong>IA</strong> e o controle zootécnico. Sal mineral misturado na ração na dose certa</td><td>Mais econômico que confinar (usa pasto), produção mais estável que no extensivo, bem-estar</td><td>Investimento moderado a alto (sala de ordenha, resfriador, cercas, cochos). Exige planejamento de forragem e silagem e funcionários treinados</td></tr>
+        <tr><td><strong>Intensivo a pasto</strong></td><td>Volumoso de pasto de altíssima qualidade em rotativo, <strong>adubado e irrigado</strong>. Muitos piquetes, ocupação de <strong>1 a 3 dias</strong>. Concentrado na ordenha. Não rapar o pasto: deixar folha para rebrotar</td><td>Menor custo estrutural que confinar; bem-estar</td><td>Exige conhecimento agronômico (agrônomo), irrigação, adubação, divisão de áreas, cercas elétricas</td></tr>
+        <tr><td><strong>Intensivo confinado</strong></td><td>Instalações cobertas, <strong>sem pasto</strong>. Dieta total no cocho, calculada por animal; leite medido individualmente. Modelos: compost barn, free stall, loose housing</td><td>Controle nutricional e sanitário, conforto térmico, altíssima produção por vaca e por área</td><td>Custo altíssimo, mão de obra superespecializada, gestão rigorosa de dejetos, retorno mais demorado. Ex.: Castro (PR). No Sul pesa o custo do grão</td></tr>
+      </tbody>
+    </table></div>
+    <ul>
+      <li><strong>Compost barn</strong> (galpão de compostagem): cama de <strong>maravalha</strong> (serragem grossa) que absorve urina e fezes e composta. Pouco cheiro e poucas moscas. Precisa ser revolvida. Ventiladores no teto.</li>
+      <li><strong>Free stall</strong> (baia livre): baias individuais onde a vaca escolhe onde deitar; corredor com raspador de dejetos.</li>
+      <li><strong>Loose housing</strong> (alojamento solto): galpão com área coletiva de descanso.</li>
+      <li><strong>Pé-direito</strong> (altura do teto) da sala de ordenha alto em região quente. Em região fria pode ser mais baixo; solução: lanternim (segundo telhado com janelas) e circuladores de ar.</li>
+    </ul>
+  </div>
+
+  <div class="sub">
+    <h3>Desafios sanitários</h3>
+    <ul>
+      <li><strong>Mastite:</strong> um dos problemas mais caros (perda de leite, antibiótico, carência).</li>
+      <li><strong>Bezerras:</strong> diarreia e pneumonia. O terneiro desidrata em poucas horas. Prevenção simples: <strong>cura do umbigo com iodo</strong> e ambiente limpo.</li>
+      <li><strong>Doenças metabólicas da transição:</strong> hipocalcemia (febre do leite) e cetose, explicadas na seção 09.</li>
+      <li><strong>Parasitoses:</strong> carrapato, verminose, moscas. A <strong>tristeza parasitária bovina</strong> ("amarelão") inclui babesiose e anaplasmose, transmitidas pelo carrapato. Destrói hemácias, causa anemia e icterícia (pele e mucosas amareladas). Animais sem contato prévio com carrapato são mais suscetíveis; os que convivem com poucos desenvolvem imunidade. Controlar o carrapato sem precisar eliminá-lo.</li>
+      <li><strong>Casco:</strong> dor, dificuldade de andar, menos consumo, menos leite.</li>
+      <li><strong>Tuberculose, brucelose, leptospirose</strong> (e raiva): zoonoses (passam para humanos), algumas pelo leite. Podem exigir abate sanitário (animais enterrados em camadas com cal). Evitar rebanho velho. Vacinar contra brucelose uma vaca no fim da gestação pode provocar aborto.</li>
+    </ul>
+  </div>
+
+  <div class="sub">
+    <h3>Desafios econômicos</h3>
+    <ul>
+      <li>Custos altos (alimentação, silagem, adubo, combustível) e baixa remuneração ao produtor.</li>
+      <li><strong>Pasto é o alimento mais barato.</strong> Usar subprodutos regionais (resíduos de arroz e de cervejaria).</li>
+      <li>Escassez de mão de obra no campo (exigem férias, FGTS, até Wi-Fi).</li>
+      <li>Volatilidade de preços e <strong>importação de leite em pó da Argentina e do Uruguai</strong>, produzido a pasto com custo baixo.</li>
+      <li>Falta de controle de custos: muitos pequenos produtores não calculam o custo por litro.</li>
+      <li>Clima (seca, granizo) e <strong>sucessão familiar</strong>: os jovens saem e as propriedades são vendidas.</li>
+    </ul>
+  </div>
+
+  <div class="sub">
+    <h3>Desafios ambientais</h3>
+    <ul>
+      <li><strong>Gases de efeito estufa:</strong> metano entérico (CH₄, da fermentação no rúmen) e óxido nitroso (N₂O, do esterco mal manejado).</li>
+      <li><strong>Eutrofização:</strong> dejeto sem tratamento na água traz excesso de nitrogênio e fósforo. As algas e bactérias explodem, consomem o oxigênio e os peixes morrem.</li>
+      <li>Estresse térmico, degradação do solo, nascentes desprotegidas, falta de mata ciliar.</li>
+      <li>Pragas em clima quente e úmido: <strong>mosca-dos-estábulos</strong> (<i>Stomoxys calcitrans</i>). Fotossensibilização em pastagens estressadas.</li>
+      <li><strong>Mitigação:</strong> melhor eficiência reprodutiva e produtiva = <strong>menos emissão por litro</strong> (menos animais improdutivos). Cobrir e empilhar a esterqueira (o calor da fermentação mata larvas) e usar como biofertilizante; biodigestor (fermentação sem oxigênio que gera gás e adubo); compostagem; silvipastoril, sombrite, ventiladores, aspersores.</li>
+    </ul>
+  </div>
+
+  <div class="sub">
+    <h3>Agregar valor ao leite</h3>
+    <div class="note">
+      <span class="lab">O professor disse que deve cair</span>
+      <p><strong>Pagamento por sólidos</strong> (gordura e proteína): a indústria paga bônus, porque leite com mais sólidos rende mais queijo e iogurte. Chega-se lá com <strong>nutrição e seleção genética</strong>.</p>
+    </div>
+    <div class="tbl" style="max-width:560px"><table>
+      <thead><tr><th>Raça</th><th>Característica do leite</th></tr></thead>
+      <tbody>
+        <tr><td>Holandesa</td><td>Alto volume</td></tr>
+        <tr><td>Jersey</td><td>Alto teor de sólidos</td></tr>
+        <tr><td>Guernsey</td><td>Gordura alta</td></tr>
+        <tr><td>Pardo-Suíço</td><td>Proteína alta</td></tr>
+        <tr><td>Ayrshire</td><td>Gordura média</td></tr>
+        <tr><td>Shorthorn</td><td>Dupla aptidão (leite e carne)</td></tr>
+      </tbody>
+    </table></div>
+    <ul>
+      <li><strong>Leite A2A2:</strong> vacas selecionadas geneticamente (não é transgenia) que só produzem a beta-caseína A2. A beta-caseína A1 está associada a desconforto digestivo em algumas pessoas. <strong>Não é leite sem lactose.</strong> Gir e Guernsey são citadas como raças com beta-caseína A2.</li>
+      <li><strong>Selos:</strong> orgânico (sem agrotóxicos e sem antibióticos alopáticos, usa homeopatia), bem-estar animal (ex.: Certified Humane), carbono neutro (com silvipastoril).</li>
+      <li><strong>Verticalização</strong> (o produtor processa o próprio leite): queijos finos, queijo canastra (valor ligado ao local de origem), iogurte gourmet, doce de leite, manteiga de garrafa. Marca própria, feiras, menos intermediários.</li>
+      <li><strong>Rastreabilidade:</strong> QR code na embalagem e brinco de identificação nos animais.</li>
+      <li>Esterco compostado como renda extra.</li>
+      <li><strong>Mercado internacional:</strong> exportação de genética (sêmen de Gir Leiteiro) pelo projeto Brazilian Cattle (ABCZ, ApexBrasil e MAPA); exige CCS e CBT baixas, controle de brucelose e tuberculose, vacinação, rastreabilidade e GTA (Guia de Trânsito Animal). Fontes: MilkPoint e Embrapa Gado de Leite.</li>
+    </ul>
+  </div>
+
+  <div class="sub">
+    <h3>Inspeção e atuação do veterinário</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Serviço</th><th>Quem faz</th><th>Alcance</th></tr></thead>
+      <tbody>
+        <tr><td><strong>SIM</strong> (municipal)</td><td>Veterinário da prefeitura</td><td>Exigências mais simples; venda só no município</td></tr>
+        <tr><td><strong>SIE</strong> (estadual)</td><td>Em SC, a <strong>CIDASC</strong></td><td>Venda no estado; exigências e custos maiores</td></tr>
+        <tr><td><strong>SIF</strong> (federal)</td><td>Ministério da Agricultura (MAPA)</td><td>O mais exigente; venda no país todo</td></tr>
+      </tbody>
+    </table></div>
+    <p><strong>Responsabilidade técnica (RT):</strong> a sala de ordenha e os laticínios precisam de um responsável técnico. O trabalho é sobretudo documental (normas de Boas Práticas de Fabricação, BPF) e o RT geralmente não é o veterinário clínico da fazenda.</p>
+  </div>
+</section>
+
+<!-- 12 -->
+<section class="sec" id="numeros">
+  <div class="sec-head">
+    <span class="eyebrow"><b>12</b> · revisão relâmpago</span>
+    <h2>Números para decorar</h2>
+  </div>
+  <div class="tbl"><table>
+    <thead><tr><th>Assunto</th><th>Número</th></tr></thead>
+    <tbody>
+      <tr><td>Ciclo estral vaca / ovelha</td><td class="mono">21 dias / 17 dias</td></tr>
+      <tr><td>Cio da vaca</td><td class="mono">12 a 18 h (média 12 h)</td></tr>
+      <tr><td>Gestação vaca / ovelha e cabra</td><td class="mono">275 a 282 dias / 145 a 150 dias</td></tr>
+      <tr><td>Puberdade bovina</td><td class="mono">15 meses (10 a 24)</td></tr>
+      <tr><td>Intervalo entre partos ideal</td><td class="mono">12 a 13 meses</td></tr>
+      <tr><td>Dias em aberto ideal</td><td class="mono">85 a 110 dias</td></tr>
+      <tr><td>Fertilidade máxima pós-parto</td><td class="mono">a partir de 60 dias</td></tr>
+      <tr><td>Período seco</td><td class="mono">60 dias (meta 50 a 60)</td></tr>
+      <tr><td>Pré-parto (transição)</td><td class="mono">21 dias</td></tr>
+      <tr><td>Lactação padrão</td><td class="mono">305 dias</td></tr>
+      <tr><td>Idade ao 1º parto (leite)</td><td class="mono">24 meses</td></tr>
+      <tr><td>Cisto ovariano</td><td class="mono">&gt; 25 mm, &gt; 10 dias, sem CL</td></tr>
+      <tr><td>Retenção de placenta</td><td class="mono">não sai em 12 h</td></tr>
+      <tr><td>Doses de um ejaculado</td><td class="mono">≈ 250 (5 bilhões ÷ 20 milhões)</td></tr>
+      <tr><td>Sexagem</td><td class="mono">85 a 95% de acerto</td></tr>
+      <tr><td>Embrião transferido / diagnóstico por ultrassom</td><td class="mono">7 dias / 30 dias</td></tr>
+      <tr><td>Detecção de cio</td><td class="mono">≥ 2 vezes ao dia, ≥ 30 min</td></tr>
+      <tr><td>Confiabilidade boa no catálogo</td><td class="mono">70%</td></tr>
+      <tr><td>Freemartin</td><td class="mono">≈ 90% das gêmeas de macho</td></tr>
+      <tr><td>ITU de início do estresse</td><td class="mono">72</td></tr>
+      <tr><td>Zona termoneutra (alta produção)</td><td class="mono">-5 a 25 °C</td></tr>
+      <tr><td>Queda de leite no calor</td><td class="mono">até 30%</td></tr>
+      <tr><td>Sombra por vaca / sombrite</td><td class="mono">3,5 a 4,5 m² / ≥ 80%</td></tr>
+      <tr><td>Aspersão</td><td class="mono">1 min ligado, 4 min desligado</td></tr>
+      <tr><td>Água</td><td class="mono">4 a 5 L/L leite; TDS ≤ 3.000 mg/L; pH 6 a 8,5</td></tr>
+      <tr><td>Energia vinda dos AGV</td><td class="mono">até 80%</td></tr>
+      <tr><td>pH e temperatura do rúmen</td><td class="mono">5,5 a 6,8 / 38 a 42 °C</td></tr>
+      <tr><td>Sons ruminais</td><td class="mono">≈ 3 a cada 2 min</td></tr>
+      <tr><td>Partícula que passa do retículo</td><td class="mono">≈ 2 mm, &gt; 1,2 g/mL</td></tr>
+      <tr><td>Fungos na microbiota</td><td class="mono">≈ 8%</td></tr>
+      <tr><td>Gordura máxima na dieta</td><td class="mono">7% da MS</td></tr>
+      <tr><td>Colostro</td><td class="mono">6 h, 10% do peso vivo</td></tr>
+      <tr><td>PB novilha 6 a 12 m / 12 m ao parto</td><td class="mono">15 a 16% / 13 a 14%</td></tr>
+      <tr><td>PB lactação início / meio / final</td><td class="mono">17 a 19% / 16 a 17% / 14 a 15%</td></tr>
+      <tr><td>ECC ao parto / ao secar</td><td class="mono">3,5 / 3,25 a 3,5</td></tr>
+      <tr><td>Volumoso</td><td class="mono">&gt; 18% FB na MS; ≈ 60% da dieta; bom NDT &gt; 65%</td></tr>
+      <tr><td>Concentrado</td><td class="mono">18 a 22% PB; NDT &gt; 70%</td></tr>
+      <tr><td>Volumoso:concentrado</td><td class="mono">40:60 a 60:40</td></tr>
+      <tr><td>Regra do concentrado</td><td class="mono">1 kg para 2,5 a 3 kg de leite</td></tr>
+      <tr><td>Ca:P</td><td class="mono">1,5:1 a 2:1</td></tr>
+      <tr><td>Unidade animal</td><td class="mono">450 kg</td></tr>
+      <tr><td>Ocupação máxima bovinos / ovinos</td><td class="mono">7 dias / 5 (ideal 3)</td></tr>
+      <tr><td>Piquetes</td><td class="mono">(descanso ÷ ocupação) + 1</td></tr>
+      <tr><td>Calagem</td><td class="mono">efeito em 6 a 8 meses; completa em 2 a 3 anos</td></tr>
+      <tr><td>Pré-dipping / canal do teto fecha</td><td class="mono">30 s / 20 a 30 min</td></tr>
+      <tr><td>Resfriamento do leite</td><td class="mono">abaixo de 4 °C</td></tr>
+      <tr><td>Custo da alimentação</td><td class="mono">40 a 60% do custo</td></tr>
+      <tr><td>Tratamento de mastite</td><td class="mono">3 a 5 dias</td></tr>
+      <tr><td>Produtividade de SC</td><td class="mono">≈ 15,9 L/vaca/dia, 1º do país</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- 13 -->
+<section class="sec" id="quiz">
+  <div class="sec-head">
+    <span class="eyebrow"><b>13</b> · treino</span>
+    <h2>Quiz de múltipla escolha</h2>
+  </div>
+  <p>Clique numa alternativa. A resposta certa aparece em verde, com a explicação. O placar fica fixo no topo enquanto você rola.</p>
+  <div class="qz-bar" role="status" aria-live="polite">
+    <span class="qz-score" id="qz-score">0 de 0 respondidas · <b>0</b> certas</span>
+    <button class="btn" type="button" id="qz-reset">Recomeçar</button>
+  </div>
+  <ol class="qz-list" id="qz-list"></ol>
+</section>
+
+<!-- 14 -->
+<section class="sec" id="discursivas">
+  <div class="sec-head">
+    <span class="eyebrow"><b>14</b> · treino</span>
+    <h2>Perguntas discursivas que podem cair</h2>
+  </div>
+  <p>Tente responder de cabeça antes de abrir. A resposta-modelo mostra o que não pode faltar.</p>
+  <div class="disc-list">
+    <details class="disc"><summary><span class="n">D1</span><span>Um produtor do litoral nordestino, clima quente e úmido, com muito carrapato e manejo simples a pasto, quer produzir leite. Que raça você indica e por quê? E se ele estivesse na Serra Catarinense com estrutura de confinamento?</span></summary>
+      <div class="ans"><span class="lab">Resposta-modelo</span>
+        <p>No Nordeste quente e úmido indico <strong>Girolando</strong> (ou Gir Leiteiro, se o foco for rusticidade máxima). O motivo é o ambiente: zebuínos e seus mestiços toleram calor, são mais resistentes a carrapato e à tristeza parasitária, têm casco mais resistente e parto mais fácil. O Girolando une isso à produção do Holandês e aproveita a heterose.</p>
+        <p>Na serra, com confinamento e comida de qualidade, indico <strong>Holandesa</strong>. É a raça de maior volume, tolera bem o frio (zona de conforto das europeias de 4 a 18 °C) e o confinamento dá o controle de nutrição e ambiência que ela exige. Se o produtor quiser bônus por sólidos ou fazer queijo, a <strong>Jersey</strong> é alternativa.</p>
+        <p>Princípio: fenótipo = genótipo + ambiente. A raça certa é a que expressa seu potencial naquele ambiente.</p>
+      </div></details>
+    <details class="disc"><summary><span class="n">D2</span><span>Explique o freemartinismo e qual orientação você daria ao produtor.</span></summary>
+      <div class="ans"><span class="lab">Resposta-modelo</span>
+        <p>Acontece em gestação gemelar de sexos diferentes. No início da gestação as placentas se fundem e os vasos dos dois fetos se ligam (anastomose). Hormônios e células do macho passam para a fêmea e masculinizam o trato reprodutivo dela. A fêmea nasce, em geral, infértil, mesmo parecendo normal por fora. Ocorre em cerca de 90% das fêmeas gêmeas de macho. O macho quase não é afetado.</p>
+        <p>Orientação: não usar a fêmea gêmea de macho como reprodutora. Destiná-la a outro fim (engorda, por exemplo) e não gastar inseminação nela.</p>
+      </div></details>
+    <details class="disc"><summary><span class="n">D3</span><span>Ao escolher touros num catálogo, por que o número de filhas avaliadas importa mais do que o valor da DEP?</span></summary>
+      <div class="ans"><span class="lab">Resposta-modelo</span>
+        <p>A DEP é uma média estimada do que as filhas vão produzir a mais ou a menos. Com poucas filhas (ou zero, só genômica), a estimativa é incerta: é promessa. Com muitas filhas (ex.: mais de mil), a média é confiável, porque se apoia em muitos dados. As filhas se distribuem numa curva normal em volta da média: algumas produzem muito mais, outras menos.</p>
+        <p>Por isso o primeiro dado a olhar é a amostra e a confiabilidade (70% já é considerada boa). Entre um touro espetacular com amostra pequena e um modesto com amostra grande, o segundo é mais seguro. E a escolha depende do objetivo: leite, sólidos, facilidade de parto, fertilidade.</p>
+      </div></details>
+    <details class="disc"><summary><span class="n">D4</span><span>A raça Holandesa tem hoje um sério problema de fertilidade. Explique a causa e uma solução.</span></summary>
+      <div class="ans"><span class="lab">Resposta-modelo</span>
+        <p>A causa é a <strong>endogamia</strong>. A seleção intensa concentrou o uso de poucos touros, e quase todas as linhagens comerciais vêm de uma base genética próxima. Animais aparentados se acasalam, genes recessivos ruins se encontram e aparecem aborto, reabsorção embrionária, morte fetal e infertilidade.</p>
+        <p>Solução: usar o pedigree para calcular o coeficiente de endogamia e escolher linhagens distantes, ou introduzir outra raça (por exemplo Jersey, formando o Jersolando). Genética distinta não carrega os mesmos genes, e o cruzamento ainda ganha heterose.</p>
+      </div></details>
+    <details class="disc"><summary><span class="n">D5</span><span>Uma propriedade tem 100 matrizes. Delas, 90 ficaram prenhes e nasceram 81 bezerros vivos. Calcule as taxas e diga o que o veterinário deve investigar.</span></summary>
+      <div class="ans"><span class="lab">Resposta-modelo</span>
+        <ol>
+          <li>Taxa de prenhez = 90 ÷ 100 = 0,90, ou seja, 90%.</li>
+          <li>Taxa de natalidade = 81 ÷ 100 = 0,81, ou seja, 81%.</li>
+          <li>Perdas entre prenhez e nascimento: 90 − 81 = 9 gestações, ou 9 ÷ 90 = 10% das prenhes.</li>
+        </ol>
+        <p>O índice é ferramenta de diagnóstico. O veterinário age como detetive e investiga por que as gestações se perderam: nutrição no pré-parto, estresse térmico, doenças reprodutivas (brucelose, leptospirose), inseminação precoce de novilhas pequenas, distocia e manejo do parto.</p>
+      </div></details>
+    <details class="disc"><summary><span class="n">D6</span><span>Descreva as fases do ciclo estral da vaca e diga qual o melhor momento para inseminar.</span></summary>
+      <div class="ans"><span class="lab">Resposta-modelo</span>
+        <p>O ciclo dura 21 dias. <strong>Proestro</strong> (3 a 4 dias): o corpo lúteo antigo regride, cresce um folículo e sobe o estrógeno; a vaca fica agitada e tenta montar. <strong>Estro</strong> (12 a 18 h): aceita a monta e fica parada, sai muco claro; a ovulação ocorre perto do fim (cerca de 28 h após o início). <strong>Metaestro</strong> (2 a 3 dias): forma-se o corpo lúteo e começa a progesterona. <strong>Diestro</strong>: domínio do corpo lúteo e da progesterona. Sem gestação, o útero libera PGF2α, que destrói o corpo lúteo (luteólise) e reinicia o ciclo.</p>
+        <p>Melhor momento: final do estro, pela regra AM/PM. Cio visto de manhã, inseminar à tarde; cio à tarde, inseminar na manhã seguinte. Assim o espermatozoide, que precisa de 4 a 6 h para se capacitar, está pronto quando a vaca ovula.</p>
+      </div></details>
+    <details class="disc"><summary><span class="n">D7</span><span>Diferencie metrite, endometrite e piometra. Por que a piometra é mais difícil de tratar?</span></summary>
+      <div class="ans"><span class="lab">Resposta-modelo</span>
+        <p><strong>Metrite</strong>: inflamação de todas as camadas do útero, pós-parto, por bactérias; é a mais grave. <strong>Endometrite</strong>: só a camada interna; prejudica a fertilidade sem febre alta. <strong>Piometra</strong>: pus acumulado dentro do útero, com cérvix fechado e corpo lúteo persistente.</p>
+        <p>A piometra é mais difícil porque o útero está fechado e sob progesterona. É preciso primeiro derrubar o corpo lúteo, depois abrir o tampão mucoso para o pus sair, e só então o antibiótico consegue agir. Há risco de lesão uterina e a vaca fica muito tempo sem ciclar. Prevenção: assepsia no parto (luva, desinfetante, lavar o animal).</p>
+      </div></details>
+    <details class="disc"><summary><span class="n">D8</span><span>Compare IA, IATF, TE e FIV e indique o que recomendaria para uma propriedade pequena e para uma grande.</span></summary>
+      <div class="ans"><span class="lab">Resposta-modelo</span>
+        <p><strong>IA</strong>: sêmen de touro selecionado depositado no útero após o cérvix; barata, acelera o melhoramento e dispensa touro. <strong>IATF</strong>: hormônios sincronizam o cio do lote e todas são inseminadas no mesmo dia, sem observar cio; concentra nascimentos; um pouco mais cara. <strong>TE</strong>: embriões de uma doadora superior são colhidos (in vivo, por lavagem uterina, ou in vitro) e colocados em receptoras sincronizadas, com cerca de 7 dias. <strong>FIV</strong>: superovulação, aspiração dos óvulos, fecundação em laboratório; 15 a 20 óvulos por coleta; a mais cara.</p>
+        <p>Pequena propriedade: IA (e sexagem). Grande: IATF costuma compensar, pela escala e pela economia de mão de obra na detecção de cio.</p>
+      </div></details>
+    <details class="disc"><summary><span class="n">D9</span><span>O que é ITU e quais medidas você recomendaria a um produtor com vacas em estresse térmico?</span></summary>
+      <div class="ans"><span class="lab">Resposta-modelo</span>
+        <p>ITU é o Índice de Temperatura e Umidade. Junta temperatura do ar e umidade relativa num número, porque com umidade alta o suor evapora mal e a vaca sofre mais. Acima de 72 começa o estresse por calor. A vaca come menos, respira ofegante, a produção pode cair até 30% e a fertilidade e a imunidade pioram.</p>
+        <p>Medidas: sombra (3,5 a 4,5 m² por vaca, árvores ou sombrite de 80%), estruturas norte-sul, água limpa e fresca à vontade (bebedouro limpo a cada 2 dias), ventiladores na alimentação e na sala de espera, aspersão com ventilação (ciclo de 1 min ligado e 4 desligado), dieta com gordura protegida e aditivos, e a longo prazo genética tolerante ao calor e sistemas silvipastoris.</p>
+      </div></details>
+    <details class="disc"><summary><span class="n">D10</span><span>Explique a produção e o destino dos três ácidos graxos voláteis e o que acontece com a gordura do leite numa dieta com muito concentrado.</span></summary>
+      <div class="ans"><span class="lab">Resposta-modelo</span>
+        <p>Os micróbios do rúmen fermentam o alimento e produzem AGV, que dão até 80% da energia do ruminante. <strong>Acetato</strong> vem principalmente da fibra (bactérias celulolíticas) e é o precursor da gordura do leite. <strong>Propionato</strong> aumenta com grãos (bactérias amilolíticas) e vira glicose no fígado (gliconeogênese). <strong>Butirato</strong> é usado pelo epitélio do rúmen, vira corpos cetônicos e estimula o crescimento das papilas.</p>
+        <p>Com muito concentrado e pouca fibra, o pH cai, as celulolíticas diminuem, cai o acetato e cai a gordura do leite. Também diminui a ruminação e a saliva, e aumenta o risco de acidose, ruminite e laminite.</p>
+      </div></details>
+    <details class="disc"><summary><span class="n">D11</span><span>O que é acidose ruminal, como ela se instala e como se trata e previne?</span></summary>
+      <div class="ans"><span class="lab">Resposta-modelo</span>
+        <p>É a queda acentuada do pH do rúmen. Causa: excesso de carboidratos de fermentação rápida (grãos) com pouca fibra efetiva. A fermentação rápida produz muito ácido, a saliva (tampão) não dá conta, o pH cai de 5,5 a 7 até 2 a 3 nos casos graves, e as bactérias benéficas morrem. Sinais: falta de apetite, diarreia, menos ruminação, queda de produção. Crônica, vira ruminite e pode dar abscessos hepáticos e laminite.</p>
+        <p>Emergência: garrafada de água com bicarbonato de sódio. Prevenção: respeitar o mínimo de FDN e a relação volumoso:concentrado, dividir o concentrado em 2 ou 3 refeições e não mudar a dieta de forma brusca.</p>
+      </div></details>
+    <details class="disc"><summary><span class="n">D12</span><span>Por que se usa dieta aniônica no pré-parto e não simplesmente mais cálcio?</span></summary>
+      <div class="ans"><span class="lab">Resposta-modelo</span>
+        <p>No parto, colostro e leite tiram muito cálcio do sangue, e vacas de alta produção podem ter hipocalcemia puerperal (febre do leite): caem e não levantam. Se o produtor dá muito cálcio pronto antes do parto, o corpo não ativa os mecanismos de buscar cálcio no osso e no intestino, e na hora do parto não consegue responder rápido.</p>
+        <p>A dieta aniônica tem mais ânions (cloro, enxofre) que cátions (sódio, potássio), com DCAD negativa. Ela deixa o sangue levemente ácido, o que torna o corpo mais sensível aos hormônios que mobilizam cálcio. A vaca chega ao parto com esse sistema já ativo. É usada nos últimos 21 dias e controlada pelo pH da urina.</p>
+      </div></details>
+    <details class="disc"><summary><span class="n">D13</span><span>Relacione balanço energético negativo, escore de condição corporal e cetose no início da lactação.</span></summary>
+      <div class="ans"><span class="lab">Resposta-modelo</span>
+        <p>Nos primeiros cerca de 100 dias, a produção de leite sobe mais rápido que o consumo de matéria seca. A vaca gasta mais energia do que come: é o BEN. Ela compensa queimando gordura corporal, e o ECC cai (de 3,5 no parto para 2,5 ou até 2).</p>
+        <p>A gordura mobilizada vai ao fígado. Se chega mais do que ele consegue processar, formam-se corpos cetônicos (como o BHB) e gordura se acumula no fígado. O excesso de corpos cetônicos é a cetose: cai o apetite, o leite e a imunidade. Prevenção: ECC de cerca de 3,5 ao parto (nem magra nem gorda), dieta de alta energia com gordura protegida no início da lactação e evitar restrição alimentar nas vacas de alta produção.</p>
+      </div></details>
+    <details class="disc"><summary><span class="n">D14</span><span>Um produtor quer fazer pastejo rotacionado com capim de 30 dias de descanso e ocupação de 3 dias. Quantos piquetes ele precisa? Por que não deixar o gado mais de 7 dias no mesmo piquete?</span></summary>
+      <div class="ans"><span class="lab">Resposta-modelo</span>
+        <ol>
+          <li>Número de piquetes = (descanso ÷ ocupação) + 1.</li>
+          <li>30 ÷ 3 = 10 piquetes em descanso.</li>
+          <li>10 + 1 = 11 piquetes (o +1 é o que está ocupado).</li>
+          <li>Conferência: o gado passa 3 dias em cada um dos outros 10, então cada piquete descansa 10 × 3 = 30 dias.</li>
+        </ol>
+        <p>Não passar de 7 dias porque os ovos de vermes eliminados nas fezes levam cerca de 5 a 7 dias para virar larva infectante. Saindo antes, o gado não se reinfecta com as larvas que ele mesmo eliminou. Em ovinos o limite é menor (até 5, de preferência 3) porque pastejam mais rente ao chão. Além disso, ocupação longa faz o gado comer a rebrota, e a planta não recupera. Todo piquete precisa de água, sombra e sal.</p>
+      </div></details>
+    <details class="disc"><summary><span class="n">D15</span><span>Descreva a rotina correta de ordenha e explique o motivo de cada etapa.</span></summary>
+      <div class="ans"><span class="lab">Resposta-modelo</span>
+        <ol>
+          <li>Caneca de fundo preto: 1 ou 2 jatos de cada teto para ver grumos de mastite clínica.</li>
+          <li>Lavar só se estiver sujo, porque lavar sempre leva sujeira para a ponta do teto.</li>
+          <li>Pré-dipping por 30 segundos para reduzir os micróbios na pele do teto.</li>
+          <li>Secar com papel-toalha, uma folha por teto, para não passar bactérias de um teto a outro.</li>
+          <li>Colocar as teteiras com o teto seco, para a água suja não subir pela teteira.</li>
+          <li>Pós-dipping, um selante que protege o canal aberto até ele fechar (20 a 30 min).</li>
+        </ol>
+        <p>Complementos: vacas com mastite ordenhadas por último e leite descartado; resfriar o leite abaixo de 4 °C; lavar equipamentos alternando detergente alcalino e ácido, sem misturar.</p>
+      </div></details>
+    <details class="disc"><summary><span class="n">D16</span><span>Compare os sistemas extensivo, semi-intensivo, intensivo a pasto e intensivo confinado.</span></summary>
+      <div class="ans"><span class="lab">Resposta-modelo</span>
+        <p><strong>Extensivo</strong>: pasto nativo, grandes áreas, monta natural, animais rústicos; barato e de baixo risco, mas de baixa produtividade (12 a 15 L), com sazonalidade e mais mastite. <strong>Semi-intensivo</strong>: pasto em piquetes + cocho na ordenha, IA e controle zootécnico; mais estável e ainda econômico, exige investimento moderado e planejamento de forragem. <strong>Intensivo a pasto</strong>: pastagem de altíssima qualidade adubada e irrigada, ocupação de 1 a 3 dias, concentrado na ordenha; custo estrutural menor que confinar e bem-estar, mas exige conhecimento agronômico. <strong>Intensivo confinado</strong> (compost barn, free stall): dieta total no cocho, máximo controle e produção por área, mas custo e mão de obra altíssimos e gestão rigorosa de dejetos.</p>
+      </div></details>
+    <details class="disc"><summary><span class="n">D17</span><span>Quais estratégias um produtor pode usar para agregar valor ao leite?</span></summary>
+      <div class="ans"><span class="lab">Resposta-modelo</span>
+        <p>Pagamento por sólidos (gordura e proteína), alcançado com nutrição e genética (Jersey, Pardo-Suíço); leite A2A2 por seleção de vacas com beta-caseína A2; selos (orgânico, bem-estar animal, carbono neutro); verticalização com derivados (queijos finos, canastra, iogurte, doce de leite, manteiga) e marca própria; rastreabilidade com QR code e brinco; venda de esterco compostado. Para mercados maiores, é preciso inspeção (SIM, SIE ou SIF) e cumprir exigências de CCS, CBT e sanidade.</p>
+      </div></details>
+  </div>
+</section>
+
+<footer>
+  <p><strong>Fontes.</strong> Suas notas no Anytype das Aulas 1, 3, 5, 7, 8, 11, 13 e 15 de Zootecnia de Ruminantes (transcrições, slides e apostilas do Prof. Breno Mourão de Sousa, Prof. Leonardo C. T. Coelho e Prof.ª Flávia Ara). Complementos da internet:</p>
+  <ul>
+    <li><a href="https://www.infoteca.cnptia.embrapa.br/infoteca/bitstream/doc/594946/1/COT42Modificacoesambientais.pdf">Embrapa: modificações ambientais e ITU para vacas leiteiras</a></li>
+    <li><a href="https://www.infoteca.cnptia.embrapa.br/infoteca/bitstream/doc/47246/1/GuiaPraticoImplantacao.pdf">Embrapa: guia de pastejo rotacionado e número de piquetes</a></li>
+    <li><a href="https://www.infoteca.cnptia.embrapa.br/infoteca/bitstream/doc/1065535/1/cot200.pdf">Embrapa: prevenção e controle da mastite bovina</a></li>
+    <li><a href="https://www.alice.cnptia.embrapa.br/alice/bitstream/doc/1168853/1/Racas-e-cruzamentos-para-rebanho-leiteiro-nos-tropicos.pdf">Embrapa: raças e cruzamentos para rebanho leiteiro nos trópicos</a></li>
+    <li><a href="https://www.alice.cnptia.embrapa.br/alice/bitstream/doc/1121004/1/ZanelaCICRAFAELAFinal.pdf">Embrapa Clima Temperado: freemartinismo, relato de caso</a></li>
+    <li><a href="https://research.slu.se/en/publications/freemartinism-in-cattle/">SLU: Freemartinism in cattle</a></li>
+    <li><a href="https://scielo.br/j/pvb/a/zzBw4CMkDprqYm795Wn3GFc/?lang=en">Pesquisa Veterinária Brasileira: dieta aniônica pré-parto e hipocalcemia</a></li>
+    <li><a href="https://scielo.br/j/pvb/a/rBVMQFVNbpmfkZwnZYbNZqq/?lang=en">Pesquisa Veterinária Brasileira: balanço energético negativo e cetose</a></li>
+    <li><a href="https://bionumbers.hms.harvard.edu/bionumber.aspx?id=111242">BioNumbers (Bergman, 1990): proporção de AGV no rúmen</a></li>
+  </ul>
+</footer>
+</main>
+</div>
+</div>
+
+<script>
+(function(){
+  const Q = [
+    {a:"Aula 1", q:"Uma fêmea bovina nasceu gêmea de um macho. Qual a orientação mais correta?", o:["Usar normalmente na reprodução, gêmeas são mais férteis","Não usar como reprodutora, pois provavelmente é freemartin e infértil","Inseminar apenas com sêmen sexado","Esperar o segundo cio para inseminar"], c:1, e:"No freemartinismo os vasos placentários dos gêmeos se ligam e hormônios do macho masculinizam o trato da fêmea. Cerca de 90% dessas fêmeas são inférteis."},
+    {a:"Aula 1", q:"Qual raça bovina tem o leite com maior teor de gordura e sólidos, sendo muito indicada para queijo?", o:["Holandesa","Gir","Jersey","Simental"], c:2, e:"A Jersey é a 'pequena notável': porte pequeno, menos volume, mas o maior teor de gordura e sólidos entre todas as raças."},
+    {a:"Aula 1", q:"Um produtor em região quente, com muito carrapato e manejo simples, quer produzir leite. A melhor escolha é:", o:["Holandesa pura","Girolando","Jersey pura","Highland"], c:1, e:"O Girolando une a produção do Holandês com a rusticidade, tolerância ao calor e resistência a carrapato do Gir."},
+    {a:"Aula 1", q:"Sobre o úbere da vaca, é correto afirmar:", o:["É uma glândula única, mastite atinge sempre todo o úbere","Tem 2 metades independentes","Tem 4 quartos independentes; um pode ter mastite e os outros não","Tem 4 quartos que dividem o mesmo canal"], c:2, e:"Cada quarto produz e adoece de forma isolada. Por isso o tratamento intramamário é feito teto por teto."},
+    {a:"Aula 1", q:"Qual ovino é indicado para ambientes úmidos, com aptidão para carne e lã?", o:["Morada Nova","Romney Marsh","Lacaune","Somalis Brasileira"], c:1, e:"Romney Marsh é resistente à umidade. Morada Nova e Somalis são deslanados do semiárido. Lacaune é leiteira."},
+    {a:"Aula 3", q:"Pai pampa (ss) cruzado com mãe sólida homozigota (SS). Os filhos serão:", o:["100% pampa","50% sólidos e 50% pampa","100% sólidos, todos portadores do alelo pampa (Ss)","75% sólidos e 25% pampa"], c:2, e:"O pai só passa s e a mãe só passa S. Todos são Ss. Como S é dominante, todos são sólidos."},
+    {a:"Aula 3", q:"Ao comparar dois touros num catálogo, o primeiro dado a observar é:", o:["O preço da dose","O maior valor de leite, independente do resto","O tamanho da amostra (número de filhas) e a confiabilidade","A cor da pelagem"], c:2, e:"O valor é uma média estimada. Com poucas filhas é promessa; com muitas é confiável. Confiabilidade de 70% já é considerada boa."},
+    {a:"Aula 3", q:"O maior problema atual da raça Holandesa, citado em aula, é:", o:["Baixa produção de leite","Baixa fertilidade, ligada à endogamia","Excesso de gordura no leite","Parto muito fácil"], c:1, e:"As linhagens comerciais vêm de uma base genética muito próxima. A consanguinidade traz aborto, reabsorção embrionária e infertilidade."},
+    {a:"Aula 3", q:"Uma vaca F1 (1/2 Holandês) é cruzada com touro 3/4 Holandês. O grau de sangue do filho é:", o:["1/2 Holandês","5/8 Holandês","7/8 Holandês","3/4 Holandês"], c:1, e:"O filho fica com a média dos pais: (1/2 + 3/4) ÷ 2 = (4/8 + 6/8) ÷ 2 = 10/16 = 5/8. É o grau do Girolando padrão."},
+    {a:"Aula 3", q:"Qual índice mede a porcentagem do rebanho comercializada por ano?", o:["Taxa de natalidade","Conversão alimentar","Taxa de desfrute","Intervalo entre partos"], c:2, e:"Taxa de desfrute é o percentual do rebanho vendido no ano, índice típico do corte."},
+    {a:"Aula 3", q:"Um lote ganha 1 kg/dia com ração cara e outro 900 g/dia a pasto. A conclusão correta é:", o:["O de 1 kg é sempre melhor","O de 900 g é sempre melhor","O GMD isolado não decide: é preciso comparar o custo do quilo ganho e o objetivo","Os dois são iguais"], c:2, e:"O professor insistiu: o GMD sem o custo não diz se o resultado é bom. Pasto é barato."},
+    {a:"Aula 5", q:"A herdabilidade das características reprodutivas costuma ser:", o:["Alta (acima de 50%)","Baixa (cerca de 3 a 30%)","Sempre 100%","Igual à das características físicas"], c:1, e:"Características físicas têm herdabilidade alta. Reprodutivas e produtivas, baixa. Por isso o manejo pesa mais que a troca de touro."},
+    {a:"Aula 5", q:"Na monta natural e na IA, o sêmen é depositado, respectivamente:", o:["No útero e na vagina","Antes do cérvix e depois do cérvix (no útero)","No oviduto e no útero","Os dois no cérvix"], c:1, e:"O touro ejacula antes do cérvix. Na IA, o técnico passa a pipeta pelas pregas do cérvix e deposita no corpo do útero."},
+    {a:"Aula 5", q:"Onde ocorre a fertilização na vaca?", o:["No corpo do útero","Na vagina","No oviduto (tuba uterina)","No ovário"], c:2, e:"A fecundação acontece na metade superior do oviduto. O infundíbulo capta o óvulo liberado pelo ovário."},
+    {a:"Aula 5", q:"Qual a duração do ciclo estral da vaca e da ovelha?", o:["21 e 17 dias","17 e 21 dias","28 e 21 dias","21 e 28 dias"], c:0, e:"Vaca: 21 dias (14 a 29). Ovelha: 17 dias."},
+    {a:"Aula 5", q:"Por que a ovelha é poliéstrica estacional e cicla no outono e inverno?", o:["Porque come mais no inverno","Por controle do fotoperíodo: dias curtos estimulam a ovulação","Porque o carneiro só tem sêmen no inverno","Por causa da chuva"], c:1, e:"Menos luz ativa o eixo hormonal. Com 5 meses de gestação, o cordeiro nasce no verão, quando há alimento."},
+    {a:"Aula 5", q:"Uma vaca foi vista em cio às 7 h da manhã. Pela regra AM/PM, quando inseminar?", o:["Imediatamente","À tarde do mesmo dia","Na manhã seguinte","Dois dias depois"], c:1, e:"Cio de manhã, insemina à tarde. Cio à tarde, insemina na manhã seguinte. Assim o espermatozoide já está capacitado quando a vaca ovula."},
+    {a:"Aula 5", q:"Cisto ovariano é definido como:", o:["Corpo lúteo maior que 10 mm","Folículo que não ovula, maior que 25 mm, por mais de 10 dias, sem corpo lúteo","Qualquer folículo dominante","Útero com pus"], c:1, e:"O cisto produz hormônio, desregula o ciclo e causa anestro ou cio irregular. Útero com pus é piometra."},
+    {a:"Aula 5", q:"A retenção de placenta é muito comum em propriedades que:", o:["Usam IATF","Não fornecem sal mineral","Têm vacas Gir","Fazem ordenha 3 vezes ao dia"], c:1, e:"É considerada retida se não sai em 12 h. É problema nutricional e de mineralização, fácil de prevenir com sal mineral."},
+    {a:"Aula 5", q:"Uma fazenda tem IME (intervalo médio entre cios observados) de 30 dias. A taxa de detecção de estro é:", o:["30%","50%","70%","90%"], c:2, e:"TDE = 21 ÷ IME × 100 = 21 ÷ 30 × 100 = 70%. Considerado adequado."},
+    {a:"Aula 5", q:"Um ejaculado tem 5 bilhões de espermatozoides e cada dose leva 20 milhões. Quantas doses rende?", o:["25","100","250","2.500"], c:2, e:"5 bilhões = 5.000 milhões. 5.000 ÷ 20 = 250 doses."},
+    {a:"Aula 5", q:"Na transferência de embriões, a diferença entre in vivo e in vitro é:", o:["In vivo a fecundação ocorre na própria doadora; in vitro, em laboratório","In vivo usa só touro; in vitro só IA","Não há diferença","In vitro dispensa receptora"], c:0, e:"In vivo: superovulação + IA na doadora, depois lavagem uterina para colher os embriões. In vitro: aspiração folicular e fecundação em laboratório."},
+    {a:"Aula 7", q:"A partir de qual ITU considera-se que começa o estresse por calor em vacas leiteiras?", o:["50","62","72","90"], c:2, e:"Acima de 72 é alerta para estresse térmico. A partir de cerca de 78, perigo."},
+    {a:"Aula 7", q:"Qual a área de sombra recomendada por vaca leiteira?", o:["0,5 a 1 m²","3,5 a 4,5 m²","10 a 12 m²","20 m²"], c:1, e:"O slide traz 3,5 a 4,5 m² por vaca, com sombrite de pelo menos 80% e estruturas orientadas norte-sul."},
+    {a:"Aula 7", q:"O ciclo recomendado de aspersão com ventilação é:", o:["4 min ligado e 1 desligado","1 min ligado e 4 desligado, ventiladores sempre ligados","Aspersão contínua o dia todo","Só ventilação, sem água"], c:1, e:"Ciclo de 5 minutos: 1 molhando, 4 secando com o vento. A evaporação leva o calor."},
+    {a:"Aula 7", q:"A nebulização (microgotas no ar) é eficiente principalmente em:", o:["Clima úmido","Clima seco, com umidade abaixo de 50%","Clima frio","Qualquer clima"], c:1, e:"Em ar úmido a microgota não evapora bem. Por isso no clima úmido a estratégia é aspersão no animal + ventilação."},
+    {a:"Aula 8", q:"Qual é o único compartimento glandular e secretor, o 'estômago verdadeiro'?", o:["Rúmen","Retículo","Omaso","Abomaso"], c:3, e:"Rúmen, retículo e omaso são não glandulares (absorvem). O abomaso secreta HCl e enzimas."},
+    {a:"Aula 8", q:"Qual AGV é o principal precursor da gordura do leite?", o:["Propionato","Acetato","Butirato","Lactato"], c:1, e:"Acetato vem principalmente da fermentação da fibra. Pouca fibra, menos acetato, menos gordura no leite."},
+    {a:"Aula 8", q:"Qual AGV é o principal substrato para a gliconeogênese no fígado?", o:["Acetato","Butirato","Propionato","Metano"], c:2, e:"O propionato aumenta com dietas ricas em grãos e vira glicose no fígado."},
+    {a:"Aula 8", q:"Qual relação ecológica descreve um microrganismo do rúmen que produz substância que inibe outro?", o:["Predação","Mutualismo","Antibiose","Comensalismo"], c:2, e:"Antibiose. Predação é o protozoário comendo bactéria; mutualismo é benefício mútuo."},
+    {a:"Aula 8", q:"O timpanismo espumoso (primário) está mais ligado a:", o:["Corpo estranho no esôfago","Pastagem rica em leguminosas jovens ou grão muito moído","Falta de água","Excesso de sal mineral"], c:1, e:"Forma-se espuma estável que prende o gás. Corpo estranho no esôfago causa o timpanismo secundário."},
+    {a:"Aula 8", q:"Dietas com gordura acima de qual valor na matéria seca prejudicam a digestão da fibra?", o:["1%","3%","7%","20%"], c:2, e:"Acima de 7% a gordura recobre a fibra, as celulolíticas não alcançam, e cai também a gordura do leite."},
+    {a:"Aula 11", q:"O colostro deve ser fornecido:", o:["Nas primeiras 6 horas, no mínimo 10% do peso vivo","Depois de 24 horas, 2% do peso","Só no segundo dia","À vontade a partir da primeira semana"], c:0, e:"A janela de absorção dos anticorpos do colostro é curta. Bezerra de 35 kg: 35 × 0,10 = 3,5 L."},
+    {a:"Aula 11", q:"A dieta aniônica no pré-parto previne principalmente:", o:["Mastite","Hipocalcemia puerperal (febre do leite)","Timpanismo","Cetose"], c:1, e:"Com DCAD negativa o organismo é 'treinado' a mobilizar cálcio do osso e do intestino antes do parto."},
+    {a:"Aula 11", q:"Qual o ECC ideal da vaca leiteira ao parto?", o:["1,5","2,0","Cerca de 3,5","5,0"], c:2, e:"Cerca de 3,5. Muito magra não tem reservas; muito gorda come menos e corre risco de cetose e fígado gorduroso."},
+    {a:"Aula 11", q:"Pelo sistema de Van Soest, FDN menos FDA é igual a:", o:["Celulose","Lignina","Hemicelulose","Conteúdo celular"], c:2, e:"FDN = hemicelulose + celulose + lignina. FDA = celulose + lignina. A diferença é a hemicelulose."},
+    {a:"Aula 11", q:"Uma vaca produz 30 L/dia. Pela regra de 1 kg de concentrado para cada 3 L de leite, quanto concentrado ela recebe?", o:["3 kg","10 kg","30 kg","90 kg"], c:1, e:"30 ÷ 3 = 10 kg por dia, divididos em 2 ou 3 refeições."},
+    {a:"Aula 11", q:"Qual faixa de proteína bruta é indicada no início da lactação (0 a 100 DEL)?", o:["10 a 12%","13 a 14%","17 a 19%","25 a 30%"], c:2, e:"Início: 17 a 19% PB. Meio: 16 a 17%. Final: 14 a 15%."},
+    {a:"Aula 11", q:"Por que a samambaia é perigosa na pastagem?", o:["Causa timpanismo espumoso","Consumo prolongado causa tumores de bexiga e sangue na urina","Causa freemartinismo","Reduz a gordura do leite"], c:1, e:"É a hematúria enzoótica. A samambaia cresce em solo ácido; prevenção é análise e correção do solo."},
+    {a:"Aula 13", q:"Descanso de 30 dias e ocupação de 3 dias. Quantos piquetes?", o:["10","11","30","33"], c:1, e:"(30 ÷ 3) + 1 = 10 + 1 = 11. O +1 é o piquete ocupado."},
+    {a:"Aula 13", q:"Por que limitar a ocupação de bovinos a até 7 dias no mesmo piquete?", o:["Porque o capim morre em 7 dias","Porque os ovos de vermes viram larva infectante em cerca de 5 a 7 dias","Porque a cerca elétrica descarrega","Por exigência legal"], c:1, e:"Saindo antes, o gado não se reinfecta. Em ovinos o limite é ainda menor: até 5, de preferência 3 dias."},
+    {a:"Aula 13", q:"Qual braquiária é conhecida por ser produtiva e resistente à cigarrinha-das-pastagens?", o:["B. decumbens","B. brizantha cv. Marandu (braquiarão)","B. humidicola","Andropogon"], c:1, e:"O Marandu é o 'campeão dos campeões'. A decumbens é sensível à cigarrinha; a humidicola é para solo encharcado."},
+    {a:"Aula 13", q:"No creep grazing:", o:["Vacas secas entram antes das lactantes","Bezerros acessam por uma abertura estreita um pasto de alta qualidade antes das mães","Todo o rebanho fica numa única área","O pasto é cortado e levado ao cocho"], c:1, e:"Acelera o consumo de sólidos e o desenvolvimento do rúmen. Com cocho privativo chama-se creep feeding."},
+    {a:"Aula 13", q:"Uma unidade animal (UA) corresponde a:", o:["Uma vaca de 300 kg","Um animal de 450 kg (vaca adulta não lactante em mantença)","Um bezerro","1.000 kg de peso vivo"], c:1, e:"UA é a medida padrão para calcular a taxa de lotação (UA por hectare)."},
+    {a:"Aula 15", q:"Qual a ordem correta das etapas iniciais da ordenha?", o:["Pré-dipping, caneca, ordenha, secagem","Caneca de fundo preto, lavar se sujo, pré-dipping, secar com papel","Lavar sempre, ordenhar, pós-dipping","Ordenhar, caneca, pré-dipping"], c:1, e:"Depois vêm ordenha com teto seco e pós-dipping."},
+    {a:"Aula 15", q:"Na limpeza do equipamento de ordenha, o detergente alcalino remove:", o:["A parte mineral","A parte orgânica (gordura e proteína)","Somente bactérias","Nada, só o ácido limpa"], c:1, e:"Alcalino para gordura e proteína, ácido para minerais. Alternar, nunca misturar: ácido + base se neutralizam."},
+    {a:"Aula 15", q:"A alimentação representa qual parcela do custo de produção do leite?", o:["5 a 10%","15 a 20%","40 a 60%","90%"], c:2, e:"É o maior custo diário. Menor a pasto, maior com mais ração."},
+    {a:"Aula 15", q:"Sobre o leite A2A2, é correto:", o:["É leite sem lactose","É leite de vacas transgênicas","Vem de vacas selecionadas que não produzem beta-caseína A1","É leite de cabra"], c:2, e:"É seleção genética, não transgenia, e não tem relação com lactose. A diferença é o tipo de beta-caseína."},
+    {a:"Aula 15", q:"O serviço de inspeção estadual em Santa Catarina é feito pela:", o:["Embrapa","CIDASC","Prefeitura","ABCZ"], c:1, e:"SIM é municipal (prefeitura), SIE é estadual (CIDASC em SC), SIF é federal (MAPA)."},
+    {a:"Aula 15", q:"No sistema intensivo a pasto, o período de ocupação típico dos piquetes é:", o:["1 a 3 dias","15 dias","30 dias","O ano todo"], c:0, e:"Pastagens de altíssima qualidade, adubadas e irrigadas, com muitos piquetes e ocupação curta."},
+    {a:"Aula 15", q:"A tristeza parasitária bovina é transmitida por:", o:["Mosca-dos-estábulos","Carrapato","Leite contaminado","Água parada"], c:1, e:"Inclui babesiose e anaplasmose. Destrói hemácias, causa anemia e icterícia. Mais comum em regiões quentes."}
+  ];
+
+  const list = document.getElementById('qz-list');
+  const score = document.getElementById('qz-score');
+  const letters = ['a','b','c','d'];
+  let answered = 0, right = 0;
+
+  function render(){
+    answered = 0; right = 0;
+    list.innerHTML = '';
+    Q.forEach((item, i) => {
+      const li = document.createElement('li');
+      li.className = 'qz';
+      li.id = 'qz-item-' + (i+1);
+      li.innerHTML = '<span class="meta">Questão ' + (i+1) + ' · ' + item.a + '</span><p class="q"></p><div class="opts"></div><div class="exp" hidden></div>';
+      li.querySelector('.q').textContent = item.q;
+      const opts = li.querySelector('.opts');
+      item.o.forEach((txt, j) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'opt';
+        b.id = 'qz-' + (i+1) + '-' + letters[j];
+        b.innerHTML = '<span class="k">' + letters[j] + ')</span><span></span>';
+        b.lastChild.textContent = txt;
+        b.addEventListener('click', () => choose(li, item, j));
+        opts.appendChild(b);
+      });
+      list.appendChild(li);
+    });
+    update();
+  }
+
+  function choose(li, item, j){
+    const btns = li.querySelectorAll('.opt');
+    btns.forEach((b, k) => {
+      b.disabled = true;
+      if (k === item.c) b.classList.add('right');
+      if (k === j && j !== item.c) b.classList.add('wrong');
+    });
+    const ok = j === item.c;
+    answered++; if (ok) right++;
+    const exp = li.querySelector('.exp');
+    exp.innerHTML = ok ? '<b class="ok">Certo.</b> ' : '<b class="no">Não foi essa.</b> A resposta é a letra ' + letters[item.c] + '. ';
+    exp.appendChild(document.createTextNode(item.e));
+    exp.hidden = false;
+    update();
+  }
+
+  function update(){
+    score.innerHTML = answered + ' de ' + Q.length + ' respondidas · <b>' + right + '</b> certas';
+  }
+
+  document.getElementById('qz-reset').addEventListener('click', render);
+  render();
+})();
+</script>
+
+</body></html>
