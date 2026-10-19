@@ -129,6 +129,10 @@ src/
 
 At the repo root, `design/reference/` holds reference artwork that is not part of the site, and `public/` only has files that must keep their exact name and address (favicon, the mobile hero).
 
+### Standalone HTML pages
+
+To publish a self-contained HTML file as-is, drop it into `public/` and deploy as usual. Astro copies it untouched to the site root and the existing `try_files ... $uri.html` rule serves it, so no nginx change is needed: `public/foo.html` is live at `/foo` (and `/foo.html`). Keep the file self-contained (inline CSS/JS, or absolute URLs); relative assets would need to sit in `public/` too.
+
 ## Section Visibility
 
 Sections are enabled or disabled at build time, not per visitor. `ENABLED_SECTIONS` in `src/config/sections.ts` is the single source of truth: add a section's key to that array to render it again, remove it to switch it off. A disabled section disappears everywhere at once — the mobile feed, the mobile menu, the desktop computer's program menu and program window, and (for books) the shelf hotspot. The section's markup, data, and translations stay in the codebase either way — nothing is deleted when a section is disabled.
