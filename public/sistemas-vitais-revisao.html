@@ -1,0 +1,1761 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Revisão de Sistemas Vitais</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&family=Zilla+Slab:wght@500;700&display=swap">
+<style>
+/* Layout: guia de estudo em coluna de leitura, sumário fixo no desktop. Vermelho = sangue arterial, azul = sangue venoso em todos os diagramas. */
+:root{
+  --bg:#F3F5F8;
+  --surface:#FFFFFF;
+  --tint:#E5EBF2;
+  --fg:#141B24;
+  --fg-soft:#4E5A68;
+  --line:#CDD6E1;
+  --accent:#225A7E;
+  --accent-soft:#D3E2EE;
+  --art:#B5333B;
+  --art-soft:#F4DADC;
+  --ven:#3D63B3;
+  --ven-soft:#DCE4F5;
+  --amber:#9C6A12;
+  --amber-soft:#F3E6C8;
+  --ok:#2C7A47;
+  --ok-soft:#D7EBDD;
+  --f-display:"Zilla Slab", "Rockwell", Georgia, serif;
+  --f-body:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0F141B; --surface:#161D26; --tint:#1C2632; --fg:#E2E8EF; --fg-soft:#A2AFBE; --line:#2C3847;
+    --accent:#86B9DC; --accent-soft:#1F3446; --art:#EF8A8F; --art-soft:#432327; --ven:#8EA9EC; --ven-soft:#232F4C;
+    --amber:#E3B661; --amber-soft:#3A2F1C; --ok:#7FCF98; --ok-soft:#1F3627; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0F141B; --surface:#161D26; --tint:#1C2632; --fg:#E2E8EF; --fg-soft:#A2AFBE; --line:#2C3847;
+  --accent:#86B9DC; --accent-soft:#1F3446; --art:#EF8A8F; --art-soft:#432327; --ven:#8EA9EC; --ven-soft:#232F4C;
+  --amber:#E3B661; --amber-soft:#3A2F1C; --ok:#7FCF98; --ok-soft:#1F3627; color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:17px;line-height:1.62}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:32px 80px}
+h1,h2,h3,h4{font-family:var(--f-display);line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.2rem,5vw,3.4rem);font-weight:700;letter-spacing:-.01em}
+h2{font-size:clamp(1.6rem,3.2vw,2.15rem);font-weight:700}
+h3{font-size:1.32rem;font-weight:700;margin-top:6px}
+h4{font-size:1.08rem;font-weight:700}
+p{margin:0}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--amber);outline-offset:2px;border-radius:4px}
+.mono,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.num{font-size:.92em;background:var(--tint);padding:1px 5px;border-radius:4px;white-space:nowrap}
+.eyebrow{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-soft)}
+.art{color:var(--art);font-weight:700}
+.ven{color:var(--ven);font-weight:700}
+
+header.top{display:grid;gap:14px;padding-bottom:28px;border-bottom:2px solid var(--fg);margin-bottom:28px}
+header.top .lede{max-width:68ch;color:var(--fg-soft);font-size:1.06rem}
+.chips{display:flex;flex-wrap:wrap;gap:8px;list-style:none;padding:0;margin:4px 0 0}
+.chips li{font-family:var(--f-mono);font-size:.76rem;border:1px solid var(--line);background:var(--surface);padding:4px 9px;border-radius:999px}
+.chips li b{color:var(--accent);font-weight:500}
+
+.layout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:48px;align-items:start}
+nav.toc{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 16px);max-height:calc(100vh - 32px);overflow:auto;font-size:.92rem}
+nav.toc ol{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:2px}
+nav.toc a{display:block;text-decoration:none;color:var(--fg-soft);padding:4px 8px;border-radius:6px}
+nav.toc a:hover{background:var(--tint);color:var(--fg)}
+nav.toc .n{font-family:var(--f-mono);font-size:.78rem;color:var(--art);margin-right:6px}
+details.toc-m{display:none}
+
+main{min-width:0;display:grid;gap:64px}
+section.sec{display:grid;gap:18px;scroll-margin-top:16px}
+section.sec > p, section.sec > ul, section.sec > ol, .sub > p, .sub > ul, .sub > ol{max-width:70ch}
+.sec-head{display:grid;gap:6px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.sec-head .eyebrow b{color:var(--art);font-weight:500}
+.sub{display:grid;gap:12px;margin-top:10px}
+ul,ol{margin:0;padding-left:1.25em;display:grid;gap:6px}
+
+.note{background:var(--tint);border-radius:10px;padding:14px 16px;display:grid;gap:6px;max-width:74ch}
+.note .lab{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:500}
+.note.warn{background:var(--amber-soft)}
+.note.warn .lab{color:var(--amber)}
+.calc{border:1px dashed var(--fg-soft);border-radius:10px;padding:14px 16px;display:grid;gap:6px;max-width:74ch;background:var(--surface)}
+.calc .lab{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-soft)}
+
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.93rem;line-height:1.45}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-soft);font-weight:500;background:var(--tint)}
+tr:last-child td{border-bottom:none}
+
+figure{margin:0;display:grid;gap:8px}
+figure .fig{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px}
+figure svg{display:block;width:100%;height:auto;min-width:560px}
+figure svg.small{min-width:0;max-width:540px;margin:0 auto}
+figcaption{font-size:.88rem;color:var(--fg-soft);max-width:74ch}
+.d-box{fill:var(--surface);stroke:var(--fg-soft);stroke-width:1.4}
+.d-box-acc{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.6}
+.d-box-art{fill:var(--art-soft);stroke:var(--art);stroke-width:1.6}
+.d-box-ven{fill:var(--ven-soft);stroke:var(--ven);stroke-width:1.6}
+.d-box-amber{fill:var(--amber-soft);stroke:var(--amber);stroke-width:1.6}
+.d-box-tint{fill:var(--tint);stroke:var(--line);stroke-width:1}
+.d-t{fill:var(--fg);font-family:var(--f-body);font-size:14px}
+.d-tb{fill:var(--fg);font-family:var(--f-display);font-size:16px;font-weight:700}
+.d-ts{fill:var(--fg-soft);font-family:var(--f-body);font-size:12px}
+.d-tm{fill:var(--fg-soft);font-family:var(--f-mono);font-size:11px}
+.d-ta{fill:var(--accent);font-family:var(--f-body);font-size:13px;font-weight:700}
+.d-tart{fill:var(--art);font-family:var(--f-body);font-size:13px;font-weight:700}
+.d-tven{fill:var(--ven);font-family:var(--f-body);font-size:13px;font-weight:700}
+.d-tamber{fill:var(--amber);font-family:var(--f-body);font-size:13px;font-weight:700}
+.d-line{stroke:var(--fg-soft);stroke-width:1.5;fill:none}
+.d-line-acc{stroke:var(--accent);stroke-width:3;fill:none}
+.d-line-art{stroke:var(--art);stroke-width:3.5;fill:none}
+.d-line-ven{stroke:var(--ven);stroke-width:3.5;fill:none}
+.d-line-amber{stroke:var(--amber);stroke-width:3;fill:none}
+.d-line-dash{stroke:var(--fg-soft);stroke-width:1.8;fill:none;stroke-dasharray:6 5}
+.d-ah{fill:var(--fg-soft)}
+.d-ah-art{fill:var(--art)}
+.d-ah-ven{fill:var(--ven)}
+.d-fill-acc{fill:var(--accent)}
+.d-fill-art{fill:var(--art)}
+.d-fill-ven{fill:var(--ven)}
+.d-fill-amber{fill:var(--amber)}
+.d-fill-fg{fill:var(--fg)}
+.d-zone-tint{fill:var(--tint)}
+.d-zone-acc{fill:var(--accent-soft)}
+.d-zone-art{fill:var(--art-soft)}
+.d-zone-ven{fill:var(--ven-soft)}
+.d-zone-amber{fill:var(--amber-soft)}
+.d-zone-ok{fill:var(--ok-soft)}
+
+.steps{list-style:none;padding:0;counter-reset:st;display:grid;gap:10px;max-width:74ch}
+.steps li{counter-increment:st;display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px;align-items:start}
+.steps li::before{content:counter(st);font-family:var(--f-mono);font-weight:500;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:var(--bg);font-size:.85rem}
+
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:grid;gap:6px;align-content:start}
+.card h4{color:var(--accent)}
+.card ul{font-size:.95rem}
+
+.qz-bar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 16px;position:sticky;top:calc(env(safe-area-inset-top, 0px) + 8px);z-index:5}
+.qz-score{font-family:var(--f-mono);font-size:.95rem}
+.qz-score b{color:var(--ok)}
+.btn{font:inherit;font-size:.92rem;border:1px solid var(--fg-soft);background:transparent;color:var(--fg);padding:7px 14px;border-radius:8px;cursor:pointer}
+.btn:hover{background:var(--tint)}
+.qz-list{display:grid;gap:14px;list-style:none;padding:0;margin:0}
+.qz{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;display:grid;gap:10px}
+.qz .meta{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-soft)}
+.qz .q{font-weight:700}
+.qz .opts{display:grid;gap:8px}
+.qz .opt{font:inherit;text-align:left;border:1px solid var(--line);background:var(--bg);color:var(--fg);padding:9px 12px;border-radius:8px;cursor:pointer;display:grid;grid-template-columns:26px minmax(0,1fr);gap:8px;align-items:start}
+.qz .opt:hover:not(:disabled){border-color:var(--accent)}
+.qz .opt .k{font-family:var(--f-mono);color:var(--fg-soft)}
+.qz .opt:disabled{cursor:default}
+.qz .opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.qz .opt.wrong{border-color:var(--art);background:var(--art-soft)}
+.qz .exp{font-size:.95rem;border-top:1px solid var(--line);padding-top:10px}
+.qz .exp b.ok{color:var(--ok)}
+.qz .exp b.no{color:var(--art)}
+
+details.disc{background:var(--surface);border:1px solid var(--line);border-radius:10px}
+details.disc summary{cursor:pointer;padding:14px 16px;font-weight:700;list-style:none;display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px}
+details.disc summary::-webkit-details-marker{display:none}
+details.disc summary .n{font-family:var(--f-mono);color:var(--art);font-weight:500}
+details.disc .ans{padding:12px 16px 16px;display:grid;gap:8px;border-top:1px solid var(--line)}
+details.disc .ans .lab{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.disc-list{display:grid;gap:10px}
+
+footer{margin-top:56px;padding-top:18px;border-top:1px solid var(--line);font-size:.9rem;color:var(--fg-soft);display:grid;gap:8px}
+footer ul{font-size:.88rem}
+
+@media (max-width: 920px){
+  .layout{grid-template-columns:minmax(0,1fr);gap:24px}
+  nav.toc{display:none}
+  details.toc-m{display:block;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 14px}
+  details.toc-m summary{cursor:pointer;font-family:var(--f-mono);font-size:.85rem}
+  details.toc-m ol{padding-left:1.2em;margin-top:8px}
+  details.toc-m a{color:var(--fg)}
+}
+@media (max-width: 620px){
+  body{font-size:16px}
+  .grid2{grid-template-columns:minmax(0,1fr)}
+  main{gap:52px}
+}
+
+.minute{border:2px solid var(--accent);border-radius:12px;padding:14px 18px;display:grid;gap:8px;max-width:74ch;background:var(--surface)}
+.minute .lab{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:500}
+.mnemo{display:grid;gap:10px}
+.mn{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:grid;gap:6px}
+.mn .big{font-family:var(--f-display);font-size:1.35rem;font-weight:700;color:var(--art);line-height:1.25}
+.mn .big b{color:var(--accent)}
+.mn .what{font-size:.95rem;color:var(--fg-soft)}
+.kw{display:flex;flex-wrap:wrap;gap:6px;list-style:none;padding:0;margin:0}
+.kw li{font-family:var(--f-mono);font-size:.78rem;background:var(--accent-soft);color:var(--fg);padding:3px 8px;border-radius:6px}
+.tool{background:var(--tint);border-radius:12px;padding:16px;display:grid;gap:12px}
+.tool h4{font-family:var(--f-mono);font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-soft);font-weight:500}
+.deck{display:grid;gap:12px}
+.fc{font:inherit;color:var(--fg);background:var(--surface);border:2px solid var(--line);border-radius:14px;min-height:170px;padding:22px;display:grid;place-items:center;text-align:center;cursor:pointer;font-size:1.08rem;line-height:1.45}
+.fc .side{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-soft);display:block;margin-bottom:8px}
+.fc.back{border-color:var(--accent);background:var(--accent-soft)}
+.fc-ctrl{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.fc-ctrl .count{font-family:var(--f-mono);font-size:.85rem;color:var(--fg-soft);margin-left:auto}
+.btn.ok{border-color:var(--ok);color:var(--ok)}
+.btn.no{border-color:var(--art);color:var(--art)}
+.order{display:grid;gap:10px}
+.order .pool,.order .done{display:flex;flex-wrap:wrap;gap:8px;min-height:40px}
+.order .pool button{font:inherit;font-size:.92rem;border:1px solid var(--fg-soft);background:var(--surface);color:var(--fg);padding:7px 12px;border-radius:8px;cursor:pointer}
+.order .pool button.shake{border-color:var(--art);background:var(--art-soft)}
+.order .done span{font-size:.92rem;background:var(--ok-soft);border:1px solid var(--ok);padding:7px 12px;border-radius:8px}
+.order .msg{font-size:.92rem;color:var(--fg-soft)}
+.order .q{font-weight:700}
+.sec-score{font-family:var(--f-mono);font-size:.9rem;color:var(--fg-soft)}
+.sec-score b{color:var(--ok)}
+.case{border-left:0;background:var(--art-soft);border-radius:10px;padding:14px 16px;display:grid;gap:6px;max-width:74ch}
+.case .lab{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--art);font-weight:500}
+details.disc .ans h5{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-soft);margin:6px 0 0;font-weight:500}
+details.disc .q-official{font-size:.8rem;font-family:var(--f-mono);color:var(--art);font-weight:500}
+</style>
+
+<div class="wrap">
+<header class="top">
+  <span class="eyebrow">Medicina Veterinária · Morfofisiologia dos Sistemas Vitais · material da revisão</span>
+  <h1>Revisão de Sistemas Vitais</h1>
+  <p class="lede">Esta página cobre só o que caiu na revisão das professoras: o Escape Room com 4 envelopes e 15 perguntas discursivas. Ela foi escrita para quem não assistiu às aulas. Cada assunto explica do zero, termina com um resumo de 1 minuto, técnicas para decorar, flashcards, um exercício de ordem, quiz e as perguntas discursivas com resposta-modelo. No fim há um simulado que junta tudo.</p>
+  <ul class="chips" aria-label="Envelopes">
+    <li><b>Envelope 1</b> sistema cardiovascular · 4 perguntas</li>
+    <li><b>Envelope 2</b> homeostase · 3 perguntas</li>
+    <li><b>Envelope 3</b> sistema respiratório · 4 perguntas</li>
+    <li><b>Envelope 4</b> sistema renal · 4 perguntas</li>
+  </ul>
+</header>
+
+<div class="layout">
+<nav class="toc" aria-label="Sumário">
+  <span class="eyebrow">Sumário</span>
+  <ol>
+    <li><a href="#comecar"><span class="n">00</span>Como usar e o caso</a></li>
+    <li><a href="#cardio"><span class="n">01</span>Cardiovascular</a></li>
+    <li><a href="#homeo"><span class="n">02</span>Homeostase</a></li>
+    <li><a href="#resp"><span class="n">03</span>Respiratório</a></li>
+    <li><a href="#renal"><span class="n">04</span>Renal</a></li>
+    <li><a href="#relampago"><span class="n">05</span>Revisão relâmpago</a></li>
+    <li><a href="#simulado"><span class="n">06</span>Simulado final</a></li>
+  </ol>
+</nav>
+
+<main>
+<details class="toc-m">
+  <summary>Sumário (toque para abrir)</summary>
+  <ol>
+    <li><a href="#comecar">Como usar e o caso</a></li>
+    <li><a href="#cardio">Cardiovascular</a></li>
+    <li><a href="#homeo">Homeostase</a></li>
+    <li><a href="#resp">Respiratório</a></li>
+    <li><a href="#renal">Renal</a></li>
+    <li><a href="#relampago">Revisão relâmpago</a></li>
+    <li><a href="#simulado">Simulado final</a></li>
+  </ol>
+</details>
+
+<!-- 00 -->
+<section class="sec" id="comecar">
+  <div class="sec-head">
+    <span class="eyebrow"><b>00</b> · antes de começar</span>
+    <h2>Como usar esta página com pouco tempo</h2>
+  </div>
+  <div class="note">
+    <span class="lab">Siglas e símbolos que ainda aparecem (quase só nos desenhos)</span>
+    <ul>
+      <li><strong>O₂</strong>: oxigênio, o gás que as células usam para produzir energia.</li>
+      <li><strong>CO₂</strong>: gás carbônico (também chamado dióxido de carbono), o gás que as células produzem como resto.</li>
+      <li><strong>mmHg</strong>: milímetros de mercúrio, a unidade usada para medir pressão.</li>
+      <li><strong>°C</strong>: graus Celsius, a unidade de temperatura.</li>
+      <li><strong>ADH</strong>: hormônio antidiurético, também chamado vasopressina. No texto escrevo o nome completo.</li>
+      <li><strong>Na⁺, K⁺, H⁺</strong>: os íons (partículas com carga elétrica) de sódio, potássio e hidrogênio.</li>
+    </ul>
+  </div>
+  <p>Ler uma vez não fixa. O que fixa é <strong>tentar lembrar</strong> sem olhar e <strong>repetir em dias diferentes</strong>, mesmo que por poucos minutos. Por isso cada assunto tem ferramentas curtas que cabem numa pausa.</p>
+  <ol class="steps">
+    <li><div><strong>Passada 1, leitura (20 a 25 min por assunto).</strong> Leia a explicação com calma, olhando os diagramas. Não precisa decorar ainda.</div></li>
+    <li><div><strong>Passada 2, lembrar (5 a 10 min, pode ser no intervalo do trabalho).</strong> Faça os flashcards e o exercício de ordem. Os cartões que você erra voltam para o fim da fila até você acertar.</div></li>
+    <li><div><strong>Passada 3, escrever (10 min).</strong> Pegue uma pergunta discursiva e escreva só as palavras-chave numa folha. Depois abra a resposta e compare com a lista "não pode faltar".</div></li>
+    <li><div><strong>Véspera e manhã da prova.</strong> Leia os quatro "Resumos de 1 minuto", a Revisão relâmpago e refaça só os flashcards que você errou.</div></li>
+  </ol>
+
+  <div class="sub">
+    <h3>O caso que amarra tudo</h3>
+    <div class="case">
+      <span class="lab">A missão do Escape Room</span>
+      <p>Um cão chegou ao hospital veterinário depois de fazer <strong>exercício intenso num ambiente quente</strong>. A equipe precisa explicar como os sistemas do corpo trabalham para manter o equilíbrio interno dele. Cada envelope trata de um sistema e, ao final, dá uma palavra-código.</p>
+    </div>
+    <p>Guarde esta história: toda pergunta da revisão é uma parte dela. Se na prova você travar, volte ao cão: "o que acontece com ele neste sistema?".</p>
+    <figure>
+      <div class="fig">
+      <svg viewBox="0 0 720 330" role="img" aria-label="Mapa do caso: os quatro sistemas respondendo ao exercício no calor">
+        <rect x="265" y="128" width="190" height="74" rx="12" class="d-box-art"/>
+        <text x="360" y="158" text-anchor="middle" class="d-tb">Cão em exercício</text>
+        <text x="360" y="180" text-anchor="middle" class="d-ts">intenso, num dia quente</text>
+        <rect x="10" y="20" width="280" height="92" rx="10" class="d-box"/>
+        <text x="26" y="44" class="d-tm">ENVELOPE 1 · CIRCULAÇÃO</text>
+        <text x="26" y="68" class="d-t">O débito cardíaco sobe</text>
+        <text x="26" y="88" class="d-ts">leva oxigênio aos músculos e calor à pele</text>
+        <rect x="430" y="20" width="280" height="92" rx="10" class="d-box"/>
+        <text x="446" y="44" class="d-tm">ENVELOPE 2 · HOMEOSTASE</text>
+        <text x="446" y="68" class="d-t">A temperatura do corpo sobe</text>
+        <text x="446" y="88" class="d-ts">o feedback negativo traz de volta</text>
+        <rect x="10" y="218" width="280" height="92" rx="10" class="d-box"/>
+        <text x="26" y="242" class="d-tm">ENVELOPE 3 · RESPIRAÇÃO</text>
+        <text x="26" y="266" class="d-t">Respira mais rápido</text>
+        <text x="26" y="286" class="d-ts">mais trocas gasosas e ofegação</text>
+        <rect x="430" y="218" width="280" height="92" rx="10" class="d-box"/>
+        <text x="446" y="242" class="d-tm">ENVELOPE 4 · NÉFRON</text>
+        <text x="446" y="266" class="d-t">Perdeu água ao ofegar</text>
+        <text x="446" y="286" class="d-ts">hormônio antidiurético: urina pouca</text>
+        <line x1="290" y1="100" x2="310" y2="128" class="d-line"/>
+        <line x1="430" y1="100" x2="410" y2="128" class="d-line"/>
+        <line x1="290" y1="230" x2="310" y2="202" class="d-line"/>
+        <line x1="430" y1="230" x2="410" y2="202" class="d-line"/>
+      </svg>
+      </div>
+      <figcaption>As quatro palavras-código da revisão, na ordem dos envelopes, são <strong>Circulação, Homeostase, Respiração e Néfron</strong>. Iniciais: <strong>C-H-R-N</strong>.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 01 -->
+<section class="sec" id="cardio">
+  <div class="sec-head">
+    <span class="eyebrow"><b>01</b> · Envelope 1 · "O coração em alerta"</span>
+    <h2>Sistema cardiovascular</h2>
+  </div>
+  <p>O envelope 1 pede quatro coisas: o caminho do sangue pelo coração, a diferença entre circulação pulmonar e sistêmica, a relação entre frequência cardíaca, volume sistólico e débito cardíaco, e as diferenças microscópicas entre artérias, arteríolas, veias e vênulas.</p>
+
+  <div class="sub">
+    <h3>1.1 As peças do coração</h3>
+    <p>O coração é um músculo oco com <strong>quatro câmaras</strong>. Em cima ficam os dois <strong>átrios</strong>, que <strong>recebem</strong> o sangue. Embaixo ficam os dois <strong>ventrículos</strong>, que <strong>bombeiam</strong> o sangue para fora. O lado direito e o lado esquerdo não se misturam.</p>
+    <ul>
+      <li><strong>Lado direito</strong> (átrio direito e ventrículo direito): trabalha com sangue <strong>pobre em oxigênio</strong>, que voltou do corpo. Manda esse sangue para o pulmão.</li>
+      <li><strong>Lado esquerdo</strong> (átrio esquerdo e ventrículo esquerdo): trabalha com sangue <strong>rico em oxigênio</strong>, que voltou do pulmão. Manda esse sangue para o corpo todo. Por isso a parede do ventrículo esquerdo é cerca de 3 vezes mais grossa.</li>
+    </ul>
+    <p><strong>Valvas</strong> (o slide chama de válvulas) são portinhas que deixam o sangue passar num sentido só. São quatro:</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Valva</th><th>Onde fica</th><th>Outro nome</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Tricúspide</strong></td><td>Entre átrio direito e ventrículo direito</td><td>Atrioventricular direita</td></tr>
+        <tr><td><strong>Pulmonar</strong></td><td>Saída do ventrículo direito para o tronco pulmonar</td><td>Semilunar pulmonar</td></tr>
+        <tr><td><strong>Mitral</strong></td><td>Entre átrio esquerdo e ventrículo esquerdo</td><td>Bicúspide ou atrioventricular esquerda</td></tr>
+        <tr><td><strong>Aórtica</strong></td><td>Saída do ventrículo esquerdo para a aorta</td><td>Semilunar aórtica</td></tr>
+      </tbody>
+    </table></div>
+    <p><strong>Vasos:</strong> a regra do nome é a direção, não o oxigênio. <strong>Artéria</strong> é todo vaso que <strong>sai</strong> do coração. <strong>Veia</strong> é todo vaso que <strong>chega</strong> ao coração.</p>
+  </div>
+
+  <div class="sub">
+    <h3>1.2 O caminho do sangue (Pergunta 1)</h3>
+    <figure>
+      <div class="fig">
+      <svg viewBox="0 0 720 460" role="img" aria-label="Circulação pulmonar e sistêmica com as quatro câmaras do coração">
+        <defs>
+          <marker id="c1a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="d-ah-art"/></marker>
+          <marker id="c1v" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="d-ah-ven"/></marker>
+        </defs>
+        <text x="360" y="16" text-anchor="middle" class="d-tm">CIRCULAÇÃO PULMONAR (PEQUENA)</text>
+        <rect x="250" y="24" width="220" height="58" rx="12" class="d-box-tint" style="stroke:var(--fg-soft)"/>
+        <text x="360" y="48" text-anchor="middle" class="d-tb">Pulmões</text>
+        <text x="360" y="67" text-anchor="middle" class="d-ts">sai gás carbônico, entra oxigênio</text>
+        <rect x="250" y="160" width="80" height="55" rx="6" class="d-box-ven"/>
+        <text x="290" y="184" text-anchor="middle" class="d-tb" style="font-size:13px">Átrio</text>
+        <text x="290" y="202" text-anchor="middle" class="d-tb" style="font-size:13px">direito</text>
+        <rect x="250" y="235" width="80" height="70" rx="6" class="d-box-ven"/>
+        <text x="290" y="266" text-anchor="middle" class="d-tb" style="font-size:13px">Ventrículo</text>
+        <text x="290" y="284" text-anchor="middle" class="d-tb" style="font-size:13px">direito</text>
+        <rect x="390" y="160" width="80" height="55" rx="6" class="d-box-art"/>
+        <text x="430" y="184" text-anchor="middle" class="d-tb" style="font-size:13px">Átrio</text>
+        <text x="430" y="202" text-anchor="middle" class="d-tb" style="font-size:13px">esquerdo</text>
+        <rect x="390" y="235" width="80" height="70" rx="6" class="d-box-art"/>
+        <text x="430" y="266" text-anchor="middle" class="d-tb" style="font-size:13px">Ventrículo</text>
+        <text x="430" y="284" text-anchor="middle" class="d-tb" style="font-size:13px">esquerdo</text>
+        <line x1="262" y1="225" x2="318" y2="225" style="stroke:var(--fg);stroke-width:3"/>
+        <line x1="402" y1="225" x2="458" y2="225" style="stroke:var(--fg);stroke-width:3"/>
+        <text x="236" y="229" text-anchor="end" class="d-ts">tricúspide</text>
+        <text x="484" y="229" class="d-ts">mitral</text>
+        <path d="M330 270 L345 270 L345 86" class="d-line-ven" marker-end="url(#c1v)"/>
+        <line x1="336" y1="150" x2="354" y2="150" style="stroke:var(--fg);stroke-width:3"/>
+        <text x="332" y="146" text-anchor="end" class="d-ts">valva pulmonar</text>
+        <text x="332" y="118" text-anchor="end" class="d-tven">tronco e artérias pulmonares</text>
+        <text x="332" y="133" text-anchor="end" class="d-ts">sangue pobre em oxigênio</text>
+        <path d="M375 82 L375 140 L430 140 L430 158" class="d-line-art" marker-end="url(#c1a)"/>
+        <text x="440" y="118" class="d-tart">veias pulmonares</text>
+        <text x="440" y="133" class="d-ts">sangue oxigenado</text>
+        <path d="M470 270 L560 270 L560 397 L474 397" class="d-line-art" marker-end="url(#c1a)"/>
+        <line x1="515" y1="261" x2="515" y2="279" style="stroke:var(--fg);stroke-width:3"/>
+        <text x="515" y="254" text-anchor="middle" class="d-ts">valva aórtica</text>
+        <text x="572" y="320" class="d-tart">aorta</text>
+        <text x="572" y="336" class="d-ts">sangue oxigenado</text>
+        <text x="572" y="352" class="d-ts">para o corpo todo</text>
+        <rect x="250" y="370" width="220" height="55" rx="12" class="d-box-tint" style="stroke:var(--fg-soft)"/>
+        <text x="360" y="393" text-anchor="middle" class="d-tb">Tecidos do corpo</text>
+        <text x="360" y="412" text-anchor="middle" class="d-ts">dá oxigênio, pega gás carbônico</text>
+        <path d="M250 397 L160 397 L160 187 L246 187" class="d-line-ven" marker-end="url(#c1v)"/>
+        <text x="150" y="300" text-anchor="end" class="d-tven">veias cavas</text>
+        <text x="150" y="316" text-anchor="end" class="d-ts">cranial e caudal</text>
+        <text x="150" y="332" text-anchor="end" class="d-ts">sangue pobre em oxigênio</text>
+        <text x="360" y="448" text-anchor="middle" class="d-tm">CIRCULAÇÃO SISTÊMICA (GRANDE)</text>
+      </svg>
+      </div>
+      <figcaption>Vermelho é sangue oxigenado, azul é sangue pobre em oxigênio. Os traços pretos são as quatro valvas. Desenhe este esquema de memória até conseguir sem olhar: a professora disse que um desenho assim pode cair.</figcaption>
+    </figure>
+    <ol class="steps">
+      <li><div>O sangue que volta dos tecidos, pobre em oxigênio, chega pelas <strong>veias cavas</strong> (cranial e caudal) ao <strong>átrio direito</strong>.</div></li>
+      <li><div>Atravessa a <strong>valva tricúspide</strong> e entra no <strong>ventrículo direito</strong>.</div></li>
+      <li><div>O ventrículo direito contrai e empurra o sangue pela <strong>valva pulmonar</strong> para o <strong>tronco pulmonar</strong> e as <strong>artérias pulmonares</strong>, que vão aos pulmões.</div></li>
+      <li><div>Nos capilares dos pulmões acontecem as <strong>trocas gasosas</strong>: o sangue solta gás carbônico e recebe oxigênio.</div></li>
+      <li><div>O sangue, agora oxigenado, volta pelas <strong>veias pulmonares</strong> ao <strong>átrio esquerdo</strong>.</div></li>
+      <li><div>Atravessa a <strong>valva mitral</strong> (bicúspide) e chega ao <strong>ventrículo esquerdo</strong>.</div></li>
+      <li><div>O ventrículo esquerdo contrai e empurra o sangue pela <strong>valva aórtica</strong> para a <strong>aorta</strong>, que começa a distribuição para o corpo todo.</div></li>
+    </ol>
+  </div>
+
+  <div class="sub">
+    <h3>1.3 Circulação pulmonar e sistêmica (Pergunta 2)</h3>
+    <div class="tbl"><table>
+      <thead><tr><th></th><th>Circulação pulmonar (pequena)</th><th>Circulação sistêmica (grande)</th></tr></thead>
+      <tbody>
+        <tr><td>Sai de</td><td>Ventrículo direito</td><td>Ventrículo esquerdo</td></tr>
+        <tr><td>Vai para</td><td>Pulmões</td><td>Todos os tecidos do corpo</td></tr>
+        <tr><td>Volta para</td><td>Átrio esquerdo</td><td>Átrio direito</td></tr>
+        <tr><td>Onde troca gases</td><td>Capilares pulmonares, em volta dos alvéolos</td><td>Capilares dos tecidos</td></tr>
+        <tr><td>O que acontece</td><td>O sangue <strong>ganha oxigênio</strong> e <strong>perde gás carbônico</strong> para o alvéolo</td><td>O sangue <strong>entrega oxigênio e nutrientes</strong> às células e <strong>recolhe gás carbônico</strong> e outros restos do metabolismo</td></tr>
+        <tr><td>Importância</td><td>Oxigenar o sangue e eliminar gás carbônico</td><td>Manter as células vivas e funcionando</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note warn">
+      <span class="lab">A pegadinha clássica</span>
+      <p>No pulmão a regra parece invertida. As <strong>artérias pulmonares</strong> levam sangue <strong>pobre em oxigênio</strong> (ele ainda vai ser oxigenado). As <strong>veias pulmonares</strong> levam sangue <strong>oxigenado</strong> (ele acabou de ser oxigenado). Não é exceção à regra do nome: elas continuam sendo artéria porque saem do coração e veia porque chegam a ele.</p>
+    </div>
+    <p>As duas circulações estão <strong>em série</strong>: o sangue passa por uma e depois pela outra, sempre. Uma não funciona sem a outra. A pulmonar recarrega o sangue de oxigênio; a sistêmica entrega esse oxigênio.</p>
+  </div>
+
+  <div class="sub">
+    <h3>1.4 Frequência cardíaca, volume sistólico e débito cardíaco (Pergunta 3)</h3>
+    <ul>
+      <li><strong>Frequência cardíaca (FC):</strong> número de batimentos por minuto.</li>
+      <li><strong>Volume sistólico (VS):</strong> volume de sangue que <strong>um ventrículo</strong> ejeta <strong>em cada batimento</strong>.</li>
+      <li><strong>Débito cardíaco (DC):</strong> volume de sangue que um ventrículo bombeia <strong>em um minuto</strong>.</li>
+    </ul>
+    <div class="note">
+      <span class="lab">A fórmula</span>
+      <p style="font-family:var(--f-mono);font-size:1.1rem">débito cardíaco = frequência cardíaca × volume sistólico</p>
+      <p>Nos livros e na prova pode aparecer abreviado como <strong>DC = FC × VS</strong>. Nessa forma, <strong>DC</strong> é débito cardíaco, <strong>FC</strong> é frequência cardíaca e <strong>VS</strong> é volume sistólico.</p>
+      <p>Faz sentido: se cada batida manda um tanto de sangue, o total por minuto é esse tanto vezes o número de batidas.</p>
+    </div>
+    <div class="calc">
+      <span class="lab">O cão do caso, em repouso e no exercício (valores de exemplo)</span>
+      <ol>
+        <li>Em repouso: frequência cardíaca de 90 batimentos por minuto e volume sistólico de 30 mililitros. Débito cardíaco = 90 × 30 = 2.700 mililitros por minuto = <strong>2,7 litros por minuto</strong>.</li>
+        <li>No exercício: a frequência cardíaca sobe para 180 batimentos por minuto e o volume sistólico sobe para 40 mililitros. Débito cardíaco = 180 × 40 = 7.200 mililitros por minuto = <strong>7,2 litros por minuto</strong>.</li>
+        <li>O débito quase triplicou. Mais sangue por minuto quer dizer mais oxigênio e nutrientes chegando aos músculos e mais gás carbônico e restos sendo levados embora.</li>
+      </ol>
+    </div>
+    <p>O sangue é o "transporte". O débito cardíaco é a quantidade de transporte por minuto. Quando os tecidos precisam de mais (exercício), o débito sobe; quando ele cai, os tecidos recebem menos oxigênio.</p>
+    <p>A resposta da professora diz que o resultado <strong>também depende</strong> de três fatores. Entenda cada um:</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Fator</th><th>O que é</th><th>Como mexe no débito</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Retorno venoso</strong></td><td>Quanto sangue volta ao coração pelas veias</td><td>Mais sangue voltando enche mais o ventrículo (mais <strong>pré-carga</strong>). Ventrículo mais cheio contrai com mais força e o volume sistólico aumenta (lei de Frank-Starling). No exercício os músculos apertam as veias e ajudam o sangue a voltar</td></tr>
+        <tr><td><strong>Contratilidade</strong></td><td>Força com que o músculo do coração contrai</td><td>Mais força ejeta mais sangue: volume sistólico maior. O sistema nervoso simpático e a adrenalina aumentam a contratilidade no exercício</td></tr>
+        <tr><td><strong>Resistência vascular</strong></td><td>Quanto os vasos dificultam a passagem do sangue</td><td>Vasos fechados (vasoconstrição) aumentam a resistência e o coração ejeta com mais dificuldade (mais <strong>pós-carga</strong>), então o volume sistólico cai. Nos músculos em exercício os vasos abrem (vasodilatação) e o sangue passa mais fácil</td></tr>
+      </tbody>
+    </table></div>
+    <p><strong>Limite importante:</strong> se a frequência cardíaca fica alta demais, cada ciclo fica curto e o ventrículo não tem tempo de encher. O volume sistólico cai e o débito pode cair, mesmo com o coração batendo rápido.</p>
+  </div>
+
+  <div class="sub">
+    <h3>1.5 Diferenças microscópicas entre os vasos (Pergunta 4)</h3>
+    <p>Todos os vasos (menos o capilar) têm a parede em <strong>três camadas</strong>, chamadas <strong>túnicas</strong>. De dentro para fora:</p>
+    <ol>
+      <li><strong>Túnica íntima:</strong> a mais interna, encostada no sangue. É formada pelo <strong>endotélio</strong> (uma camada única de células achatadas) e um pouco de tecido conjuntivo.</li>
+      <li><strong>Túnica média:</strong> o meio. Tem <strong>músculo liso</strong> e <strong>fibras elásticas</strong>. É ela que aguenta pressão e muda o diâmetro do vaso.</li>
+      <li><strong>Túnica adventícia:</strong> a mais externa. É <strong>tecido conjuntivo</strong> que prende o vaso aos tecidos em volta.</li>
+    </ol>
+    <p>O que muda de um vaso para outro é <strong>a espessura de cada túnica</strong>, e isso acompanha a função.</p>
+    <figure>
+      <div class="fig">
+      <svg viewBox="0 0 720 290" role="img" aria-label="Cortes transversais de artéria, arteríola, vênula e veia mostrando as túnicas">
+        <circle cx="100" cy="105" r="62" class="d-zone-amber"/>
+        <circle cx="100" cy="105" r="54" class="d-zone-acc"/>
+        <circle cx="100" cy="105" r="26" class="d-zone-art" style="stroke:var(--fg);stroke-width:2.5"/>
+        <circle cx="275" cy="105" r="28" class="d-zone-amber"/>
+        <circle cx="275" cy="105" r="24" class="d-zone-acc"/>
+        <circle cx="275" cy="105" r="12" class="d-zone-art" style="stroke:var(--fg);stroke-width:2"/>
+        <circle cx="435" cy="105" r="26" class="d-zone-amber"/>
+        <circle cx="435" cy="105" r="21.5" class="d-zone-acc"/>
+        <circle cx="435" cy="105" r="20" class="d-zone-ven" style="stroke:var(--fg);stroke-width:2"/>
+        <ellipse cx="595" cy="105" rx="80" ry="58" class="d-zone-amber"/>
+        <ellipse cx="595" cy="105" rx="70" ry="49" class="d-zone-acc"/>
+        <ellipse cx="595" cy="105" rx="66" ry="45" class="d-zone-ven" style="stroke:var(--fg);stroke-width:2.5"/>
+        <path d="M560 72 Q 590 110 560 140" style="fill:none;stroke:var(--fg-soft);stroke-width:2"/>
+        <text x="600" y="110" class="d-tm">válvula</text>
+        <text x="100" y="196" text-anchor="middle" class="d-tb">Artéria</text>
+        <text x="100" y="214" text-anchor="middle" class="d-ts">parede grossa</text>
+        <text x="100" y="230" text-anchor="middle" class="d-ts">média bem desenvolvida</text>
+        <text x="275" y="196" text-anchor="middle" class="d-tb">Arteríola</text>
+        <text x="275" y="214" text-anchor="middle" class="d-ts">luz pequena</text>
+        <text x="275" y="230" text-anchor="middle" class="d-ts">1 ou poucas</text>
+        <text x="275" y="246" text-anchor="middle" class="d-ts">camadas de músculo</text>
+        <text x="435" y="196" text-anchor="middle" class="d-tb">Vênula</text>
+        <text x="435" y="214" text-anchor="middle" class="d-ts">parede fina</text>
+        <text x="435" y="230" text-anchor="middle" class="d-ts">pouco músculo</text>
+        <text x="595" y="196" text-anchor="middle" class="d-tb">Veia</text>
+        <text x="595" y="214" text-anchor="middle" class="d-ts">parede fina, luz grande</text>
+        <text x="595" y="230" text-anchor="middle" class="d-ts">e irregular; média fina</text>
+        <text x="595" y="246" text-anchor="middle" class="d-ts">adventícia evidente</text>
+        <rect x="80" y="266" width="14" height="14" class="d-zone-amber"/><text x="100" y="278" class="d-ts">adventícia</text>
+        <rect x="200" y="266" width="14" height="14" class="d-zone-acc"/><text x="220" y="278" class="d-ts">média (músculo e elástica)</text>
+        <rect x="400" y="266" width="14" height="14" style="fill:none;stroke:var(--fg);stroke-width:2"/><text x="420" y="278" class="d-ts">íntima (endotélio)</text>
+        <rect x="540" y="266" width="14" height="14" class="d-zone-art"/><text x="560" y="278" class="d-ts">luz com sangue</text>
+      </svg>
+      </div>
+      <figcaption>Cortes transversais esquemáticos. Compare a cor do meio (túnica média): grossa na artéria, fina na veia e na vênula. A luz (o buraco por onde o sangue passa) é pequena na artéria e grande e achatada na veia.</figcaption>
+    </figure>
+    <div class="tbl"><table>
+      <thead><tr><th>Vaso</th><th>Parede e túnicas</th><th>Função ligada à estrutura</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Artéria</strong></td><td>Parede <strong>espessa</strong>. Túnica média <strong>bem desenvolvida</strong>, com músculo liso e fibras elásticas. As artérias grandes (como a aorta) têm muita fibra elástica; as médias, mais músculo</td><td>Conduz o sangue <strong>sob alta pressão</strong>, logo na saída do coração. A parede grossa aguenta a pressão e as fibras elásticas esticam a cada batida e voltam, mantendo o sangue andando</td></tr>
+        <tr><td><strong>Arteríola</strong></td><td>Luz <strong>pequena</strong>. Túnica média com <strong>uma ou poucas camadas de músculo liso</strong></td><td>Contraindo ou relaxando, regula a <strong>resistência vascular</strong> e quanto sangue chega aos capilares de cada tecido</td></tr>
+        <tr><td><strong>Vênula</strong></td><td>Parede <strong>fina</strong>; as menores quase não têm músculo</td><td>Recebe o sangue dos capilares. As <strong>vênulas pós-capilares</strong> (logo depois do capilar) participam de trocas com os tecidos e são o principal lugar por onde os <strong>leucócitos</strong> (células de defesa) saem do sangue para o tecido na inflamação</td></tr>
+        <tr><td><strong>Veia</strong></td><td>Parede <strong>mais fina</strong> que a da artéria do mesmo tamanho. Luz <strong>maior e muitas vezes irregular</strong> (achatada). Túnica média <strong>pouco desenvolvida</strong>; adventícia relativamente evidente (muitas vezes a camada mais grossa). Algumas têm <strong>válvulas</strong></td><td>Pressão baixa, não precisa de parede grossa. São <strong>vasos de capacitância</strong>: por terem luz grande e parede que estica, guardam a maior parte do volume de sangue do corpo. As válvulas impedem o sangue de voltar para trás</td></tr>
+      </tbody>
+    </table></div>
+    <p>O capilar não tem as três túnicas: é só endotélio. É por isso que ali acontecem as trocas: a parede é finíssima.</p>
+  </div>
+
+  <div class="minute">
+    <span class="lab">Resumo de 1 minuto</span>
+    <ul>
+      <li>Caminho: cavas → átrio direito → <strong>tricúspide</strong> → ventrículo direito → <strong>pulmonar</strong> → artérias pulmonares → pulmão → veias pulmonares → átrio esquerdo → <strong>mitral</strong> → ventrículo esquerdo → <strong>aórtica</strong> → aorta.</li>
+      <li>Pulmonar: ventrículo direito → pulmão → átrio esquerdo, oxigena. Sistêmica: ventrículo esquerdo → tecidos → átrio direito, entrega oxigênio e recolhe gás carbônico.</li>
+      <li>Artéria pulmonar leva sangue pobre em oxigênio; veia pulmonar leva sangue oxigenado.</li>
+      <li><strong>Débito cardíaco = frequência cardíaca × volume sistólico</strong>. Depende também de retorno venoso, contratilidade e resistência vascular.</li>
+      <li>Túnicas: íntima (endotélio), média (músculo e elástica), adventícia (conjuntivo).</li>
+      <li>Artéria: parede grossa, média forte, aguenta pressão. Arteríola: poucas camadas de músculo, regula resistência. Vênula: fina, recebe dos capilares, saída de leucócitos. Veia: fina, luz grande, guarda volume, válvulas.</li>
+    </ul>
+  </div>
+
+  <div class="sub">
+    <h3>Para decorar</h3>
+    <div class="mnemo">
+      <div class="mn"><span class="big"><b>T</b>oda <b>P</b>essoa <b>M</b>erece <b>A</b>mor</span><span class="what">As valvas na ordem em que o sangue passa: <strong>T</strong>ricúspide, <strong>P</strong>ulmonar, <strong>M</strong>itral, <strong>A</strong>órtica. As duas primeiras são do lado direito; as duas últimas, do esquerdo.</span></div>
+      <div class="mn"><span class="big"><b>A</b>rtéria <b>A</b>fasta, <b>V</b>eia <b>V</b>olta</span><span class="what">Artéria afasta o sangue do coração; veia volta com ele. O nome não depende do oxigênio. Por isso a artéria pulmonar pode levar sangue pobre em oxigênio.</span></div>
+      <div class="mn"><span class="big"><b>D</b>ébito = <b>F</b>requência × <b>V</b>olume</span><span class="what">Débito cardíaco = frequência cardíaca × volume sistólico. Pense "quantas batidas vezes quanto sai em cada uma". Fatores extras: <strong>R</strong>etorno venoso, <strong>C</strong>ontratilidade, <strong>R</strong>esistência: "RCR".</span></div>
+      <div class="mn"><span class="big"><b>I</b>-<b>M</b>-<b>A</b>: o ímã de dentro para fora</span><span class="what">Túnicas na ordem: <strong>Í</strong>ntima, <strong>M</strong>édia, <strong>A</strong>dventícia.</span></div>
+      <div class="mn"><span class="big">Artéria <b>aguenta</b>, arteríola <b>ajusta</b>, capilar <b>troca</b>, vênula <b>recolhe</b>, veia <b>guarda</b></span><span class="what">A função de cada vaso, na ordem do caminho do sangue. Aguenta pressão (parede grossa), ajusta a resistência (músculo), troca (só endotélio), recolhe do capilar e deixa leucócitos saírem, guarda volume (capacitância).</span></div>
+    </div>
+    <div class="tool">
+      <h4>Flashcards: cardiovascular</h4>
+      <div class="deck" data-deck="cardio"></div>
+    </div>
+    <div class="tool">
+      <h4>Exercício de ordem</h4>
+      <div class="order" data-order="sangue"></div>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>Teste-se: quiz do envelope 1</h3>
+    <p class="sec-score" data-score="cardio"></p>
+    <ol class="qz-list" data-quiz="cardio"></ol>
+  </div>
+
+  <div class="sub">
+    <h3>Perguntas discursivas do envelope 1</h3>
+    <div class="disc-list">
+      <details class="disc"><summary><span class="n">1.1</span><span><span class="q-official">Pergunta oficial 1</span><br>Descreva o caminho percorrido pelo sangue desde sua chegada ao coração pelas veias cavas até sua saída pela aorta. Identifique as câmaras cardíacas, as válvulas e os vasos envolvidos, explicando a passagem pela circulação pulmonar e sistêmica.</span></summary><div class="ans"><span class="lab">Resposta-modelo</span>
+        <p>O sangue pobre em oxigênio que volta dos tecidos chega ao coração pelas veias cavas cranial e caudal e entra no átrio direito. Do átrio direito atravessa a válvula tricúspide e entra no ventrículo direito. Quando o ventrículo direito contrai, o sangue passa pela válvula pulmonar para o tronco pulmonar e as artérias pulmonares, que o levam aos pulmões. Nos capilares pulmonares ocorrem as trocas gasosas: o sangue elimina gás carbônico e recebe oxigênio. Esse trajeto do ventrículo direito até o pulmão e de volta é a circulação pulmonar.</p>
+        <p>O sangue oxigenado volta pelas veias pulmonares ao átrio esquerdo, atravessa a válvula mitral (bicúspide) e entra no ventrículo esquerdo. A contração do ventrículo esquerdo empurra o sangue pela válvula aórtica para a aorta, que inicia a circulação sistêmica, distribuindo o sangue oxigenado para todos os tecidos.</p>
+        <h5>Não pode faltar</h5>
+        <ul class="kw"><li>veias cavas</li><li>átrio direito</li><li>tricúspide</li><li>ventrículo direito</li><li>valva pulmonar</li><li>tronco e artérias pulmonares</li><li>trocas gasosas</li><li>veias pulmonares</li><li>átrio esquerdo</li><li>mitral/bicúspide</li><li>ventrículo esquerdo</li><li>valva aórtica</li><li>aorta</li></ul>
+      </div></details>
+      <details class="disc"><summary><span class="n">1.2</span><span><span class="q-official">Pergunta oficial 2</span><br>Explique a diferença entre a circulação pulmonar e a circulação sistêmica. Em quais locais ocorrem as trocas gasosas e qual é a importância dessas duas circulações para o funcionamento do organismo?</span></summary><div class="ans"><span class="lab">Resposta-modelo</span>
+        <p>A circulação pulmonar leva o sangue do ventrículo direito até os pulmões e o devolve ao átrio esquerdo. Nos capilares pulmonares, em volta dos alvéolos, ocorre a troca de gases: o oxigênio entra no sangue e o dióxido de carbono sai para os alvéolos. Sua importância é oxigenar o sangue e eliminar o gás carbônico.</p>
+        <p>A circulação sistêmica leva o sangue do ventrículo esquerdo, pela aorta, a todos os tecidos e o devolve ao átrio direito pelas veias cavas. Nos capilares dos tecidos o sangue entrega oxigênio e nutrientes às células e recolhe gás carbônico e outros produtos do metabolismo. Sua importância é manter as células vivas e funcionando.</p>
+        <p>Na circulação pulmonar as artérias pulmonares levam sangue pobre em oxigênio e as veias pulmonares levam sangue oxigenado. As duas circulações funcionam em série e dependem uma da outra.</p>
+        <h5>Não pode faltar</h5>
+        <ul class="kw"><li>Ventrículo direito → pulmões → átrio esquerdo</li><li>Ventrículo esquerdo → tecidos → átrio direito</li><li>capilares pulmonares (alvéolos)</li><li>capilares dos tecidos</li><li>Oxigênio entra / gás carbônico sai</li><li>nutrientes e metabólitos</li><li>artéria pulmonar com sangue pobre em oxigênio</li></ul>
+      </div></details>
+      <details class="disc"><summary><span class="n">1.3</span><span><span class="q-official">Pergunta oficial 3</span><br>Explique a relação entre frequência cardíaca, volume sistólico e débito cardíaco. Como essas variáveis influenciam o transporte de oxigênio e nutrientes para os tecidos?</span></summary><div class="ans"><span class="lab">Resposta-modelo</span>
+        <p>Frequência cardíaca é o número de batimentos por minuto. Volume sistólico é o volume de sangue ejetado por um ventrículo em cada batimento. Débito cardíaco é o volume de sangue que um ventrículo bombeia em um minuto e é calculado por débito cardíaco = frequência cardíaca × volume sistólico. Por exemplo, 90 batimentos por minuto × 30 mililitros = 2,7 litros por minuto.</p>
+        <p>Quanto maior o débito, mais sangue chega aos tecidos por minuto e, com ele, mais oxigênio e nutrientes. No exercício, a frequência cardíaca aumenta e, dependendo das condições, o volume sistólico também, elevando o débito e a oferta de oxigênio aos músculos. O resultado depende ainda do retorno venoso (quanto sangue volta e enche o ventrículo), da contratilidade (força de contração) e da resistência vascular (dificuldade que os vasos oferecem à ejeção). Se a frequência ficar alta demais, o ventrículo não enche e o volume sistólico cai.</p>
+        <h5>Não pode faltar</h5>
+        <ul class="kw"><li>Débito cardíaco = frequência cardíaca × volume sistólico</li><li>definição das três variáveis</li><li>mais débito cardíaco = mais oxigênio e nutrientes</li><li>exercício</li><li>retorno venoso</li><li>contratilidade</li><li>resistência vascular</li></ul>
+      </div></details>
+      <details class="disc"><summary><span class="n">1.4</span><span><span class="q-official">Pergunta oficial 4</span><br>Descreva as principais diferenças histológicas entre artérias, arteríolas, veias e vênulas. Compare a espessura das paredes e o desenvolvimento das túnicas, e relacione essas características às funções de cada vaso.</span></summary><div class="ans"><span class="lab">Resposta-modelo</span>
+        <p>Os vasos têm três túnicas: íntima (endotélio), média (músculo liso e fibras elásticas) e adventícia (tecido conjuntivo). As <strong>artérias</strong> têm paredes relativamente espessas e túnica média bem desenvolvida, com músculo liso e fibras elásticas em proporções variáveis; isso permite conduzir o sangue sob alta pressão. As <strong>arteríolas</strong> têm lúmen pequeno e túnica média formada por uma ou poucas camadas de músculo liso; ao contrair ou relaxar, regulam a resistência vascular e o fluxo que chega aos capilares.</p>
+        <p>As <strong>veias</strong> têm paredes mais finas que as artérias correspondentes, lúmen maior e muitas vezes irregular, túnica média pouco desenvolvida e adventícia relativamente evidente. Funcionam como vasos de capacitância, armazenando grande volume de sangue sob baixa pressão, e algumas têm válvulas que impedem o refluxo. As <strong>vênulas</strong> têm paredes finas, com pouco ou nenhum músculo liso nas menores; recebem o sangue dos capilares, e as vênulas pós-capilares participam de trocas com os tecidos e da saída de leucócitos. A organização varia com o calibre e o tipo de vaso.</p>
+        <h5>Não pode faltar</h5>
+        <ul class="kw"><li>três túnicas</li><li>artéria: parede espessa, média desenvolvida, pressão</li><li>arteríola: poucas camadas de músculo, resistência</li><li>veia: fina, lúmen grande, capacitância, válvulas</li><li>vênula: fina, recebe dos capilares, leucócitos</li></ul>
+      </div></details>
+      <details class="disc"><summary><span class="n">1.5</span><span>Extra: por que a parede do ventrículo esquerdo é mais grossa que a do direito?</span></summary><div class="ans"><span class="lab">Resposta-modelo</span>
+        <p>Porque o ventrículo esquerdo bombeia o sangue para a circulação sistêmica, que vai ao corpo todo e exige uma pressão muito maior. O ventrículo direito só manda o sangue aos pulmões, que ficam perto e têm pressão baixa. A espessura do músculo acompanha a pressão que cada câmara precisa gerar; no adulto a parede do esquerdo é cerca de 3 vezes a do direito.</p>
+      </div></details>
+      <details class="disc"><summary><span class="n">1.6</span><span>Extra: o cão do caso vai ficando desidratado. O que acontece com o débito cardíaco e por quê?</span></summary><div class="ans"><span class="lab">Resposta-modelo</span>
+        <ol><li>A desidratação diminui o volume de sangue.</li><li>Volta menos sangue ao coração: o retorno venoso cai.</li><li>O ventrículo enche menos (pré-carga menor) e ejeta menos: o volume sistólico cai.</li><li>Como débito cardíaco = frequência cardíaca × volume sistólico, o débito tende a cair. O corpo compensa aumentando a frequência cardíaca, mas isso tem limite.</li><li>Com menos débito, chega menos oxigênio aos tecidos e menos sangue à pele para perder calor.</li></ol>
+      </div></details>
+    </div>
+  </div>
+</section>
+
+<!-- 02 -->
+<section class="sec" id="homeo">
+  <div class="sec-head">
+    <span class="eyebrow"><b>02</b> · Envelope 2 · "O equilíbrio perdido"</span>
+    <h2>Homeostase</h2>
+  </div>
+  <div class="case">
+    <span class="lab">No caso</span>
+    <p>O cão apresenta <strong>aumento da temperatura corporal</strong> depois do exercício no calor. O corpo precisa perceber essa mudança e reagir para trazer a temperatura de volta.</p>
+  </div>
+  <p>O envelope 2 pede três coisas: definir homeostase, explicar o feedback negativo usando a temperatura e descrever os quatro elementos de uma regulação (estímulo, receptor, centro de controle e efetor).</p>
+
+  <div class="sub">
+    <h3>2.1 O que é homeostase (Pergunta 1)</h3>
+    <p>As células do corpo não ficam soltas no ambiente. Elas vivem banhadas por um líquido, o <strong>meio interno</strong> (o líquido entre as células e o plasma do sangue). Para funcionar, as células precisam que esse líquido tenha temperatura, pH, quantidade de água, glicose, oxigênio e sais dentro de certos limites.</p>
+    <div class="note">
+      <span class="lab">Definição para escrever na prova</span>
+      <p><strong>Homeostase</strong> é a capacidade do organismo de manter o meio interno <strong>relativamente estável</strong>, dentro de <strong>limites compatíveis com o funcionamento das células</strong>, apesar das mudanças internas e externas.</p>
+    </div>
+    <p><strong>Por que é fundamental para sobreviver?</strong> Porque quase tudo o que acontece na célula depende dessas condições:</p>
+    <ul>
+      <li><strong>Atividade das enzimas.</strong> Enzimas são proteínas que fazem as reações químicas acontecerem. Cada enzima só trabalha bem numa faixa de temperatura e de pH. Fora dela, a enzima muda de forma e para de funcionar.</li>
+      <li><strong>Transporte de substâncias.</strong> A entrada e a saída de água, nutrientes e íons pelas membranas depende das concentrações dentro e fora da célula.</li>
+      <li><strong>Funcionamento dos órgãos.</strong> Coração, músculos, nervos e rins só funcionam bem com os valores dentro da faixa.</li>
+    </ul>
+    <p><strong>Por que não é "tudo constante"?</strong> A palavra-chave é <strong>relativamente</strong>. Os valores <strong>oscilam</strong> o tempo todo, sobem e descem um pouco, e são <strong>ajustados continuamente</strong> pelos mecanismos de regulação. O que se mantém é a <strong>faixa</strong>, não um número fixo.</p>
+    <figure>
+      <div class="fig">
+      <svg viewBox="0 0 720 250" role="img" aria-label="Temperatura do cão oscilando dentro da faixa normal, subindo no exercício e voltando por feedback negativo">
+        <rect x="60" y="125" width="640" height="41" class="d-zone-ok"/>
+        <line x1="60" y1="20" x2="60" y2="205" class="d-line"/>
+        <line x1="60" y1="205" x2="705" y2="205" class="d-line"/>
+        <text x="52" y="170" text-anchor="end" class="d-tm">38 °C</text>
+        <text x="52" y="129" text-anchor="end" class="d-tm">39 °C</text>
+        <text x="52" y="68" text-anchor="end" class="d-tm">41 °C</text>
+        <line x1="60" y1="64" x2="705" y2="64" class="d-line-dash"/>
+        <path d="M60 150 C 90 135, 110 160, 140 148 C 170 136, 190 158, 220 146 C 245 137, 262 140, 280 130 C 320 108, 360 70, 400 66 C 440 62, 470 92, 520 120 C 560 140, 590 150, 620 146 C 650 142, 672 155, 700 148" style="fill:none;stroke:var(--art);stroke-width:3"/>
+        <text x="140" y="190" text-anchor="middle" class="d-ts">repouso: sobe e desce</text>
+        <text x="140" y="118" text-anchor="middle" class="d-ts">dentro da faixa</text>
+        <text x="330" y="54" text-anchor="middle" class="d-tart">exercício no calor</text>
+        <text x="330" y="38" text-anchor="middle" class="d-ts">a temperatura sai da faixa</text>
+        <text x="625" y="92" text-anchor="middle" class="d-ta">feedback negativo</text>
+        <text x="625" y="108" text-anchor="middle" class="d-ts">ofegação e vasos da pele</text>
+        <text x="650" y="190" text-anchor="middle" class="d-ts">voltou à faixa</text>
+        <text x="380" y="226" text-anchor="middle" class="d-tm">TEMPO</text>
+        <text x="690" y="160" text-anchor="end" class="d-tm" style="fill:var(--ok)">faixa normal</text>
+      </svg>
+      </div>
+      <figcaption>Valores aproximados. A faixa verde é o intervalo normal da temperatura do cão (cerca de 38 a 39 °C). Mesmo em repouso a linha nunca fica reta: isso é homeostase. No exercício ela sai da faixa e o feedback negativo a traz de volta.</figcaption>
+    </figure>
+  </div>
+
+  <div class="sub">
+    <h3>2.2 Feedback negativo (Pergunta 2)</h3>
+    <p><strong>Feedback</strong> é uma palavra em inglês que quer dizer <strong>retroalimentação</strong>: o resultado de uma resposta volta e influencia o próprio sistema.</p>
+    <div class="note">
+      <span class="lab">A ideia central</span>
+      <p>No <strong>feedback negativo</strong>, a resposta do organismo <strong>vai contra</strong> (se opõe à) alteração inicial. Se a variável subiu, a resposta faz descer. Se desceu, a resposta faz subir. Assim a variável volta para perto do seu <strong>intervalo de referência</strong> (a faixa normal).</p>
+    </div>
+    <p>Funciona como o termostato de um ar-condicionado: esquentou além do valor marcado, ele liga e esfria; esfriou, ele desliga.</p>
+    <p><strong>No cão do caso, passo a passo:</strong></p>
+    <ol class="steps">
+      <li><div>O exercício faz os músculos produzirem muito calor e o ambiente quente dificulta perder esse calor. A <strong>temperatura corporal sobe</strong>.</div></li>
+      <li><div>A subida é percebida e os mecanismos de <strong>termorregulação</strong> (regulação da temperatura) são acionados.</div></li>
+      <li><div><strong>Ofegação:</strong> o cão respira rápido e curto, de boca aberta. A água <strong>evapora</strong> da língua e das vias respiratórias. Para evaporar, a água precisa de calor, e ela tira esse calor do corpo. O cão quase não sua (só tem glândulas sudoríparas úteis nos coxins, as almofadas das patas), por isso a ofegação é o principal recurso dele.</div></li>
+      <li><div><strong>Fluxo sanguíneo na pele:</strong> os vasos da pele se dilatam (vasodilatação), passa mais sangue quente perto da superfície e o calor é perdido para o ambiente.</div></li>
+      <li><div>A temperatura cai e volta à faixa. Como o estímulo diminuiu, a resposta também diminui. O circuito se fecha.</div></li>
+    </ol>
+    <p>A resposta da professora tem um detalhe importante: a eficiência <strong>depende das condições ambientais e do estado do animal</strong>. Num dia muito quente e úmido, a evaporação é pior; um cão desidratado tem menos água para evaporar e menos sangue para mandar à pele.</p>
+    <div class="note warn">
+      <span class="lab">Não confunda</span>
+      <p><strong>Feedback positivo</strong> é o contrário: a resposta <strong>reforça</strong> o estímulo até um evento terminar. É raro. Exemplo: no parto, a contração do útero estimula mais ocitocina, que gera contrações mais fortes, até o filhote nascer. A homeostase usa principalmente o feedback <strong>negativo</strong>.</p>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>2.3 Estímulo, receptor, centro de controle e efetor (Pergunta 3)</h3>
+    <p>Toda regulação tem as mesmas peças, sempre na mesma ordem:</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Peça</th><th>O que é</th><th>No cão com calor</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Estímulo</strong></td><td>A alteração que foi detectada</td><td>Aumento da temperatura corporal</td></tr>
+        <tr><td><strong>Receptor</strong></td><td>A estrutura que <strong>percebe</strong> a alteração</td><td><strong>Termorreceptores</strong> (sensores de temperatura) na pele e no sistema nervoso central</td></tr>
+        <tr><td><strong>Centro de controle</strong></td><td>Recebe a informação, <strong>integra</strong> (compara com o valor normal) e <strong>coordena</strong> a resposta</td><td><strong>Centros termorreguladores no sistema nervoso central</strong>, principalmente no hipotálamo (região na base do cérebro)</td></tr>
+        <tr><td><strong>Efetor</strong></td><td>O órgão ou tecido que <strong>executa</strong> a resposta</td><td>Músculos da respiração fazendo a <strong>ofegação</strong>; vasos da pele se dilatando</td></tr>
+        <tr><td>Resposta</td><td>O resultado da ação do efetor</td><td>O calor é dissipado e a temperatura cai</td></tr>
+      </tbody>
+    </table></div>
+    <figure>
+      <div class="fig">
+      <svg viewBox="0 0 720 220" role="img" aria-label="Alça de feedback negativo da temperatura no cão">
+        <defs><marker id="h1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="d-ah"/></marker></defs>
+        <rect x="10" y="20" width="120" height="50" rx="8" class="d-box-amber"/><text x="70" y="50" text-anchor="middle" class="d-tb">Estímulo</text>
+        <rect x="155" y="20" width="120" height="50" rx="8" class="d-box"/><text x="215" y="50" text-anchor="middle" class="d-tb">Receptor</text>
+        <rect x="300" y="20" width="120" height="50" rx="8" class="d-box-acc"/><text x="360" y="42" text-anchor="middle" class="d-tb">Centro de</text><text x="360" y="60" text-anchor="middle" class="d-tb">controle</text>
+        <rect x="445" y="20" width="120" height="50" rx="8" class="d-box"/><text x="505" y="50" text-anchor="middle" class="d-tb">Efetor</text>
+        <rect x="590" y="20" width="120" height="50" rx="8" class="d-box"/><text x="650" y="50" text-anchor="middle" class="d-tb">Resposta</text>
+        <path d="M130 45 L153 45" class="d-line" marker-end="url(#h1)"/>
+        <path d="M275 45 L298 45" class="d-line" marker-end="url(#h1)"/>
+        <path d="M420 45 L443 45" class="d-line" marker-end="url(#h1)"/>
+        <path d="M565 45 L588 45" class="d-line" marker-end="url(#h1)"/>
+        <path d="M650 70 L650 96 L70 96 L70 72" class="d-line-dash" marker-end="url(#h1)"/>
+        <text x="360" y="114" text-anchor="middle" class="d-ta">a resposta reduz o estímulo: feedback negativo</text>
+        <g class="d-ts">
+          <text x="70" y="146" text-anchor="middle">temperatura</text><text x="70" y="162" text-anchor="middle">sobe</text>
+          <text x="215" y="146" text-anchor="middle">termorreceptores</text><text x="215" y="162" text-anchor="middle">pele e encéfalo</text>
+          <text x="360" y="146" text-anchor="middle">centros</text><text x="360" y="162" text-anchor="middle">termorreguladores</text><text x="360" y="178" text-anchor="middle">(hipotálamo)</text>
+          <text x="505" y="146" text-anchor="middle">ofegação;</text><text x="505" y="162" text-anchor="middle">vasos da pele</text><text x="505" y="178" text-anchor="middle">dilatam</text>
+          <text x="650" y="146" text-anchor="middle">perde calor;</text><text x="650" y="162" text-anchor="middle">temperatura</text><text x="650" y="178" text-anchor="middle">volta à faixa</text>
+        </g>
+        <text x="360" y="208" text-anchor="middle" class="d-tm">o hipotálamo fica no encéfalo, parte do sistema nervoso central</text>
+      </svg>
+      </div>
+      <figcaption>A seta tracejada é o "feedback": o resultado volta e diminui o estímulo que começou tudo. Desenhe este circuito na prova da pergunta 3; ele já responde quase tudo.</figcaption>
+    </figure>
+  </div>
+
+  <div class="minute">
+    <span class="lab">Resumo de 1 minuto</span>
+    <ul>
+      <li>Homeostase: manter o meio interno <strong>relativamente estável</strong>, dentro de limites compatíveis com as células, apesar das mudanças internas e externas.</li>
+      <li>Importância: enzimas, transporte de substâncias, funcionamento dos órgãos.</li>
+      <li>Não é constante: os valores <strong>oscilam</strong> numa faixa e são ajustados o tempo todo.</li>
+      <li>Feedback negativo: a resposta se <strong>opõe</strong> à alteração e traz a variável de volta à faixa.</li>
+      <li>Cão com calor: <strong>ofegação</strong> (evaporação nas vias respiratórias) e mais sangue na pele.</li>
+      <li>Peças: estímulo (alteração) → receptor (percebe: termorreceptores) → centro de controle (integra: centros termorreguladores no sistema nervoso central) → efetor (executa: ofegação).</li>
+    </ul>
+  </div>
+
+  <div class="sub">
+    <h3>Para decorar</h3>
+    <div class="mnemo">
+      <div class="mn"><span class="big"><b>R</b>elativamente estável, dentro de <b>L</b>imites</span><span class="what">As duas expressões que não podem faltar na definição. "Relativamente" responde por que não é tudo constante.</span></div>
+      <div class="mn"><span class="big"><b>E</b>stou <b>R</b>ecebendo <b>C</b>alor, <b>E</b>sfria!</span><span class="what">A ordem das peças: <strong>E</strong>stímulo, <strong>R</strong>eceptor, <strong>C</strong>entro de controle, <strong>E</strong>fetor. E a frase já lembra o exemplo da temperatura.</span></div>
+      <div class="mn"><span class="big">Receptor <b>percebe</b>, centro <b>decide</b>, efetor <b>faz</b></span><span class="what">A função de cada peça em um verbo.</span></div>
+      <div class="mn"><span class="big"><b>N</b>egativo = <b>N</b>ormaliza; <b>P</b>ositivo = <b>P</b>arto</span><span class="what">O negativo traz de volta ao normal. O positivo reforça, como no parto.</span></div>
+      <div class="mn"><span class="big"><b>E</b>nzima, <b>T</b>ransporte, <b>Ó</b>rgãos</span><span class="what">Por que a homeostase importa. Pense "<strong>ETÓ</strong>" ou "é tó(do)".</span></div>
+    </div>
+    <div class="tool">
+      <h4>Flashcards: homeostase</h4>
+      <div class="deck" data-deck="homeo"></div>
+    </div>
+    <div class="tool">
+      <h4>Exercício de ordem</h4>
+      <div class="order" data-order="feedback"></div>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>Teste-se: quiz do envelope 2</h3>
+    <p class="sec-score" data-score="homeo"></p>
+    <ol class="qz-list" data-quiz="homeo"></ol>
+  </div>
+
+  <div class="sub">
+    <h3>Perguntas discursivas do envelope 2</h3>
+    <div class="disc-list">
+      <details class="disc"><summary><span class="n">2.1</span><span><span class="q-official">Pergunta oficial 1</span><br>Defina homeostase e explique por que ela é fundamental para a sobrevivência dos animais. Em sua resposta, esclareça por que manter a homeostase não significa que todas as variáveis do organismo permaneçam absolutamente constantes.</span></summary><div class="ans"><span class="lab">Resposta-modelo</span>
+        <p>Homeostase é a capacidade de manter o meio interno relativamente estável, dentro de limites compatíveis com o funcionamento celular, apesar de mudanças internas e externas. Ela é fundamental porque processos essenciais dependem dessas condições: a atividade das enzimas depende de temperatura e pH adequados, o transporte de substâncias pelas membranas depende das concentrações corretas e os órgãos só funcionam bem com as variáveis dentro da faixa.</p>
+        <p>Manter a homeostase não significa que as variáveis fiquem fixas. Temperatura, pH, glicemia e quantidade de água oscilam o tempo todo e são ajustadas continuamente por mecanismos regulatórios, principalmente de feedback negativo. O que se mantém é o intervalo de valores, não um número exato.</p>
+        <h5>Não pode faltar</h5>
+        <ul class="kw"><li>meio interno</li><li>relativamente estável</li><li>limites compatíveis com as células</li><li>mudanças internas e externas</li><li>enzimas</li><li>transporte</li><li>órgãos</li><li>oscilam e são ajustadas</li></ul>
+      </div></details>
+      <details class="disc"><summary><span class="n">2.2</span><span><span class="q-official">Pergunta oficial 2</span><br>Explique como funciona um mecanismo de feedback negativo. Utilize a regulação da temperatura corporal como exemplo e descreva como o organismo pode responder ao aumento da temperatura.</span></summary><div class="ans"><span class="lab">Resposta-modelo</span>
+        <p>No feedback negativo, a resposta do organismo se opõe à alteração inicial, aproximando a variável de seu intervalo de referência. Quando a temperatura corporal sobe, essa alteração é detectada e os mecanismos de termorregulação são acionados para perder calor. Quando a temperatura volta ao normal, o estímulo diminui e a resposta também.</p>
+        <p>No cão, o principal mecanismo é a ofegação: a respiração rápida e curta favorece a evaporação de água nas superfícies das vias respiratórias, e essa evaporação retira calor do corpo. Ajustes no fluxo sanguíneo da pele, com vasodilatação, também contribuem, levando sangue quente para perto da superfície. A eficiência da resposta depende das condições do ambiente (como calor e umidade) e do estado fisiológico do animal (como a hidratação).</p>
+        <h5>Não pode faltar</h5>
+        <ul class="kw"><li>resposta se opõe à alteração</li><li>volta ao intervalo de referência</li><li>termorregulação</li><li>ofegação</li><li>evaporação nas vias respiratórias</li><li>fluxo sanguíneo cutâneo</li><li>depende do ambiente e do animal</li></ul>
+      </div></details>
+      <details class="disc"><summary><span class="n">2.3</span><span><span class="q-official">Pergunta oficial 3</span><br>Descreva a função do estímulo, do receptor, do centro de controle e do efetor em um mecanismo de regulação fisiológica. Utilize uma situação relacionada à termorregulação para exemplificar a atuação desses elementos.</span></summary><div class="ans"><span class="lab">Resposta-modelo</span>
+        <p>O estímulo é a alteração detectada na variável. O receptor é a estrutura que percebe essa alteração. O centro de controle recebe e integra a informação e coordena a resposta. O efetor é o órgão ou tecido que executa a resposta.</p>
+        <p>Na termorregulação do cão após o exercício no calor, o aumento da temperatura corporal é o estímulo; os termorreceptores detectam essa alteração; os centros termorreguladores no sistema nervoso central, principalmente no hipotálamo, integram os sinais; e os efetores, como os músculos respiratórios realizando a ofegação e os vasos da pele, contribuem para dissipar o calor, trazendo a temperatura de volta à faixa normal.</p>
+        <h5>Não pode faltar</h5>
+        <ul class="kw"><li>estímulo = alteração</li><li>receptor = percebe</li><li>centro = integra e coordena</li><li>efetor = executa</li><li>termorreceptores</li><li>centros termorreguladores no sistema nervoso central</li><li>ofegação</li></ul>
+      </div></details>
+      <details class="disc"><summary><span class="n">2.4</span><span>Extra: por que um cão desidratado regula pior a temperatura?</span></summary><div class="ans"><span class="lab">Resposta-modelo</span>
+        <ol><li>A ofegação perde calor pela evaporação de água. Com pouca água no corpo, a mucosa fica mais seca e evapora menos.</li><li>A desidratação diminui o volume de sangue. Sobra menos sangue para mandar à pele, então a perda de calor pela pele também cai.</li><li>Com os dois efetores enfraquecidos, o feedback negativo fica menos eficiente e a temperatura sobe mais.</li></ol>
+      </div></details>
+      <details class="disc"><summary><span class="n">2.5</span><span>Extra: diferencie feedback negativo de feedback positivo, com um exemplo de cada.</span></summary><div class="ans"><span class="lab">Resposta-modelo</span>
+        <p>No feedback negativo a resposta se opõe ao estímulo e traz a variável de volta à faixa normal, como na queda da temperatura pela ofegação depois que ela subiu. No feedback positivo a resposta reforça o estímulo, aumentando a alteração até um evento terminar, como no parto, em que as contrações estimulam mais ocitocina e contrações mais fortes até a expulsão do filhote. A homeostase depende principalmente do feedback negativo.</p>
+      </div></details>
+    </div>
+  </div>
+</section>
+
+<!-- 03 -->
+<section class="sec" id="resp">
+  <div class="sec-head">
+    <span class="eyebrow"><b>03</b> · Envelope 3 · "O mistério da respiração"</span>
+    <h2>Sistema respiratório</h2>
+  </div>
+  <div class="case">
+    <span class="lab">No caso</span>
+    <p>O paciente tem <strong>aumento da frequência respiratória</strong>. A equipe precisa entender o caminho do ar, como o oxigênio chega ao sangue e o gás carbônico sai, por que ele respira mais rápido e o papel do surfactante.</p>
+  </div>
+
+  <div class="sub">
+    <h3>3.1 O caminho do ar (Pergunta 1)</h3>
+    <p>O sistema respiratório tem duas partes com trabalhos diferentes:</p>
+    <ul>
+      <li><strong>Porção condutora:</strong> os "canos". Leva o ar de fora até o fundo do pulmão e prepara esse ar. Vai das narinas até os bronquíolos terminais. Aqui <strong>não</strong> há troca de gases.</li>
+      <li><strong>Porção respiratória:</strong> onde o ar encosta no sangue e os gases são trocados. Vai dos bronquíolos respiratórios até os alvéolos.</li>
+    </ul>
+    <figure>
+      <div class="fig">
+      <svg viewBox="0 0 720 250" role="img" aria-label="Sequência do caminho do ar das narinas aos alvéolos">
+        <defs><marker id="ar1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="d-ah"/></marker></defs>
+        <rect x="14" y="30" width="124" height="52" rx="8" class="d-box-ven"/><text x="76" y="61" text-anchor="middle" class="d-tb">Narinas</text>
+        <rect x="156" y="30" width="124" height="52" rx="8" class="d-box-ven"/><text x="218" y="53" text-anchor="middle" class="d-tb">Cavidade</text><text x="218" y="71" text-anchor="middle" class="d-tb">nasal</text>
+        <rect x="298" y="30" width="124" height="52" rx="8" class="d-box-ven"/><text x="360" y="61" text-anchor="middle" class="d-tb">Faringe</text>
+        <rect x="440" y="30" width="124" height="52" rx="8" class="d-box-ven"/><text x="502" y="61" text-anchor="middle" class="d-tb">Laringe</text>
+        <rect x="582" y="30" width="124" height="52" rx="8" class="d-box-ven"/><text x="644" y="61" text-anchor="middle" class="d-tb">Traqueia</text>
+        <path d="M138 56 L154 56" class="d-line" marker-end="url(#ar1)"/>
+        <path d="M280 56 L296 56" class="d-line" marker-end="url(#ar1)"/>
+        <path d="M422 56 L438 56" class="d-line" marker-end="url(#ar1)"/>
+        <path d="M564 56 L580 56" class="d-line" marker-end="url(#ar1)"/>
+        <path d="M644 82 L644 108 L76 108 L76 128" class="d-line" marker-end="url(#ar1)"/>
+        <rect x="14" y="130" width="124" height="52" rx="8" class="d-box-ven"/><text x="76" y="161" text-anchor="middle" class="d-tb">Brônquios</text>
+        <rect x="156" y="130" width="124" height="52" rx="8" class="d-box-ven"/><text x="218" y="161" text-anchor="middle" class="d-tb">Bronquíolos</text>
+        <rect x="298" y="130" width="124" height="52" rx="8" class="d-box-art"/><text x="360" y="153" text-anchor="middle" class="d-tb">Bronquíolos</text><text x="360" y="171" text-anchor="middle" class="d-tb">respiratórios</text>
+        <rect x="440" y="130" width="124" height="52" rx="8" class="d-box-art"/><text x="502" y="153" text-anchor="middle" class="d-tb">Ductos e sacos</text><text x="502" y="171" text-anchor="middle" class="d-tb">alveolares</text>
+        <rect x="582" y="130" width="124" height="52" rx="8" class="d-box-art"/><text x="644" y="161" text-anchor="middle" class="d-tb">Alvéolos</text>
+        <path d="M138 156 L154 156" class="d-line" marker-end="url(#ar1)"/>
+        <path d="M280 156 L296 156" class="d-line" marker-end="url(#ar1)"/>
+        <path d="M422 156 L438 156" class="d-line" marker-end="url(#ar1)"/>
+        <path d="M564 156 L580 156" class="d-line" marker-end="url(#ar1)"/>
+        <path d="M14 206 L284 206" class="d-line-ven" style="stroke-width:3"/>
+        <path d="M298 206 L706 206" class="d-line-art" style="stroke-width:3"/>
+        <text x="149" y="228" text-anchor="middle" class="d-tven">azul: porção condutora (só conduz)</text>
+        <text x="502" y="228" text-anchor="middle" class="d-tart">vermelho: porção respiratória (troca gases)</text>
+        <text x="360" y="18" text-anchor="middle" class="d-tm">FILTRA · AQUECE · UMIDIFICA</text>
+      </svg>
+      </div>
+      <figcaption>Azul: porção condutora, que só leva e prepara o ar. Vermelho: porção respiratória, onde há alvéolos e troca de gases.</figcaption>
+    </figure>
+    <p>O que cada estrutura faz:</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Estrutura</th><th>Função principal</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Narinas e vestíbulo nasal</strong></td><td>Entrada do ar. Os pelos do vestíbulo seguram partículas grandes</td></tr>
+        <tr><td><strong>Cavidade nasal</strong></td><td>Prepara o ar. As conchas nasais (dobras de osso cobertas de mucosa) aumentam a superfície. A mucosa cheia de vasos <strong>aquece</strong>, o muco <strong>umidifica</strong> e <strong>prende</strong> poeira e micróbios. No teto fica a região do olfato</td></tr>
+        <tr><td><strong>Faringe</strong></td><td>Cruzamento por onde passam o ar e o alimento</td></tr>
+        <tr><td><strong>Laringe</strong></td><td>A <strong>epiglote</strong> fecha a entrada na hora de engolir, para o alimento não ir para o pulmão. Tem as pregas vocais (produção do som)</td></tr>
+        <tr><td><strong>Traqueia</strong></td><td>Tubo mantido aberto por <strong>anéis de cartilagem em forma de C</strong>. Os cílios empurram o muco com sujeira para cima, para ser engolido ou eliminado</td></tr>
+        <tr><td><strong>Brônquios</strong></td><td>Ramos da traqueia que entram em cada pulmão e se dividem. A cartilagem vira placas</td></tr>
+        <tr><td><strong>Bronquíolos</strong></td><td>Ramos finos, <strong>sem cartilagem</strong>. O músculo liso da parede abre ou fecha o calibre e controla quanto ar passa. O último ramo condutor é o bronquíolo terminal</td></tr>
+        <tr><td><strong>Bronquíolos respiratórios</strong></td><td>Primeiros a ter alvéolos na parede: começa a troca de gases</td></tr>
+        <tr><td><strong>Ductos e sacos alveolares</strong></td><td>Ductos são corredores com a parede toda feita de alvéolos; sacos são os "cachos" de alvéolos no fim</td></tr>
+        <tr><td><strong>Alvéolos</strong></td><td>Saquinhos de parede finíssima, envolvidos por capilares. <strong>Principal local das trocas gasosas</strong></td></tr>
+      </tbody>
+    </table></div>
+    <p><strong>Os epitélios do caminho.</strong> Epitélio é o tecido de revestimento, uma camada de células coladas que forra a parede por dentro. Ele muda ao longo do caminho porque a função muda: na entrada precisa resistir ao atrito, nos canos precisa limpar o ar, no alvéolo precisa ser fino para os gases passarem.</p>
+    <figure>
+      <div class="fig">
+      <svg viewBox="0 0 720 290" role="img" aria-label="Quatro tipos de epitélio ao longo da via respiratória">
+        <g style="stroke:var(--fg-soft);stroke-width:1.2">
+          <rect x="20" y="150" width="35" height="22" class="d-zone-tint"/><rect x="55" y="150" width="35" height="22" class="d-zone-tint"/><rect x="90" y="150" width="35" height="22" class="d-zone-tint"/><rect x="125" y="150" width="35" height="22" class="d-zone-tint"/>
+          <rect x="20" y="134" width="47" height="16" class="d-zone-tint"/><rect x="67" y="134" width="47" height="16" class="d-zone-tint"/><rect x="114" y="134" width="46" height="16" class="d-zone-tint"/>
+          <rect x="20" y="122" width="70" height="12" class="d-zone-tint"/><rect x="90" y="122" width="70" height="12" class="d-zone-tint"/>
+          <rect x="20" y="114" width="140" height="8" class="d-zone-amber"/>
+        </g>
+        <text x="90" y="108" text-anchor="middle" class="d-tm">queratina</text>
+        <g style="stroke:var(--fg-soft);stroke-width:1.2">
+          <rect x="200" y="92" width="22" height="80" class="d-zone-tint"/><rect x="222" y="92" width="22" height="80" class="d-zone-tint"/><rect x="244" y="92" width="22" height="80" class="d-zone-tint"/><rect x="266" y="92" width="22" height="80" class="d-zone-tint"/><rect x="288" y="92" width="22" height="80" class="d-zone-tint"/><rect x="310" y="92" width="22" height="80" class="d-zone-tint"/>
+          <rect x="232" y="148" width="22" height="24" class="d-zone-tint"/><rect x="298" y="148" width="22" height="24" class="d-zone-tint"/>
+        </g>
+        <ellipse cx="277" cy="112" rx="10" ry="18" class="d-box-amber"/>
+        <g style="stroke:var(--fg);stroke-width:1.5">
+          <path d="M204 92 L204 82 M210 92 L210 82 M216 92 L216 82 M226 92 L226 82 M232 92 L232 82 M238 92 L238 82 M248 92 L248 82 M254 92 L254 82 M260 92 L260 82 M292 92 L292 82 M298 92 L298 82 M304 92 L304 82 M314 92 L314 82 M320 92 L320 82 M326 92 L326 82"/>
+        </g>
+        <g class="d-fill-fg"><circle cx="211" cy="132" r="4"/><circle cx="243" cy="160" r="4"/><circle cx="255" cy="122" r="4"/><circle cx="299" cy="128" r="4"/><circle cx="309" cy="160" r="4"/><circle cx="321" cy="118" r="4"/></g>
+        <text x="277" y="76" text-anchor="middle" class="d-tm">cílios</text>
+        <g style="stroke:var(--fg-soft);stroke-width:1.2">
+          <rect x="380" y="140" width="26" height="32" class="d-zone-tint"/><rect x="406" y="140" width="26" height="32" class="d-zone-tint"/><rect x="458" y="140" width="26" height="32" class="d-zone-tint"/><rect x="484" y="140" width="26" height="32" class="d-zone-tint"/>
+          <path d="M432 172 L432 140 Q 445 112 458 140 L458 172 Z" class="d-zone-acc"/>
+        </g>
+        <g style="stroke:var(--fg);stroke-width:1.5"><path d="M384 140 L384 132 M390 140 L390 132 M396 140 L396 132 M488 140 L488 132 M494 140 L494 132 M500 140 L500 132"/></g>
+        <g class="d-fill-fg"><circle cx="393" cy="158" r="4"/><circle cx="419" cy="158" r="4"/><circle cx="445" cy="156" r="4"/><circle cx="471" cy="158" r="4"/><circle cx="497" cy="158" r="4"/></g>
+        <text x="445" y="104" text-anchor="middle" class="d-tm">célula club</text>
+        <g style="stroke:var(--fg-soft);stroke-width:1.2">
+          <path d="M560 172 L560 166 L600 166 Q 608 158 616 166 L620 166 L620 172 Z" class="d-zone-tint"/>
+          <rect x="620" y="144" width="28" height="28" class="d-zone-amber"/>
+          <path d="M648 172 L648 166 L668 166 Q 676 158 684 166 L700 166 L700 172 Z" class="d-zone-tint"/>
+        </g>
+        <g class="d-fill-fg"><circle cx="628" cy="152" r="2"/><circle cx="638" cy="156" r="2"/><circle cx="630" cy="164" r="2"/><circle cx="641" cy="149" r="2"/></g>
+        <path d="M600 140 L606 160" class="d-line"/><text x="586" y="134" text-anchor="middle" class="d-tm">tipo I</text>
+        <text x="660" y="134" text-anchor="middle" class="d-tm">tipo II</text>
+        <g style="stroke:var(--fg);stroke-width:2"><line x1="16" y1="174" x2="164" y2="174"/><line x1="196" y1="174" x2="336" y2="174"/><line x1="376" y1="174" x2="514" y2="174"/><line x1="556" y1="174" x2="704" y2="174"/></g>
+        <text x="90" y="30" text-anchor="middle" class="d-tb">Vestíbulo nasal</text>
+        <text x="266" y="30" text-anchor="middle" class="d-tb">Cavidade nasal,</text>
+        <text x="266" y="48" text-anchor="middle" class="d-tb">traqueia, brônquios</text>
+        <text x="445" y="30" text-anchor="middle" class="d-tb">Bronquíolos</text>
+        <text x="630" y="30" text-anchor="middle" class="d-tb">Alvéolos</text>
+        <g class="d-ts">
+          <text x="90" y="198" text-anchor="middle">estratificado</text><text x="90" y="214" text-anchor="middle">pavimentoso</text><text x="90" y="230" text-anchor="middle">(queratinizado</text><text x="90" y="246" text-anchor="middle">na parte da frente)</text>
+          <text x="266" y="198" text-anchor="middle">pseudoestratificado</text><text x="266" y="214" text-anchor="middle">cilíndrico ciliado</text><text x="266" y="230" text-anchor="middle">com caliciformes</text>
+          <text x="445" y="198" text-anchor="middle">simples cilíndrico</text><text x="445" y="214" text-anchor="middle">a cúbico, ciliadas</text><text x="445" y="230" text-anchor="middle">e células club</text><text x="445" y="246" text-anchor="middle">sem cartilagem</text>
+          <text x="630" y="198" text-anchor="middle">pneumócito I:</text><text x="630" y="214" text-anchor="middle">pavimentoso simples</text><text x="630" y="230" text-anchor="middle">pneumócito II:</text><text x="630" y="246" text-anchor="middle">cúbico, surfactante</text>
+        </g>
+        <text x="266" y="276" text-anchor="middle" class="d-tamber">em âmbar: célula caliciforme (muco)</text>
+        <text x="630" y="276" text-anchor="middle" class="d-tamber">em âmbar: pneumócito II</text>
+      </svg>
+      </div>
+      <figcaption>Esquemas simplificados, fora de escala. A linha preta embaixo de cada um é a membrana basal, a "base" onde o epitélio se apoia. Note como o epitélio fica cada vez mais baixo e simples até virar uma película no alvéolo.</figcaption>
+    </figure>
+    <p>Os nomes dos epitélios seguem duas regras. Primeiro o número de camadas: <strong>simples</strong> é uma camada só, <strong>estratificado</strong> são várias. Depois a forma da célula de cima: <strong>pavimentoso</strong> é achatado como um ladrilho, <strong>cúbico</strong> é quadrado, <strong>cilíndrico</strong> é alto.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Local</th><th>Epitélio</th><th>Por que é assim</th></tr></thead>
+      <tbody>
+        <tr><td>Vestíbulo nasal</td><td><strong>Estratificado pavimentoso</strong>, que pode ser <strong>queratinizado</strong> na parte mais da frente</td><td>Várias camadas resistem ao atrito, como a pele. Queratina é a proteína dura da pele e das unhas</td></tr>
+        <tr><td>Cavidade nasal respiratória, traqueia e brônquios</td><td><strong>Pseudoestratificado cilíndrico ciliado com células caliciformes</strong></td><td>"Pseudo" quer dizer falso: parece ter várias camadas porque os núcleos ficam em alturas diferentes, mas todas as células tocam a base, então é uma camada só. As <strong>caliciformes</strong> (em forma de cálice) produzem muco que prende a sujeira; os <strong>cílios</strong> varrem esse muco para fora</td></tr>
+        <tr><td>Bronquíolos</td><td><strong>Simples cilíndrico a cúbico</strong>, com células ciliadas e <strong>células club</strong>. <strong>Sem cartilagem</strong> na parede</td><td>O tubo é fino, então o epitélio fica mais baixo. <strong>Club</strong> é inglês para "clava" (um bastão com a ponta arredondada), o formato da célula. Antes se chamava célula de Clara. Ela secreta substâncias que protegem o bronquíolo</td></tr>
+        <tr><td>Alvéolos</td><td><strong>Pneumócito tipo I</strong>: epitélio <strong>pavimentoso simples</strong>, forma a maior parte da superfície. <strong>Pneumócito tipo II</strong>: célula <strong>cúbica</strong> que produz <strong>surfactante</strong></td><td>A parede precisa ser finíssima para os gases passarem rápido</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="sub">
+    <h3>3.2 As trocas gasosas (Pergunta 2)</h3>
+    <p><strong>Onde:</strong> entre o ar dos <strong>alvéolos</strong> e o sangue dos <strong>capilares pulmonares</strong>, através da <strong>barreira alvéolo-capilar</strong>. Essa barreira é a soma de três coisas finíssimas: o pneumócito tipo I, a membrana basal e o endotélio do capilar.</p>
+    <p><strong>Como:</strong> por <strong>difusão</strong>. Difusão é o movimento espontâneo de uma substância de onde ela está mais concentrada para onde está menos concentrada, sem gastar energia. Para gases, a "concentração" se mede como <strong>pressão parcial</strong>.</p>
+    <div class="calc">
+      <span class="lab">O que é pressão parcial, passo a passo</span>
+      <ol>
+        <li>O ar é uma mistura de gases. A pressão total do ar ao nível do mar é cerca de 760 mmHg (milímetros de mercúrio, a unidade de pressão).</li>
+        <li>Cada gás contribui com uma parte dessa pressão, proporcional à quantidade dele. Essa parte é a pressão parcial. Nos livros ela aparece com P na frente: PO₂ (pressão parcial de oxigênio) e PCO₂ (pressão parcial de gás carbônico).</li>
+        <li>O oxigênio é cerca de 21% do ar. Então pressão parcial de oxigênio do ar = 0,21 × 760 ≈ <strong>160 mmHg</strong>.</li>
+        <li>No alvéolo, o ar novo se mistura com o ar que ficou e com vapor de água, e a pressão parcial de oxigênio cai para cerca de <strong>100 mmHg</strong>.</li>
+        <li>Regra de ouro: <strong>cada gás vai do lado em que sua pressão parcial é maior para o lado em que é menor</strong>.</li>
+      </ol>
+    </div>
+    <figure>
+      <div class="fig">
+      <svg viewBox="0 0 720 300" role="img" aria-label="Pressões parciais de oxigênio e gás carbônico nos pulmões e nos tecidos">
+        <defs>
+          <linearGradient id="pg1" x1="0" y1="0" x2="1" y2="0"><stop offset="0" style="stop-color:var(--ven)"/><stop offset="1" style="stop-color:var(--art)"/></linearGradient>
+          <linearGradient id="pg2" x1="0" y1="0" x2="1" y2="0"><stop offset="0" style="stop-color:var(--art)"/><stop offset="1" style="stop-color:var(--ven)"/></linearGradient>
+          <marker id="pp1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="d-ah"/></marker>
+        </defs>
+        <text x="180" y="18" text-anchor="middle" class="d-tm">NOS PULMÕES</text>
+        <rect x="60" y="30" width="240" height="74" rx="12" class="d-zone-tint" style="stroke:var(--accent);stroke-width:2"/>
+        <text x="180" y="56" text-anchor="middle" class="d-tb">Ar do alvéolo</text>
+        <text x="180" y="76" text-anchor="middle" class="d-ts">oxigênio ≈ 100 mmHg</text>
+        <text x="180" y="92" text-anchor="middle" class="d-ts">gás carbônico ≈ 40 mmHg</text>
+        <path d="M150 108 L150 176" class="d-line" marker-end="url(#pp1)"/>
+        <text x="142" y="146" text-anchor="end" class="d-tart">oxigênio</text>
+        <path d="M210 176 L210 108" class="d-line" marker-end="url(#pp1)"/>
+        <text x="218" y="146" class="d-tven">gás carbônico</text>
+        <rect x="110" y="180" width="140" height="40" rx="20" style="fill:url(#pg1)"/>
+        <text x="102" y="188" text-anchor="end" class="d-tm">chega</text>
+        <text x="102" y="204" text-anchor="end" class="d-tven">oxigênio 40</text>
+        <text x="102" y="220" text-anchor="end" class="d-tven">gás carb. 46</text>
+        <text x="258" y="188" class="d-tm">sai</text>
+        <text x="258" y="204" class="d-tart">oxigênio 100</text>
+        <text x="258" y="220" class="d-tart">gás carb. 40</text>
+        <text x="180" y="240" text-anchor="middle" class="d-ts">capilar pulmonar</text>
+        <text x="540" y="18" text-anchor="middle" class="d-tm">NOS TECIDOS</text>
+        <rect x="480" y="40" width="110" height="40" rx="20" style="fill:url(#pg2)"/>
+        <text x="472" y="48" text-anchor="end" class="d-tm">chega</text>
+        <text x="472" y="64" text-anchor="end" class="d-tart">oxigênio 100</text>
+        <text x="472" y="80" text-anchor="end" class="d-tart">gás carb. 40</text>
+        <text x="598" y="48" class="d-tm">sai</text>
+        <text x="598" y="64" class="d-tven">oxigênio 40</text>
+        <text x="598" y="80" class="d-tven">gás carb. 46</text>
+        <text x="540" y="98" text-anchor="middle" class="d-ts">capilar do tecido</text>
+        <path d="M510 104 L510 172" class="d-line" marker-end="url(#pp1)"/>
+        <text x="502" y="142" text-anchor="end" class="d-tart">oxigênio</text>
+        <path d="M570 172 L570 104" class="d-line" marker-end="url(#pp1)"/>
+        <text x="578" y="142" class="d-tven">gás carbônico</text>
+        <rect x="420" y="176" width="240" height="64" rx="12" class="d-zone-amber" style="stroke:var(--amber);stroke-width:2"/>
+        <text x="540" y="198" text-anchor="middle" class="d-tb">Células do músculo</text>
+        <text x="540" y="216" text-anchor="middle" class="d-ts">oxigênio abaixo de 40</text>
+        <text x="540" y="232" text-anchor="middle" class="d-ts">gás carbônico acima de 46</text>
+        <text x="360" y="284" text-anchor="middle" class="d-ta">cada gás se difunde da pressão parcial maior para a menor</text>
+      </svg>
+      </div>
+      <figcaption>Os números são pressões parciais típicas, em mmHg (milímetros de mercúrio), arredondadas. "Gás carb." é gás carbônico. No pulmão o oxigênio desce (100 → 40) e o gás carbônico sobe (46 → 40). No tecido acontece o contrário. Os números servem para entender a direção; a prova pede o processo.</figcaption>
+    </figure>
+    <ol class="steps">
+      <li><div><strong>No pulmão:</strong> o sangue que chega pela artéria pulmonar tem pouco oxigênio (pressão parcial de 40 mmHg) e muito gás carbônico (46 mmHg). O ar do alvéolo tem muito oxigênio (100 mmHg) e pouco gás carbônico (40 mmHg). Então o <strong>Oxigênio passa do alvéolo para o sangue</strong> e o <strong>Gás carbônico passa do sangue para o alvéolo</strong>, e sai na expiração.</div></li>
+      <li><div><strong>Nos tecidos:</strong> o sangue chega rico em oxigênio. As células gastam oxigênio e produzem gás carbônico o tempo todo. Então o <strong>Oxigênio passa do sangue para as células</strong> e o <strong>Gás carbônico passa das células para o sangue</strong>.</div></li>
+    </ol>
+    <p>A troca é eficiente porque a barreira é <strong>muito fina</strong> e a <strong>área é enorme</strong> (milhões de alvéolos, todos envolvidos por capilares).</p>
+  </div>
+
+  <div class="sub">
+    <h3>3.3 Por que a frequência respiratória aumenta no exercício (Pergunta 3)</h3>
+    <p>São <strong>dois motivos</strong>, e a pergunta pede os dois:</p>
+    <div class="grid2">
+      <div class="card"><h4>1. Demanda metabólica</h4><p>Os músculos em exercício gastam muito mais energia. Para isso <strong>consomem mais oxigênio</strong> e <strong>produzem mais gás carbônico</strong>. A <strong>ventilação</strong> (quantidade de ar que entra e sai por minuto) aumenta para trazer mais oxigênio e eliminar o gás carbônico extra. Se o gás carbônico acumulasse, o sangue ficaria ácido.</p></div>
+      <div class="card"><h4>2. Perder calor (no cão)</h4><p>A <strong>ofegação</strong> é um mecanismo de <strong>termorregulação</strong>. A respiração rápida e curta passa muito ar pelas vias respiratórias, a <strong>água evapora</strong> das superfícies úmidas (língua, boca, nariz) e essa evaporação <strong>retira calor</strong>. É o elo com o envelope 2.</p></div>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>3.4 Surfactante pulmonar (Pergunta 4)</h3>
+    <p>O alvéolo é forrado por dentro por uma <strong>camada fina de líquido</strong>. Aí aparece um problema físico chamado tensão superficial.</p>
+    <div class="calc">
+      <span class="lab">Tensão superficial, passo a passo</span>
+      <ol>
+        <li>As moléculas de água se atraem umas às outras.</li>
+        <li>Onde a água encosta no ar, essa atração puxa a superfície para encolher, como uma bexiga de borracha esticada que quer se fechar. Essa força é a <strong>tensão superficial</strong>.</li>
+        <li>No alvéolo, que é uma bolinha, essa força puxa a parede para dentro e tende a <strong>fechar</strong> (colapsar) o alvéolo.</li>
+        <li>Quanto <strong>menor</strong> a bolinha, <strong>maior</strong> a tendência a fechar. Por isso o perigo é maior no <strong>fim da expiração</strong>, quando os alvéolos estão menores.</li>
+      </ol>
+    </div>
+    <div class="note">
+      <span class="lab">O que é o surfactante</span>
+      <p>É uma mistura de <strong>lipídios</strong> (gorduras, principalmente fosfolipídios) e <strong>proteínas</strong>, produzida pelos <strong>pneumócitos tipo II</strong>. As moléculas dele se espalham na superfície do líquido, ficam entre as moléculas de água e diminuem a atração entre elas. Resultado: <strong>reduz a tensão superficial</strong>.</p>
+    </div>
+    <p><strong>Funções:</strong></p>
+    <ul>
+      <li>Aumenta a <strong>estabilidade</strong> dos alvéolos e <strong>evita o colapso</strong>, principalmente ao final da expiração.</li>
+      <li><strong>Diminui o trabalho</strong> (o esforço) necessário para expandir os pulmões na inspiração.</li>
+    </ul>
+    <figure>
+      <div class="fig">
+      <svg viewBox="0 0 720 240" role="img" aria-label="Alvéolo aberto com surfactante e alvéolo colapsado sem surfactante">
+        <defs><marker id="sf1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="d-ah-art"/></marker></defs>
+        <text x="180" y="22" text-anchor="middle" class="d-tb">Com surfactante</text>
+        <circle cx="180" cy="110" r="68" class="d-zone-tint" style="stroke:var(--accent);stroke-width:4"/>
+        <circle cx="180" cy="110" r="61" style="fill:none;stroke:var(--amber);stroke-width:3;stroke-dasharray:5 4"/>
+        <text x="180" y="114" text-anchor="middle" class="d-ts">aberto</text>
+        <text x="180" y="204" text-anchor="middle" class="d-ta">tensão superficial baixa</text>
+        <text x="180" y="222" text-anchor="middle" class="d-ts">continua aberto no fim da expiração</text>
+        <text x="540" y="22" text-anchor="middle" class="d-tb">Sem surfactante</text>
+        <path d="M505 110 Q 512 86 540 92 Q 568 84 575 110 Q 568 134 540 126 Q 512 136 505 110 Z" class="d-zone-tint" style="stroke:var(--accent);stroke-width:4"/>
+        <path d="M540 38 L540 80" class="d-line-art" marker-end="url(#sf1)"/>
+        <path d="M540 182 L540 140" class="d-line-art" marker-end="url(#sf1)"/>
+        <path d="M460 110 L495 110" class="d-line-art" marker-end="url(#sf1)"/>
+        <path d="M620 110 L585 110" class="d-line-art" marker-end="url(#sf1)"/>
+        <text x="540" y="204" text-anchor="middle" class="d-tart">tensão superficial alta</text>
+        <text x="540" y="222" text-anchor="middle" class="d-ts">o alvéolo colapsa: atelectasia</text>
+      </svg>
+      </div>
+      <figcaption>O tracejado âmbar é a película de surfactante. Sem ela, a tensão superficial (setas vermelhas) puxa a parede para dentro e o alvéolo fecha.</figcaption>
+    </figure>
+    <p><strong>Se faltar surfactante:</strong></p>
+    <ol class="steps">
+      <li><div>A tensão superficial fica alta e os alvéolos <strong>colapsam</strong>. O nome disso é <strong>atelectasia</strong> (alvéolos fechados, sem ar).</div></li>
+      <li><div>A <strong>complacência pulmonar</strong> diminui. Complacência é a facilidade com que o pulmão estica e se enche de ar. Pulmão pouco complacente é "duro": o animal precisa fazer muito mais força para respirar.</div></li>
+      <li><div>Com alvéolos fechados, entra menos ar (pior <strong>ventilação</strong>) e há menos área para <strong>trocar gases</strong>. O sangue fica com menos oxigênio.</div></li>
+    </ol>
+    <div class="note">
+      <span class="lab">Na clínica</span>
+      <p>O surfactante só é produzido em quantidade suficiente no fim da gestação. Por isso filhotes prematuros podem nascer com falta dele e ter dificuldade grave para respirar.</p>
+    </div>
+  </div>
+
+  <div class="minute">
+    <span class="lab">Resumo de 1 minuto</span>
+    <ul>
+      <li>Ar: narinas → cavidade nasal → faringe → laringe → traqueia → brônquios → bronquíolos → bronquíolos respiratórios → ductos e sacos alveolares → alvéolos.</li>
+      <li>Vias condutoras <strong>filtram, aquecem e umidificam</strong>. Alvéolos: principal local de troca.</li>
+      <li>Epitélios: vestíbulo <strong>estratificado pavimentoso</strong> (queratinizado na frente); cavidade nasal, traqueia e brônquios <strong>pseudoestratificado cilíndrico ciliado com caliciformes</strong>; bronquíolos <strong>simples cilíndrico a cúbico</strong> com células club e sem cartilagem; alvéolos <strong>pneumócito I</strong> (pavimentoso simples) e <strong>II</strong> (cúbico, surfactante).</li>
+      <li>Troca gasosa: <strong>difusão</strong> pela barreira alvéolo-capilar, guiada pelas <strong>pressões parciais</strong>. Oxigênio alvéolo → sangue; gás carbônico sangue → alvéolo. Nos tecidos, o inverso.</li>
+      <li>Frequência sobe no exercício: mais oxigênio consumido e mais gás carbônico produzido; e ofegação para perder calor.</li>
+      <li>Surfactante: lipídios + proteínas, do pneumócito II; reduz tensão superficial, evita colapso no fim da expiração, reduz o trabalho respiratório. Falta: atelectasia, menos complacência, pior troca.</li>
+    </ul>
+  </div>
+
+  <div class="sub">
+    <h3>Para decorar</h3>
+    <div class="mnemo">
+      <div class="mn"><span class="big"><b>N</b>unca <b>C</b>oma <b>F</b>arinha, <b>L</b>eve <b>T</b>rigo; <b>B</b>olo <b>B</b>om</span><span class="what"><strong>N</strong>arinas, <strong>C</strong>avidade nasal, <strong>F</strong>aringe, <strong>L</strong>aringe, <strong>T</strong>raqueia, <strong>B</strong>rônquios, <strong>B</strong>ronquíolos. O primeiro B é o maior (brônquio); o segundo, o menor (bronquíolo).</span></div>
+      <div class="mn"><span class="big"><b>R</b>espira <b>D</b>evagar, <b>S</b>ente o <b>A</b>r</span><span class="what">O final do caminho: bronquíolo <strong>R</strong>espiratório, <strong>D</strong>uctos alveolares, <strong>S</strong>acos alveolares, <strong>A</strong>lvéolos.</span></div>
+      <div class="mn"><span class="big"><b>F</b>-<b>A</b>-<b>U</b>: filtra, aquece, umidifica</span><span class="what">O trabalho das vias condutoras.</span></div>
+      <div class="mn"><span class="big"><b>Escudo</b>, <b>Vassoura</b>, <b>Cubinho</b>, <b>Película</b></span><span class="what">Os epitélios em ordem. Vestíbulo = <strong>escudo</strong> (estratificado, resiste ao atrito). Cavidade, traqueia e brônquios = <strong>vassoura</strong> (cílios varrendo o muco das caliciformes). Bronquíolos = <strong>cubinho</strong> (simples cilíndrico a cúbico, sem cartilagem). Alvéolo = <strong>película</strong> (pavimentoso simples).</span></div>
+      <div class="mn"><span class="big">Tipo <b>1</b> = 1 função · Tipo <b>2</b> = 2 funções</span><span class="what">Pneumócito I: troca de gases. Pneumócito II: produz surfactante e repõe o tipo I quando ele se lesa.</span></div>
+      <div class="mn"><span class="big"><b>S</b>em <b>S</b>urfactante o alvéolo <b>S</b>ome</span><span class="what">Sem surfactante o alvéolo colapsa (atelectasia).</span></div>
+      <div class="mn"><span class="big">Gás <b>desce a ladeira</b> da pressão</span><span class="what">Difusão: sempre da pressão parcial maior para a menor, sem gastar energia.</span></div>
+    </div>
+    <div class="tool">
+      <h4>Flashcards: respiratório</h4>
+      <div class="deck" data-deck="resp"></div>
+    </div>
+    <div class="tool">
+      <h4>Exercício de ordem</h4>
+      <div class="order" data-order="ar"></div>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>Teste-se: quiz do envelope 3</h3>
+    <p class="sec-score" data-score="resp"></p>
+    <ol class="qz-list" data-quiz="resp"></ol>
+  </div>
+
+  <div class="sub">
+    <h3>Perguntas discursivas do envelope 3</h3>
+    <div class="disc-list">
+      <details class="disc"><summary><span class="n">3.1</span><span><span class="q-official">Pergunta oficial 1</span><br>Descreva o percurso do ar desde sua entrada pelas narinas até os alvéolos pulmonares. Explique a função das principais estruturas envolvidas nesse trajeto. E cite quais epitélios são encontrados neste percurso.</span></summary><div class="ans"><span class="lab">Resposta-modelo</span>
+        <p>O ar entra pelas narinas e passa pela cavidade nasal, faringe, laringe, traqueia, brônquios e bronquíolos, chegando às regiões respiratórias: bronquíolos respiratórios, ductos alveolares e sacos alveolares, até os alvéolos. As vias condutoras filtram, aquecem e umidificam o ar: a cavidade nasal, com mucosa muito vascularizada e muco, aquece, umidifica e retém partículas; a laringe protege a via aérea durante a deglutição; a traqueia e os brônquios, sustentados por cartilagem, conduzem o ar e removem partículas pelo movimento ciliar; os bronquíolos, sem cartilagem, regulam a passagem do ar pelo músculo liso. Os alvéolos são o principal local das trocas gasosas.</p>
+        <p>Quanto aos epitélios: o vestíbulo nasal apresenta epitélio estratificado pavimentoso, que pode ser queratinizado na região mais anterior. Boa parte da cavidade nasal respiratória, a traqueia e os brônquios têm epitélio pseudoestratificado cilíndrico ciliado com células caliciformes. Nos bronquíolos o epitélio passa a simples cilíndrico a cúbico, com células ciliadas e células club, e não há cartilagem. Nos alvéolos, os pneumócitos tipo I (epitélio pavimentoso simples) formam a maior parte da superfície de troca, e os pneumócitos tipo II são células cúbicas que produzem surfactante.</p>
+        <h5>Não pode faltar</h5>
+        <ul class="kw"><li>sequência completa até alvéolos</li><li>filtram, aquecem, umidificam</li><li>alvéolo = trocas</li><li>estratificado pavimentoso (queratinizado)</li><li>pseudoestratificado cilíndrico ciliado com caliciformes</li><li>simples cilíndrico a cúbico, células club, sem cartilagem</li><li>pneumócito I pavimentoso simples</li><li>pneumócito II cúbico, surfactante</li></ul>
+      </div></details>
+      <details class="disc"><summary><span class="n">3.2</span><span><span class="q-official">Pergunta oficial 2</span><br>Explique como ocorrem as trocas gasosas, o local e o processo que ocorre.</span></summary><div class="ans"><span class="lab">Resposta-modelo</span>
+        <p>As trocas gasosas pulmonares ocorrem principalmente entre o ar dos alvéolos e o sangue dos capilares pulmonares, através da barreira alvéolo-capilar, formada pelo pneumócito tipo I, pela membrana basal e pelo endotélio capilar. O processo é a difusão, guiada pelas diferenças de pressão parcial dos gases: o oxigênio, com pressão parcial maior no alvéolo, move-se do alvéolo para o sangue; o dióxido de carbono, com pressão parcial maior no sangue venoso, move-se do sangue para o alvéolo e é eliminado na expiração.</p>
+        <p>Nos tecidos também ocorre difusão entre o sangue sistêmico e as células: o oxigênio passa do sangue para os tecidos, onde é consumido, e o dióxido de carbono produzido pelo metabolismo faz o caminho inverso.</p>
+        <h5>Não pode faltar</h5>
+        <ul class="kw"><li>alvéolos e capilares pulmonares</li><li>barreira alvéolo-capilar</li><li>difusão</li><li>pressões parciais</li><li>Oxigênio alvéolo → sangue</li><li>Gás carbônico sangue → alvéolo</li><li>tecidos: o inverso</li></ul>
+      </div></details>
+      <details class="disc"><summary><span class="n">3.3</span><span><span class="q-official">Pergunta oficial 3</span><br>Explique por que a frequência respiratória pode aumentar durante o exercício físico. Considere tanto a necessidade de atender à demanda metabólica quanto o papel da respiração na dissipação de calor em cães.</span></summary><div class="ans"><span class="lab">Resposta-modelo</span>
+        <p>O exercício eleva a demanda metabólica dos músculos, aumentando o consumo de oxigênio e a produção de dióxido de carbono. Para atender às necessidades de trocas gasosas, a ventilação aumenta: entra mais oxigênio e sai o excesso de gás carbônico, evitando que ele se acumule e acidifique o sangue.</p>
+        <p>Em cães, a respiração também participa da termorregulação. A ofegação, uma respiração rápida e superficial, favorece a evaporação de água nas superfícies das vias respiratórias, e essa evaporação retira calor do corpo. Como o cão tem poucas glândulas sudoríparas funcionais, a ofegação é um mecanismo importante para dissipar o calor gerado no exercício em ambiente quente.</p>
+        <h5>Não pode faltar</h5>
+        <ul class="kw"><li>demanda metabólica</li><li>mais oxigênio consumido</li><li>mais gás carbônico produzido</li><li>ventilação aumenta</li><li>ofegação</li><li>evaporação nas vias respiratórias</li><li>dissipar calor</li></ul>
+      </div></details>
+      <details class="disc"><summary><span class="n">3.4</span><span><span class="q-official">Pergunta oficial 4</span><br>Explique o que é o surfactante pulmonar, onde ele é produzido e qual é sua função nos alvéolos. Descreva como essa substância atua sobre a tensão superficial e explique o que poderia acontecer com os alvéolos caso houvesse deficiência de surfactante.</span></summary><div class="ans"><span class="lab">Resposta-modelo</span>
+        <p>O surfactante é uma mistura de lipídios e proteínas produzida pelos pneumócitos tipo II. Os alvéolos são revestidos por uma fina camada de líquido, cuja tensão superficial tende a encolher e fechar os alvéolos. O surfactante se distribui nessa superfície e reduz a tensão superficial, aumentando a estabilidade dos alvéolos, ajudando a evitar o colapso alveolar, especialmente ao final da expiração, quando os alvéolos estão menores, e diminuindo o trabalho necessário para expandir os pulmões.</p>
+        <p>A deficiência de surfactante favorece a atelectasia (colapso dos alvéolos), reduz a complacência pulmonar, tornando o pulmão mais difícil de expandir, e pode comprometer a ventilação e as trocas gasosas.</p>
+        <h5>Não pode faltar</h5>
+        <ul class="kw"><li>lipídios e proteínas</li><li>pneumócito tipo II</li><li>reduz tensão superficial</li><li>evita colapso no fim da expiração</li><li>menos trabalho respiratório</li><li>atelectasia</li><li>menor complacência</li><li>prejudica ventilação e trocas</li></ul>
+      </div></details>
+      <details class="disc"><summary><span class="n">3.5</span><span>Extra: por que os bronquíolos não têm cartilagem e o que mantém a traqueia aberta?</span></summary><div class="ans"><span class="lab">Resposta-modelo</span>
+        <p>A traqueia é mantida aberta por anéis de cartilagem em forma de C, que impedem que ela se feche quando a pressão muda na respiração. Nos brônquios a cartilagem vira placas e, nos bronquíolos, desaparece. No lugar dela os bronquíolos têm músculo liso, que permite abrir ou fechar o calibre e assim regular quanto ar chega a cada região do pulmão.</p>
+      </div></details>
+      <details class="disc"><summary><span class="n">3.6</span><span>Extra: explique a diferença entre a porção condutora e a porção respiratória.</span></summary><div class="ans"><span class="lab">Resposta-modelo</span>
+        <p>A porção condutora vai das narinas aos bronquíolos terminais. Ela só conduz o ar e o prepara, filtrando, aquecendo e umidificando, e não faz trocas gasosas. A porção respiratória vai dos bronquíolos respiratórios aos alvéolos, passando por ductos e sacos alveolares. Nela há alvéolos e acontece a troca de oxigênio e gás carbônico com o sangue dos capilares.</p>
+      </div></details>
+    </div>
+  </div>
+</section>
+
+<!-- 04 -->
+<section class="sec" id="renal">
+  <div class="sec-head">
+    <span class="eyebrow"><b>04</b> · Envelope 4 · "O código dos rins"</span>
+    <h2>Sistema renal</h2>
+  </div>
+  <div class="case">
+    <span class="lab">No caso</span>
+    <p>Depois do exercício o cão <strong>perdeu água</strong> (ofegação). O rim precisa formar urina, eliminar resíduos e, agora, <strong>economizar água</strong>.</p>
+  </div>
+  <p>O envelope 4 pede quatro coisas: os três processos de formação da urina, a conservação de água com o hormônio antidiurético, duas funções do rim além de eliminar resíduos, e a anatomia interna do rim com o caminho da urina.</p>
+
+  <div class="sub">
+    <h3>4.1 O néfron e a formação da urina (Pergunta 1)</h3>
+    <p>O <strong>néfron</strong> é a unidade funcional do rim, a menor estrutura que consegue formar urina sozinha. Cada rim tem centenas de milhares deles. O néfron tem duas partes:</p>
+    <ul>
+      <li><strong>Corpúsculo renal:</strong> um novelo de capilares, o <strong>glomérulo</strong>, envolvido por uma "taça" chamada <strong>cápsula glomerular</strong> (ou cápsula de Bowman). É onde o sangue é filtrado.</li>
+      <li><strong>Túbulos:</strong> um tubo longo que sai da cápsula (túbulo proximal, alça de Henle, túbulo distal) e desemboca no ducto coletor. É onde o filtrado é ajustado.</li>
+    </ul>
+    <p>A urina se forma em <strong>três processos</strong>. Pense no túbulo como uma esteira e no sangue como o depósito ao lado:</p>
+    <figure>
+      <div class="fig">
+      <svg viewBox="0 0 720 260" role="img" aria-label="Filtração, reabsorção, secreção e excreção no néfron">
+        <defs><marker id="nf1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="d-ah"/></marker></defs>
+        <rect x="200" y="50" width="480" height="24" rx="12" class="d-box-art"/>
+        <text x="440" y="40" text-anchor="middle" class="d-tart">capilares em volta do túbulo (sangue)</text>
+        <circle cx="100" cy="115" r="42" class="d-zone-tint" style="stroke:var(--accent);stroke-width:3"/>
+        <circle cx="100" cy="115" r="18" class="d-box-art"/>
+        <path d="M14 115 L80 115" class="d-line-art" style="stroke-width:3"/>
+        <text x="14" y="66" class="d-ts">chega sangue</text>
+        <path d="M114 102 L200 62" class="d-line-art" style="stroke-width:3"/>
+        <text x="160" y="104" class="d-ts">sai sangue</text>
+        <path d="M100 134 L100 152" class="d-line" marker-end="url(#nf1)"/>
+        <path d="M136 138 Q 150 175 168 179" style="fill:none;stroke:var(--accent);stroke-width:5"/>
+        <rect x="160" y="166" width="500" height="26" rx="13" class="d-zone-tint" style="stroke:var(--accent);stroke-width:3"/>
+        <path d="M660 179 L702 179" class="d-line" marker-end="url(#nf1)"/>
+        <path d="M300 164 L300 78" class="d-line" marker-end="url(#nf1)"/>
+        <path d="M480 78 L480 164" class="d-line" marker-end="url(#nf1)"/>
+        <text x="308" y="124" class="d-ta">2 Reabsorção</text>
+        <text x="308" y="140" class="d-ts">túbulo → sangue</text>
+        <text x="488" y="124" class="d-ta">3 Secreção</text>
+        <text x="488" y="140" class="d-ts">sangue → túbulo</text>
+        <text x="100" y="176" text-anchor="middle" class="d-ts">glomérulo</text>
+        <text x="100" y="222" text-anchor="middle" class="d-ta">1 Filtração</text>
+        <text x="100" y="238" text-anchor="middle" class="d-ts">sangue → cápsula</text>
+        <text x="410" y="212" text-anchor="middle" class="d-tm">TÚBULO DO NÉFRON (FLUIDO TUBULAR)</text>
+        <text x="640" y="222" text-anchor="middle" class="d-ta">4 Excreção</text>
+        <text x="640" y="238" text-anchor="middle" class="d-ts">o que sobra é urina</text>
+      </svg>
+      </div>
+      <figcaption>Filtração enche a esteira, reabsorção devolve ao sangue o que é útil, secreção joga na esteira o que o sangue quer eliminar. O que chega ao fim é a urina.</figcaption>
+    </figure>
+    <div class="tbl"><table>
+      <thead><tr><th>Processo</th><th>Direção</th><th>O que acontece</th><th>Importância</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Filtração glomerular</strong></td><td>Sangue do glomérulo → espaço da cápsula</td><td>A pressão do sangue empurra <strong>água e substâncias pequenas</strong> do plasma através da <strong>barreira de filtração</strong> (parede do capilar, membrana basal e podócitos, as células da cápsula que abraçam o capilar). <strong>Células do sangue e a maior parte das proteínas ficam retidas</strong>, porque são grandes</td><td>Primeiro passo. Produz o filtrado, um "plasma sem proteínas", de onde a urina vai sair</td></tr>
+        <tr><td><strong>Reabsorção tubular</strong></td><td>Túbulo → sangue</td><td>Substâncias úteis do fluido tubular <strong>voltam ao sangue</strong>: <strong>água, glicose, aminoácidos e íons</strong> (como sódio), cada um na sua região do túbulo. O túbulo proximal reabsorve praticamente toda a glicose e os aminoácidos e a maior parte da água</td><td>Impede que o corpo perca o que precisa. Sem ela, o animal perderia água e nutrientes em poucas horas</td></tr>
+        <tr><td><strong>Secreção tubular</strong></td><td>Sangue → túbulo</td><td>Algumas substâncias são <strong>tiradas do sangue</strong> e jogadas no túbulo: <strong>íons</strong> (íons hidrogênio, potássio), <strong>metabólitos</strong> (restos do metabolismo, como a creatinina) e <strong>fármacos</strong> (remédios, como a penicilina)</td><td>Elimina o que a filtração não tirou o suficiente e ajuda a regular o <strong>equilíbrio ácido-base</strong> (secreção de íons hidrogênio)</td></tr>
+      </tbody>
+    </table></div>
+    <div class="calc">
+      <span class="lab">A conta da urina, passo a passo</span>
+      <ol>
+        <li>Fórmula: <strong>excretado = filtrado − reabsorvido + secretado</strong>.</li>
+        <li>Glicose: filtra 100 partes, reabsorve 100. Excretado = 100 − 100 + 0 = <strong>0</strong>. Por isso a urina normal não tem glicose.</li>
+        <li>Penicilina: filtra 20 partes, não é reabsorvida, e o túbulo secreta mais 80. Excretado = 20 − 0 + 80 = <strong>100</strong>. Por isso ela sai rápido do corpo.</li>
+        <li>Conclusão da professora: o <strong>volume e a composição final da urina</strong> resultam da <strong>integração</strong> desses três processos.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>4.2 Conservação de água e o hormônio antidiurético (Pergunta 2)</h3>
+    <p><strong>ADH</strong> é a sigla de <strong>hormônio antidiurético</strong>, o nome que a prova usa. Neste material escrevo o nome completo. Diurese é a produção de urina; "anti" quer dizer contra. Então hormônio antidiurético é o hormônio que <strong>diminui a urina</strong>. Ele também se chama <strong>vasopressina</strong>.</p>
+    <figure>
+      <div class="fig">
+      <svg viewBox="0 0 720 250" role="img" aria-label="Caminho do ADH desde a perda de água até a urina concentrada">
+        <defs><marker id="ad1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="d-ah"/></marker></defs>
+        <rect x="20" y="30" width="210" height="72" rx="10" class="d-box-amber"/>
+        <text x="125" y="54" text-anchor="middle" class="d-tb">1. Perde água</text>
+        <text x="125" y="74" text-anchor="middle" class="d-ts">ofegação e exercício</text>
+        <text x="125" y="90" text-anchor="middle" class="d-ts">no calor</text>
+        <rect x="255" y="30" width="210" height="72" rx="10" class="d-box"/>
+        <text x="360" y="54" text-anchor="middle" class="d-tb">2. Sangue concentrado</text>
+        <text x="360" y="74" text-anchor="middle" class="d-ts">osmolaridade sobe</text>
+        <text x="360" y="90" text-anchor="middle" class="d-ts">volume de sangue cai</text>
+        <rect x="490" y="30" width="210" height="72" rx="10" class="d-box-acc"/>
+        <text x="595" y="54" text-anchor="middle" class="d-tb">3. Hipotálamo</text>
+        <text x="595" y="74" text-anchor="middle" class="d-ts">osmorreceptores percebem</text>
+        <text x="595" y="90" text-anchor="middle" class="d-ts">e ele produz o hormônio</text>
+        <rect x="490" y="160" width="210" height="72" rx="10" class="d-box-acc"/>
+        <text x="595" y="184" text-anchor="middle" class="d-tb">4. Neuro-hipófise</text>
+        <text x="595" y="204" text-anchor="middle" class="d-ts">libera o hormônio no sangue</text>
+        <text x="595" y="220" text-anchor="middle" class="d-ts">ele viaja até o rim</text>
+        <rect x="255" y="160" width="210" height="72" rx="10" class="d-box"/>
+        <text x="360" y="184" text-anchor="middle" class="d-tb">5. Ducto coletor</text>
+        <text x="360" y="204" text-anchor="middle" class="d-ts">o hormônio faz a célula pôr</text>
+        <text x="360" y="220" text-anchor="middle" class="d-ts">aquaporinas na membrana</text>
+        <rect x="20" y="160" width="210" height="72" rx="10" class="d-box-ven"/>
+        <text x="125" y="184" text-anchor="middle" class="d-tb">6. Água volta ao sangue</text>
+        <text x="125" y="204" text-anchor="middle" class="d-ts">urina pouca e concentrada</text>
+        <text x="125" y="220" text-anchor="middle" class="d-ts">osmolaridade normaliza</text>
+        <path d="M230 66 L253 66" class="d-line" marker-end="url(#ad1)"/>
+        <path d="M465 66 L488 66" class="d-line" marker-end="url(#ad1)"/>
+        <path d="M595 102 L595 158" class="d-line" marker-end="url(#ad1)"/>
+        <path d="M490 196 L467 196" class="d-line" marker-end="url(#ad1)"/>
+        <path d="M255 196 L232 196" class="d-line" marker-end="url(#ad1)"/>
+        <path d="M70 158 L70 104" class="d-line-dash" marker-end="url(#ad1)"/>
+        <text x="84" y="136" class="d-ta">feedback negativo: o hormônio volta a cair</text>
+      </svg>
+      </div>
+      <figcaption>"Hormônio" aqui é o hormônio antidiurético. Leia em "U": em cima da esquerda para a direita, embaixo da direita para a esquerda. A seta tracejada fecha o circuito: com a água recuperada, o estímulo some e a liberação de hormônio antidiurético diminui.</figcaption>
+    </figure>
+    <ol class="steps">
+      <li><div><strong>O gatilho.</strong> O cão perdeu água. O sangue fica mais concentrado (a <strong>osmolaridade</strong>, a concentração de partículas dissolvidas, sobe) e o volume de sangue cai.</div></li>
+      <li><div><strong>Onde é feito.</strong> O hormônio antidiurético é <strong>sintetizado no hipotálamo</strong>, onde os <strong>osmorreceptores</strong> (sensores de concentração) percebem a mudança.</div></li>
+      <li><div><strong>Onde é liberado.</strong> Ele desce pelos neurônios e é <strong>liberado pela neuro-hipófise</strong> (a parte de trás da hipófise, glândula logo abaixo do hipotálamo) no sangue.</div></li>
+      <li><div><strong>Onde age.</strong> Em segmentos específicos do néfron, <strong>sobretudo nos ductos coletores</strong>. Ele se encaixa num <strong>receptor</strong> (a "fechadura" na superfície da célula onde o hormônio se prende) das células do ducto. Esse receptor se chama V2: V de vasopressina, tipo 2.</div></li>
+      <li><div><strong>O que faz.</strong> A célula coloca na membrana voltada para o túbulo as <strong>aquaporinas</strong>: proteínas que formam canais por onde só a água passa ("aqua" é água, "porina" é poro). A <strong>permeabilidade à água</strong> aumenta.</div></li>
+      <li><div><strong>Resultado.</strong> Mais água sai do ducto e é <strong>reabsorvida para o sangue</strong>. A urina fica <strong>mais concentrada e em menor volume</strong>.</div></li>
+    </ol>
+    <div class="note warn">
+      <span class="lab">O detalhe "desde que os mecanismos renais funcionem"</span>
+      <p>A aquaporina é só a porta. A força que puxa a água para fora do ducto é a <strong>medula muito concentrada</strong> em volta dele, que a alça de Henle cria. Se o rim estiver doente e não conseguir manter essa medula concentrada, o hormônio antidiurético abre a porta mas a água não sai, e a urina continua diluída.</p>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>4.3 Outras funções do rim (Pergunta 3)</h3>
+    <p>A pergunta pede <strong>duas</strong> funções além de eliminar resíduos, bem explicadas. Escolha as duas que você lembrar melhor. Estas são as aceitas:</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Função</th><th>Como o rim faz</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Regular a água e a osmolaridade</strong></td><td>Ajusta quanta água sai na urina. Falta água: hormônio antidiurético, urina concentrada. Sobra água: pouco hormônio antidiurético, urina diluída e abundante</td></tr>
+        <tr><td><strong>Ajustar os eletrólitos</strong> (sais dissolvidos, como sódio e potássio)</td><td>Reabsorve ou elimina sódio (Na⁺) e potássio (K⁺) conforme a necessidade. A <strong>aldosterona</strong> (hormônio da glândula adrenal) faz o túbulo distal e o ducto coletor reabsorver sódio e eliminar potássio. Potássio alto no sangue é perigoso para o coração</td></tr>
+        <tr><td><strong>Equilíbrio ácido-base</strong> (manter o pH do sangue)</td><td><strong>Secreta íons hidrogênio (H⁺)</strong>, que deixam o sangue ácido, e <strong>reabsorve e produz bicarbonato (HCO₃⁻)</strong>, que neutraliza ácido. No exercício o músculo produz ácido; o rim ajuda a eliminar</td></tr>
+        <tr><td><strong>Controle da pressão arterial</strong></td><td>Pelo <strong>sistema renina-angiotensina-aldosterona</strong>: se a pressão cai, o rim libera renina, que leva à formação de angiotensina II (fecha os vasos) e de aldosterona (retém sódio e água). A pressão sobe</td></tr>
+        <tr><td><strong>Produzir eritropoietina</strong></td><td>Hormônio que manda a medula óssea produzir mais <strong>hemácias</strong> (glóbulos vermelhos) quando falta oxigênio</td></tr>
+        <tr><td><strong>Ativar a vitamina D</strong></td><td>O rim faz o último passo da ativação. A vitamina D ativa aumenta a absorção de cálcio no intestino</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="sub">
+    <h3>4.4 Anatomia interna do rim e o caminho da urina (Pergunta 4)</h3>
+    <p>Corte o rim ao meio no comprimento e você vê duas regiões e uma cavidade:</p>
+    <figure>
+      <div class="fig">
+      <svg viewBox="0 0 720 340" role="img" aria-label="Corte do rim do cão com córtex, medula, crista renal, pelve e ureter">
+        <path d="M300 30 C 420 30, 470 110, 470 170 C 470 240, 420 310, 300 310 C 220 310, 180 270, 200 225 C 215 195, 215 145, 200 115 C 180 70, 220 30, 300 30 Z" class="d-zone-tint" style="stroke:var(--fg-soft);stroke-width:2"/>
+        <path d="M310 72 C 395 72, 430 125, 430 170 C 430 218, 395 268, 310 268 C 300 268, 300 250, 302 230 L 302 110 C 300 90, 300 72, 310 72 Z" class="d-zone-amber"/>
+        <path d="M302 125 Q 262 170 302 215 Z" class="d-zone-amber"/>
+        <g class="d-line-dash" style="stroke-width:1.2">
+          <line x1="300" y1="170" x2="424" y2="170"/><line x1="300" y1="160" x2="408" y2="112"/><line x1="300" y1="180" x2="408" y2="228"/><line x1="304" y1="150" x2="360" y2="82"/><line x1="304" y1="190" x2="360" y2="258"/>
+        </g>
+        <path d="M300 112 Q 220 170 300 228 Q 268 170 300 112 Z" class="d-zone-acc" style="stroke:var(--accent);stroke-width:2"/>
+        <path d="M262 170 C 230 170, 200 175, 150 200 C 110 220, 90 260, 80 330" style="fill:none;stroke:var(--accent);stroke-width:8;stroke-linecap:round"/>
+        <g class="d-fill-art"><circle cx="452" cy="170" r="5"/><circle cx="440" cy="115" r="5"/><circle cx="440" cy="225" r="5"/><circle cx="380" cy="50" r="5"/><circle cx="380" cy="290" r="5"/></g>
+        <g>
+          <circle cx="450" cy="142" r="10" class="d-box"/><text x="450" y="146" text-anchor="middle" class="d-tm">1</text>
+          <circle cx="380" cy="200" r="10" class="d-box"/><text x="380" y="204" text-anchor="middle" class="d-tm">2</text>
+          <circle cx="292" cy="170" r="9" class="d-box"/><text x="292" y="174" text-anchor="middle" class="d-tm">3</text>
+          <circle cx="250" cy="136" r="10" class="d-box"/><text x="250" y="140" text-anchor="middle" class="d-tm">4</text>
+          <circle cx="148" cy="244" r="10" class="d-box"/><text x="148" y="248" text-anchor="middle" class="d-tm">5</text>
+          <circle cx="180" cy="110" r="10" class="d-box"/><text x="180" y="114" text-anchor="middle" class="d-tm">6</text>
+        </g>
+        <path d="M256 144 L268 158" class="d-line"/>
+        <text x="500" y="44" class="d-tb">1 Córtex</text>
+        <text x="500" y="62" class="d-ts">corpúsculos renais</text>
+        <text x="500" y="78" class="d-ts">e túbulos contorcidos</text>
+        <text x="500" y="106" class="d-tb">2 Medula</text>
+        <text x="500" y="124" class="d-ts">alças de Henle e ductos</text>
+        <text x="500" y="140" class="d-ts">coletores (tracejado)</text>
+        <text x="500" y="168" class="d-tb">3 Crista renal</text>
+        <text x="500" y="186" class="d-ts">papilas fundidas (cão)</text>
+        <text x="500" y="214" class="d-tb">4 Pelve renal</text>
+        <text x="500" y="232" class="d-ts">cavidade que recolhe a urina</text>
+        <text x="500" y="260" class="d-tb">5 Ureter</text>
+        <text x="500" y="278" class="d-ts">leva a urina até a bexiga</text>
+        <text x="500" y="306" class="d-tb">6 Hilo</text>
+        <text x="500" y="324" class="d-ts">entrada e saída de vasos e ureter</text>
+      </svg>
+      </div>
+      <figcaption>Esquema do rim de cão cortado ao meio. Os pontos vermelhos são corpúsculos renais. A medula (âmbar) forma uma peça única que termina na crista renal, encaixada na pelve (azul-claro). Não há cálices.</figcaption>
+    </figure>
+    <div class="tbl"><table>
+      <thead><tr><th>Região</th><th>Onde fica</th><th>O que tem</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Córtex renal</strong></td><td>A parte mais <strong>externa</strong></td><td>Os <strong>corpúsculos renais</strong> (glomérulos e cápsulas glomerulares) e partes dos <strong>túbulos contorcidos</strong> (os trechos enrolados, proximal e distal). Tem aspecto granuloso</td></tr>
+        <tr><td><strong>Medula renal</strong></td><td>A parte <strong>interna</strong></td><td>Organizada em <strong>pirâmides</strong> (estruturas em forma de cone) com segmentos das <strong>alças de Henle</strong> e os <strong>ductos coletores</strong>. Tem aspecto estriado, em listras</td></tr>
+        <tr><td><strong>Crista renal</strong> (no cão)</td><td>Ponta interna da medula</td><td>No cão as <strong>papilas</strong> (as pontas das pirâmides) são <strong>fundidas</strong> e formam uma crista única, que <strong>drena para a pelve</strong></td></tr>
+        <tr><td><strong>Pelve renal</strong></td><td>Cavidade no centro, voltada para o hilo</td><td>Recolhe a urina e continua como ureter. No cão, os <strong>cálices</strong> individualizados (pequenos funis, um para cada papila) de outras espécies <strong>não são proeminentes</strong></td></tr>
+      </tbody>
+    </table></div>
+    <p><strong>O caminho da urina, do néfron até sair do rim:</strong></p>
+    <ol class="steps">
+      <li><div>Túbulos do néfron (proximal, alça de Henle, distal), onde o filtrado vira urina.</div></li>
+      <li><div>Túbulos e <strong>ductos coletores</strong>, que recebem vários néfrons e descem pela medula.</div></li>
+      <li><div><strong>Ductos papilares</strong>, os ductos maiores que se abrem na ponta da medula.</div></li>
+      <li><div><strong>Crista renal</strong>, por onde a urina pinga.</div></li>
+      <li><div><strong>Pelve renal</strong>, que recolhe tudo.</div></li>
+      <li><div><strong>Ureter</strong>, que sai pelo hilo e leva a urina até a <strong>bexiga urinária</strong>.</div></li>
+    </ol>
+    <div class="note">
+      <span class="lab">Varia com a espécie (a prova valoriza o cão)</span>
+      <div class="tbl"><table>
+        <thead><tr><th>Espécie</th><th>Como é</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Cão</strong> (e gato)</td><td>Rim liso em forma de feijão, <strong>unipiramidal</strong>: as pirâmides se fundem, papilas viram <strong>crista renal</strong>, drena direto para a <strong>pelve</strong>, sem cálices proeminentes</td></tr>
+          <tr><td>Bovino</td><td>Rim <strong>lobado</strong> por fora, <strong>multipiramidal</strong>: cada papila tem seu <strong>cálice</strong>, e os cálices levam ao ureter; não tem pelve típica</td></tr>
+          <tr><td>Equino</td><td>Tem crista renal e pelve, com <strong>recessos terminais</strong> (prolongamentos da pelve)</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="minute">
+    <span class="lab">Resumo de 1 minuto</span>
+    <ul>
+      <li>Néfron = unidade funcional: corpúsculo (glomérulo + cápsula) + túbulos.</li>
+      <li><strong>Filtração</strong>: sangue → cápsula; passam água e substâncias pequenas; ficam células e a maior parte das proteínas.</li>
+      <li><strong>Reabsorção</strong>: túbulo → sangue; água, glicose, aminoácidos, íons.</li>
+      <li><strong>Secreção</strong>: sangue → túbulo; íons, metabólitos, fármacos; ajuda no ácido-base.</li>
+      <li><strong>Hormônio antidiurético</strong> (vasopressina): feito no <strong>hipotálamo</strong>, liberado pela <strong>neuro-hipófise</strong>, age no <strong>ducto coletor</strong>, põe <strong>aquaporinas</strong>, mais água volta ao sangue, urina concentrada e pouca.</li>
+      <li>Outras funções: água e osmolaridade; sódio e potássio; ácido-base (íons hidrogênio e bicarbonato); pressão arterial (sistema renina-angiotensina-aldosterona); eritropoietina; vitamina D.</li>
+      <li><strong>Córtex</strong>: corpúsculos e túbulos contorcidos. <strong>Medula</strong>: pirâmides com alças de Henle e ductos coletores. <strong>Cão</strong>: papilas fundidas em <strong>crista renal</strong> → pelve; sem cálices proeminentes.</li>
+      <li>Urina: túbulos → ductos coletores → ductos papilares → crista → pelve → ureter → bexiga.</li>
+    </ul>
+  </div>
+
+  <div class="sub">
+    <h3>Para decorar</h3>
+    <div class="mnemo">
+      <div class="mn"><span class="big"><b>F</b>iltra, <b>R</b>ecupera, <b>S</b>olta, <b>E</b>xpulsa</span><span class="what"><strong>F</strong>iltração, <strong>R</strong>eabsorção (recupera o útil), <strong>S</strong>ecreção (o sangue solta no túbulo), <strong>E</strong>xcreção.</span></div>
+      <div class="mn"><span class="big"><b>RE</b>absorção <b>RE</b>torna · <b>S</b>ecreção: o <b>S</b>angue <b>S</b>olta</span><span class="what">Para não trocar as direções: reabsorção volta ao sangue; secreção sai do sangue para o túbulo.</span></div>
+      <div class="mn"><span class="big"><b>A</b>-<b>D</b>-<b>H</b>: <b>A</b>quaporina no <b>D</b>ucto, feito no <b>H</b>ipotálamo</span><span class="what">A sigla ADH (hormônio antidiurético) lembra o mecanismo. E o caminho de saída: hipotálamo faz, neuro-hipófise libera ("a <strong>N</strong>euro <strong>N</strong>ão fabrica, só libera").</span></div>
+      <div class="mn"><span class="big"><b>Á</b>gua, <b>S</b>al, <b>Á</b>cido, <b>P</b>ressão, <b>E</b>ritro, <b>V</b>itamina</span><span class="what">As funções extras do rim. Frase: "<strong>Á</strong>gua <strong>S</strong>algada <strong>Á</strong>cida <strong>P</strong>ode <strong>E</strong>stragar <strong>V</strong>idro". Sal = eletrólitos (sódio e potássio).</span></div>
+      <div class="mn"><span class="big"><b>C</b>órtex tem os <b>C</b>orpúsculos · <b>M</b>edula tem o <b>M</b>ergulho</span><span class="what">No córtex ficam os corpúsculos e túbulos contorcidos. Na medula ficam as alças de Henle, que "mergulham", e os ductos coletores.</span></div>
+      <div class="mn"><span class="big"><b>C</b>ão tem <b>C</b>rista, não tem <b>C</b>álice</span><span class="what">No cão as papilas se fundem numa crista renal que drena para a pelve.</span></div>
+      <div class="mn"><span class="big"><b>N</b>unca <b>D</b>eixe <b>D</b>e <b>C</b>uidar, <b>P</b>ois <b>U</b>rina <b>B</b>ate</span><span class="what">Caminho da urina: <strong>N</strong>éfron, <strong>D</strong>ucto coletor, <strong>D</strong>ucto papilar, <strong>C</strong>rista, <strong>P</strong>elve, <strong>U</strong>reter, <strong>B</strong>exiga.</span></div>
+    </div>
+    <div class="tool">
+      <h4>Flashcards: renal</h4>
+      <div class="deck" data-deck="renal"></div>
+    </div>
+    <div class="tool">
+      <h4>Exercício de ordem: caminho da urina</h4>
+      <div class="order" data-order="urina"></div>
+    </div>
+    <div class="tool">
+      <h4>Exercício de ordem: ação do hormônio antidiurético</h4>
+      <div class="order" data-order="adh"></div>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>Teste-se: quiz do envelope 4</h3>
+    <p class="sec-score" data-score="renal"></p>
+    <ol class="qz-list" data-quiz="renal"></ol>
+  </div>
+
+  <div class="sub">
+    <h3>Perguntas discursivas do envelope 4</h3>
+    <div class="disc-list">
+      <details class="disc"><summary><span class="n">4.1</span><span><span class="q-official">Pergunta oficial 1</span><br>Explique como ocorre a formação da urina, descrevendo os processos de filtração glomerular, reabsorção tubular e secreção tubular. Diferencie esses três processos e indique a importância de cada um.</span></summary><div class="ans"><span class="lab">Resposta-modelo</span>
+        <p>Na filtração glomerular, a pressão do sangue faz água e pequenas substâncias do plasma atravessarem a barreira de filtração dos capilares glomerulares e chegarem ao espaço da cápsula glomerular. Células sanguíneas e a maior parte das proteínas normalmente ficam retidas no sangue. É o primeiro passo e produz o filtrado.</p>
+        <p>Na reabsorção tubular, substâncias presentes no fluido tubular, como água, glicose, aminoácidos e íons, conforme a região do túbulo, retornam ao sangue. Sua importância é recuperar o que o organismo precisa e evitar perdas. Na secreção tubular, determinadas substâncias passam do sangue para o lúmen do túbulo, contribuindo para a excreção de íons, metabólitos e fármacos e para a regulação do equilíbrio ácido-base, por exemplo pela secreção de íons hidrogênio.</p>
+        <p>Os processos diferem na direção: a filtração vai do sangue do glomérulo para a cápsula, a reabsorção vai do túbulo para o sangue e a secreção vai do sangue para o túbulo. O volume e a composição final da urina resultam da integração dos três.</p>
+        <h5>Não pode faltar</h5>
+        <ul class="kw"><li>barreira de filtração</li><li>cápsula glomerular</li><li>células e proteínas retidas</li><li>reabsorção: túbulo → sangue</li><li>água, glicose, aminoácidos, íons</li><li>secreção: sangue → túbulo</li><li>íons, metabólitos, fármacos</li><li>ácido-base</li><li>integração dos processos</li></ul>
+      </div></details>
+      <details class="disc"><summary><span class="n">4.2</span><span><span class="q-official">Pergunta oficial 2</span><br>Explique como os rins podem contribuir para a conservação de água quando o organismo precisa reduzir sua perda hídrica. Descreva a participação do hormônio antidiurético (ADH ou vasopressina).</span></summary><div class="ans"><span class="lab">Resposta-modelo</span>
+        <p>Quando o organismo perde água, como o cão após o exercício com ofegação, a osmolaridade do sangue sobe e o volume cai. Esses sinais são percebidos, entre outros, por osmorreceptores do hipotálamo, e a liberação de hormônio antidiurético (vasopressina) aumenta. O hormônio é sintetizado no hipotálamo e liberado pela neuro-hipófise.</p>
+        <p>O hormônio antidiurético atua em segmentos específicos do néfron, sobretudo nos ductos coletores, onde aumenta a inserção de aquaporinas na membrana das células e, portanto, a permeabilidade à água. Assim, mais água é reabsorvida para o sangue, e a urina fica mais concentrada e em menor volume, desde que os mecanismos renais estejam funcionando adequadamente, já que a saída de água depende da medula renal concentrada. Com a recuperação da água, a osmolaridade normaliza e a liberação de hormônio antidiurético diminui, num feedback negativo.</p>
+        <h5>Não pode faltar</h5>
+        <ul class="kw"><li>osmolaridade alta / volume baixo</li><li>Hormônio antidiurético = vasopressina</li><li>sintetizado no hipotálamo</li><li>liberado pela neuro-hipófise</li><li>ductos coletores</li><li>aquaporinas</li><li>permeabilidade à água</li><li>urina concentrada, menor volume</li></ul>
+      </div></details>
+      <details class="disc"><summary><span class="n">4.3</span><span><span class="q-official">Pergunta oficial 3</span><br>Além da eliminação de resíduos, explique duas outras funções importantes dos rins na manutenção da homeostase. Considere a regulação da água, dos eletrólitos ou do equilíbrio ácido-base.</span></summary><div class="ans"><span class="lab">Resposta-modelo (duas funções bem explicadas bastam)</span>
+        <p><strong>Regulação da água e da osmolaridade:</strong> os rins ajustam a quantidade de água eliminada na urina. Quando falta água, o hormônio antidiurético aumenta a reabsorção de água nos ductos coletores e a urina sai concentrada; quando sobra água, a liberação de hormônio antidiurético cai e a urina sai diluída e em maior volume. Assim o volume de líquidos e a concentração do sangue ficam dentro da faixa normal.</p>
+        <p><strong>Equilíbrio ácido-base:</strong> os rins secretam íons hidrogênio (H⁺) no túbulo, eliminando ácido na urina, e reabsorvem e produzem bicarbonato, que neutraliza ácidos no sangue. Com isso mantêm o pH do sangue dentro da faixa compatível com as enzimas.</p>
+        <p>Outras funções aceitas: ajustar as concentrações de eletrólitos, como sódio e potássio; controlar a pressão arterial pelo sistema renina-angiotensina-aldosterona; produzir eritropoietina; ativar a vitamina D.</p>
+        <h5>Não pode faltar</h5>
+        <ul class="kw"><li>duas funções nomeadas</li><li>explicar o mecanismo de cada uma</li><li>ligar à homeostase</li></ul>
+      </div></details>
+      <details class="disc"><summary><span class="n">4.4</span><span><span class="q-official">Pergunta oficial 4</span><br>Descreva a organização anatômica interna de um rim. Explique também o trajeto percorrido pela urina desde sua formação nos néfrons até sua saída do rim.</span></summary><div class="ans"><span class="lab">Resposta-modelo</span>
+        <p>O córtex renal é a região mais externa e contém os corpúsculos renais (glomérulos e cápsulas glomerulares) e partes dos túbulos contorcidos. A medula é a região interna, organizada em pirâmides ou estruturas medulares que contêm segmentos das alças de Henle e os ductos coletores. No cão, as papilas das pirâmides são fundidas, formando uma crista renal, que drena para a pelve renal; os cálices individualizados típicos de algumas outras espécies, como o bovino, não são proeminentes no rim canino.</p>
+        <p>A urina percorre os túbulos do néfron, passa pelos túbulos e ductos coletores, segue pelos ductos papilares até a crista renal, chega à pelve renal e sai do rim pelo ureter, em direção à bexiga urinária.</p>
+        <h5>Não pode faltar</h5>
+        <ul class="kw"><li>córtex: corpúsculos e túbulos contorcidos</li><li>medula: pirâmides, alças de Henle, ductos coletores</li><li>cão: crista renal</li><li>pelve renal</li><li>sem cálices proeminentes</li><li>ductos papilares</li><li>ureter → bexiga</li></ul>
+      </div></details>
+      <details class="disc"><summary><span class="n">4.5</span><span>Extra: por que normalmente não há glicose nem proteína na urina?</span></summary><div class="ans"><span class="lab">Resposta-modelo</span>
+        <p>As proteínas são grandes e quase não atravessam a barreira de filtração, então ficam no sangue. A glicose é pequena e é filtrada, mas o túbulo proximal reabsorve praticamente toda ela de volta para o sangue. Pela conta excretado = filtrado − reabsorvido + secretado, a glicose excretada fica perto de zero. Glicose na urina indica que a quantidade filtrada passou da capacidade de reabsorção, como no diabetes.</p>
+      </div></details>
+      <details class="disc"><summary><span class="n">4.6</span><span>Extra: compare o rim do cão com o do bovino.</span></summary><div class="ans"><span class="lab">Resposta-modelo</span>
+        <p>O rim do cão é liso e unipiramidal: as pirâmides se fundem e as papilas formam uma crista renal única, que drena para a pelve, sem cálices proeminentes. O rim do bovino é lobado por fora e multipiramidal: cada pirâmide termina numa papila própria, envolvida por um cálice, e os cálices conduzem a urina ao ureter, sem uma pelve típica.</p>
+      </div></details>
+    </div>
+  </div>
+</section>
+
+<!-- 05 -->
+<section class="sec" id="relampago">
+  <div class="sec-head">
+    <span class="eyebrow"><b>05</b> · para a véspera e a manhã da prova</span>
+    <h2>Revisão relâmpago</h2>
+  </div>
+  <p>Uma linha por pergunta oficial: o que a sua resposta precisa conter. Se você souber escrever uma frase com cada uma destas palavras, está pronta para a prova.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Pergunta</th><th>Palavras que a correção procura</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1.1</strong> Caminho do sangue</td><td>cavas → átrio direito → tricúspide → ventrículo direito → valva pulmonar → tronco e artérias pulmonares → pulmões (trocas) → veias pulmonares → átrio esquerdo → mitral → ventrículo esquerdo → valva aórtica → aorta</td></tr>
+      <tr><td><strong>1.2</strong> Pulmonar x sistêmica</td><td>Ventrículo direito → pulmão → átrio esquerdo (oxigena); ventrículo esquerdo → tecidos → átrio direito (entrega oxigênio e nutrientes, recolhe gás carbônico); trocas nos capilares pulmonares e dos tecidos; artéria pulmonar com sangue pobre em oxigênio</td></tr>
+      <tr><td><strong>1.3</strong> frequência cardíaca, volume sistólico e débito cardíaco</td><td>Débito cardíaco = frequência cardíaca × volume sistólico; mais débito cardíaco, mais oxigênio e nutrientes; exercício aumenta frequência cardíaca e volume sistólico; retorno venoso, contratilidade, resistência vascular</td></tr>
+      <tr><td><strong>1.4</strong> Histologia dos vasos</td><td>artéria: parede espessa, média desenvolvida, pressão; arteríola: poucas camadas de músculo, resistência; veia: fina, luz grande e irregular, adventícia, capacitância, válvulas; vênula: fina, recebe dos capilares, saída de leucócitos</td></tr>
+      <tr><td><strong>2.1</strong> Homeostase</td><td>meio interno relativamente estável; limites compatíveis com as células; mudanças internas e externas; enzimas, transporte, órgãos; variáveis oscilam e são ajustadas</td></tr>
+      <tr><td><strong>2.2</strong> Feedback negativo</td><td>resposta se opõe à alteração; intervalo de referência; ofegação (evaporação nas vias respiratórias); fluxo sanguíneo cutâneo; depende do ambiente e do animal</td></tr>
+      <tr><td><strong>2.3</strong> Componentes</td><td>estímulo = alteração; receptor = percebe (termorreceptores); centro de controle = integra e coordena (centros termorreguladores no sistema nervoso central); efetor = executa (ofegação)</td></tr>
+      <tr><td><strong>3.1</strong> Caminho do ar e epitélios</td><td>narinas → cavidade nasal → faringe → laringe → traqueia → brônquios → bronquíolos → bronq. respiratórios → ductos e sacos → alvéolos; filtram, aquecem, umidificam; estratificado pavimentoso; pseudoestratificado ciliado com caliciformes; simples cilíndrico a cúbico com club, sem cartilagem; pneumócitos I e II</td></tr>
+      <tr><td><strong>3.2</strong> Trocas gasosas</td><td>alvéolos e capilares pulmonares; barreira alvéolo-capilar; difusão; pressões parciais; oxigênio alvéolo → sangue; gás carbônico sangue → alvéolo; nos tecidos o inverso</td></tr>
+      <tr><td><strong>3.3</strong> frequência respiratória no exercício</td><td>demanda metabólica; mais oxigênio consumido e gás carbônico produzido; ventilação aumenta; ofegação; evaporação; dissipar calor</td></tr>
+      <tr><td><strong>3.4</strong> Surfactante</td><td>lipídios e proteínas; pneumócito II; reduz tensão superficial; evita colapso no fim da expiração; menos trabalho; deficiência: atelectasia, menor complacência, pior troca</td></tr>
+      <tr><td><strong>4.1</strong> Formação da urina</td><td>filtração (água e pequenas substâncias; ficam células e proteínas); reabsorção (túbulo → sangue: água, glicose, aminoácidos, íons); secreção (sangue → túbulo: íons, metabólitos, fármacos, ácido-base); integração</td></tr>
+      <tr><td><strong>4.2</strong> hormônio antidiurético</td><td>vasopressina; hipotálamo faz; neuro-hipófise libera; ductos coletores; aquaporinas; permeabilidade à água; urina concentrada e em menor volume</td></tr>
+      <tr><td><strong>4.3</strong> Duas funções</td><td>escolha duas e explique: água e osmolaridade; sódio e potássio; ácido-base (íons hidrogênio e bicarbonato); pressão arterial (sistema renina-angiotensina-aldosterona); eritropoietina; vitamina D</td></tr>
+      <tr><td><strong>4.4</strong> Anatomia e trajeto</td><td>córtex: corpúsculos e túbulos contorcidos; medula: pirâmides, alças de Henle, ductos coletores; cão: crista renal → pelve, sem cálices proeminentes; ductos coletores → papilares → crista → pelve → ureter → bexiga</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note">
+    <span class="lab">As quatro charadas</span>
+    <ul>
+      <li><strong>Envelope 1:</strong> "Não sou um órgão, mas dependo do coração e dos vasos; levo oxigênio e nutrientes e ajudo a levar resíduos." Resposta: <strong>Circulação</strong>.</li>
+      <li><strong>Envelope 2:</strong> "Mantenho as condições internas dentro de limites, mas não significa que tudo seja constante." Resposta: <strong>Homeostase</strong>.</li>
+      <li><strong>Envelope 3:</strong> "Processo que faz o gás essencial entrar pelas vias aéreas, chegar ao alvéolo e passar ao sangue." Resposta: <strong>Respiração</strong>.</li>
+      <li><strong>Envelope 4:</strong> "Estrutura microscópica, unidade funcional do rim, que filtra e modifica o filtrado." Resposta: <strong>Néfron</strong>.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 06 -->
+<section class="sec" id="simulado">
+  <div class="sec-head">
+    <span class="eyebrow"><b>06</b> · tudo junto</span>
+    <h2>Simulado final</h2>
+  </div>
+  <p>Agora as perguntas misturam os envelopes, como o caso do cão faz. Faça o quiz sem olhar a página. Depois tente responder as discursivas por escrito antes de abrir.</p>
+  <div class="sub">
+    <h3>Quiz integrado</h3>
+    <p class="sec-score" data-score="final"></p>
+    <ol class="qz-list" data-quiz="final"></ol>
+  </div>
+  <div class="sub">
+    <h3>Discursivas integradas</h3>
+    <div class="disc-list">
+      <details class="disc"><summary><span class="n">6.1</span><span>Descreva a resposta integrada do organismo do cão que fez exercício intenso num ambiente quente, citando o sistema cardiovascular, a homeostase, o sistema respiratório e o rim.</span></summary><div class="ans"><span class="lab">Resposta-modelo</span>
+        <ol>
+          <li><strong>Cardiovascular:</strong> os músculos precisam de mais oxigênio. A frequência cardíaca e o volume sistólico sobem e o débito cardíaco (débito cardíaco = frequência cardíaca × volume sistólico) aumenta, levando mais oxigênio e nutrientes aos músculos e mais sangue à pele para perder calor.</li>
+          <li><strong>Homeostase:</strong> a temperatura sobe (estímulo), os termorreceptores percebem (receptor), os centros termorreguladores do sistema nervoso central integram (centro de controle) e acionam a ofegação e a vasodilatação da pele (efetores). É um feedback negativo.</li>
+          <li><strong>Respiratório:</strong> a frequência respiratória aumenta pela demanda metabólica (mais oxigênio consumido e gás carbônico produzido) e pela ofegação, que perde calor por evaporação nas vias respiratórias. Oxigênio e gás carbônico são trocados por difusão nos alvéolos.</li>
+          <li><strong>Renal:</strong> a ofegação gasta água. A osmolaridade sobe, o hipotálamo produz hormônio antidiurético, a neuro-hipófise libera, e nos ductos coletores as aquaporinas aumentam a reabsorção de água. A urina sai concentrada e em menor volume.</li>
+        </ol>
+      </div></details>
+      <details class="disc"><summary><span class="n">6.2</span><span>Explique como a ofegação, que é um mecanismo de termorregulação, acaba levando à liberação de hormônio antidiurético.</span></summary><div class="ans"><span class="lab">Resposta-modelo</span>
+        <ol><li>Na ofegação, a água evapora das vias respiratórias para tirar calor do corpo.</li><li>Essa água sai do organismo; se o cão não bebe, o volume de líquidos cai e o sangue fica mais concentrado (osmolaridade alta).</li><li>Os osmorreceptores do hipotálamo percebem o aumento da osmolaridade, e o hipotálamo aumenta a produção de hormônio antidiurético, liberado pela neuro-hipófise.</li><li>O hormônio antidiurético age nos ductos coletores, aumenta as aquaporinas e mais água é reabsorvida. Assim o rim compensa a água perdida na termorregulação.</li></ol>
+      </div></details>
+      <details class="disc"><summary><span class="n">6.3</span><span>No exercício o músculo produz mais gás carbônico. Relacione isso com a frequência respiratória e com o papel do rim no equilíbrio ácido-base.</span></summary><div class="ans"><span class="lab">Resposta-modelo</span>
+        <p>O gás carbônico produzido pelo músculo se difunde para o sangue nos capilares dos tecidos. No sangue, o gás carbônico forma ácido, então, se ele acumular, o pH cai. A ventilação aumenta para eliminar o gás carbônico extra: nos alvéolos o gás carbônico passa por difusão do sangue para o ar, porque sua pressão parcial é maior no sangue venoso, e sai na expiração. O rim complementa esse controle mais lentamente: secreta íons íons hidrogênio na urina e reabsorve e produz bicarbonato, que neutraliza ácidos. Pulmão e rim juntos mantêm o pH, um exemplo de homeostase.</p>
+      </div></details>
+      <details class="disc"><summary><span class="n">6.4</span><span>Se o cão ficar desidratado, explique o efeito no débito cardíaco e os mecanismos que o organismo usa para compensar.</span></summary><div class="ans"><span class="lab">Resposta-modelo</span>
+        <ol><li>A desidratação diminui o volume de sangue, então o retorno venoso cai.</li><li>Com menos sangue chegando, o ventrículo enche menos e o volume sistólico diminui.</li><li>Como débito cardíaco = frequência cardíaca × volume sistólico, o débito tende a cair, e chega menos oxigênio aos tecidos e menos sangue à pele.</li><li>Compensações: a frequência cardíaca aumenta para manter o débito; o hormônio antidiurético aumenta a reabsorção de água no ducto coletor; e o sistema renina-angiotensina-aldosterona fecha os vasos (angiotensina II) e retém sódio e água (aldosterona), ajudando a manter a pressão arterial.</li></ol>
+      </div></details>
+      <details class="disc"><summary><span class="n">6.5</span><span>Qual é o papel da circulação na perda de calor durante o exercício no calor?</span></summary><div class="ans"><span class="lab">Resposta-modelo</span>
+        <p>O calor é produzido principalmente nos músculos em atividade e é levado pelo sangue. Na termorregulação, os vasos da pele se dilatam e o fluxo sanguíneo cutâneo aumenta, trazendo sangue quente para perto da superfície, onde o calor é perdido para o ambiente. Para isso o coração precisa manter um débito alto, dividido entre os músculos e a pele. Se houver desidratação, sobra menos sangue para a pele e a perda de calor fica pior.</p>
+      </div></details>
+      <details class="disc"><summary><span class="n">6.6</span><span>Resolva as quatro charadas e explique como as quatro palavras-código se ligam na missão do caso.</span></summary><div class="ans"><span class="lab">Resposta-modelo</span>
+        <p>As palavras são Circulação, Homeostase, Respiração e Néfron. A missão era explicar como os sistemas mantêm o equilíbrio interno do cão após o exercício no calor. A <strong>homeostase</strong> é o objetivo comum: manter temperatura, gases, água e pH dentro da faixa. A <strong>respiração</strong> traz oxigênio e elimina gás carbônico e, no cão, ajuda a perder calor pela ofegação. A <strong>circulação</strong> transporta o oxigênio e os nutrientes até os tecidos, leva o gás carbônico aos pulmões e o calor à pele. O <strong>néfron</strong> ajusta a água e os sais, recuperando a água perdida na ofegação com a ajuda do hormônio antidiurético. Nenhum sistema trabalha sozinho.</p>
+      </div></details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p><strong>Fontes.</strong> Escopo e respostas esperadas: arquivo PDF "Revisão de Morfofisiologia, Escape Room Med Vet, 4 envelopes". Explicações: aulas de Morfofisiologia dos Sistemas Vitais no seu Anytype. Complementos: <a href="https://anatomiaveterinaria1e2.uff.br/wp-content/uploads/sites/73/2025/06/Sistema-urinario.pdf">Universidade Federal Fluminense, Anatomia Veterinária, Sistema urinário</a> · <a href="https://teaching.ncl.ac.uk/bms/wiki/index.php/Vasopressin">Newcastle University, Vasopressin</a> · <a href="https://ohiostate.pressbooks.pub/vethisto/?p=349">Ohio State, Veterinary Histology, Respiratory System</a>.</p>
+  <p>Valores numéricos (débito cardíaco, temperatura, pressões parciais) são aproximados e servem para entender a direção dos processos.</p>
+</footer>
+</main>
+</div>
+</div>
+
+<script>
+const QUIZ = {
+  cardio: [
+    {q:"Qual valva fica entre o átrio direito e o ventrículo direito?", o:["Mitral","Tricúspide","Aórtica","Pulmonar"], a:1, e:"A tricúspide é a valva do lado direito, entre átrio direito e ventrículo direito. A mitral (bicúspide) é a do lado esquerdo."},
+    {q:"O sangue que chega ao átrio esquerdo vem de onde?", o:["Veias cavas","Veias pulmonares","Aorta","Artérias pulmonares"], a:1, e:"As veias pulmonares trazem o sangue oxigenado dos pulmões ao átrio esquerdo. As cavas chegam ao átrio direito."},
+    {q:"As artérias pulmonares levam:", o:["Sangue oxigenado para o corpo","Sangue pobre em oxigênio do ventrículo direito aos pulmões","Sangue oxigenado dos pulmões ao átrio esquerdo","Sangue pobre em oxigênio ao átrio direito"], a:1, e:"São artérias porque saem do coração. Levam sangue que ainda vai ser oxigenado no pulmão."},
+    {q:"Onde ocorrem as trocas gasosas da circulação sistêmica?", o:["Nos alvéolos","Nos capilares dos tecidos","Nas veias cavas","No ventrículo esquerdo"], a:1, e:"Nos capilares dos tecidos o sangue entrega oxigênio e nutrientes e recolhe gás carbônico. Nos alvéolos ficam as trocas da circulação pulmonar."},
+    {q:"Um cão tem frequência cardíaca de 100 batimentos por minuto e volume sistólico de 25 mililitros. Qual é o débito cardíaco?", o:["125 mililitros por minuto","2,5 litros por minuto","4 litros por minuto","250 mililitros por minuto"], a:1, e:"Débito cardíaco = frequência cardíaca × volume sistólico = 100 × 25 = 2.500 mililitros por minuto = 2,5 litros por minuto."},
+    {q:"Qual destes NÃO foi citado como fator que influencia o débito cardíaco?", o:["Retorno venoso","Contratilidade","Resistência vascular","Número de alvéolos"], a:3, e:"A resposta da professora cita retorno venoso, contratilidade e resistência vascular. Alvéolos são do sistema respiratório."},
+    {q:"Qual vaso tem túnica média bem desenvolvida e conduz o sangue sob alta pressão?", o:["Veia","Vênula","Artéria","Capilar"], a:2, e:"A artéria tem parede espessa com muito músculo liso e fibras elásticas para aguentar a pressão de saída do coração."},
+    {q:"Vaso de parede fina, luz grande e irregular, com válvulas, que guarda grande volume de sangue:", o:["Arteríola","Veia","Artéria elástica","Capilar"], a:1, e:"A veia é o vaso de capacitância. As válvulas impedem o refluxo."},
+    {q:"A arteríola regula a resistência vascular porque:", o:["Tem válvulas","Tem uma ou poucas camadas de músculo liso que contraem e relaxam","Tem parede só de endotélio","Guarda grande volume de sangue"], a:1, e:"Contraindo, ela fecha e aumenta a resistência; relaxando, abre e deixa mais sangue chegar aos capilares."},
+    {q:"Por onde os leucócitos saem principalmente do sangue para o tecido?", o:["Arteríolas","Vênulas pós-capilares","Aorta","Veias cavas"], a:1, e:"As vênulas pós-capilares têm parede fina e participam das trocas e da saída de leucócitos."}
+  ],
+  homeo: [
+    {q:"Qual é a melhor definição de homeostase?", o:["Manter todas as variáveis absolutamente constantes","Manter o meio interno relativamente estável, dentro de limites compatíveis com as células","Aumentar a temperatura para combater infecções","Eliminar resíduos pela urina"], a:1, e:"As palavras-chave são relativamente estável e dentro de limites."},
+    {q:"Por que manter a homeostase não significa constância absoluta?", o:["Porque as variáveis oscilam e são ajustadas continuamente dentro de uma faixa","Porque o corpo não regula nada","Porque só a temperatura é regulada","Porque os valores ficam sempre fora da faixa"], a:0, e:"Os valores sobem e descem um pouco o tempo todo. O que se mantém é a faixa."},
+    {q:"No feedback negativo, a resposta:", o:["Reforça o estímulo","Se opõe à alteração inicial","Não altera a variável","Só ocorre no parto"], a:1, e:"Ela vai contra a alteração e devolve a variável ao intervalo de referência."},
+    {q:"Qual é o principal mecanismo de perda de calor no cão?", o:["Suor no corpo todo","Ofegação","Tremor muscular","Arrepio dos pelos"], a:1, e:"O cão quase não sua. A ofegação perde calor pela evaporação de água nas vias respiratórias."},
+    {q:"Na termorregulação, os termorreceptores são:", o:["O efetor","O centro de controle","O receptor","O estímulo"], a:2, e:"Receptor é quem percebe a alteração. Os termorreceptores percebem a temperatura."},
+    {q:"Quem integra a informação e coordena a resposta?", o:["O receptor","O efetor","O centro de controle, nos centros termorreguladores do sistema nervoso central","O estímulo"], a:2, e:"O centro de controle, principalmente o hipotálamo, compara com o normal e decide a resposta."},
+    {q:"No cão com calor, a ofegação faz o papel de:", o:["Estímulo","Receptor","Efetor","Centro de controle"], a:2, e:"Efetor é quem executa a resposta. A ofegação dissipa o calor."},
+    {q:"Qual é um exemplo de feedback positivo?", o:["Queda da temperatura pela ofegação","Contrações do parto estimulando mais ocitocina","Liberação de hormônio antidiurético na desidratação","Aumento da ventilação no exercício"], a:1, e:"No feedback positivo a resposta reforça o estímulo até o evento acabar, como no parto."},
+    {q:"Por que a homeostase é essencial para as enzimas?", o:["Enzimas só funcionam bem em faixas de temperatura e pH","Enzimas são feitas de gordura","Enzimas não dependem do meio","Enzimas só existem no sangue"], a:0, e:"Fora da faixa a enzima muda de forma e para de funcionar."}
+  ],
+  resp: [
+    {q:"Qual é a ordem correta do caminho do ar?", o:["Narinas, faringe, cavidade nasal, laringe, traqueia, brônquios, bronquíolos, alvéolos","Narinas, cavidade nasal, faringe, laringe, traqueia, brônquios, bronquíolos, alvéolos","Narinas, laringe, faringe, traqueia, cavidade nasal, brônquios, alvéolos, bronquíolos","Narinas, cavidade nasal, laringe, faringe, brônquios, traqueia, bronquíolos, alvéolos"], a:1, e:"Nunca Coma Farinha, Leve Trigo; Bolo Bom; e no fim o Ar."},
+    {q:"Quais são as funções das vias condutoras?", o:["Trocar gases","Filtrar, aquecer e umidificar o ar","Produzir surfactante","Produzir eritropoietina"], a:1, e:"FAU: filtra, aquece, umidifica. A troca ocorre na porção respiratória."},
+    {q:"Qual é o epitélio do vestíbulo nasal?", o:["Pseudoestratificado cilíndrico ciliado","Estratificado pavimentoso, que pode ser queratinizado na parte anterior","Simples cúbico","Pavimentoso simples"], a:1, e:"É o escudo: várias camadas para resistir ao atrito na entrada."},
+    {q:"Qual é o epitélio da traqueia e dos brônquios?", o:["Pseudoestratificado cilíndrico ciliado com células caliciformes","Estratificado pavimentoso queratinizado","Pavimentoso simples","Simples cúbico sem cílios"], a:0, e:"É a vassoura: caliciformes fazem o muco e os cílios varrem."},
+    {q:"O que caracteriza os bronquíolos?", o:["Anéis de cartilagem em C","Epitélio simples cilíndrico a cúbico, células club e ausência de cartilagem","Epitélio estratificado","Pneumócitos tipo II"], a:1, e:"Não há cartilagem nas paredes bronquiolares."},
+    {q:"A troca de gases nos pulmões acontece por:", o:["Transporte ativo, gastando energia","Difusão, guiada por diferenças de pressão parcial","Filtração pela pressão do sangue","Osmose"], a:1, e:"Cada gás vai da pressão parcial maior para a menor, sem gastar energia."},
+    {q:"No alvéolo, o oxigênio passa para o sangue porque:", o:["A pressão parcial de oxigênio do alvéolo (cerca de 100 mmHg) é maior que a do sangue venoso (cerca de 40 mmHg)","O sangue venoso tem mais oxigênio","O gás carbônico empurra o oxigênio","O surfactante carrega o oxigênio"], a:0, e:"Difusão: do lado de maior pressão parcial para o de menor."},
+    {q:"Quem produz o surfactante?", o:["Pneumócito tipo I","Pneumócito tipo II","Células caliciformes","Macrófagos alveolares"], a:1, e:"Tipo 2, 2 funções: surfactante e repor o tipo I."},
+    {q:"Qual é a função do surfactante?", o:["Aumentar a tensão superficial","Reduzir a tensão superficial e evitar o colapso dos alvéolos","Filtrar o ar","Transportar gás carbônico"], a:1, e:"Ele evita o colapso principalmente no fim da expiração e reduz o trabalho para expandir o pulmão."},
+    {q:"A deficiência de surfactante leva a:", o:["Atelectasia e menor complacência pulmonar","Maior complacência","Alvéolos maiores","Aumento das trocas gasosas"], a:0, e:"Sem Surfactante o alvéolo Some: colapsa, o pulmão fica duro e a troca piora."},
+    {q:"Por que a frequência respiratória do cão aumenta no exercício?", o:["Só por estresse","Mais oxigênio consumido e mais gás carbônico produzido, e ofegação para perder calor","Porque o surfactante acaba","Porque o hormônio antidiurético estimula o pulmão"], a:1, e:"Dois motivos: demanda metabólica e termorregulação."}
+  ],
+  renal: [
+    {q:"Na filtração glomerular, normalmente ficam retidos no sangue:", o:["Água e glicose","Células sanguíneas e a maior parte das proteínas","Sódio e ureia","Aminoácidos"], a:1, e:"São grandes demais para atravessar a barreira de filtração."},
+    {q:"Reabsorção tubular é a passagem de substâncias:", o:["Do sangue para o túbulo","Do túbulo para o sangue","Da cápsula para o glomérulo","Da bexiga para o ureter"], a:1, e:"REabsorção REtorna ao sangue."},
+    {q:"Qual é um exemplo de substância secretada pelo túbulo?", o:["Hemácia","Albumina","Íons hidrogênio e fármacos como a penicilina","Glicose"], a:2, e:"A secreção leva íons, metabólitos e fármacos do sangue para o túbulo."},
+    {q:"Onde o hormônio antidiurético é sintetizado e por onde é liberado?", o:["Sintetizado na neuro-hipófise e liberado pelo hipotálamo","Sintetizado no hipotálamo e liberado pela neuro-hipófise","Produzido no rim","Produzido na adrenal"], a:1, e:"A neuro-hipófise não fabrica, só libera."},
+    {q:"Onde o hormônio antidiurético age principalmente?", o:["No glomérulo","Nos ductos coletores","No ureter","Na bexiga"], a:1, e:"A sigla ADH (hormônio antidiurético) lembra: Aquaporina no Ducto, feito no Hipotálamo."},
+    {q:"Como o hormônio antidiurético aumenta a reabsorção de água?", o:["Aumentando a inserção de aquaporinas e a permeabilidade à água","Fechando o glomérulo","Aumentando a secreção de potássio","Destruindo o surfactante"], a:0, e:"As aquaporinas são canais de água colocados na membrana das células do ducto."},
+    {q:"Com muito hormônio antidiurético, a urina fica:", o:["Diluída e abundante","Concentrada e em menor volume","Com glicose","Com sangue"], a:1, e:"Mais água volta ao sangue, então sai menos água na urina."},
+    {q:"Qual destas é uma função do rim além de eliminar resíduos?", o:["Produzir surfactante","Produzir eritropoietina","Produzir hormônio antidiurético","Produzir insulina"], a:1, e:"O hormônio antidiurético é do hipotálamo; o rim produz eritropoietina, ativa a vitamina D e regula água, sais, pH e pressão."},
+    {q:"O córtex renal contém:", o:["Corpúsculos renais e túbulos contorcidos","Pelve e ureter","Apenas ductos coletores","Exclusivamente alças de Henle"], a:0, e:"Córtex tem os Corpúsculos."},
+    {q:"No rim do cão, as papilas:", o:["Formam cálices individualizados","São fundidas numa crista renal que drena para a pelve","Não existem","Desembocam direto na bexiga"], a:1, e:"Cão tem Crista, não tem Cálice."},
+    {q:"Qual é o trajeto correto da urina?", o:["Ductos coletores → ductos papilares → crista renal → pelve → ureter → bexiga","Pelve → crista → ductos papilares → ureter → bexiga","Ureter → pelve → crista → bexiga","Ductos papilares → ductos coletores → pelve → crista → ureter"], a:0, e:"Nunca Deixe De Cuidar, Pois Urina Bate."}
+  ],
+  final: [
+    {q:"No cão em exercício no calor, qual combinação está correta?", o:["Frequência cardíaca cai, ventilação cai, hormônio antidiurético cai","Frequência cardíaca sobe, ventilação sobe com ofegação, hormônio antidiurético sobe","Frequência cardíaca sobe, ventilação cai, hormônio antidiurético cai","Frequência cardíaca não muda, suor intenso, hormônio antidiurético cai"], a:1, e:"Mais débito para os músculos, mais ventilação e ofegação, e hormônio antidiurético para economizar a água perdida."},
+    {q:"O sangue que sai do ventrículo esquerdo vai para:", o:["Artéria pulmonar","Aorta","Veias cavas","Veias pulmonares"], a:1, e:"Ventrículo esquerdo → valva aórtica → aorta → corpo todo."},
+    {q:"O sangue que chega aos capilares pulmonares tem pressão parcial de oxigênio de cerca de:", o:["100 mmHg","40 mmHg","160 mmHg","0 mmHg"], a:1, e:"É sangue venoso, vindo dos tecidos. Ele sai do pulmão com cerca de 100."},
+    {q:"Qual célula aparece tanto na pergunta dos epitélios quanto na do surfactante?", o:["Pneumócito tipo II","Podócito","Célula caliciforme","Hemácia"], a:0, e:"O pneumócito II é cúbico e produz surfactante."},
+    {q:"Os osmorreceptores que disparam a liberação de hormônio antidiurético ficam:", o:["No ducto coletor","No hipotálamo","No pulmão","No córtex renal"], a:1, e:"O hipotálamo percebe a osmolaridade e produz o hormônio antidiurético."},
+    {q:"Na termorregulação, se o receptor é o termorreceptor, o centro de controle é:", o:["Os centros termorreguladores no sistema nervoso central (hipotálamo)","O ventrículo esquerdo","A neuro-hipófise","O alvéolo"], a:0, e:"Estímulo, Receptor, Centro, Efetor: o centro fica no sistema nervoso central."},
+    {q:"A desidratação reduz o retorno venoso. Pela fórmula débito cardíaco = frequência cardíaca × volume sistólico:", o:["O volume sistólico cai e o débito cardíaco tende a cair; o coração compensa aumentando a frequência cardíaca","O volume sistólico sobe","O débito cardíaco dobra","Nada muda"], a:0, e:"Menos sangue volta, o ventrículo enche menos e ejeta menos."},
+    {q:"As palavras-código, na ordem dos envelopes, são:", o:["Néfron, Respiração, Homeostase, Circulação","Circulação, Homeostase, Respiração, Néfron","Homeostase, Circulação, Néfron, Respiração","Circulação, Respiração, Homeostase, Néfron"], a:1, e:"C-H-R-N: cardiovascular, homeostase, respiratório, renal."},
+    {q:"Qual destas estruturas NÃO tem cartilagem na parede?", o:["Traqueia","Brônquio","Bronquíolo","Laringe"], a:2, e:"Bronquíolos não têm cartilagem; têm músculo liso."},
+    {q:"Qual afirmação é verdadeira?", o:["Veia é todo vaso com sangue pobre em oxigênio","Artéria é todo vaso que sai do coração","A artéria pulmonar leva sangue oxigenado","A veia pulmonar leva sangue pobre em oxigênio"], a:1, e:"Artéria Afasta, Veia Volta. O nome depende da direção."},
+    {q:"Qual par processo e direção está correto?", o:["Secreção: túbulo → sangue","Reabsorção: sangue → túbulo","Filtração: sangue do glomérulo → cápsula","Excreção: bexiga → rim"], a:2, e:"Reabsorção retorna ao sangue; secreção sai do sangue."},
+    {q:"Se o gás carbônico se acumular no sangue durante o exercício, o sangue tende a:", o:["Ficar mais básico","Ficar mais ácido","Não mudar o pH","Transformar o gás carbônico em oxigênio"], a:1, e:"O gás carbônico forma ácido no sangue. Por isso a ventilação aumenta e o rim secreta íons hidrogênio."}
+  ]
+};
+
+const FLASH = {
+  cardio: [
+    ["Ordem das valvas no caminho do sangue","Tricúspide → Pulmonar → Mitral → Aórtica (Toda Pessoa Merece Amor)"],
+    ["Onde fica a valva tricúspide?","Entre o átrio direito e o ventrículo direito"],
+    ["Outro nome da valva mitral","Bicúspide (atrioventricular esquerda)"],
+    ["Por onde o sangue chega ao átrio direito?","Pelas veias cavas cranial e caudal, pobre em oxigênio"],
+    ["Por onde o sangue chega ao átrio esquerdo?","Pelas veias pulmonares, oxigenado"],
+    ["O que a artéria pulmonar leva?","Sangue pobre em oxigênio, do ventrículo direito aos pulmões"],
+    ["Circulação pulmonar: trajeto e função","Ventrículo direito → pulmões → átrio esquerdo. Oxigena o sangue e elimina gás carbônico"],
+    ["Circulação sistêmica: trajeto e função","Ventrículo esquerdo → aorta → tecidos → cavas → átrio direito. Entrega oxigênio e nutrientes, recolhe gás carbônico"],
+    ["Fórmula do débito cardíaco","Débito cardíaco = frequência cardíaca × volume sistólico"],
+    ["Os três fatores extras do débito","Retorno venoso, contratilidade, resistência vascular"],
+    ["Túnicas, de dentro para fora","Íntima (endotélio), média (músculo liso e elástica), adventícia (conjuntivo)"],
+    ["Artéria: estrutura e função","Parede espessa, média desenvolvida. Conduz sangue sob alta pressão"],
+    ["Arteríola: estrutura e função","Luz pequena, uma ou poucas camadas de músculo liso. Regula resistência e fluxo aos capilares"],
+    ["Veia: estrutura e função","Parede fina, luz grande e irregular, média fina, adventícia evidente, válvulas. Vaso de capacitância"],
+    ["Vênula: estrutura e função","Parede fina, pouco músculo. Recebe dos capilares; a pós-capilar faz trocas e deixa leucócitos saírem"]
+  ],
+  homeo: [
+    ["Definição de homeostase","Manter o meio interno relativamente estável, dentro de limites compatíveis com as células, apesar de mudanças internas e externas"],
+    ["Por que a homeostase é essencial?","Enzimas, transporte de substâncias e funcionamento dos órgãos dependem dela"],
+    ["Homeostase quer dizer tudo constante?","Não. Os valores oscilam numa faixa e são ajustados continuamente"],
+    ["Feedback negativo","A resposta se opõe à alteração e traz a variável de volta ao intervalo de referência"],
+    ["Feedback positivo: exemplo","Parto: contração → mais ocitocina → contração mais forte"],
+    ["Como o cão perde calor?","Ofegação (evaporação nas vias respiratórias) e mais sangue na pele"],
+    ["Estímulo","A alteração detectada. Exemplo: a temperatura subiu"],
+    ["Receptor","Percebe a alteração. Exemplo: termorreceptores"],
+    ["Centro de controle","Integra e coordena. Exemplo: centros termorreguladores no sistema nervoso central (hipotálamo)"],
+    ["Efetor","Executa a resposta. Exemplo: ofegação, vasos da pele"],
+    ["Ordem das peças","Estímulo → Receptor → Centro → Efetor (Estou Recebendo Calor, Esfria!)"]
+  ],
+  resp: [
+    ["Caminho do ar","Narinas, cavidade nasal, faringe, laringe, traqueia, brônquios, bronquíolos, bronquíolos respiratórios, ductos e sacos alveolares, alvéolos"],
+    ["O que as vias condutoras fazem?","Filtram, aquecem e umidificam o ar (FAU)"],
+    ["Epitélio do vestíbulo nasal","Estratificado pavimentoso, pode ser queratinizado na parte da frente"],
+    ["Epitélio da cavidade nasal, traqueia e brônquios","Pseudoestratificado cilíndrico ciliado com células caliciformes"],
+    ["Epitélio dos bronquíolos","Simples cilíndrico a cúbico, com ciliadas e células club; sem cartilagem"],
+    ["Pneumócito tipo I","Pavimentoso simples; forma a maior parte da superfície; troca gasosa"],
+    ["Pneumócito tipo II","Cúbico; produz surfactante e repõe o tipo I"],
+    ["Onde ocorrem as trocas pulmonares?","Entre alvéolos e capilares pulmonares, pela barreira alvéolo-capilar"],
+    ["Processo da troca gasosa","Difusão, guiada pelas diferenças de pressão parcial"],
+    ["Direção dos gases no pulmão","Oxigênio: alvéolo → sangue. Gás carbônico: sangue → alvéolo"],
+    ["Direção dos gases nos tecidos","Oxigênio: sangue → células. Gás carbônico: células → sangue"],
+    ["Por que a frequência respiratória sobe no exercício?","Mais oxigênio consumido e gás carbônico produzido; e ofegação para dissipar calor"],
+    ["Surfactante: o que é e quem faz","Lipídios + proteínas, feito pelo pneumócito tipo II"],
+    ["Surfactante: funções","Reduz a tensão superficial, evita o colapso no fim da expiração, reduz o trabalho respiratório"],
+    ["Falta de surfactante","Atelectasia, menor complacência, pior ventilação e troca"],
+    ["Complacência pulmonar","Facilidade com que o pulmão se expande"]
+  ],
+  renal: [
+    ["Unidade funcional do rim","Néfron: corpúsculo (glomérulo + cápsula) + túbulos"],
+    ["Filtração glomerular","Sangue → cápsula. Passam água e substâncias pequenas; ficam células e a maior parte das proteínas"],
+    ["Reabsorção tubular","Túbulo → sangue: água, glicose, aminoácidos, íons"],
+    ["Secreção tubular","Sangue → túbulo: íons, metabólitos, fármacos; ajuda no ácido-base"],
+    ["Fórmula do que sai na urina","Excretado = filtrado − reabsorvido + secretado"],
+    ["Hormônio antidiurético: sigla e outro nome","Sigla ADH. Também se chama vasopressina"],
+    ["Hormônio antidiurético: onde é feito e onde é liberado","Feito no hipotálamo, liberado pela neuro-hipófise"],
+    ["Hormônio antidiurético: onde age e como","Nos ductos coletores; aumenta as aquaporinas e a permeabilidade à água"],
+    ["Efeito do hormônio antidiurético na urina","Urina mais concentrada e em menor volume"],
+    ["O que estimula o hormônio antidiurético","Osmolaridade alta do sangue e queda do volume"],
+    ["Funções extras do rim","Água e osmolaridade, sódio e potássio, ácido-base, pressão arterial (sistema renina-angiotensina-aldosterona), eritropoietina, vitamina D"],
+    ["Córtex renal","Corpúsculos renais e túbulos contorcidos"],
+    ["Medula renal","Pirâmides com alças de Henle e ductos coletores"],
+    ["Particularidade do rim do cão","Papilas fundidas numa crista renal que drena para a pelve; sem cálices proeminentes"],
+    ["Caminho da urina","Túbulos → ductos coletores → ductos papilares → crista renal → pelve → ureter → bexiga"]
+  ]
+};
+
+const ORDER = {
+  sangue: {p:"Clique nas etapas na ordem em que o sangue passa, começando nas veias cavas.", s:["Veias cavas","Átrio direito","Valva tricúspide","Ventrículo direito","Valva pulmonar","Artérias pulmonares","Pulmões","Veias pulmonares","Átrio esquerdo","Valva mitral","Ventrículo esquerdo","Valva aórtica","Aorta"]},
+  feedback: {p:"Clique na ordem do circuito que corrige a temperatura do cão.", s:["Estímulo: a temperatura sobe","Receptor: termorreceptores","Centro: centros termorreguladores no sistema nervoso central","Efetor: ofegação e vasos da pele","Resposta: perde calor e a temperatura cai"]},
+  ar: {p:"Clique na ordem do caminho do ar, das narinas ao alvéolo.", s:["Narinas","Cavidade nasal","Faringe","Laringe","Traqueia","Brônquios","Bronquíolos","Bronquíolos respiratórios","Ductos alveolares","Sacos alveolares","Alvéolos"]},
+  urina: {p:"Clique na ordem do caminho da urina, do néfron à bexiga.", s:["Glomérulo e cápsula","Túbulos do néfron","Ductos coletores","Ductos papilares","Crista renal","Pelve renal","Ureter","Bexiga"]},
+  adh: {p:"Clique na ordem dos acontecimentos, da perda de água até a urina concentrada.", s:["Perda de água pela ofegação","Osmolaridade do sangue sobe","Osmorreceptores do hipotálamo percebem","Hipotálamo produz hormônio antidiurético","Neuro-hipófise libera hormônio antidiurético","Hormônio antidiurético age no ducto coletor","Aquaporinas vão para a membrana","Água é reabsorvida para o sangue","Urina concentrada e em menor volume"]}
+};
+
+const LETTERS = "abcd";
+function shuffle(a){const b=a.slice();for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
+function el(tag, cls, text){const e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e;}
+
+document.querySelectorAll('[data-quiz]').forEach(list=>{
+  const key=list.dataset.quiz, qs=QUIZ[key]; if(!qs) return;
+  const scoreEl=document.querySelector('[data-score="'+key+'"]');
+  let right=0, done=0;
+  function update(){ if(!scoreEl) return; scoreEl.innerHTML=''; scoreEl.append('Acertos: '); const b=el('b',null,String(right)); scoreEl.append(b,' de '+qs.length+' · respondidas: '+done);
+    if(done===qs.length){ const r=el('button','btn','Refazer'); r.style.marginLeft='12px'; r.addEventListener('click',reset); scoreEl.append(r);} }
+  function render(){
+    list.innerHTML='';
+    qs.forEach((q,i)=>{
+      const li=el('li','qz'); li.append(el('div','meta','Questão '+(i+1)), el('div','q',q.q));
+      const opts=el('div','opts'); const exp=el('div','exp'); exp.hidden=true;
+      q.o.forEach((t,k)=>{
+        const b=el('button','opt'); b.type='button'; b.id='qz-'+key+'-'+i+'-'+LETTERS[k];
+        b.append(el('span','k',LETTERS[k]+')'), el('span',null,t));
+        b.addEventListener('click',()=>{
+          opts.querySelectorAll('button').forEach(x=>x.disabled=true);
+          opts.children[q.a].classList.add('right');
+          exp.innerHTML='';
+          if(k===q.a){ right++; exp.append(el('b','ok','Certo. ')); }
+          else { b.classList.add('wrong'); exp.append(el('b','no','Não foi essa. A resposta é a letra '+LETTERS[q.a]+'. ')); }
+          exp.append(q.e); exp.hidden=false; done++; update();
+        });
+        opts.append(b);
+      });
+      li.append(opts, exp); list.append(li);
+    });
+  }
+  function reset(){ right=0; done=0; render(); update(); }
+  reset();
+});
+
+document.querySelectorAll('[data-deck]').forEach(box=>{
+  const cards=FLASH[box.dataset.deck]; if(!cards) return;
+  let queue, flipped, known, seen;
+  const card=el('button','fc'); card.type='button';
+  const ctrl=el('div','fc-ctrl');
+  const bFlip=el('button','btn','Virar'); bFlip.type='button';
+  const bOk=el('button','btn ok','Eu sabia'); bOk.type='button';
+  const bNo=el('button','btn no','Ainda não'); bNo.type='button';
+  const bRe=el('button','btn','Recomeçar'); bRe.type='button';
+  const count=el('span','count');
+  ctrl.append(bFlip,bOk,bNo,bRe,count);
+  box.append(card,ctrl);
+  function show(){
+    card.innerHTML=''; card.classList.toggle('back',flipped);
+    if(!queue.length){ card.append(el('span','side','fim do baralho'), el('span',null,'Você acertou todos os '+cards.length+' cartões. Volte amanhã e refaça: repetir em dias diferentes é o que fixa.')); bOk.disabled=bNo.disabled=bFlip.disabled=true; count.textContent=''; return; }
+    const c=cards[queue[0]];
+    const wrap=el('span'); wrap.append(el('span','side',flipped?'resposta':'pergunta · toque para virar'), el('span',null,flipped?c[1]:c[0]));
+    card.append(wrap);
+    bFlip.disabled=false; bOk.disabled=bNo.disabled=!flipped;
+    count.textContent='faltam '+queue.length+' de '+cards.length+(seen?' · erros: '+seen:'');
+  }
+  function flip(){ if(queue.length){ flipped=!flipped; show(); } }
+  function start(){ queue=shuffle(cards.map((_,i)=>i)); flipped=false; known=0; seen=0; show(); }
+  card.addEventListener('click',flip); bFlip.addEventListener('click',flip);
+  bOk.addEventListener('click',()=>{ queue.shift(); known++; flipped=false; show(); });
+  bNo.addEventListener('click',()=>{ queue.push(queue.shift()); seen++; flipped=false; show(); });
+  bRe.addEventListener('click',start);
+  start();
+});
+
+document.querySelectorAll('[data-order]').forEach(box=>{
+  const d=ORDER[box.dataset.order]; if(!d) return;
+  const q=el('p','q',d.p), done=el('div','done'), pool=el('div','pool'), msg=el('p','msg');
+  box.append(q,done,pool,msg);
+  let next, errors;
+  function start(){
+    next=0; errors=0; done.innerHTML=''; pool.innerHTML=''; msg.textContent='Erros: 0';
+    let order=shuffle(d.s); if(order.join()===d.s.join()) order=order.reverse();
+    order.forEach(t=>{
+      const b=el('button',null,t); b.type='button';
+      b.addEventListener('click',()=>{
+        if(t===d.s[next]){
+          b.remove(); done.append(el('span',null,(next+1)+'. '+t)); next++;
+          if(next===d.s.length){ msg.innerHTML=''; msg.append('Completo com '+errors+(errors===1?' erro. ':' erros. ')); const r=el('button','btn','Refazer'); r.type='button'; r.addEventListener('click',start); msg.append(r); }
+          else msg.textContent='Erros: '+errors;
+        } else {
+          errors++; b.classList.add('shake'); setTimeout(()=>b.classList.remove('shake'),600);
+          msg.textContent='Não é essa ainda. Erros: '+errors;
+        }
+      });
+      pool.append(b);
+    });
+  }
+  start();
+});
+</script>
+
+</body></html>
