@@ -240,7 +240,7 @@ export const SCENE_ITEMS: readonly SceneItem[] = [
       hotspot: { x: 0.606, y: 0.497, size: 0.52 },
       action: {
         type: "open-link",
-        url: "https://focustrail.com.br/app/login",
+        url: "https://focustrail.com.br/",
       },
     },
   },
